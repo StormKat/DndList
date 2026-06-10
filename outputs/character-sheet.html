@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        meta: ['Forum', 'Georgia', 'serif'],
+        body: ['Manrope', 'Arial', 'sans-serif']
+      },
+      colors: {
+        drow: {
+          outer:   '#0d0e14',
+          page:    '#141720',
+          header:  '#1a1d2e',
+          bar:     '#12151f',
+          accent:  '#4a6fa8',
+          bright:  '#6a9fd8',
+          silver:  '#b0bec5',
+          dim:     '#78909c',
+          text:    '#dce8f0',
+          muted:   '#8fa8b8',
+          faint:   '#506070',
+          border:  '#2e3d5a',
+          card:    'rgba(74,111,168,0.07)',
+          card2:   'rgba(74,111,168,0.13)',
+          new:     '#3a8060',
+          newtext: '#70d0a0',
+          warn:    '#8b3020',
+          warntext:'#e09080',
+          good:    '#2a7040',
+          goodtext:'#70c090',
+        }
+      },
+      width: { page: '210mm' },
+      minWidth: { page: '210mm' },
+    }
+  }
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'Manrope', Arial, sans-serif; background: #0d0e14; color: #dce8f0; }
+  .page {
+    width: 210mm; background: #141720; border: 2px solid #2e3d5a;
+    border-left: 3px solid #4a6fa8; position: relative; overflow: hidden; margin-bottom: 12px;
+    background-image:
+      repeating-linear-gradient(105deg, transparent 0px, transparent 18px, rgba(74,111,168,0.04) 18px, rgba(74,111,168,0.04) 19px),
+      repeating-linear-gradient(75deg,  transparent 0px, transparent 28px, rgba(74,111,168,0.03) 28px, rgba(74,111,168,0.03) 29px),
+      radial-gradient(ellipse at 20% 50%, rgba(30,40,80,0.4) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(20,30,60,0.3) 0%, transparent 50%);
+  }
+  .page::before {
+    content:''; position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0;
+    background: repeating-linear-gradient(0deg,rgba(255,255,255,0.012) 0px,transparent 1px,transparent 3px);
+  }
+  .dot        { width:8px; height:8px; border-radius:50%; border:0.5px solid #2e3d5a; flex-shrink:0; background:transparent; }
+  .dot.p      { background:#78909c; border-color:#b0bec5; }
+  .dot.e      { background:#4a6fa8; border-color:#6a9fd8; }
+  .atk-row:nth-child(even) td { background: rgba(74,111,168,0.05); }
+  .scard-new  { background: rgba(60,120,80,0.15) !important; border-color: #3a8060 !important; border-width: 1.5px !important; }
+  .sgood      { background: rgba(40,100,60,0.12); border-left: 2px solid #2a7040; }
+  .swarn      { background: rgba(160,60,40,0.12); border-left: 2px solid #8b3020; }
+  .seffect    { background: rgba(74,111,168,0.08); border-left: 2px solid #4a6fa8; }
+  .slot       { width:28px; height:28px; border-radius:4px; border:1.5px solid #4a6fa8; display:flex; align-items:center; justify-content:center; font-size:11px; color:#b0bec5; background:rgba(74,111,168,0.1); }
+  .slot-new   { border-color:#3a8060 !important; background:rgba(60,120,80,0.15) !important; color:#70d0a0 !important; }
+  .sbadge-race   { background:rgba(40,80,40,0.2);  color:#90c090; border-color:#3a6040; }
+  .sbadge-later  { background:rgba(80,50,20,0.2);  color:#c09060; border-color:#806030; }
+  .sbadge-ability{ background:rgba(60,60,120,0.2); color:#9090e0; border-color:#404080; }
+  .sbadge-new    { background:rgba(40,120,70,0.3); color:#70d0a0; border-color:#3a8060; font-weight:700; }
+  .eqli::before  { content:'◆'; position:absolute; left:0; color:#4a6fa8; font-size:7px; top:2px; }
+  textarea { background:rgba(74,111,168,0.07); border:0.5px solid #2e3d5a; border-radius:3px; color:#dce8f0; font-family:'Manrope',Arial,sans-serif; font-size:9px; padding:6px; resize:none; outline:none; line-height:1.5; width:100%; height:58px; }
+  textarea::placeholder { color:#506070; }
+
+  /* ── ТУЛТИПЫ ── */
+  .tip { position: relative; cursor: help; }
+  .tip-box {
+    display: none; position: absolute; z-index: 9999;
+    bottom: calc(100% + 8px); left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    width: 210px; background: #0d1220;
+    border: 1px solid #4a6fa8; border-radius: 6px;
+    padding: 8px 10px; font-family: 'Manrope', Arial, sans-serif;
+    font-size: 9px; color: #dce8f0; line-height: 1.6;
+    box-shadow: 0 4px 20px rgba(74,111,168,0.4);
+    pointer-events: none; opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .tip-box::after {
+    content: ''; position: absolute; top: 100%; left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent; border-top-color: #4a6fa8;
+  }
+  .tip-title { font-size: 10px; color: #6a9fd8; border-bottom: 1px solid #2e3d5a; padding-bottom: 4px; margin-bottom: 5px; display: block; }
+  .tip-good { color: #70c090; }
+  .tip-warn { color: #e09080; }
+  .tip:hover .tip-box { display: block; opacity: 1; transform: translateX(-50%) translateY(0); }
+  .tip-left .tip-box { left: 0; transform: translateX(0) translateY(4px); }
+  .tip-left .tip-box::after { left: 20px; }
+  .tip-left:hover .tip-box { transform: translateX(0) translateY(0); }
+  @keyframes rainbow {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes amethyst-name {
+    0%, 100% {
+      background-position: 0% center;
+      filter: drop-shadow(0 0 4px rgba(113,83,168,0.18));
+    }
+    50% {
+      background-position: 100% center;
+      filter: drop-shadow(0 0 8px rgba(151,119,210,0.3));
+    }
+  }
+  .char-name {
+    display: inline-block;
+    color: #d8d2e5;
+    background: linear-gradient(
+      105deg,
+      #aaa3ba 0%,
+      #d8d2e5 22%,
+      #8f70bd 43%,
+      #cbb9e7 56%,
+      #665084 74%,
+      #d8d2e5 100%
+    );
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: amethyst-name 8s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .char-name { animation: none; }
+  }
+  /* ── АНИМАЦИИ БЛОКОВ УМЕНИЙ ── */
+  @keyframes drow-border {
+    0%,100% { border-color: #4a6fa8; box-shadow: 0 0 8px rgba(74,111,168,0.3), inset 0 0 8px rgba(74,111,168,0.05); }
+    33%     { border-color: #8a2be2; box-shadow: 0 0 14px rgba(138,43,226,0.5), inset 0 0 12px rgba(138,43,226,0.08); }
+    66%     { border-color: #1a0040; box-shadow: 0 0 6px rgba(26,0,64,0.8), inset 0 0 6px rgba(26,0,64,0.1); }
+  }
+  @keyframes rogue-border {
+    0%,100% { border-color: #2e3d5a; box-shadow: 0 0 4px rgba(46,61,90,0.2); }
+    25%     { border-color: #4a6fa8; box-shadow: 0 0 10px rgba(74,111,168,0.4); }
+    50%     { border-color: #78909c; box-shadow: 0 0 16px rgba(120,144,156,0.5), inset 0 0 10px rgba(120,144,156,0.06); }
+    75%     { border-color: #4a6fa8; box-shadow: 0 0 10px rgba(74,111,168,0.4); }
+  }
+  @keyframes assassin-border {
+    0%,100% { border-color: #3a8060; box-shadow: 0 0 6px rgba(58,128,96,0.3), inset 0 0 8px rgba(58,128,96,0.05); }
+    30%     { border-color: #1a3020; box-shadow: 0 0 4px rgba(26,48,32,0.6); }
+    60%     { border-color: #70d0a0; box-shadow: 0 0 18px rgba(112,208,160,0.6), inset 0 0 14px rgba(112,208,160,0.08); }
+  }
+  @keyframes darkviolet {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes stat-ember {
+    0%, 100% {
+      background-position: 0% center;
+      filter:
+        drop-shadow(0 0 2px rgba(151,93,255,0.65))
+        drop-shadow(0 0 7px rgba(105,50,190,0.38));
+    }
+    50% {
+      background-position: 100% center;
+      filter:
+        drop-shadow(0 0 3px rgba(221,193,255,0.9))
+        drop-shadow(0 0 11px rgba(137,70,235,0.62));
+    }
+  }
+  @keyframes stat-card-glow {
+    0%, 100% {
+      border-color: rgba(90,68,128,0.55);
+      box-shadow: inset 0 0 10px rgba(102,50,175,0.05);
+    }
+    50% {
+      border-color: rgba(137,96,196,0.75);
+      box-shadow: inset 0 0 15px rgba(112,56,194,0.12), 0 0 7px rgba(112,56,194,0.1);
+    }
+  }
+  .stat-arcane {
+    animation: stat-card-glow 4.8s ease-in-out infinite;
+    background:
+      radial-gradient(circle at 50% 62%, rgba(105,48,175,0.13), transparent 60%),
+      rgba(74,111,168,0.07) !important;
+  }
+  .stat-arcane-value {
+    display: inline-block;
+    color: #cbb6ec;
+    background: linear-gradient(
+      100deg,
+      #65507f 0%,
+      #aa7ee4 28%,
+      #eee6fa 48%,
+      #8d55d1 66%,
+      #d5bdf4 82%,
+      #65507f 100%
+    );
+    background-size: 240% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: stat-ember 3.8s ease-in-out infinite;
+  }
+  .stat-arcane-mod {
+    animation-delay: -1.15s;
+  }
+  .stat-steel {
+    position: relative;
+    overflow: hidden;
+    border-color: rgba(70,88,116,0.72) !important;
+    background:
+      linear-gradient(145deg, rgba(176,190,197,0.045), transparent 42%),
+      rgba(46,61,90,0.14) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(220,232,240,0.035),
+      inset 0 -8px 16px rgba(5,8,15,0.12);
+  }
+  .stat-steel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 16%;
+    width: 68%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(176,190,197,0.28), transparent);
+    pointer-events: none;
+  }
+  .stat-steel-value {
+    display: inline-block;
+    color: #b8c3cb;
+    background: linear-gradient(180deg, #e0e7eb 0%, #aebbc4 52%, #718391 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.65));
+  }
+  .stat-steel-mod {
+    color: #8299a8 !important;
+    text-shadow: 0 0 5px rgba(106,159,216,0.12);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stat-arcane,
+    .stat-arcane-value { animation: none; }
+  }
+  @keyframes goldshine {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+
+  @media print {
+    #upload-btn { display:none; }
+    body { background:#0d0e14; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .page { border:none; margin-bottom:0; page-break-after:always; }
+    .page:last-child { page-break-after:avoid; }
+  }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<style>
+/* ── КАРТОЧКИ ШПАРГАЛКИ ── */
+.scard-anim {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+  transform-origin: center top;
+  z-index: 1;
+}
+.scard-anim:hover {
+  transform: scale(1.045);
+  z-index: 50;
+  box-shadow: 0 8px 32px rgba(74,111,168,0.45), 0 0 0 1px #4a6fa8;
+}
+
+/* Анимированная заливка — текущий псевдоэлемент */
+.scard-anim::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    rgba(74,111,168,0.0) 0%,
+    rgba(138,43,226,0.12) 40%,
+    rgba(74,111,168,0.0) 80%
+  );
+  background-size: 300% 300%;
+  animation: card-fill 5s ease infinite;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 0;
+}
+.scard-anim > * { position: relative; z-index: 1; }
+
+/* Убийца — зелёная заливка */
+.scard-anim.scard-new::before {
+  background: linear-gradient(135deg,
+    rgba(58,128,96,0.0) 0%,
+    rgba(112,208,160,0.15) 40%,
+    rgba(58,128,96,0.0) 80%
+  );
+  background-size: 300% 300%;
+  animation: card-fill-green 4s ease infinite;
+}
+
+@keyframes card-fill {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes card-fill-green {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Ripple при клике */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(74,111,168,0.3);
+  transform: scale(0);
+  animation: ripple-out 0.6s linear;
+  pointer-events: none;
+  z-index: 99;
+}
+@keyframes ripple-out {
+  to { transform: scale(4); opacity: 0; }
+}
+</style>
+
+<style>
+/* ══════════════ МОБИЛЬНАЯ АДАПТАЦИЯ ══════════════ */
+
+/* Базовый page — на мобиле full width */
+@media (max-width: 768px) {
+  .page {
+    width: 100% !important;
+    min-width: unset !important;
+    border-left-width: 2px !important;
+    margin-bottom: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  /* HEADER — портрет сверху, инфо снизу */
+  .mob-header {
+    flex-direction: column !important;
+  }
+  .char-identity {
+    padding: 14px 12px 12px !important;
+  }
+  .char-title-row {
+    text-align: center;
+  }
+  .char-name {
+    font-size: 20px !important;
+    letter-spacing: 2px !important;
+  }
+  .char-subtitle {
+    font-size: 9px !important;
+  }
+  .char-meta-grid {
+    margin-top: 10px !important;
+  }
+  .mob-portrait {
+    width: 100% !important;
+    min-height: 140px !important;
+    max-height: 180px !important;
+    border-right: none !important;
+    border-bottom: 1px solid #2e3d5a !important;
+  }
+  .mob-portrait #upload-zone {
+    min-height: 140px !important;
+  }
+  .mob-hpbox {
+    flex-direction: row !important;
+    border-left: none !important;
+    border-top: 1px solid #2e3d5a !important;
+    justify-content: center !important;
+    align-self: stretch !important;
+    padding: 10px 16px !important;
+    min-width: unset !important;
+  }
+  .char-vitals-main {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .char-vitals-side {
+    display: flex;
+    gap: 8px;
+  }
+  .char-vitals-title { display: none; }
+  .char-vital-stat {
+    min-width: 62px;
+    padding: 5px 8px;
+    border: 1px solid #2e3d5a;
+    border-radius: 5px;
+    background: rgba(74,111,168,0.08);
+    text-align: center;
+  }
+
+  /* Имя крупнее на мобиле */
+  .mob-name { font-size: 20px !important; }
+
+  /* Мета-грид 3 -> 3 (нормально) */
+
+  /* PROFBAR — в столбик */
+  .mob-profbar {
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+    font-size: 10px !important;
+  }
+  .mob-profbar span { flex: 1 1 45%; }
+
+  /* MAIN GRID — три колонки убираем, делаем аккордеон */
+  .mob-main {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .mob-abilities-col {
+    border-right: none !important;
+    border-bottom: 1px solid #2e3d5a !important;
+  }
+  .mob-skills-col {
+    border-right: none !important;
+    border-bottom: 1px solid #2e3d5a !important;
+  }
+
+  /* Аккордеон — характеристики */
+  .accordion-header {
+    cursor: pointer;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 10px 14px !important;
+    background: rgba(74,111,168,0.1) !important;
+    font-size: 12px !important;
+    user-select: none;
+  }
+  .accordion-header::after {
+    content: '▼';
+    font-size: 10px;
+    color: #4a6fa8;
+    transition: transform 0.25s;
+  }
+  .accordion-header.open::after { transform: rotate(180deg); }
+  .accordion-body {
+    display: none;
+    overflow: hidden;
+  }
+  .accordion-body.open { display: block; }
+
+  /* Характеристики на мобиле — 3 колонки 2 строки */
+  .mob-abs-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+    padding: 10px !important;
+  }
+  .mob-abs-grid .ab-item {
+    padding: 8px 4px !important;
+    font-size: 11px !important;
+  }
+  .mob-abs-grid .ab-val { font-size: 22px !important; }
+  .mob-abs-grid .ab-mod { font-size: 13px !important; }
+
+  /* Навыки — 2 колонки */
+  .mob-skills-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    padding: 8px 10px !important;
+    gap: 1px !important;
+  }
+
+  /* Бой — 2 колонки вместо 3 */
+  .mob-combat-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Фичи — 1 колонка */
+  .mob-features {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Снаряжение — 1 колонка */
+  .mob-equip {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Черты — 2 колонки */
+  .mob-traits {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Шпаргалка — 2 колонки с горизонтальным скроллом */
+  .mob-spell-grid {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .mob-spell-grid .spell-grid-inner {
+    min-width: 600px !important;
+  }
+
+  /* Тултипы на мобиле — отключить hover, показывать по клику */
+  .tip-box { font-size: 11px !important; width: 240px !important; }
+
+  /* Таблица атак — скролл */
+  .mob-atk-wrap { overflow-x: auto; }
+  .mob-atk-wrap table { min-width: 280px; }
+
+  /* Шрифты крупнее */
+  .mob-text-base { font-size: 11px !important; }
+  .mob-text-sm { font-size: 10px !important; }
+}
+
+/* Планшет */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .page { width: 100% !important; }
+  .mob-traits { grid-template-columns: repeat(2, 1fr) !important; }
+}
+</style>
+
+
+<style>
+/* ══════════════ ДЕСКТОП САЙТ ══════════════ */
+
+/* Общий фон и центрирование */
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 15% 30%, rgba(74,111,168,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 70%, rgba(138,43,226,0.06) 0%, transparent 50%),
+    #0d0e14 !important;
+}
+
+/* Контейнер */
+.site-wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 16px 60px;
+}
+
+/* Сброс page */
+.page {
+  width: 100% !important;
+  min-width: unset !important;
+  border-radius: 8px !important;
+  border: 1px solid #2e3d5a !important;
+  border-left: 3px solid #4a6fa8 !important;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(74,111,168,0.1) !important;
+  overflow: visible !important;
+}
+
+/* ── ШАПКА САЙТА ── */
+.site-header {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.site-logo {
+  font-family: 'Forum', Georgia, serif;
+  font-size: 13px;
+  color: #506070;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.site-logo span { color: #4a6fa8; }
+
+/* ── ВКЛАДКИ ── */
+.tabs-wrap {
+  max-width: 980px;
+  margin: 0 auto 16px;
+  padding: 0 16px;
+}
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid #2e3d5a;
+  padding-bottom: 0;
+}
+.tab-btn {
+  font-family: 'Manrope', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: #506070;
+  padding: 10px 20px;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  cursor: pointer;
+  background: transparent;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+  position: relative;
+  bottom: -1px;
+}
+.tab-btn:hover { color: #8fa8b8; background: rgba(74,111,168,0.05); }
+.tab-btn.active {
+  color: #6a9fd8;
+  background: #141720;
+  border-color: #2e3d5a;
+  border-bottom-color: #141720;
+}
+.tab-btn .tab-icon { margin-right: 6px; }
+
+/* ── ПАНЕЛИ ВКЛАДОК ── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Инвентарь — отдельная вкладка */
+.inventory-panel {
+  background: #141720;
+  border: 1px solid #2e3d5a;
+  border-left: 3px solid #4a6fa8;
+  border-radius: 8px;
+  padding: 20px 24px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+}
+.inv-title {
+  font-family: 'Forum', Georgia, serif;
+  font-size: 16px;
+  color: #b0bec5;
+  border-bottom: 1px solid #2e3d5a;
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+.inv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.inv-section {
+  background: rgba(74,111,168,0.06);
+  border: 1px solid #2e3d5a;
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+.inv-section-title {
+  font-family: 'Forum', Georgia, serif;
+  font-size: 10px;
+  color: #6a9fd8;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-bottom: 1px solid #2e3d5a;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+}
+.inv-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(74,111,168,0.1);
+  font-size: 13px;
+  color: #dce8f0;
+}
+.inv-item:last-child { border-bottom: none; }
+.inv-item::before { content: '◆'; color: #4a6fa8; font-size: 7px; flex-shrink: 0; }
+.inv-currency {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: rgba(74,111,168,0.08);
+  border: 1px solid #2e3d5a;
+  border-radius: 6px;
+  font-size: 15px;
+  text-align: center;
+}
+.inv-notes {
+  margin-top: 16px;
+}
+.inv-notes textarea {
+  width: 100%;
+  height: 100px;
+  font-size: 13px !important;
+  padding: 12px !important;
+}
+
+/* ── ДЕСКТОП: ЛИСТ и ШПАРГАЛКА ── */
+@media (min-width: 769px) {
+  /* Убираем разделение на .page — всё в одном потоке */
+  .page { margin-bottom: 0 !important; }
+
+  /* Шапка персонажа: три равновесные зоны */
+  .character-header {
+    min-height: 190px;
+  }
+  .char-identity {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    padding: 18px 18px 16px !important;
+  }
+  .char-title-row {
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(74,111,168,0.28);
+  }
+  .char-name {
+    font-size: 25px !important;
+    line-height: 1.15;
+    letter-spacing: 2.5px !important;
+  }
+  .char-subtitle {
+    margin-top: 5px !important;
+    font-size: 10px !important;
+  }
+  .char-meta-grid {
+    margin-top: 12px !important;
+    gap: 7px !important;
+  }
+  .char-meta-card {
+    min-height: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(145deg, rgba(74,111,168,0.09), rgba(74,111,168,0.035)) !important;
+    border-color: rgba(74,111,168,0.42) !important;
+    border-radius: 5px !important;
+  }
+
+  /* Боевая панель занимает всю высоту правой колонки */
+  .char-vitals {
+    align-self: stretch;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    width: 188px;
+    min-width: 188px !important;
+    margin: 0;
+    padding: 16px 14px !important;
+    border-left: 1px solid #2e3d5a !important;
+    background:
+      radial-gradient(circle at 50% 34%, rgba(74,111,168,0.16), transparent 48%),
+      rgba(13,14,20,0.28);
+  }
+  .char-vitals-title {
+    display: block;
+    width: 100%;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(74,111,168,0.32);
+    color: #78909c;
+    font-size: 7px;
+    letter-spacing: 1.5px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .char-vitals-main {
+    display: flex !important;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 11px;
+  }
+  .char-vitals-circle {
+    width: 72px !important;
+    height: 72px !important;
+  }
+  .char-vitals-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 7px;
+  }
+  .char-vital-stat {
+    min-width: 0;
+    padding: 8px 6px;
+    border: 1px solid rgba(74,111,168,0.48);
+    border-radius: 5px;
+    background: rgba(74,111,168,0.09);
+    text-align: center;
+  }
+
+  /* Profbar крупнее */
+  .profbar-big { font-size: 11px !important; padding: 6px 16px !important; }
+  .profbar-big b { font-size: 13px !important; }
+
+  /* Main grid — больше места для колонок */
+  .main-grid-big {
+    grid-template-columns: 110px 1fr 1.2fr !important;
+  }
+
+  /* Характеристики */
+  .ab-val-big { font-size: 22px !important; }
+  .ab-mod-big { font-size: 13px !important; }
+  .ab-name-big { font-size: 9px !important; }
+
+  /* Навыки */
+  .sk-big { font-size: 12px !important; }
+
+  /* Бой */
+  .cv-big { font-size: 20px !important; }
+  .cl-big { font-size: 9px !important; }
+  .atk-big { font-size: 12px !important; }
+
+  /* Фичи, история */
+  .fi-big { font-size: 11px !important; line-height: 1.7 !important; }
+  .ft-big { font-size: 10px !important; }
+  .btext-big { font-size: 12px !important; line-height: 1.8 !important; }
+  .tx-big { font-size: 11px !important; }
+}
+</style>
+
+
+<style>
+/* ══════════════ ПОРТРЕТ ══════════════ */
+
+/* Десктоп — крупный квадрат слева */
+@media (min-width: 769px) {
+  .portrait-wrap {
+    width: 180px !important;
+    min-width: 180px !important;
+    min-height: 190px !important;
+    border-right: 1px solid #2e3d5a !important;
+    border-bottom: none !important;
+    position: relative;
+  }
+  #upload-zone {
+    min-height: 190px !important;
+  }
+  #portrait-img {
+    width: 180px !important;
+    height: 100% !important;
+    min-height: 190px !important;
+    object-fit: cover;
+    object-position: top center;
+  }
+  .mob-header {
+    flex-direction: row !important;
+  }
+}
+
+/* Кнопка загрузки поверх портрета */
+.portrait-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(13,14,20,0.85));
+  padding: 20px 6px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.portrait-wrap:hover .portrait-overlay { opacity: 1; }
+.portrait-upload-btn {
+  font-family: 'Manrope', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 9px;
+  color: #dce8f0;
+  background: rgba(74,111,168,0.7);
+  border: 1px solid #4a6fa8;
+  border-radius: 4px;
+  padding: 3px 8px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  transition: background 0.2s;
+}
+.portrait-upload-btn:hover { background: rgba(74,111,168,0.9); }
+
+/* Netlify upload modal */
+.netlify-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.netlify-modal.open { display: flex; }
+.netlify-modal-box {
+  background: #1a1d2e;
+  border: 1px solid #4a6fa8;
+  border-radius: 10px;
+  padding: 24px 28px;
+  width: 380px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(74,111,168,0.2);
+}
+.modal-title {
+  font-family: 'Forum', Georgia, serif;
+  font-size: 15px;
+  color: #b0bec5;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+.modal-sub {
+  font-size: 11px;
+  color: #506070;
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+.modal-sub span { color: #4a6fa8; }
+
+/* Dropzone внутри модалки */
+.dropzone {
+  border: 2px dashed #2e3d5a;
+  border-radius: 8px;
+  padding: 30px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: rgba(74,111,168,0.04);
+  margin-bottom: 14px;
+}
+.dropzone:hover, .dropzone.drag-over {
+  border-color: #4a6fa8;
+  background: rgba(74,111,168,0.1);
+}
+.dropzone-icon { font-size: 32px; margin-bottom: 8px; opacity: 0.6; }
+.dropzone-text { font-size: 12px; color: #8fa8b8; }
+.dropzone-hint { font-size: 10px; color: #506070; margin-top: 4px; }
+
+/* Preview в модалке */
+.modal-preview {
+  display: none;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  border: 1px solid #2e3d5a;
+}
+.modal-preview.show { display: block; }
+
+.modal-actions { display: flex; gap: 8px; }
+.modal-btn {
+  flex: 1;
+  font-family: 'Manrope', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  padding: 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  border: 1px solid;
+}
+.modal-btn-primary {
+  background: #4a6fa8;
+  border-color: #6a9fd8;
+  color: #fff;
+}
+.modal-btn-primary:hover { background: #6a9fd8; }
+.modal-btn-primary:disabled { opacity: 0.4; cursor: default; }
+.modal-btn-cancel {
+  background: transparent;
+  border-color: #2e3d5a;
+  color: #8fa8b8;
+}
+.modal-btn-cancel:hover { border-color: #4a6fa8; color: #dce8f0; }
+
+/* Netlify info badge */
+.netlify-badge {
+  margin-top: 14px;
+  padding: 8px 12px;
+  background: rgba(0,200,80,0.06);
+  border: 1px solid rgba(0,200,80,0.2);
+  border-radius: 5px;
+  font-size: 10px;
+  color: #60c070;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.upload-status {
+  margin-top: 10px;
+  font-size: 11px;
+  text-align: center;
+  color: #506070;
+  min-height: 16px;
+}
+.upload-status.success { color: #70c090; }
+.upload-status.error   { color: #e09080; }
+.upload-password {
+  width: 100%;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  color: #dce8f0;
+  background: rgba(74,111,168,0.06);
+  border: 1px solid #2e3d5a;
+  border-radius: 6px;
+  outline: none;
+  font-size: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.upload-password:focus {
+  border-color: #4a6fa8;
+  box-shadow: 0 0 0 2px rgba(74,111,168,0.12);
+}
+.upload-password::placeholder { color: #506070; }
+</style>
+
+<style>
+/* ══════════════ ТИПОГРАФИЧЕСКАЯ СИСТЕМА ══════════════ */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+body,
+button,
+input,
+textarea {
+  font-family: 'Manrope', Arial, sans-serif;
+}
+.page,
+.inventory-panel {
+  font-weight: 500;
+}
+.font-meta,
+.char-name,
+.site-logo,
+.inv-title,
+.inv-section-title,
+.modal-title {
+  font-family: 'Forum', Georgia, serif !important;
+  font-weight: 400 !important;
+}
+.char-name {
+  letter-spacing: 0.055em !important;
+}
+.char-subtitle {
+  font-weight: 500;
+  letter-spacing: 0.045em !important;
+}
+.accordion-header,
+.inv-section-title,
+.char-vitals-title {
+  font-family: 'Forum', Georgia, serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.16em !important;
+}
+@media (min-width: 769px) {
+  .page .font-meta.uppercase {
+    font-size: 9px !important;
+    letter-spacing: 0.13em !important;
+  }
+}
+.char-meta-card > div:first-child,
+.char-vital-stat > div:first-child,
+.stat-steel > div:first-child,
+.stat-arcane > div:first-child,
+.mob-combat-grid > div > div:last-child {
+  font-family: 'Manrope', Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+.char-meta-card > div:last-child {
+  font-family: 'Forum', Georgia, serif;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.025em;
+}
+.stat-steel-value,
+.stat-arcane-value,
+.char-vitals-circle .font-meta,
+.char-vital-stat .font-meta,
+.mob-combat-grid .font-meta,
+.profbar-big b {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+table,
+textarea,
+.tip-box,
+.modal-sub,
+.dropzone-text,
+.dropzone-hint {
+  font-weight: 400;
+}
+strong,
+b,
+.font-bold {
+  font-weight: 700;
+}
+.tab-btn,
+.portrait-upload-btn,
+.modal-btn,
+.site-header button {
+  font-family: 'Manrope', Arial, sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.025em;
+}
+</style>
+
+
+</head>
+<body>
+
+<!-- ШАПКА САЙТА -->
+<div class="site-header">
+  <div class="site-logo">D&amp;D · <span>Лист персонажа</span></div>
+  <button onclick="openPortraitModal()"
+    class="bg-drow-accent hover:bg-drow-bright text-white border border-drow-bright rounded px-3 py-1.5 text-[11px] cursor-pointer transition-colors font-meta">
+    📷 Портрет персонажа
+  </button>
+</div>
+
+<!-- ВКЛАДКИ -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('sheet')"><span class="tab-icon">📜</span>Лист</button>
+    <button class="tab-btn" onclick="switchTab('spells')"><span class="tab-icon">✨</span>Шпаргалка</button>
+    <button class="tab-btn" onclick="switchTab('inventory')"><span class="tab-icon">🎒</span>Инвентарь</button>
+  </div>
+</div>
+
+<div class="site-wrap">
+
+<!-- ── ВКЛАДКА: ЛИСТ ── -->
+<div class="tab-panel active" id="panel-sheet">
+
+<!-- ══════════════ СТРАНИЦА 1 ══════════════ -->
+<div class="page">
+
+<!-- HEADER -->
+<div class="character-header flex items-stretch border-b-2 border-drow-border bg-drow-header relative z-10 mob-header">
+
+  <!-- ПОРТРЕТ — высокий под вертикальное фото -->
+  <div class="portrait-wrap shrink-0 overflow-hidden mob-portrait" style="width:180px;min-height:190px;border-right:1px solid #2e3d5a;position:relative;">
+    <div id="upload-zone" class="w-full h-full flex flex-col items-center justify-center gap-2 cursor-pointer" style="min-height:190px;background:rgba(74,111,168,0.08);" onclick="openPortraitModal()">
+      <div style="font-size:36px;opacity:0.25">🗡️</div>
+      <div style="font-size:8px;color:#506070;text-align:center;letter-spacing:1px;font-family:Manrope,Arial,sans-serif;font-weight:600">ПОРТРЕТ</div>
+    </div>
+    <img id="portrait-img" alt="Съебастьян" style="display:none;width:180px;height:100%;object-fit:cover;object-position:top center;position:absolute;top:0;left:0;">
+    <div class="portrait-overlay">
+      <div class="portrait-upload-btn" onclick="openPortraitModal()">📷 Изменить</div>
+    </div>
+  </div>
+
+  <div class="char-identity flex-1 px-3 py-2">
+    <div class="char-title-row">
+      <div class="char-name font-meta text-[22px] tracking-[3px]">Съебастьян Сквозняк</div>
+      <div class="char-subtitle text-[10px] text-drow-bright mt-0.5 tracking-wide">
+        Дроу · Плут 4 · Архетип Убийца · Нейтрально-злой
+      </div>
+    </div>
+    <div class="char-meta-grid grid grid-cols-3 gap-1.5 mt-1.5">
+      <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
+        <div class="text-[8px] text-drow-faint uppercase tracking-wide">Раса</div>
+        <div class="text-[11px] text-drow-text font-bold">Дроу</div>
+      </div>
+      <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
+        <div class="text-[8px] text-drow-faint uppercase tracking-wide">Класс</div>
+        <div class="text-[11px] text-drow-text font-bold">Плут 4</div>
+      </div>
+      <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
+        <div class="text-[8px] text-drow-faint uppercase tracking-wide">Опыт</div>
+        <div class="text-[11px] text-drow-text font-bold">2700 / 6500</div>
+      </div>
+      <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
+        <div class="text-[8px] text-drow-faint uppercase tracking-wide">Предыстория</div>
+        <div class="text-[11px] text-drow-text font-bold">Преступник</div>
+      </div>
+      <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
+        <div class="text-[8px] text-drow-faint uppercase tracking-wide">Скорость</div>
+        <div class="text-[11px] text-drow-text font-bold">30 фт</div>
+      </div>
+      <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
+        <div class="text-[8px] text-drow-faint uppercase tracking-wide">Уровень</div>
+        <div class="text-[11px] text-drow-text font-bold">4</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- КБ И ХИТЫ -->
+  <div class="char-vitals flex flex-col items-center justify-center px-4 py-3 border-l border-drow-border min-w-[80px] mob-hpbox">
+    <div class="char-vitals-title">Боевые показатели</div>
+    <div class="char-vitals-main">
+      <div>
+        <div class="text-[7px] text-drow-muted uppercase tracking-wide mb-1 text-center">Хиты</div>
+        <div class="char-vitals-circle w-[56px] h-[56px] rounded-full border-2 border-drow-accent flex flex-col items-center justify-center bg-[rgba(74,111,168,0.12)]" style="box-shadow:0 0 12px rgba(74,111,168,0.25)">
+          <div class="font-meta text-[22px] text-drow-silver leading-none">27</div>
+          <div class="text-[8px] text-drow-muted">макс: 27</div>
+        </div>
+      </div>
+      <div class="char-vitals-side">
+        <div class="char-vital-stat">
+          <div class="text-[7px] text-drow-muted uppercase">КБ</div>
+          <div class="font-meta text-[17px] text-drow-silver font-bold leading-tight">15</div>
+        </div>
+        <div class="char-vital-stat">
+          <div class="text-[7px] text-drow-muted uppercase">Иниц.</div>
+          <div class="font-meta text-[14px] text-drow-text font-bold leading-tight">+4</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROFBAR -->
+<div class="flex items-center justify-between px-3 py-1.5 border-b border-drow-border bg-drow-bar text-[8.5px] text-drow-muted relative z-10 mob-profbar">
+  <span class="tip">Бонус мастерства: <b class="font-meta text-[10px] text-drow-bright">+2</b>
+  <div class="tip-box"><span class="tip-title">⚔ Бонус мастерства</span>Добавляется к атакам, навыкам и спасброскам с владением.<br><br>Ур. 1–4: <b>+2</b> · Ур. 5–8: <b>+3</b> · Ур. 9–12: <b>+4</b></div>
+</span>
+  <span class="tip">Пассивная Внимательность: <b class="font-meta text-[10px] text-drow-bright">14</b>
+  <div class="tip-box"><span class="tip-title">👁 Пассивная Внимательность</span>= 10 + бонус Внимательности. Мастер использует её чтобы определить, заметишь ли ты что-то без активного осмотра.<br><br><span class="tip-good">Твоя: 10 + 2 + 2 (владение) = 14</span></div>
+</span>
+  <span class="tip">Тёмное зрение: <b class="font-meta text-[10px] text-drow-bright">120 фт</b>
+  <div class="tip-box"><span class="tip-title">🌑 Тёмное зрение</span>В тусклом свете → видишь как при ярком.<br>В темноте → видишь как в тусклом (серый).<br><br>120 фт — лучшее среди рас!<br><span class="tip-warn">Помеха атакам при прямом солнечном свете!</span></div>
+</span>
+  <span>Кубик хитов: <b class="font-meta text-[10px] text-drow-bright">4d8</b></span>
+</div>
+
+<!-- MAIN GRID -->
+<div class="grid grid-cols-[88px_1fr_1fr] border-b border-drow-border relative z-10 mob-main">
+
+  <!-- ABILITIES -->
+  <div class="border-r border-drow-border mob-abilities-col">
+    <div class="accordion-header font-meta text-[8px] text-drow-bright uppercase tracking-widest" id="acc-abs" onclick="toggleAcc('abs')">Характеристики</div>
+    <div class="accordion-body px-1.5 py-1.5 flex flex-col gap-1.5 mob-abs-grid open" id="body-abs">
+    <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
+      <div class="text-[7px] text-drow-faint uppercase tip">Сила<div class="tip-box tip-left"><span class="tip-title">💪 Сила</span>Атлетика, ближний бой (если нет фехтовального), ношение грузов, выламывание дверей.<br><br><span class="tip-warn">У Съебастьяна Сила 10 — используй Ловкость для атак!</span></div></div>
+      <div class="stat-steel-value font-meta text-[17px] leading-none">10</div>
+      <div class="stat-steel-mod text-[10px] font-bold">+0</div>
+    </div>
+    <div class="stat-arcane bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
+      <div class="text-[7px] text-drow-faint uppercase tip">Ловкость<div class="tip-box tip-left"><span class="tip-title">🏃 Ловкость</span>Акробатика, Скрытность, Ловкость рук, атаки фехтовальным оружием и дальнобойным, КД без доспехов, инициатива.<br><br><span class="tip-good">Главная характеристика Съебастьяна — +3 везде!</span></div></div>
+      <div class="stat-arcane-value font-meta text-[17px] leading-none">18</div>
+      <div class="stat-arcane-value stat-arcane-mod text-[10px] font-bold">+4</div>
+    </div>
+    <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
+      <div class="text-[7px] text-drow-faint uppercase tip">Телосл.<div class="tip-box tip-left"><span class="tip-title">❤ Телосложение</span>Хиты на каждом уровне, концентрация заклинаний (СС 10 или полурон), физическая выносливость.<br><br>+1 к хитам на каждом уровне.</div></div>
+      <div class="stat-steel-value font-meta text-[17px] leading-none">13</div>
+      <div class="stat-steel-mod text-[10px] font-bold">+1</div>
+    </div>
+    <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
+      <div class="text-[7px] text-drow-faint uppercase tip">Интеллект<div class="tip-box tip-left"><span class="tip-title">📚 Интеллект</span>Аркана, История, Расследование, Природа, Религия. Спасброски Интеллекта.<br><br>Плут владеет спасбросками Интеллекта — <span class="tip-good">+3 со вл.</span></div></div>
+      <div class="stat-steel-value font-meta text-[17px] leading-none">12</div>
+      <div class="stat-steel-mod text-[10px] font-bold">+1</div>
+    </div>
+    <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
+      <div class="text-[7px] text-drow-faint uppercase tip">Мудрость<div class="tip-box tip-left"><span class="tip-title">🔮 Мудрость</span>Внимательность, Проницательность, Медицина, Выживание. Магия жрецов/друидов.<br><br><span class="tip-warn">Мудрость 10 — будь осторожен с заклинаниями очарования!</span></div></div>
+      <div class="stat-steel-value font-meta text-[17px] leading-none">10</div>
+      <div class="stat-steel-mod text-[10px] font-bold">+0</div>
+    </div>
+    <div class="stat-arcane bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
+      <div class="text-[7px] text-drow-faint uppercase tip">Харизма<div class="tip-box tip-left"><span class="tip-title">✨ Харизма</span>Обман, Запугивание, Выступление, Убеждение. Магия дроу использует Харизму (СС 12).<br><br><span class="tip-good">Харизма +2 → Обман +4!</span></div></div>
+      <div class="stat-arcane-value font-meta text-[17px] leading-none">16</div>
+      <div class="stat-arcane-value stat-arcane-mod text-[10px] font-bold">+2</div>
+    </div>
+  </div></div>
+
+  <!-- SKILLS -->
+  <div class="border-r border-drow-border mob-skills-col">
+    <div class="accordion-header font-meta text-[8px] text-drow-bright uppercase tracking-widest" id="acc-sk" onclick="toggleAcc('sk')">Навыки и спасброски</div>
+    <div class="accordion-body px-1.5 py-1.5 open" id="body-sk">
+    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-1">Спасброски</div>
+    <ul class="flex flex-col gap-px mb-1">
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span>Сила</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+6</span><span>Ловкость</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+1</span><span>Телосложение</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+3</span><span>Интеллект</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span>Мудрость</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+2</span><span>Харизма</span></li>
+    </ul>
+    <div class="text-center text-drow-accent text-[9px] tracking-[3px] my-0.5">✦ ✦ ✦</div>
+    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-1 mt-0.5">Навыки</div>
+    <ul class="flex flex-col gap-px">
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span class="flex-1">Атлетика</span><span class="text-[8px] text-drow-faint">Сил</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+6</span><span class="flex-1">Акробатика</span><span class="text-[8px] text-drow-faint">Лов</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot e"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+8</span><span class="flex-1">Ловкость рук ✦</span><span class="text-[8px] text-drow-faint">Лов</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot e"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+8</span><span class="flex-1">Скрытность ✦</span><span class="text-[8px] text-drow-faint">Лов</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+1</span><span class="flex-1">Аркана</span><span class="text-[8px] text-drow-faint">Инт</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+1</span><span class="flex-1">История</span><span class="text-[8px] text-drow-faint">Инт</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+3</span><span class="flex-1">Расследование</span><span class="text-[8px] text-drow-faint">Инт</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+1</span><span class="flex-1">Природа</span><span class="text-[8px] text-drow-faint">Инт</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+2</span><span class="flex-1">Внимательность</span><span class="text-[8px] text-drow-faint">Муд</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span class="flex-1">Проницательность</span><span class="text-[8px] text-drow-faint">Муд</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span class="flex-1">Медицина</span><span class="text-[8px] text-drow-faint">Муд</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span class="flex-1">Выживание</span><span class="text-[8px] text-drow-faint">Муд</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+5</span><span class="flex-1">Обман</span><span class="text-[8px] text-drow-faint">Хар</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+3</span><span class="flex-1">Запугивание</span><span class="text-[8px] text-drow-faint">Хар</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+3</span><span class="flex-1">Выступление</span><span class="text-[8px] text-drow-faint">Хар</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+3</span><span class="flex-1">Убеждение</span><span class="text-[8px] text-drow-faint">Хар</span></li>
+    </ul>
+    <div class="text-[6.5px] text-drow-faint mt-1">✦ Мастерство ×2</div>
+  </div></div>
+
+  <!-- COMBAT -->
+  <div class="px-2 py-1.5">
+    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-1.5">Бой</div>
+    <div class="grid grid-cols-3 gap-1.5 mb-2 mob-combat-grid">
+      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver tip">15
+  <div class="tip-box"><span class="tip-title">🛡 КД 14</span>Кожаный доспех 11 + Лов +3. Атаки ниже 14 — промах.<br><span class="tip-good">Щит реакцией → КД 19 на 1 ход!</span></div>
+</div><div class="text-[7px] text-drow-faint uppercase">Класс доспехов</div></div>
+      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver tip">+4
+  <div class="tip-box"><span class="tip-title">⚡ Инициатива +4</span>d20 + 3 в начале боя. Чем выше — тем раньше ходишь.<br><span class="tip-good">Убийца выигрывает от первого хода!</span></div>
+</div><div class="text-[7px] text-drow-faint uppercase">Инициатива</div></div>
+      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver">30 фт</div><div class="text-[7px] text-drow-faint uppercase">Скорость</div></div>
+      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver">27</div><div class="text-[7px] text-drow-faint uppercase">Макс хиты</div></div>
+      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver">4d8</div><div class="text-[7px] text-drow-faint uppercase">Куб хитов</div></div>
+      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver tip">+2
+  <div class="tip-box"><span class="tip-title">📖 Бонус мастерства</span>Добавляется к навыкам, атакам и спасброскам с владением.<br><br>Ур. 1–4: +2 · Ур. 5–8: +3<br><span class="tip-good">Экспертиза удваивает: +4!</span></div>
+</div><div class="text-[7px] text-drow-faint uppercase">Бонус мастерства</div></div>
+    </div>
+    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-1">Атаки</div>
+    <div class="mob-atk-wrap"><table class="w-full text-[9px] border-collapse">
+      <tr><th class="bg-[rgba(74,111,168,0.13)] text-drow-bright px-1 py-1 text-left text-[7.5px] border border-drow-border">Оружие</th><th class="bg-[rgba(74,111,168,0.13)] text-drow-bright px-1 py-1 text-left text-[7.5px] border border-drow-border">Атака</th><th class="bg-[rgba(74,111,168,0.13)] text-drow-bright px-1 py-1 text-left text-[7.5px] border border-drow-border">Урон / Тип</th></tr>
+      <tr class="atk-row"><td class="px-1 py-0.5 border border-drow-border text-drow-text">Рапира</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">+6</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">1d8+4 / прокол</td></tr>
+      <tr class="atk-row"><td class="px-1 py-0.5 border border-drow-border text-drow-text">Ручной арбалет</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">+6</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">1d8+6 / прокол</td></tr>
+      <tr class="atk-row"><td class="px-1 py-0.5 border border-drow-border text-drow-text">Кинжал (брос.)</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">+6</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">1d4+6 / прокол</td></tr>
+    </table></div>
+    <div class="mt-1.5">
+      <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-0.5">Скрытная атака (1 раз в ход)</div>
+      <div class="text-[9px] text-drow-text leading-relaxed tip">+<strong>2d6</strong> урона при преимуществе или союзнике в 5 фт от цели
+  <div class="tip-box"><span class="tip-title">🗡 Скрытная атака</span>Один раз в ход. Нужно:<br>• Преимущество на атаку, <b>ИЛИ</b><br>• Союзник в 5 фт от цели<br>• Без помехи на атаку<br><br>На 5 ур.: +3d6 · На 7 ур.: +4d6<br><span class="tip-good">При крите все кубики удваиваются!</span></div>
+</div>
+    </div>
+    <div class="mt-1.5">
+      <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-0.5">Магия дроу (Хар, СС 13)</div>
+      <div class="text-[9px] text-drow-text leading-relaxed">◆ <span class="text-drow-bright font-bold">Пляшущие огоньки</span> — заговор, по желанию<br>◆ <span class="text-drow-bright font-bold">Огонь фей</span> — 1/день ✦ РАЗБЛОКИРОВАН<br>◆ <span class="text-drow-bright font-bold">Тьма</span> — с 5 уровня, 1/день</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="grid grid-cols-3 gap-1.5 px-2 py-1.5 border-t border-drow-border relative z-10 mob-features">
+  <div class="rounded p-1.5" style="background:rgba(74,111,168,0.07);border:1px solid #4a6fa8;animation:drow-border 4s ease-in-out infinite;transition:all 0.3s;">
+    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-wide border-b border-drow-border pb-0.5 mb-1">Черты расы: Дроу</div>
+    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Тёмное зрение</strong> — 120 фт</div>
+    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Обострённые чувства</strong> — владение Внимательностью</div>
+    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Наследие фей</strong> — преим. против очарования, иммун. к усыплению</div>
+    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Чувствительность к солнцу</strong> — помеха при солнечном свете</div>
+    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Владение оружием дроу</strong> — рапира, к. меч, арбалет</div>
+    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Транс</strong> — 4 часа медитации вместо 8 часов сна</div>
+  </div>
+  <div class="rounded p-1.5" style="background:rgba(74,111,168,0.07);border:1px solid #2e3d5a;animation:rogue-border 3s ease-in-out infinite;transition:all 0.3s;">
+    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-wide border-b border-drow-border pb-0.5 mb-1">Умения плута</div>
+    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Мастерство ×2</strong> — Скрытность и Ловкость рук: +8</div>
+    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Скрытная атака</strong> — +2d6 при преимуществе / союзнике в 5 фт</div>
+    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Хитрое действие</strong> — Рывок / Отход / Затаивание бонусным</div>
+    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Воровской жаргон</strong> — тайный язык воров</div>
+    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Спасброски:</strong> Ловкость, Интеллект</div>
+  </div>
+    <div class="rounded p-1.5" style="background:rgba(60,120,80,0.15);border:1px solid #3a8060;animation:assassin-border 3.5s ease-in-out infinite;">
+    <div class="font-meta text-[8px] uppercase tracking-wide border-b pb-0.5 mb-1" style="color:#70d0a0;border-color:#3a8060">
+      Убийца — архетип
+    </div>
+    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Ликвидация</strong> — преимущество по не ходившим. Попадание по врасплох — АВТОКРИТ</div>
+    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Владения:</strong> Набор для грима · Инструменты отравителя</div>
+    <div class="text-[7px] mt-1" style="color:#70c090">★ Спрятался → автокрит + 2d6 скрытная с первого удара!</div>
+  </div>
+</div>
+
+<!-- EQUIP -->
+<div class="grid grid-cols-2 gap-1.5 px-2 py-1.5 border-t border-drow-border relative z-10 mob-equip">
+  <div>
+    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-wide border-b border-drow-border pb-0.5 mb-1">Снаряжение</div>
+    <ul class="text-[9px] text-drow-text leading-relaxed">
+      <li class="eqli relative pl-3">Рапира</li>
+      <li class="eqli relative pl-3">Ручной арбалет + 20 болтов</li>
+      <li class="eqli relative pl-3">Кинжал × 2</li>
+      <li class="eqli relative pl-3">Кожаный доспех (КД 11 + Лов)</li>
+      <li class="eqli relative pl-3">Набор взломщика · Инструменты вора</li>
+      <li class="eqli relative pl-3">Набор для грима · Инструменты отравителя</li>
+      <li class="eqli relative pl-3">Наручи меткости (+2 к урону дальн.)</li>
+      <li class="eqli relative pl-3">Верёвка шёлковая 50 фт</li>
+      <li class="eqli relative pl-3">Факел × 5 · Фляга · Пайки × 3</li>
+      <li class="eqli relative pl-3">Дымовые шашки × 3 (радиус 20 фт)</li>
+      <li class="eqli relative pl-3">Лопата</li>
+    </ul>
+  </div>
+  <div>
+    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-wide border-b border-drow-border pb-0.5 mb-1">Владения и валюта</div>
+    <div class="text-[9px] text-drow-text leading-relaxed">Лёгкие доспехи · Простое оружие<br>Рапиры · Длинные и короткие мечи<br>Ручные арбалеты<br>Инструменты вора · Набор взломщика<br>Языки: Общий, Эльфийский, Подземный<br><strong style="background:linear-gradient(90deg,#b8860b,#ffd700,#ffec6e,#ffd700,#b8860b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:11px;animation:goldshine 2s linear infinite;background-size:200% auto;">💰 68 зм · 23 см</strong></div>
+  </div>
+</div>
+
+<!-- BACKSTORY -->
+<div class="px-2.5 py-1.5 border-t border-drow-border bg-[rgba(74,111,168,0.04)] relative z-10">
+  <div class="font-meta text-[8px] text-drow-bright uppercase tracking-wide border-b border-drow-border pb-0.5 mb-1">История</div>
+  <div class="text-[9px] text-drow-muted leading-relaxed italic">Родился в Андердарке, в младшем доме дроу — достаточно знатном для амбиций, но не для их реализации. Мать — жрица Вальдиры — возлагала надежды. Отец просто надеялся выжить. В четырнадцать лет Съебастьяна отдали в академию магов. В пятнадцать он оттуда <strong class="not-italic text-drow-silver">съебастьянировал</strong> — прихватив фамильный флакон с дымовой шашкой, казну учителя и чужие сапоги на два размера больше. Долги? <strong class="not-italic text-drow-silver">Сквозняк.</strong> Стража? <strong class="not-italic text-drow-silver">Сквозняк.</strong> Свадьба с намёком? <strong class="not-italic text-drow-silver">Сквозняк.</strong> Мотивация проста: вернуться настолько богатым и опасным, чтобы мать сказала «я горжусь тобой» — и исчезнуть, пока не передумала. Где-то на этом пути он нашёл <strong class="not-italic text-drow-silver">Вальдиру</strong> — или она нашла его. Богиня теней, тайн и страха. Съебастьян не молится — он просто живёт так, как она велит: незаметно, опасно, и всегда на шаг впереди тех, кто его ищет.</div>
+</div>
+
+<!-- TRAITS -->
+<div class="grid grid-cols-4 gap-1.5 px-2 py-1.5 border-t border-drow-border relative z-10 mob-traits">
+  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1.5">
+    <div class="font-meta text-[7.5px] text-drow-faint uppercase tracking-wide mb-1">Черты личности</div>
+    <div class="text-[8.5px] text-drow-muted leading-snug italic">Всегда улыбается, когда что-то идёт не так. Особенно — когда это не так для других. Мастер массажа простаты.</div>
+  </div>
+  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1.5">
+    <div class="font-meta text-[7.5px] text-drow-faint uppercase tracking-wide mb-1">Идеал</div>
+    <div class="text-[8.5px] text-drow-muted leading-snug italic">Свобода. Никто не указывает Съебастьяну — ни боги, ни господа, ни смерть.</div>
+  </div>
+  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1.5">
+    <div class="font-meta text-[7.5px] text-drow-faint uppercase tracking-wide mb-1">Привязанность</div>
+    <div class="text-[8.5px] text-drow-muted leading-snug italic">Флакон с дымом — память о первой удачной краже. Никогда не расстаётся.</div>
+  </div>
+  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1.5">
+    <div class="font-meta text-[7.5px] text-drow-faint uppercase tracking-wide mb-1">Слабость</div>
+    <div class="text-[8.5px] text-drow-muted leading-snug italic">Не может устоять перед красивой работой — ловушкой, замком или красавицей.</div>
+  </div>
+</div>
+
+<!-- NOTES -->
+<div class="px-2.5 pb-3 pt-1.5 border-t border-drow-border relative z-10">
+  <div class="font-meta text-[8px] text-drow-bright uppercase tracking-wide border-b border-drow-border pb-0.5 mb-1">Заметки</div>
+  <textarea placeholder="Записывай сюда всё важное — квесты, NPC, долги, улики..."></textarea>
+</div>
+
+</div><!-- END PAGE 1 -->
+</div><!-- END panel-sheet -->
+
+<!-- ── ВКЛАДКА: ШПАРГАЛКА ── -->
+<div class="tab-panel" id="panel-spells">
+<!-- ══════════════ СТРАНИЦА 2: ШПАРГАЛКА ══════════════ -->
+<div class="page">
+
+<div class="text-center px-3 py-2.5 border-b-2 border-drow-border bg-drow-header relative z-10">
+  <div class="font-meta text-[20px] text-drow-silver tracking-[2px]">Съебастьян Сквозняк — Шпаргалка</div>
+  <div class="text-[10px] text-drow-muted mt-0.5">Плут 4 · Убийца · Дроу · Хар-ка: Харизма (+2) · СС 13 · Бонус атаки +5</div>
+</div>
+
+<!-- helper macros as inline template -->
+<div class="relative z-10">
+
+<!-- SECTION: БОЕВЫЕ УМЕНИЯ -->
+<div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mt-2 mb-1.5">Боевые умения плута</div>
+<div class="mob-spell-grid"><div class="grid grid-cols-2 gap-2 px-2.5 mb-2 spell-grid-inner">
+
+  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
+    <div class="flex items-start justify-between mb-1.5 gap-2">
+      <div class="font-meta text-[13px] text-drow-silver">🗡 Скрытная атака</div>
+      <span class="text-[8px] px-2 py-0.5 rounded border sbadge-ability shrink-0">1× за ход</span>
+    </div>
+    <div class="flex flex-wrap gap-1 mb-1.5">
+      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Доп. урон: <span class="text-drow-silver font-bold">+2d6</span></span>
+      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Оружие: <span class="text-drow-silver font-bold">фехт. или дальн.</span></span>
+    </div>
+    <div class="text-[9.5px] text-drow-muted leading-relaxed italic">Раз в ход добавь <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">+2d6 урона</span> если есть <strong class="not-italic">преимущество</strong> или <strong class="not-italic">союзник в 5 фт от цели</strong>. Без помехи.</div>
+    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext leading-snug">✓ Союзник рядом с ЦЕЛЬЮ, не с тобой. Работает реакцией!</div></div>
+  </div>
+
+  <div class="scard-new border rounded-md p-2 scard-anim">
+    <div class="flex items-start justify-between mb-1.5 gap-2">
+      <div class="font-meta text-[13px] text-drow-silver">🏃 Хитрое действие</div>
+      <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">Бонусное действие</span>
+    </div>
+    <div class="text-[9.5px] text-drow-muted leading-relaxed italic">Каждый ход бонусным действием:<br>— <strong class="not-italic text-drow-text">Рывок</strong> — удвоить скорость (60 фт)<br>— <strong class="not-italic text-drow-text">Отход</strong> — без провоцированных атак<br>— <strong class="not-italic text-drow-text">Затаивание</strong> — попытка спрятаться</div>
+    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Затаивание → преимущество → Скрытная атака автоматически!</div></div>
+  </div>
+
+</div></div>
+
+<!-- SECTION: УБИЙЦА -->
+<div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mb-1.5" style="color:#70d0a0;border-color:#3a8060">Архетип Убийца — умения 3 уровня</div>
+<div class="mob-spell-grid"><div class="grid grid-cols-2 gap-2 px-2.5 mb-2 spell-grid-inner">
+
+  <div class="scard-new border rounded-md p-2 scard-anim">
+    <div class="flex items-start justify-between mb-1.5 gap-2">
+      <div class="font-meta text-[13px] text-drow-silver">🎯 Ликвидация</div>
+      <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">НОВОЕ · 3 ур.</span>
+    </div>
+    <div class="flex flex-wrap gap-1 mb-1.5">
+      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Тип: <span class="text-drow-silver font-bold">Пассивно</span></span>
+    </div>
+    <div class="text-[9.5px] text-drow-muted leading-relaxed italic">— <strong class="not-italic">Преимущество</strong> на атаки по существам, что ещё <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">не совершали ход</span><br>— Попадание по <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">захваченному врасплох</span> = <strong class="not-italic">АВТОКРИТ</strong></div>
+    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Спрятался → враг удивлён → АВТОКРИТ + 2d6 удваиваются при крите!</div></div>
+    <div class="swarn rounded-r p-1.5 mt-1"><div class="text-[9px] text-drow-warntext">⚠ Автокрит — только по захваченным врасплох (до начала боя).</div></div>
+  </div>
+
+  <div class="scard-new border rounded-md p-2 scard-anim">
+    <div class="flex items-start justify-between mb-1.5 gap-2">
+      <div class="font-meta text-[13px] text-drow-silver">🎭 Владения убийцы</div>
+      <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">НОВОЕ · 3 ур.</span>
+    </div>
+    <div class="flex flex-wrap gap-1 mb-1.5">
+      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Набор для грима</span>
+      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Инстр. отравителя</span>
+    </div>
+    <div class="text-[9.5px] text-drow-muted leading-relaxed italic"><strong class="not-italic text-drow-text">Набор для грима</strong> — менять внешность, возраст, черты лица.<br><strong class="not-italic text-drow-text">Инструменты отравителя</strong> — яды: Simple Poison 1d4/ход, СС Тел 10.</div>
+    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Маскировка + Скрытность +7 = подойти вплотную незамеченным!</div></div>
+  </div>
+
+</div></div>
+
+<!-- SECTION: МАГИЯ ДРОУ -->
+<div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mb-1.5">Природная магия дроу (Хар +2, СС 12)</div>
+<div class="mob-spell-grid"><div class="grid grid-cols-2 gap-2 px-2.5 mb-2 spell-grid-inner">
+
+  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
+    <div class="flex items-start justify-between mb-1.5 gap-2">
+      <div><div class="font-meta text-[13px] text-drow-silver">💫 Пляшущие огоньки</div><div class="text-[9px] text-drow-muted italic">Dancing Lights</div></div>
+      <span class="text-[8px] px-2 py-0.5 rounded border sbadge-race shrink-0">Заговор · ∞</span>
+    </div>
+    <div class="flex flex-wrap gap-1 mb-1.5">
+      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Дистанция: <span class="text-drow-silver font-bold">120 фт</span></span>
+      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Конц. <span class="text-drow-silver font-bold">1 мин.</span></span>
+    </div>
+    <div class="text-[9.5px] text-drow-muted italic leading-relaxed">До <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">4 огоньков</span> в 120 фт. Тусклый свет 10 фт. Бонусным — перемещай на 60 фт.</div>
+    <div class="seffect rounded-r p-1.5 mt-1.5"><div class="font-meta text-[8px] text-drow-bright uppercase mb-0.5">Тактика</div><div class="text-[9px] text-drow-muted">Приманка из фигуры. Отвлекай стражников. Освещай без раскрытия.</div></div>
+    <div class="swarn rounded-r p-1.5 mt-1"><div class="text-[9px] text-drow-warntext">⚠ Концентрация — нельзя совмещать с Огнём фей!</div></div>
+  </div>
+
+  <div class="scard-new border rounded-md p-2 scard-anim">
+    <div class="flex items-start justify-between mb-1.5 gap-2">
+      <div><div class="font-meta text-[13px] text-drow-silver">✨ Огонь фей</div><div class="text-[9px] text-drow-muted italic">Faerie Fire</div></div>
+      <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">3 ур. · 1/день · СЕЙЧАС</span>
+    </div>
+    <div class="flex flex-wrap gap-1 mb-1.5">
+      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">60 фт · Куб 20 фт</span>
+      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Спас.: <span class="text-drow-silver font-bold">Лов СС 12</span></span>
+    </div>
+    <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Существа в кубе 20 фт — спасбросок Лов СС 12. При провале — подсвечены. Все атаки по ним <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">с преимуществом</span>.</div>
+    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Преимущество для всей пати → Скрытная атака каждый ход!</div></div>
+    <div class="swarn rounded-r p-1.5 mt-1"><div class="text-[9px] text-drow-warntext">⚠ Бьёт ВСЕХ в области включая союзников!</div></div>
+  </div>
+
+</div></div>
+
+<!-- SECTION: РАСОВЫЕ -->
+<div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mb-1.5">Расовые особенности · Тьма (с 5 уровня)</div>
+<div class="mob-spell-grid"><div class="grid grid-cols-2 gap-2 px-2.5 mb-2 spell-grid-inner">
+  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
+    <div class="flex items-start justify-between mb-1.5"><div class="font-meta text-[13px] text-drow-silver">👁 Тёмное зрение 120 фт</div><span class="text-[8px] px-2 py-0.5 rounded border sbadge-race shrink-0">Пассивно</span></div>
+    <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Тусклый → яркий. Темнота → тусклый (серый). <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">120 фт</span> — лучшее среди рас.</div>
+    <div class="swarn rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-warntext">⚠ Помеха атакам и Внимательности при солнечном свете!</div></div>
+  </div>
+  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
+    <div class="flex items-start justify-between mb-1.5"><div class="font-meta text-[13px] text-drow-silver">🌑 Тьма — с 5 уровня</div><span class="text-[8px] px-2 py-0.5 rounded border sbadge-later shrink-0">1/день</span></div>
+    <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Сфера 15 фт. Ничто не рассеивает. Дроу видит свою тьму нормально.</div>
+    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ КОМБО: Тьма → враги слепы → атаки с преимуществом → Скрытная атака каждый ход!</div></div>
+  </div>
+</div></div>
+
+<!-- SECTION: СВОДКА -->
+<div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mb-1.5">Быстрая сводка — что делать в бою</div>
+<div class="grid grid-cols-2 gap-2 px-2.5 pb-2.5">
+  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-2">
+    <div class="font-meta text-[9px] text-drow-silver border-b border-drow-border pb-0.5 mb-1">Начало боя — враги удивлены</div>
+    <div class="text-[9px] text-drow-muted leading-relaxed">→ <span class="font-bold text-drow-bright">АВТОКРИТ</span> + 2d6 скрытная. Кубики удваиваются!</div>
+  </div>
+  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-2">
+    <div class="font-meta text-[9px] text-drow-silver border-b border-drow-border pb-0.5 mb-1">Первый раунд — враги не ходили</div>
+    <div class="text-[9px] text-drow-muted leading-relaxed">→ <span class="font-bold text-drow-bright">Ликвидация</span> даёт преимущество автоматически</div>
+  </div>
+  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-2">
+    <div class="font-meta text-[9px] text-drow-silver border-b border-drow-border pb-0.5 mb-1">Нас окружили</div>
+    <div class="text-[9px] text-drow-muted leading-relaxed">→ <span class="font-bold text-drow-bright">Огонь фей</span> (1/день) → преимущество для пати 10 раундов</div>
+  </div>
+  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-2">
+    <div class="font-meta text-[9px] text-drow-silver border-b border-drow-border pb-0.5 mb-1">Проникновение / разведка</div>
+    <div class="text-[9px] text-drow-muted leading-relaxed">→ <span class="font-bold text-drow-bright">Скрытность +7</span> · <span class="font-bold text-drow-bright">Грим</span> · <span class="font-bold text-drow-bright">Ловкость рук +7</span></div>
+  </div>
+</div>
+
+</div>
+</div><!-- END PAGE 2 -->
+</div><!-- END panel-spells -->
+
+<script>
+// Ripple effect on card click
+document.querySelectorAll('.scard-anim').forEach(card => {
+  card.addEventListener('click', function(e) {
+    const rect = card.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = e.clientX - rect.left - size/2;
+    const y = e.clientY - rect.top - size/2;
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px`;
+    card.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 700);
+  });
+});
+
+// anime.js — пульс рамки при наведении
+document.querySelectorAll('.scard-anim').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    anime({
+      targets: card,
+      boxShadow: [
+        '0 8px 32px rgba(74,111,168,0.45)',
+        '0 8px 40px rgba(138,43,226,0.6)',
+        '0 8px 32px rgba(74,111,168,0.45)'
+      ],
+      duration: 800,
+      easing: 'easeInOutSine',
+      loop: false
+    });
+  });
+});
+</script>
+
+<script>
+function toggleAcc(id) {
+  const body = document.getElementById('body-' + id);
+  const header = document.getElementById('acc-' + id);
+  body.classList.toggle('open');
+  header.classList.toggle('open');
+}
+
+// На мобиле — тултипы по клику
+if (window.innerWidth <= 768) {
+  document.querySelectorAll('.tip').forEach(el => {
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const box = this.querySelector('.tip-box');
+      if (!box) return;
+      document.querySelectorAll('.tip-box').forEach(b => {
+        if (b !== box) b.style.display = 'none';
+      });
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+      box.style.opacity = '1';
+      box.style.transform = 'translateX(-50%) translateY(0)';
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.tip-box').forEach(b => b.style.display = 'none');
+  });
+}
+</script>
+
+
+<!-- ── ВКЛАДКА: ИНВЕНТАРЬ ── -->
+<div class="tab-panel" id="panel-inventory">
+  <div class="inventory-panel">
+    <div class="inv-title">🎒 Инвентарь — Съебастьян Сквозняк</div>
+    <div class="inv-grid">
+      <div class="inv-section">
+        <div class="inv-section-title">⚔ Оружие</div>
+        <div class="inv-item">Рапира</div>
+        <div class="inv-item">Ручной арбалет + 20 болтов</div>
+        <div class="inv-item">Кинжал × 2</div>
+      </div>
+      <div class="inv-section">
+        <div class="inv-section-title">🛡 Доспехи и защита</div>
+        <div class="inv-item">Кожаный доспех (КД 11 + Лов)</div>
+        <div class="inv-item">Наручи меткости (+2 к урону дальн.)</div>
+      </div>
+      <div class="inv-section">
+        <div class="inv-section-title">🔧 Инструменты</div>
+        <div class="inv-item">Набор взломщика</div>
+        <div class="inv-item">Инструменты вора</div>
+        <div class="inv-item">Набор для грима</div>
+        <div class="inv-item">Инструменты отравителя</div>
+      </div>
+      <div class="inv-section">
+        <div class="inv-section-title">🎒 Прочее снаряжение</div>
+        <div class="inv-item">Верёвка шёлковая 50 фт</div>
+        <div class="inv-item">Факел × 5</div>
+        <div class="inv-item">Фляга</div>
+        <div class="inv-item">Пайки × 3</div>
+        <div class="inv-item">Дымовые шашки × 3 (радиус 20 фт)</div>
+        <div class="inv-item">Лопата</div>
+      </div>
+    </div>
+    <div class="inv-currency">
+      <strong style="background:linear-gradient(90deg,#b8860b,#ffd700,#ffec6e,#ffd700,#b8860b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:goldshine 2s linear infinite;background-size:200% auto;font-size:18px;">💰 68 зм · 23 см</strong>
+    </div>
+    <div class="inv-notes">
+      <div class="inv-section-title" style="margin-bottom:8px">📝 Заметки</div>
+      <textarea placeholder="Записывай сюда всё важное — квесты, NPC, долги, улики..."></textarea>
+    </div>
+  </div>
+</div><!-- END panel-inventory -->
+
+</div><!-- END site-wrap -->
+
+
+<script>
+function switchTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+</script>
+
+
+<!-- ══ МОДАЛКА ЗАГРУЗКИ ПОРТРЕТА ══ -->
+<div class="netlify-modal" id="portraitModal">
+  <div class="netlify-modal-box">
+    <div class="modal-title">🗡️ Портрет персонажа</div>
+    <div class="modal-sub">
+      Загрузи изображение — оно применится к листу.<br>
+      <span>На Netlify портрет сохранится в постоянном хранилище Blobs.</span>
+    </div>
+
+    <input class="upload-password" id="portrait-password" type="password"
+      autocomplete="current-password" placeholder="Пароль для изменения портрета">
+
+    <!-- Дропзона -->
+    <div class="dropzone" id="dropzone" onclick="document.getElementById('fi-modal').click()"
+         ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+      <div class="dropzone-icon">🖼️</div>
+      <div class="dropzone-text">Нажми или перетащи файл сюда</div>
+      <div class="dropzone-hint">PNG, JPG, WEBP · до 4 MB</div>
+    </div>
+    <input type="file" id="fi-modal" accept="image/*" style="display:none" onchange="handleFileSelect(this.files[0])">
+
+    <!-- Превью -->
+    <img id="modal-preview" class="modal-preview" alt="preview">
+
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" onclick="closePortraitModal()">Отмена</button>
+      <button class="modal-btn modal-btn-primary" id="modal-apply-btn" onclick="applyPortrait()" disabled>
+        ✓ Применить
+      </button>
+    </div>
+
+    <div class="netlify-badge">
+      <span>⬡</span>
+      <span>Новый портрет заменит предыдущий и появится на всех устройствах.</span>
+    </div>
+    <div class="upload-status" id="upload-status"></div>
+  </div>
+</div>
+
+
+<script>
+let selectedFile = null;
+
+function openPortraitModal() {
+  document.getElementById('portraitModal').classList.add('open');
+}
+function closePortraitModal() {
+  document.getElementById('portraitModal').classList.remove('open');
+  selectedFile = null;
+  document.getElementById('portrait-password').value = '';
+  document.getElementById('fi-modal').value = '';
+  document.getElementById('modal-preview').classList.remove('show');
+  document.getElementById('modal-preview').removeAttribute('src');
+  document.getElementById('dropzone').style.display = '';
+  document.getElementById('modal-apply-btn').disabled = true;
+  document.getElementById('upload-status').textContent = '';
+  document.getElementById('upload-status').className = 'upload-status';
+}
+
+function handleFileSelect(file) {
+  if (!file) return;
+  if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+    setStatus('Разрешены только JPG, PNG и WEBP', 'error');
+    return;
+  }
+  if (file.size > 4 * 1024 * 1024) {
+    setStatus('Файл слишком большой (макс. 4 МБ)', 'error');
+    return;
+  }
+  selectedFile = file;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const preview = document.getElementById('modal-preview');
+    preview.src = ev.target.result;
+    preview.classList.add('show');
+    document.getElementById('modal-apply-btn').disabled = false;
+    document.getElementById('dropzone').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+async function applyPortrait() {
+  if (!selectedFile) return;
+  const password = document.getElementById('portrait-password').value;
+  if (!password) {
+    setStatus('Введи пароль для изменения портрета', 'error');
+    return;
+  }
+
+  const applyButton = document.getElementById('modal-apply-btn');
+  applyButton.disabled = true;
+  setStatus('Загружаю портрет...', '');
+
+  try {
+    const response = await fetch('/.netlify/functions/upload-portrait', {
+      method: 'POST',
+      headers: {
+        'content-type': selectedFile.type,
+        'x-upload-token': password
+      },
+      body: selectedFile
+    });
+
+    let result = {};
+    try { result = await response.json(); } catch(e) {}
+
+    if (!response.ok) {
+      if (response.status === 401) throw new Error('Неверный пароль');
+      throw new Error(result.error || 'Не удалось сохранить портрет');
+    }
+
+    showPortrait('/.netlify/functions/get-portrait?v=' + Date.now());
+    try {
+      const reader = new FileReader();
+      reader.onload = event => localStorage.setItem('sye_portrait', event.target.result);
+      reader.readAsDataURL(selectedFile);
+    } catch(e) {}
+
+    setStatus('✓ Портрет сохранён и доступен на всех устройствах', 'success');
+    setTimeout(closePortraitModal, 1400);
+  } catch(error) {
+    setStatus(error.message || 'Ошибка загрузки портрета', 'error');
+    applyButton.disabled = false;
+  }
+}
+
+function setStatus(msg, cls) {
+  const el = document.getElementById('upload-status');
+  el.textContent = msg;
+  el.className = 'upload-status ' + cls;
+}
+
+// Drag & drop
+function handleDragOver(e) {
+  e.preventDefault();
+  document.getElementById('dropzone').classList.add('drag-over');
+}
+function handleDragLeave(e) {
+  document.getElementById('dropzone').classList.remove('drag-over');
+}
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('dropzone').classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) handleFileSelect(file);
+}
+
+// Закрыть по клику вне модалки
+document.getElementById('portraitModal').addEventListener('click', function(e) {
+  if (e.target === this) closePortraitModal();
+});
+
+function showPortrait(source) {
+  const image = document.getElementById('portrait-img');
+  image.src = source;
+  image.style.display = 'block';
+  document.getElementById('upload-zone').style.display = 'none';
+}
+
+function restoreLocalPortrait() {
+  try {
+    const saved = localStorage.getItem('sye_portrait');
+    if (saved) showPortrait(saved);
+  } catch(e) {}
+}
+
+async function loadStoredPortrait() {
+  try {
+    const response = await fetch('/.netlify/functions/get-portrait', {
+      method: 'HEAD',
+      cache: 'no-store'
+    });
+    if (response.ok) {
+      showPortrait('/.netlify/functions/get-portrait?v=' + Date.now());
+      return;
+    }
+  } catch(e) {}
+  restoreLocalPortrait();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  loadStoredPortrait();
+});
+</script>
+
+</body>
+</html>

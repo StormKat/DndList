@@ -1,0 +1,13 @@
+[build]
+  publish = "outputs"
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/"
+  to = "/character-sheet.html"
+  status = 200
+
+[[headers]]
+  for = "/.netlify/functions/get-portrait"
+  [headers.values]
+    Cache-Control = "no-cache"
