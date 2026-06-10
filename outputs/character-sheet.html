@@ -860,8 +860,28 @@ body {
 }
 
 @media (max-width: 768px) {
-  .tabs { overflow-x: auto; }
-  .tab-btn { flex: 0 0 auto; padding: 10px 13px; }
+  .tabs-wrap {
+    overflow: hidden;
+  }
+  .tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .tab-btn {
+    flex: 0 0 auto;
+    min-height: 42px;
+    padding: 10px 13px;
+    white-space: nowrap;
+  }
   .notes-panel { padding: 16px 10px 20px; border-radius: 0; }
   .notes-heading {
     display: block;
