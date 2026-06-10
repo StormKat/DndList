@@ -695,6 +695,546 @@ body {
   padding: 12px !important;
 }
 
+/* ── БОЕВОЙ РЕЖИМ ── */
+.combat-panel {
+  --combat-red: #b85f63;
+  --combat-green: #62ad85;
+  --combat-gold: #c6a361;
+  padding: 20px;
+  border: 1px solid #2e3d5a;
+  border-left: 3px solid #76518f;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(118,81,143,0.17), transparent 30%),
+    radial-gradient(circle at 90% 12%, rgba(74,111,168,0.13), transparent 32%),
+    #11141d;
+  box-shadow: 0 12px 42px rgba(0,0,0,0.38);
+}
+.combat-heading,
+.combat-section-head,
+.combat-card-head,
+.combat-controls,
+.combat-add-row,
+.combat-log-head,
+.combat-death-saves,
+.combat-turn-tools {
+  display: flex;
+  align-items: center;
+}
+.combat-heading {
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.combat-heading-actions {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.combat-session-actions {
+  display: flex;
+  gap: 7px;
+}
+.combat-title {
+  font-family: 'Forum', Georgia, serif;
+  font-size: 26px;
+  letter-spacing: 0.08em;
+  color: #ded5e8;
+}
+.combat-subtitle {
+  margin-top: 3px;
+  color: #78909c;
+  font-size: 10px;
+}
+.combat-round-box {
+  min-width: 112px;
+  padding: 9px 14px;
+  border: 1px solid #4a5f80;
+  border-radius: 7px;
+  background: rgba(74,111,168,0.09);
+  text-align: center;
+}
+.combat-round-label {
+  color: #78909c;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+.combat-round-value {
+  margin-top: 2px;
+  color: #dce8f0;
+  font-family: 'Forum', Georgia, serif;
+  font-size: 21px;
+}
+.combat-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+  gap: 14px;
+}
+.combat-stack {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+.combat-box {
+  border: 1px solid #293a57;
+  border-radius: 8px;
+  background: rgba(19,23,34,0.86);
+  overflow: hidden;
+}
+.combat-section-head {
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #293a57;
+  background: rgba(74,111,168,0.07);
+}
+.combat-section-title {
+  color: #9eb5ca;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+}
+.combat-hero {
+  padding: 16px;
+}
+.combat-hero-main {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+}
+.combat-hp-orb {
+  width: 140px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #6c6089;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(110,78,145,0.23), transparent 58%),
+    #151925;
+  box-shadow: inset 0 0 24px rgba(113,77,149,0.15), 0 0 18px rgba(93,65,126,0.2);
+}
+.combat-hp-orb.danger {
+  border-color: #9b4f58;
+  box-shadow: inset 0 0 24px rgba(155,79,88,0.18), 0 0 18px rgba(155,79,88,0.24);
+}
+.combat-hp-current {
+  color: #edf2f5;
+  font-family: 'Forum', Georgia, serif;
+  font-size: 43px;
+  line-height: 0.9;
+}
+.combat-hp-max {
+  margin-top: 6px;
+  color: #78909c;
+  font-size: 10px;
+}
+.combat-temp-hp {
+  margin-top: 7px;
+  color: #9d8bc2;
+  font-size: 10px;
+}
+.combat-hero-info {
+  min-width: 0;
+}
+.combat-hero-name {
+  color: #ddd5e6;
+  font-family: 'Forum', Georgia, serif;
+  font-size: 21px;
+  letter-spacing: 0.05em;
+}
+.combat-mini-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  margin: 10px 0;
+}
+.combat-mini-stat {
+  padding: 7px 6px;
+  border: 1px solid #2e3d5a;
+  border-radius: 5px;
+  text-align: center;
+  background: rgba(74,111,168,0.055);
+}
+.combat-mini-stat span {
+  display: block;
+  color: #607386;
+  font-size: 7px;
+  text-transform: uppercase;
+}
+.combat-mini-stat b {
+  display: block;
+  margin-top: 2px;
+  color: #c6d1d9;
+  font-family: 'Forum', Georgia, serif;
+  font-size: 17px;
+}
+.combat-controls {
+  gap: 7px;
+  flex-wrap: wrap;
+}
+.combat-number {
+  width: 82px;
+  min-height: 38px;
+  padding: 8px 9px;
+  border: 1px solid #344663;
+  border-radius: 5px;
+  outline: none;
+  color: #dce8f0;
+  background: #0f121a;
+  font-size: 14px;
+  text-align: center;
+}
+.combat-number:focus,
+.combat-text-input:focus,
+.combat-select:focus {
+  border-color: #786294;
+  box-shadow: 0 0 0 2px rgba(120,98,148,0.15);
+}
+.combat-btn {
+  min-height: 36px;
+  padding: 8px 11px;
+  border: 1px solid #3b4c68;
+  border-radius: 5px;
+  color: #c7d3dc;
+  background: rgba(74,111,168,0.09);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+  transition: border-color 0.16s, background 0.16s, transform 0.16s;
+}
+.combat-btn:hover {
+  border-color: #62799d;
+  background: rgba(74,111,168,0.16);
+  transform: translateY(-1px);
+}
+.combat-btn.damage { border-color: #73434b; color: #e4a2a5; background: rgba(139,48,32,0.13); }
+.combat-btn.heal { border-color: #356a50; color: #8ed2ad; background: rgba(42,112,64,0.13); }
+.combat-btn.magic { border-color: #65517d; color: #c4ace0; background: rgba(101,81,125,0.15); }
+.combat-btn.warn { border-color: #6f5834; color: #d8bc7d; background: rgba(111,88,52,0.13); }
+.combat-btn.remove { border-color: #683d48; color: #d98f98; background: rgba(120,49,62,0.13); }
+.combat-btn.ghost { border-color: transparent; color: #71879a; background: transparent; }
+.combat-btn.small { min-height: 30px; padding: 6px 8px; font-size: 9px; }
+.combat-btn.active {
+  border-color: #7a6696;
+  color: #ede5f5;
+  background: rgba(118,81,143,0.25);
+  box-shadow: inset 0 0 12px rgba(118,81,143,0.12);
+}
+.combat-turn-tools {
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 11px;
+  padding-top: 11px;
+  border-top: 1px solid rgba(46,61,90,0.65);
+}
+.combat-tool-label {
+  width: 100%;
+  color: #607386;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.combat-death {
+  display: none;
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid #73434b;
+  border-radius: 6px;
+  background: rgba(115,45,54,0.1);
+}
+.combat-death.visible { display: block; }
+.combat-death-saves {
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 7px;
+}
+.combat-save-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: #8fa8b8;
+  font-size: 9px;
+}
+.combat-save-dot {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #4a5b72;
+  border-radius: 50%;
+  color: transparent;
+  background: transparent;
+  cursor: pointer;
+}
+.combat-save-dot.success.on { border-color: #4b9a70; background: #397656; box-shadow: 0 0 8px rgba(70,160,110,0.25); }
+.combat-save-dot.failure.on { border-color: #b65b61; background: #843f47; box-shadow: 0 0 8px rgba(182,91,97,0.25); }
+.initiative-list,
+.combat-entity-list,
+.combat-log {
+  display: grid;
+  gap: 7px;
+  padding: 10px;
+}
+.initiative-row {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  gap: 9px;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid #293a57;
+  border-radius: 6px;
+  background: rgba(74,111,168,0.045);
+  transition: border-color 0.16s, background 0.16s, transform 0.16s, opacity 0.16s;
+}
+.initiative-row.current {
+  border-color: #79618f;
+  background: linear-gradient(90deg, rgba(118,81,143,0.2), rgba(74,111,168,0.06));
+  box-shadow: inset 3px 0 0 #8a6ba2;
+}
+.initiative-row.dragging {
+  z-index: 5;
+  opacity: 0.68;
+  border-color: #a488bf;
+  background: rgba(118,81,143,0.24);
+  transform: scale(1.015);
+}
+.initiative-handle {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #3a4c67;
+  border-radius: 5px;
+  color: #8297aa;
+  background: rgba(74,111,168,0.08);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  font-size: 18px;
+  line-height: 1;
+}
+.initiative-handle:active {
+  cursor: grabbing;
+  color: #d5c7e3;
+  border-color: #80689a;
+}
+.initiative-name {
+  min-width: 0;
+  overflow: hidden;
+  color: #cdd8df;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.initiative-kind {
+  display: block;
+  margin-top: 2px;
+  color: #5f7386;
+  font-size: 8px;
+}
+.initiative-order-hint {
+  padding: 9px 10px 0;
+  color: #64798c;
+  font-size: 9px;
+  line-height: 1.45;
+}
+.combat-next-btn {
+  width: calc(100% - 20px);
+  margin: 0 10px 10px;
+}
+.combat-card {
+  padding: 10px;
+  border: 1px solid #293a57;
+  border-radius: 7px;
+  background: rgba(74,111,168,0.045);
+}
+.combat-card.enemy { border-left: 3px solid #7c454d; }
+.combat-card.ally { border-left: 3px solid #3f765b; }
+.combat-card.defeated { opacity: 0.53; filter: grayscale(0.35); }
+.combat-card-head {
+  justify-content: space-between;
+  gap: 10px;
+}
+.combat-card-name {
+  min-width: 0;
+  color: #d8e0e5;
+  font-size: 12px;
+  font-weight: 700;
+}
+.combat-card-state {
+  color: #70869a;
+  font-size: 9px;
+  white-space: nowrap;
+}
+.combat-card-value {
+  margin: 8px 0;
+  color: #8fa8b8;
+  font-size: 10px;
+}
+.combat-card-value b {
+  color: #e0e6ea;
+  font-family: 'Forum', Georgia, serif;
+  font-size: 20px;
+}
+.combat-hp-track {
+  height: 5px;
+  margin: 7px 0 9px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #0c0f16;
+}
+.combat-hp-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #397656, #64aa82);
+  transition: width 0.2s;
+}
+.combat-tags {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin: 7px 0;
+}
+.combat-tag {
+  padding: 3px 6px;
+  border: 1px solid #4e4560;
+  border-radius: 10px;
+  color: #b7a8c7;
+  background: rgba(91,67,113,0.14);
+  font-size: 8px;
+}
+.combat-empty {
+  padding: 16px 12px;
+  color: #5f7386;
+  font-size: 10px;
+  line-height: 1.5;
+  text-align: center;
+}
+.combat-add {
+  padding: 10px;
+  border-top: 1px solid #293a57;
+  background: rgba(8,11,17,0.24);
+}
+.combat-add-row {
+  gap: 6px;
+}
+.combat-text-input,
+.combat-select {
+  min-width: 0;
+  min-height: 34px;
+  padding: 7px 8px;
+  border: 1px solid #344663;
+  border-radius: 5px;
+  outline: none;
+  color: #dce8f0;
+  background: #0f121a;
+  font-size: 10px;
+}
+.combat-text-input { flex: 1; }
+.combat-select { max-width: 132px; }
+.combat-log-head {
+  justify-content: space-between;
+}
+.combat-log {
+  max-height: 320px;
+  overflow-y: auto;
+}
+.combat-log-entry {
+  padding: 7px 8px;
+  border-left: 2px solid #394d6b;
+  color: #8fa8b8;
+  background: rgba(74,111,168,0.035);
+  font-size: 9px;
+  line-height: 1.45;
+}
+.combat-log-entry b { color: #c6d1d9; }
+.combat-log-time {
+  margin-right: 6px;
+  color: #53677a;
+}
+.combat-archive-list {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+}
+.combat-archive-card {
+  border: 1px solid #33445f;
+  border-radius: 7px;
+  background: rgba(74,111,168,0.045);
+  overflow: hidden;
+}
+.combat-archive-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+}
+.combat-archive-title {
+  color: #d4dde3;
+  font-size: 11px;
+  font-weight: 700;
+}
+.combat-archive-meta {
+  margin-top: 3px;
+  color: #657a8e;
+  font-size: 8px;
+  line-height: 1.5;
+}
+.combat-archive-actions {
+  display: flex;
+  gap: 5px;
+}
+.combat-archive-details {
+  display: none;
+  padding: 10px;
+  border-top: 1px solid #293a57;
+  background: rgba(7,10,16,0.22);
+}
+.combat-archive-card.open .combat-archive-details {
+  display: block;
+}
+.combat-archive-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 9px;
+}
+.combat-archive-stat {
+  padding: 7px;
+  border: 1px solid #293a57;
+  border-radius: 5px;
+  color: #71869a;
+  font-size: 8px;
+  text-align: center;
+}
+.combat-archive-stat b {
+  display: block;
+  margin-top: 2px;
+  color: #c7d2da;
+  font-family: 'Forum', Georgia, serif;
+  font-size: 16px;
+}
+.combat-archive-roster {
+  margin-bottom: 9px;
+  color: #8da0b0;
+  font-size: 9px;
+  line-height: 1.7;
+}
+.combat-archive-log {
+  max-height: 210px;
+  overflow-y: auto;
+  display: grid;
+  gap: 5px;
+}
+
 /* ── ЗАМЕТКИ: БЛОКНОТ ── */
 .notes-panel {
   position: relative;
@@ -881,6 +1421,77 @@ body {
     min-height: 42px;
     padding: 10px 13px;
     white-space: nowrap;
+  }
+  .combat-panel {
+    padding: 12px 9px 18px;
+    border-radius: 0;
+  }
+  .combat-heading {
+    display: block;
+    align-items: flex-start;
+  }
+  .combat-heading-actions {
+    justify-content: space-between;
+    margin-top: 12px;
+  }
+  .combat-session-actions {
+    flex: 1 1 100%;
+  }
+  .combat-session-actions .combat-btn {
+    flex: 1;
+  }
+  .combat-title { font-size: 22px; }
+  .combat-round-box {
+    min-width: 88px;
+    padding: 7px 9px;
+  }
+  .combat-layout {
+    display: block;
+  }
+  .combat-stack {
+    margin-bottom: 10px;
+  }
+  .combat-hero {
+    padding: 12px;
+  }
+  .combat-hero-main {
+    grid-template-columns: 105px minmax(0, 1fr);
+    gap: 12px;
+  }
+  .combat-hp-orb {
+    width: 100px;
+    height: 100px;
+  }
+  .combat-hp-current { font-size: 34px; }
+  .combat-mini-stats { gap: 4px; }
+  .combat-mini-stat { padding: 6px 3px; }
+  .combat-controls {
+    display: grid;
+    grid-template-columns: 72px repeat(3, 1fr);
+    gap: 5px;
+  }
+  .combat-number { width: 100%; min-height: 40px; }
+  .combat-controls .combat-btn { padding: 7px 5px; }
+  .combat-death-saves {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .combat-add-row {
+    flex-wrap: wrap;
+  }
+  .combat-add-row .combat-text-input {
+    flex: 1 1 150px;
+  }
+  .combat-add-row .combat-number {
+    width: 62px;
+  }
+  .combat-select { max-width: 120px; }
+  .combat-log { max-height: 220px; }
+  .combat-archive-summary {
+    grid-template-columns: 1fr;
+  }
+  .combat-archive-actions .combat-btn {
+    flex: 1;
   }
   .notes-panel { padding: 16px 10px 20px; border-radius: 0; }
   .notes-heading {
@@ -1336,6 +1947,8 @@ b,
     <button class="tab-btn" onclick="switchTab('spells', this)"><span class="tab-icon">✨</span>Шпаргалка</button>
     <button class="tab-btn" onclick="switchTab('inventory', this)"><span class="tab-icon">🎒</span>Инвентарь</button>
     <button class="tab-btn" onclick="switchTab('notes', this)"><span class="tab-icon">📝</span>Заметки</button>
+    <button class="tab-btn" onclick="switchTab('combat', this)"><span class="tab-icon">⚔️</span>Бой (Beta)</button>
+    <button class="tab-btn" onclick="switchTab('combat-archive', this)"><span class="tab-icon">📚</span>Архив боёв (Beta)</button>
   </div>
 </div>
 
@@ -1841,6 +2454,190 @@ if (window.innerWidth <= 768) {
 </script>
 
 
+<!-- ── ВКЛАДКА: БОЙ ── -->
+<div class="tab-panel" id="panel-combat">
+  <div class="combat-panel">
+    <div class="combat-heading">
+      <div>
+        <div class="combat-title">Боевой журнал</div>
+        <div class="combat-subtitle">Хиты, инициатива, противники и состояния в одном месте</div>
+      </div>
+      <div class="combat-heading-actions">
+        <div class="combat-session-actions">
+          <button class="combat-btn warn" onclick="startNewCombat()">Начать новый бой</button>
+          <button class="combat-btn heal" onclick="archiveCurrentCombat()">Завершить бой и сохранить в архив</button>
+        </div>
+        <div class="combat-round-box">
+          <div class="combat-round-label">Текущий раунд</div>
+          <div class="combat-round-value" id="combat-round">1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="combat-layout">
+      <div class="combat-stack">
+        <section class="combat-box">
+          <div class="combat-section-head">
+            <div class="combat-section-title">Съебастьян Сквозняк</div>
+            <span class="combat-card-state" id="combat-session-time">бой начат сейчас</span>
+          </div>
+          <div class="combat-hero">
+            <div class="combat-hero-main">
+              <div class="combat-hp-orb" id="combat-hp-orb">
+                <div class="combat-hp-current" id="combat-player-hp">27</div>
+                <div class="combat-hp-max">из <span id="combat-player-max-hp">27</span> ХП</div>
+                <div class="combat-temp-hp">временные: <span id="combat-player-temp-hp">0</span></div>
+              </div>
+
+              <div class="combat-hero-info">
+                <div class="combat-hero-name">Теневой клинок</div>
+                <div class="combat-mini-stats">
+                  <div class="combat-mini-stat"><span>КБ</span><b>15</b></div>
+                  <div class="combat-mini-stat"><span>Инициатива</span><b>+4</b></div>
+                  <div class="combat-mini-stat"><span>Скорость</span><b>30</b></div>
+                </div>
+                <div class="combat-controls">
+                  <input class="combat-number" id="combat-player-amount" type="number" inputmode="numeric" min="0" value="1" aria-label="Количество хитов">
+                  <button class="combat-btn damage" onclick="changePlayerHp('damage')">Урон</button>
+                  <button class="combat-btn heal" onclick="changePlayerHp('heal')">Лечение</button>
+                  <button class="combat-btn magic" onclick="changePlayerHp('temp')">Врем. ХП</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="combat-turn-tools">
+              <div class="combat-tool-label">Ресурсы текущего хода</div>
+              <button class="combat-btn small" data-turn-tool="action" onclick="toggleTurnTool('action')">Действие</button>
+              <button class="combat-btn small" data-turn-tool="bonus" onclick="toggleTurnTool('bonus')">Бонусное</button>
+              <button class="combat-btn small" data-turn-tool="reaction" onclick="toggleTurnTool('reaction')">Реакция</button>
+              <button class="combat-btn small magic" data-turn-tool="sneak" onclick="toggleTurnTool('sneak')">Скрытая атака</button>
+            </div>
+
+            <div class="combat-tags" id="combat-player-tags"></div>
+            <div class="combat-add-row">
+              <select class="combat-select" id="combat-player-condition" aria-label="Состояние персонажа"></select>
+              <button class="combat-btn small" onclick="addCondition('player')">Добавить состояние</button>
+            </div>
+
+            <div class="combat-death" id="combat-death">
+              <div class="combat-section-title">Спасброски от смерти</div>
+              <div class="combat-death-saves">
+                <div class="combat-save-group">
+                  Успехи
+                  <button class="combat-save-dot success" onclick="setDeathSave('success', 1)"></button>
+                  <button class="combat-save-dot success" onclick="setDeathSave('success', 2)"></button>
+                  <button class="combat-save-dot success" onclick="setDeathSave('success', 3)"></button>
+                </div>
+                <div class="combat-save-group">
+                  Провалы
+                  <button class="combat-save-dot failure" onclick="setDeathSave('failure', 1)"></button>
+                  <button class="combat-save-dot failure" onclick="setDeathSave('failure', 2)"></button>
+                  <button class="combat-save-dot failure" onclick="setDeathSave('failure', 3)"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="combat-box">
+          <div class="combat-section-head">
+            <div class="combat-section-title">Противники</div>
+            <span class="combat-card-state" id="combat-enemy-count">0 целей</span>
+          </div>
+          <div class="combat-entity-list" id="combat-enemies"></div>
+          <div class="combat-add">
+            <div class="combat-add-row">
+              <input class="combat-text-input" id="combat-enemy-name" maxlength="40" placeholder="Имя врага">
+              <button class="combat-btn damage" onclick="addCombatant('enemy')">Добавить</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="combat-box">
+          <div class="combat-section-head">
+            <div class="combat-section-title">Сопартийцы</div>
+            <span class="combat-card-state" id="combat-ally-count">0 героев</span>
+          </div>
+          <div class="combat-entity-list" id="combat-allies"></div>
+          <div class="combat-add">
+            <div class="combat-add-row">
+              <input class="combat-text-input" id="combat-ally-name" maxlength="40" placeholder="Имя союзника">
+              <input class="combat-number" id="combat-ally-max" type="number" inputmode="numeric" min="1" placeholder="Макс. ХП" aria-label="Максимальные хиты союзника">
+              <button class="combat-btn heal" onclick="addCombatant('ally')">Добавить</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="combat-stack">
+        <section class="combat-box">
+          <div class="combat-section-head">
+            <div class="combat-section-title">Порядок инициативы</div>
+            <span class="combat-card-state">ручной порядок</span>
+          </div>
+          <div class="initiative-order-hint">Зажми ручку ≡ и перетащи участника туда, куда объявил мастер.</div>
+          <div class="initiative-list" id="combat-initiative"></div>
+          <button class="combat-btn magic combat-next-btn" onclick="nextCombatTurn()">Следующий ход →</button>
+        </section>
+
+        <section class="combat-box">
+          <div class="combat-section-head">
+            <div class="combat-section-title">Быстрая памятка</div>
+          </div>
+          <div class="combat-entity-list">
+            <div class="combat-card">
+              <div class="combat-card-name">Ход плута</div>
+              <div class="combat-card-value" style="font-size:9px;line-height:1.6;margin-bottom:0">
+                Движение до 30 фт · одно действие · возможное бонусное действие.
+                Реакция восстанавливается в начале твоего хода. Скрытая атака применяется один раз за ход.
+              </div>
+            </div>
+            <div class="combat-card">
+              <div class="combat-card-name">Концентрация</div>
+              <div class="combat-card-value" style="font-size:9px;line-height:1.6;margin-bottom:0">
+                После получения урона: спасбросок Телосложения со Сл. 10 или половина урона, если она выше.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="combat-box">
+          <div class="combat-section-head combat-log-head">
+            <div class="combat-section-title">История боя</div>
+            <button class="combat-btn ghost small" id="combat-undo" onclick="undoCombatAction()">↶ Отменить</button>
+          </div>
+          <div class="combat-log" id="combat-log"></div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div><!-- END panel-combat -->
+
+<!-- ── ВКЛАДКА: АРХИВ БОЁВ ── -->
+<div class="tab-panel" id="panel-combat-archive">
+  <div class="combat-panel">
+    <div class="combat-heading">
+      <div>
+        <div class="combat-title">Архив боёв</div>
+        <div class="combat-subtitle">Завершённые сражения, участники, нанесённый урон и полная история ходов</div>
+      </div>
+      <div class="combat-round-box">
+        <div class="combat-round-label">Сохранено</div>
+        <div class="combat-round-value" id="combat-archive-count">0</div>
+      </div>
+    </div>
+    <section class="combat-box">
+      <div class="combat-section-head">
+        <div class="combat-section-title">Боевые записи</div>
+        <span class="combat-card-state">хранятся в этом браузере</span>
+      </div>
+      <div class="combat-archive-list" id="combat-archive"></div>
+    </section>
+  </div>
+</div><!-- END panel-combat-archive -->
+
+
 <!-- ── ВКЛАДКА: ИНВЕНТАРЬ ── -->
 <div class="tab-panel" id="panel-inventory">
   <div class="inventory-panel">
@@ -1918,8 +2715,703 @@ function switchTab(name, button) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('panel-' + name).classList.add('active');
   button.classList.add('active');
+  if (name === 'combat') initCombat();
+  if (name === 'combat-archive') {
+    if (!combatArchive.length) combatArchive = loadCombatArchive();
+    renderCombatArchive();
+  }
   if (name === 'notes') loadNotes();
 }
+</script>
+
+<script>
+const COMBAT_STORAGE_KEY = 'sye_combat_state_v1';
+const COMBAT_ARCHIVE_KEY = 'sye_combat_archive_v1';
+const COMBAT_CONDITIONS = [
+  'Лежит', 'Схвачен', 'Опутан', 'Отравлен', 'Испуган',
+  'Ослеплён', 'Оглушён', 'Без сознания', 'Невидим', 'Концентрация'
+];
+let combatState = null;
+let combatArchive = [];
+let combatInitialized = false;
+let combatUndoStack = [];
+let initiativeDrag = null;
+
+function defaultCombatState() {
+  return {
+    version: 1,
+    startedAt: new Date().toISOString(),
+    round: 1,
+    currentId: 'player',
+    order: ['player'],
+    player: {
+      hp: 27,
+      maxHp: 27,
+      tempHp: 0,
+      conditions: [],
+      deathSuccess: 0,
+      deathFailure: 0,
+      tools: { action: false, bonus: false, reaction: false, sneak: false }
+    },
+    entities: [],
+    log: [{
+      id: Date.now(),
+      round: 1,
+      time: new Date().toISOString(),
+      text: 'Боевой журнал готов'
+    }]
+  };
+}
+
+function loadCombatState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(COMBAT_STORAGE_KEY));
+    if (saved && saved.version === 1 && saved.player && Array.isArray(saved.entities)) {
+      if (!saved.startedAt) saved.startedAt = new Date().toISOString();
+      if (!Array.isArray(saved.order)) {
+        saved.order = ['player'].concat(
+          saved.entities
+            .slice()
+            .sort((a, b) => (b.initiative || 0) - (a.initiative || 0))
+            .map(entity => entity.id)
+        );
+      }
+      return saved;
+    }
+  } catch(e) {}
+  return defaultCombatState();
+}
+
+function loadCombatArchive() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(COMBAT_ARCHIVE_KEY));
+    return Array.isArray(saved) ? saved : [];
+  } catch(e) {
+    return [];
+  }
+}
+
+function saveCombatState() {
+  localStorage.setItem(COMBAT_STORAGE_KEY, JSON.stringify(combatState));
+}
+
+function saveCombatArchive() {
+  localStorage.setItem(COMBAT_ARCHIVE_KEY, JSON.stringify(combatArchive));
+}
+
+function initCombat() {
+  if (!combatState) combatState = loadCombatState();
+  if (!combatArchive.length) combatArchive = loadCombatArchive();
+  if (!combatInitialized) {
+    combatInitialized = true;
+    populateCombatConditions();
+    renderCombat();
+  }
+}
+
+function populateCombatConditions() {
+  const options = '<option value="">Состояние...</option>' +
+    COMBAT_CONDITIONS.map(item => '<option value="' + escapeCombatHtml(item) + '">' +
+      escapeCombatHtml(item) + '</option>').join('');
+  document.getElementById('combat-player-condition').innerHTML = options;
+}
+
+function escapeCombatHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
+
+function combatSnapshot() {
+  return JSON.stringify(combatState);
+}
+
+function commitCombat(message, mutation) {
+  combatUndoStack.push(combatSnapshot());
+  if (combatUndoStack.length > 40) combatUndoStack.shift();
+  mutation();
+  if (message) {
+    combatState.log.unshift({
+      id: Date.now() + Math.random(),
+      round: combatState.round,
+      time: new Date().toISOString(),
+      text: message
+    });
+    combatState.log = combatState.log.slice(0, 100);
+  }
+  saveCombatState();
+  renderCombat();
+}
+
+function combatAmount(inputId) {
+  const input = document.getElementById(inputId);
+  return Math.max(0, Math.floor(Number(input.value) || 0));
+}
+
+function changePlayerHp(mode) {
+  initCombat();
+  const amount = combatAmount('combat-player-amount');
+  if (!amount) return;
+
+  if (mode === 'damage') {
+    let absorbed = 0;
+    let hpDamage = 0;
+    commitCombat('', () => {
+      absorbed = Math.min(combatState.player.tempHp, amount);
+      combatState.player.tempHp -= absorbed;
+      hpDamage = amount - absorbed;
+      combatState.player.hp = Math.max(0, combatState.player.hp - hpDamage);
+      const details = absorbed
+        ? amount + ' урона (' + absorbed + ' поглощено временными ХП)'
+        : amount + ' урона';
+      combatState.log.unshift({
+        id: Date.now() + Math.random(),
+        round: combatState.round,
+        time: new Date().toISOString(),
+        text: 'Съебастьян получает ' + details
+      });
+    });
+  }
+
+  if (mode === 'heal') {
+    const before = combatState.player.hp;
+    const healed = Math.min(amount, combatState.player.maxHp - before);
+    if (!healed) return;
+    commitCombat('Съебастьян восстанавливает ' + healed + ' ХП', () => {
+      combatState.player.hp += healed;
+      if (combatState.player.hp > 0) {
+        combatState.player.deathSuccess = 0;
+        combatState.player.deathFailure = 0;
+        combatState.player.conditions = combatState.player.conditions.filter(item => item !== 'Без сознания');
+      }
+    });
+  }
+
+  if (mode === 'temp') {
+    if (amount <= combatState.player.tempHp) return;
+    commitCombat('Съебастьян получает ' + amount + ' временных ХП', () => {
+      combatState.player.tempHp = amount;
+    });
+  }
+}
+
+function toggleTurnTool(tool) {
+  initCombat();
+  const labels = {
+    action: 'Действие',
+    bonus: 'Бонусное действие',
+    reaction: 'Реакция',
+    sneak: 'Скрытая атака'
+  };
+  const nextValue = !combatState.player.tools[tool];
+  commitCombat(labels[tool] + (nextValue ? ' использовано' : ' снова доступно'), () => {
+    combatState.player.tools[tool] = nextValue;
+  });
+}
+
+function setDeathSave(type, value) {
+  initCombat();
+  const key = type === 'success' ? 'deathSuccess' : 'deathFailure';
+  const label = type === 'success' ? 'Успех спасброска от смерти' : 'Провал спасброска от смерти';
+  const nextValue = combatState.player[key] === value ? value - 1 : value;
+  commitCombat(label + ': ' + nextValue + ' из 3', () => {
+    combatState.player[key] = nextValue;
+  });
+}
+
+function addCombatant(type) {
+  initCombat();
+  const prefix = type === 'enemy' ? 'combat-enemy-' : 'combat-ally-';
+  const nameInput = document.getElementById(prefix + 'name');
+  const maxInput = type === 'ally' ? document.getElementById(prefix + 'max') : null;
+  const name = nameInput.value.trim();
+  const enteredMax = maxInput ? Math.floor(Number(maxInput.value) || 0) : 0;
+  if (!name) {
+    nameInput.focus();
+    return;
+  }
+  if (type === 'ally' && enteredMax < 1) {
+    maxInput.focus();
+    return;
+  }
+
+  const entity = {
+    id: 'c-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
+    type,
+    name,
+    maxHp: enteredMax > 0 ? enteredMax : null,
+    hp: type === 'ally' ? enteredMax : null,
+    damage: 0,
+    defeated: false,
+    conditions: []
+  };
+
+  commitCombat((type === 'enemy' ? 'Добавлен противник: ' : 'Добавлен союзник: ') + name, () => {
+    combatState.entities.push(entity);
+    combatState.order.push(entity.id);
+  });
+  nameInput.value = '';
+  if (maxInput) maxInput.value = '';
+}
+
+function getCombatEntity(id) {
+  return combatState.entities.find(entity => entity.id === id);
+}
+
+function changeEntityHp(id, mode) {
+  initCombat();
+  const entity = getCombatEntity(id);
+  if (!entity) return;
+  const amount = combatAmount('combat-amount-' + id);
+  if (!amount) return;
+
+  if (entity.type === 'enemy') {
+    if (mode === 'damage') {
+      commitCombat(entity.name + ' получает ' + amount + ' урона', () => {
+        entity.damage += amount;
+        if (entity.maxHp && entity.damage >= entity.maxHp) entity.defeated = true;
+      });
+    } else {
+      const healed = Math.min(amount, entity.damage);
+      if (!healed) return;
+      commitCombat(entity.name + ': отменено ' + healed + ' урона', () => {
+        entity.damage -= healed;
+        entity.defeated = false;
+      });
+    }
+  } else {
+    if (mode === 'damage') {
+      const dealt = Math.min(amount, entity.hp);
+      if (!dealt) return;
+      commitCombat(entity.name + ' получает ' + dealt + ' урона', () => {
+        entity.hp -= dealt;
+        if (entity.hp === 0 && !entity.conditions.includes('Без сознания')) {
+          entity.conditions.push('Без сознания');
+        }
+      });
+    } else {
+      const healed = Math.min(amount, entity.maxHp - entity.hp);
+      if (!healed) return;
+      commitCombat(entity.name + ' восстанавливает ' + healed + ' ХП', () => {
+        entity.hp += healed;
+        if (entity.hp > 0) {
+          entity.conditions = entity.conditions.filter(item => item !== 'Без сознания');
+        }
+      });
+    }
+  }
+}
+
+function toggleEntityDefeated(id) {
+  initCombat();
+  const entity = getCombatEntity(id);
+  if (!entity) return;
+  const nextValue = !entity.defeated;
+  commitCombat(entity.name + (nextValue ? ' побеждён' : ' снова участвует в бою'), () => {
+    entity.defeated = nextValue;
+    if (nextValue && combatState.currentId === id) combatState.currentId = 'player';
+  });
+}
+
+function removeCombatant(id) {
+  initCombat();
+  const entity = getCombatEntity(id);
+  if (!entity) return;
+  commitCombat(entity.name + ' удалён из боя', () => {
+    combatState.entities = combatState.entities.filter(item => item.id !== id);
+    combatState.order = combatState.order.filter(itemId => itemId !== id);
+    if (combatState.currentId === id) combatState.currentId = 'player';
+  });
+}
+
+function conditionOptions(selected = '') {
+  return '<option value="">Состояние...</option>' +
+    COMBAT_CONDITIONS.map(item => '<option value="' + escapeCombatHtml(item) + '"' +
+      (item === selected ? ' selected' : '') + '>' + escapeCombatHtml(item) + '</option>').join('');
+}
+
+function addCondition(target) {
+  initCombat();
+  const select = target === 'player'
+    ? document.getElementById('combat-player-condition')
+    : document.getElementById('combat-condition-' + target);
+  const condition = select.value;
+  if (!condition) return;
+  const conditions = target === 'player'
+    ? combatState.player.conditions
+    : getCombatEntity(target)?.conditions;
+  if (!conditions || conditions.includes(condition)) return;
+  const name = target === 'player' ? 'Съебастьян' : getCombatEntity(target).name;
+  commitCombat(name + ': состояние «' + condition + '»', () => {
+    conditions.push(condition);
+  });
+}
+
+function removeCondition(target, condition) {
+  initCombat();
+  const holder = target === 'player' ? combatState.player : getCombatEntity(target);
+  if (!holder) return;
+  const name = target === 'player' ? 'Съебастьян' : holder.name;
+  commitCombat(name + ': снято состояние «' + condition + '»', () => {
+    holder.conditions = holder.conditions.filter(item => item !== condition);
+  });
+}
+
+function syncCombatOrder() {
+  const validIds = ['player'].concat(combatState.entities.map(entity => entity.id));
+  const uniqueOrder = [];
+  (combatState.order || []).forEach(id => {
+    if (validIds.includes(id) && !uniqueOrder.includes(id)) uniqueOrder.push(id);
+  });
+  validIds.forEach(id => {
+    if (!uniqueOrder.includes(id)) uniqueOrder.push(id);
+  });
+  combatState.order = uniqueOrder;
+}
+
+function combatInitiativeOrder() {
+  syncCombatOrder();
+  const participants = {
+    player: {
+      id: 'player',
+      type: 'player',
+      name: 'Съебастьян'
+    }
+  };
+  combatState.entities.forEach(entity => {
+    if (!(entity.type === 'enemy' && entity.defeated)) participants[entity.id] = entity;
+  });
+  return combatState.order.map(id => participants[id]).filter(Boolean);
+}
+
+function startInitiativeDrag(event, id) {
+  if (event.button !== undefined && event.button !== 0) return;
+  const row = event.currentTarget.closest('.initiative-row');
+  const list = document.getElementById('combat-initiative');
+  if (!row || !list) return;
+
+  event.preventDefault();
+  event.currentTarget.setPointerCapture?.(event.pointerId);
+  initiativeDrag = {
+    id,
+    pointerId: event.pointerId,
+    row,
+    list,
+    beforeState: combatSnapshot(),
+    beforeOrder: [...combatState.order]
+  };
+  row.classList.add('dragging');
+  window.addEventListener('pointermove', moveInitiativeDrag, { passive: false });
+  window.addEventListener('pointerup', finishInitiativeDrag, { once: true });
+  window.addEventListener('pointercancel', finishInitiativeDrag, { once: true });
+}
+
+function moveInitiativeDrag(event) {
+  if (!initiativeDrag || event.pointerId !== initiativeDrag.pointerId) return;
+  event.preventDefault();
+  const target = document.elementFromPoint(event.clientX, event.clientY)?.closest('.initiative-row');
+  if (!target || target === initiativeDrag.row || target.parentElement !== initiativeDrag.list) return;
+  const box = target.getBoundingClientRect();
+  const insertAfter = event.clientY > box.top + box.height / 2;
+  initiativeDrag.list.insertBefore(
+    initiativeDrag.row,
+    insertAfter ? target.nextSibling : target
+  );
+}
+
+function finishInitiativeDrag(event) {
+  if (!initiativeDrag || event.pointerId !== initiativeDrag.pointerId) return;
+  window.removeEventListener('pointermove', moveInitiativeDrag);
+  window.removeEventListener('pointerup', finishInitiativeDrag);
+  window.removeEventListener('pointercancel', finishInitiativeDrag);
+  initiativeDrag.row.classList.remove('dragging');
+
+  const visibleOrder = [...initiativeDrag.list.querySelectorAll('.initiative-row')]
+    .map(row => row.dataset.combatId);
+  const hiddenIds = combatState.order.filter(id => !visibleOrder.includes(id));
+  const nextOrder = visibleOrder.concat(hiddenIds);
+  const changed = nextOrder.join('|') !== initiativeDrag.beforeOrder.join('|');
+
+  if (changed) {
+    combatUndoStack.push(initiativeDrag.beforeState);
+    if (combatUndoStack.length > 40) combatUndoStack.shift();
+    combatState.order = nextOrder;
+    combatState.log.unshift({
+      id: Date.now() + Math.random(),
+      round: combatState.round,
+      time: new Date().toISOString(),
+      text: 'Порядок ходов изменён'
+    });
+    combatState.log = combatState.log.slice(0, 100);
+    saveCombatState();
+  }
+
+  initiativeDrag = null;
+  renderCombat();
+}
+
+function nextCombatTurn() {
+  initCombat();
+  const order = combatInitiativeOrder();
+  if (!order.length) return;
+  let index = order.findIndex(item => item.id === combatState.currentId);
+  if (index < 0) index = 0;
+  const nextIndex = (index + 1) % order.length;
+  const next = order[nextIndex];
+  const newRound = nextIndex === 0;
+  commitCombat('Ход: ' + next.name, () => {
+    if (newRound) combatState.round += 1;
+    combatState.currentId = next.id;
+    if (next.id === 'player') {
+      combatState.player.tools = { action: false, bonus: false, reaction: false, sneak: false };
+    }
+  });
+}
+
+function undoCombatAction() {
+  if (!combatUndoStack.length) return;
+  combatState = JSON.parse(combatUndoStack.pop());
+  saveCombatState();
+  renderCombat();
+}
+
+function startNewCombat() {
+  if (!window.confirm('Начать новый бой без сохранения текущего в архив?')) return;
+  combatState = defaultCombatState();
+  combatUndoStack = [];
+  saveCombatState();
+  renderCombat();
+}
+
+function archiveCurrentCombat() {
+  initCombat();
+  const enemies = combatState.entities.filter(entity => entity.type === 'enemy');
+  const allies = combatState.entities.filter(entity => entity.type === 'ally');
+  const enemyNames = enemies.map(entity => entity.name);
+  const title = enemyNames.length
+    ? 'Бой: ' + enemyNames.slice(0, 2).join(', ') + (enemyNames.length > 2 ? ' и ещё ' + (enemyNames.length - 2) : '')
+    : 'Бой без отмеченных противников';
+
+  if (!window.confirm('Завершить текущий бой, сохранить его в архив и начать новый?')) return;
+
+  combatArchive.unshift({
+    id: 'battle-' + Date.now(),
+    title,
+    startedAt: combatState.startedAt,
+    endedAt: new Date().toISOString(),
+    round: combatState.round,
+    player: JSON.parse(JSON.stringify(combatState.player)),
+    entities: JSON.parse(JSON.stringify(combatState.entities)),
+    order: [...combatState.order],
+    log: JSON.parse(JSON.stringify(combatState.log)),
+    enemyCount: enemies.length,
+    allyCount: allies.length
+  });
+  combatArchive = combatArchive.slice(0, 30);
+  saveCombatArchive();
+
+  combatState = defaultCombatState();
+  combatUndoStack = [];
+  saveCombatState();
+  renderCombat();
+}
+
+function toggleArchivedCombat(id) {
+  const card = document.querySelector('[data-archive-id="' + id + '"]');
+  if (card) card.classList.toggle('open');
+}
+
+function deleteArchivedCombat(id) {
+  const battle = combatArchive.find(item => item.id === id);
+  if (!battle) return;
+  if (!window.confirm('Удалить из архива «' + battle.title + '»?')) return;
+  combatArchive = combatArchive.filter(item => item.id !== id);
+  saveCombatArchive();
+  renderCombatArchive();
+}
+
+function formatCombatDuration(startedAt, endedAt = new Date().toISOString()) {
+  const minutes = Math.max(0, Math.round((new Date(endedAt) - new Date(startedAt)) / 60000));
+  if (minutes < 60) return minutes + ' мин';
+  const hours = Math.floor(minutes / 60);
+  const rest = minutes % 60;
+  return hours + ' ч' + (rest ? ' ' + rest + ' мин' : '');
+}
+
+function formatCombatDate(value) {
+  return new Intl.DateTimeFormat('ru-RU', {
+    day: '2-digit',
+    month: '2-digit',
+    year: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  }).format(new Date(value));
+}
+
+function renderCombatArchive() {
+  const container = document.getElementById('combat-archive');
+  if (!container) return;
+  document.getElementById('combat-archive-count').textContent = combatArchive.length;
+
+  if (!combatArchive.length) {
+    container.innerHTML = '<div class="combat-empty">Завершённые бои появятся здесь. Архив хранится только в этом браузере.</div>';
+    return;
+  }
+
+  container.innerHTML = combatArchive.map(battle => {
+    const enemies = battle.entities.filter(entity => entity.type === 'enemy');
+    const allies = battle.entities.filter(entity => entity.type === 'ally');
+    const enemyText = enemies.length
+      ? enemies.map(entity => escapeCombatHtml(entity.name) + ' — ' + entity.damage + ' урона').join('<br>')
+      : 'Противники не отмечены';
+    const allyText = allies.length
+      ? '<br>Союзники: ' + allies.map(entity => escapeCombatHtml(entity.name)).join(', ')
+      : '';
+    const log = battle.log.map(entry =>
+      '<div class="combat-log-entry"><b>Р' + entry.round + '</b> · ' +
+      escapeCombatHtml(entry.text) + '</div>'
+    ).join('');
+
+    return '<article class="combat-archive-card" data-archive-id="' + escapeCombatHtml(battle.id) + '">' +
+      '<div class="combat-archive-summary">' +
+        '<div><div class="combat-archive-title">' + escapeCombatHtml(battle.title) + '</div>' +
+        '<div class="combat-archive-meta">' + formatCombatDate(battle.endedAt) + ' · ' +
+        formatCombatDuration(battle.startedAt, battle.endedAt) + ' · раундов: ' + battle.round + '</div></div>' +
+        '<div class="combat-archive-actions">' +
+          '<button class="combat-btn small" onclick="toggleArchivedCombat(\'' + escapeCombatHtml(battle.id) + '\')">Подробнее</button>' +
+          '<button class="combat-btn remove small" onclick="deleteArchivedCombat(\'' + escapeCombatHtml(battle.id) + '\')">Удалить</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="combat-archive-details">' +
+        '<div class="combat-archive-stats">' +
+          '<div class="combat-archive-stat">Раунды<b>' + battle.round + '</b></div>' +
+          '<div class="combat-archive-stat">Финальные ХП<b>' + battle.player.hp + '/' + battle.player.maxHp + '</b></div>' +
+          '<div class="combat-archive-stat">Противники<b>' + battle.enemyCount + '</b></div>' +
+        '</div>' +
+        '<div class="combat-archive-roster">' + enemyText + allyText + '</div>' +
+        '<div class="combat-archive-log">' + log + '</div>' +
+      '</div>' +
+    '</article>';
+  }).join('');
+}
+
+function combatTagsHtml(target, conditions) {
+  if (!conditions.length) return '';
+  return conditions.map(condition =>
+    '<button class="combat-tag" title="Нажми, чтобы снять" onclick="removeCondition(\'' +
+    escapeCombatHtml(target) + '\', \'' + escapeCombatHtml(condition) + '\')">' +
+    escapeCombatHtml(condition) + ' ×</button>'
+  ).join('');
+}
+
+function renderCombatEntity(entity) {
+  const safeId = escapeCombatHtml(entity.id);
+  const safeName = escapeCombatHtml(entity.name);
+  const isEnemy = entity.type === 'enemy';
+  let valueHtml = '';
+  let trackHtml = '';
+
+  if (isEnemy) {
+    valueHtml = 'Нанесено урона: <b>' + entity.damage + '</b>';
+  } else {
+    valueHtml = 'Хиты: <b>' + entity.hp + '</b> из ' + entity.maxHp;
+    const percent = Math.max(0, Math.min(100, entity.hp / entity.maxHp * 100));
+    trackHtml = '<div class="combat-hp-track"><div class="combat-hp-fill" style="width:' +
+      percent + '%"></div></div>';
+  }
+
+  return '<article class="combat-card ' + entity.type + (entity.defeated ? ' defeated' : '') + '">' +
+    '<div class="combat-card-head">' +
+      '<div class="combat-card-name">' + safeName + '</div>' +
+      '<div class="combat-card-state">' + (isEnemy ? 'противник' : 'союзник') + '</div>' +
+    '</div>' +
+    '<div class="combat-card-value">' + valueHtml + '</div>' +
+    trackHtml +
+    '<div class="combat-tags">' + combatTagsHtml(entity.id, entity.conditions) + '</div>' +
+    '<div class="combat-controls">' +
+      '<input class="combat-number" id="combat-amount-' + safeId + '" type="number" inputmode="numeric" min="0" value="1" aria-label="Количество хитов">' +
+      '<button class="combat-btn damage small" onclick="changeEntityHp(\'' + safeId + '\', \'damage\')">Урон</button>' +
+      '<button class="combat-btn heal small" onclick="changeEntityHp(\'' + safeId + '\', \'heal\')">' + (isEnemy ? 'Исправить' : 'Лечение') + '</button>' +
+      (isEnemy ? '<button class="combat-btn warn small" onclick="toggleEntityDefeated(\'' + safeId + '\')">' +
+        (entity.defeated ? 'Вернуть' : 'Побеждён') + '</button>' : '') +
+    '</div>' +
+    '<div class="combat-add-row" style="margin-top:7px">' +
+      '<select class="combat-select" id="combat-condition-' + safeId + '">' + conditionOptions() + '</select>' +
+      '<button class="combat-btn small" onclick="addCondition(\'' + safeId + '\')">Состояние</button>' +
+      '<button class="combat-btn remove small" onclick="removeCombatant(\'' + safeId + '\')">Удалить</button>' +
+    '</div>' +
+  '</article>';
+}
+
+function renderCombat() {
+  if (!combatState) return;
+  const player = combatState.player;
+  document.getElementById('combat-session-time').textContent =
+    'идёт ' + formatCombatDuration(combatState.startedAt);
+  document.getElementById('combat-round').textContent = combatState.round;
+  document.getElementById('combat-player-hp').textContent = player.hp;
+  document.getElementById('combat-player-max-hp').textContent = player.maxHp;
+  document.getElementById('combat-player-temp-hp').textContent = player.tempHp;
+  document.getElementById('combat-hp-orb').classList.toggle('danger', player.hp <= player.maxHp * 0.3);
+  document.getElementById('combat-death').classList.toggle('visible', player.hp === 0);
+  document.getElementById('combat-player-tags').innerHTML = combatTagsHtml('player', player.conditions);
+
+  document.querySelectorAll('[data-turn-tool]').forEach(button => {
+    button.classList.toggle('active', Boolean(player.tools[button.dataset.turnTool]));
+  });
+  document.querySelectorAll('.combat-save-dot.success').forEach((button, index) => {
+    button.classList.toggle('on', index < player.deathSuccess);
+  });
+  document.querySelectorAll('.combat-save-dot.failure').forEach((button, index) => {
+    button.classList.toggle('on', index < player.deathFailure);
+  });
+
+  const enemies = combatState.entities.filter(entity => entity.type === 'enemy');
+  const allies = combatState.entities.filter(entity => entity.type === 'ally');
+  document.getElementById('combat-enemy-count').textContent = enemies.length + ' ' +
+    (enemies.length === 1 ? 'цель' : 'целей');
+  document.getElementById('combat-ally-count').textContent = allies.length + ' ' +
+    (allies.length === 1 ? 'герой' : 'героев');
+  document.getElementById('combat-enemies').innerHTML = enemies.length
+    ? enemies.map(renderCombatEntity).join('')
+    : '<div class="combat-empty">Добавь врага: лист будет считать только подтверждённый нанесённый ему урон, без неизвестных максимальных ХП.</div>';
+  document.getElementById('combat-allies').innerHTML = allies.length
+    ? allies.map(renderCombatEntity).join('')
+    : '<div class="combat-empty">Добавь сопартийца и укажи его максимальные ХП, чтобы отслеживать состояние группы.</div>';
+
+  const order = combatInitiativeOrder();
+  if (!order.some(item => item.id === combatState.currentId)) combatState.currentId = 'player';
+  document.getElementById('combat-initiative').innerHTML = order.map(item => {
+    const kind = item.type === 'player' ? 'твой персонаж' : item.type === 'enemy' ? 'противник' : 'союзник';
+    const safeId = escapeCombatHtml(item.id);
+    return '<div class="initiative-row' + (item.id === combatState.currentId ? ' current' : '') +
+      '" data-combat-id="' + safeId + '">' +
+      '<button class="initiative-handle" aria-label="Перетащить ' + escapeCombatHtml(item.name) +
+        '" onpointerdown="startInitiativeDrag(event, \'' + safeId + '\')">≡</button>' +
+      '<div class="initiative-name">' + escapeCombatHtml(item.name) +
+        '<span class="initiative-kind">' + kind + '</span></div>' +
+      '<div class="combat-card-state">' + (item.id === combatState.currentId ? 'ХОД' : '') + '</div>' +
+    '</div>';
+  }).join('');
+
+  document.getElementById('combat-log').innerHTML = combatState.log.length
+    ? combatState.log.map(entry => {
+      const time = new Intl.DateTimeFormat('ru-RU', { hour: '2-digit', minute: '2-digit' }).format(new Date(entry.time));
+      return '<div class="combat-log-entry"><span class="combat-log-time">' + time + '</span>' +
+        '<b>Р' + entry.round + '</b> · ' + escapeCombatHtml(entry.text) + '</div>';
+    }).join('')
+    : '<div class="combat-empty">Здесь появится история боя.</div>';
+  document.getElementById('combat-undo').disabled = combatUndoStack.length === 0;
+  renderCombatArchive();
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  combatState = loadCombatState();
+  combatArchive = loadCombatArchive();
+});
 </script>
 
 <script>
