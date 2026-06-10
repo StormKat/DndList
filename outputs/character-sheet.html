@@ -737,6 +737,37 @@ body {
   display: flex;
   gap: 7px;
 }
+.combat-cloud {
+  display: grid;
+  grid-template-columns: minmax(130px, 180px) auto;
+  gap: 6px;
+  align-items: center;
+}
+.combat-cloud-password {
+  min-width: 0;
+  min-height: 36px;
+  padding: 8px 9px;
+  border: 1px solid #344663;
+  border-radius: 5px;
+  outline: none;
+  color: #dce8f0;
+  background: #0f121a;
+  font-size: 10px;
+}
+.combat-cloud-password:focus {
+  border-color: #786294;
+  box-shadow: 0 0 0 2px rgba(120,98,148,0.15);
+}
+.combat-cloud-status {
+  grid-column: 1 / -1;
+  min-height: 13px;
+  color: #64798c;
+  font-size: 8px;
+  text-align: right;
+}
+.combat-cloud-status.saving { color: #b7a4ce; }
+.combat-cloud-status.saved { color: #70c090; }
+.combat-cloud-status.error { color: #e09080; }
 .combat-title {
   font-family: 'Forum', Georgia, serif;
   font-size: 26px;
@@ -1439,6 +1470,10 @@ body {
   }
   .combat-session-actions .combat-btn {
     flex: 1;
+  }
+  .combat-cloud {
+    width: 100%;
+    grid-template-columns: 1fr auto;
   }
   .combat-title { font-size: 22px; }
   .combat-round-box {
@@ -2467,6 +2502,12 @@ if (window.innerWidth <= 768) {
           <button class="combat-btn warn" onclick="startNewCombat()">Начать новый бой</button>
           <button class="combat-btn heal" onclick="archiveCurrentCombat()">Завершить бой и сохранить в архив</button>
         </div>
+        <div class="combat-cloud">
+          <input class="combat-cloud-password" type="password" autocomplete="current-password"
+            placeholder="Пароль синхронизации" oninput="setCombatCloudPassword(this.value)">
+          <button class="combat-btn magic" onclick="saveCombatCloud(true)">Синхронизировать</button>
+          <div class="combat-cloud-status">Загружаю облачные данные...</div>
+        </div>
         <div class="combat-round-box">
           <div class="combat-round-label">Текущий раунд</div>
           <div class="combat-round-value" id="combat-round">1</div>
@@ -2622,9 +2663,17 @@ if (window.innerWidth <= 768) {
         <div class="combat-title">Архив боёв</div>
         <div class="combat-subtitle">Завершённые сражения, участники, нанесённый урон и полная история ходов</div>
       </div>
-      <div class="combat-round-box">
-        <div class="combat-round-label">Сохранено</div>
-        <div class="combat-round-value" id="combat-archive-count">0</div>
+      <div class="combat-heading-actions">
+        <div class="combat-cloud">
+          <input class="combat-cloud-password" type="password" autocomplete="current-password"
+            placeholder="Пароль синхронизации" oninput="setCombatCloudPassword(this.value)">
+          <button class="combat-btn magic" onclick="saveCombatCloud(true)">Синхронизировать</button>
+          <div class="combat-cloud-status">Загружаю облачные данные...</div>
+        </div>
+        <div class="combat-round-box">
+          <div class="combat-round-label">Сохранено</div>
+          <div class="combat-round-value" id="combat-archive-count">0</div>
+        </div>
       </div>
     </div>
     <section class="combat-box">
@@ -2727,6 +2776,7 @@ function switchTab(name, button) {
 <script>
 const COMBAT_STORAGE_KEY = 'sye_combat_state_v1';
 const COMBAT_ARCHIVE_KEY = 'sye_combat_archive_v1';
+const COMBAT_UPDATED_KEY = 'sye_combat_updated_at_v1';
 const COMBAT_CONDITIONS = [
   'Лежит', 'Схвачен', 'Опутан', 'Отравлен', 'Испуган',
   'Ослеплён', 'Оглушён', 'Без сознания', 'Невидим', 'Концентрация'
@@ -2736,6 +2786,9 @@ let combatArchive = [];
 let combatInitialized = false;
 let combatUndoStack = [];
 let initiativeDrag = null;
+let combatCloudLoaded = false;
+let combatCloudSaveTimer = null;
+let combatCloudSaving = false;
 
 function defaultCombatState() {
   return {
@@ -2793,10 +2846,126 @@ function loadCombatArchive() {
 
 function saveCombatState() {
   localStorage.setItem(COMBAT_STORAGE_KEY, JSON.stringify(combatState));
+  markCombatLocalChange();
 }
 
 function saveCombatArchive() {
   localStorage.setItem(COMBAT_ARCHIVE_KEY, JSON.stringify(combatArchive));
+  markCombatLocalChange();
+}
+
+function markCombatLocalChange() {
+  localStorage.setItem(COMBAT_UPDATED_KEY, new Date().toISOString());
+  scheduleCombatCloudSave();
+}
+
+function setCombatCloudStatus(message, state = '') {
+  document.querySelectorAll('.combat-cloud-status').forEach(status => {
+    status.textContent = message;
+    status.className = 'combat-cloud-status ' + state;
+  });
+}
+
+function setCombatCloudPassword(value) {
+  document.querySelectorAll('.combat-cloud-password').forEach(input => {
+    if (input.value !== value) input.value = value;
+  });
+  if (value) {
+    sessionStorage.setItem('sye_edit_token', value);
+    scheduleCombatCloudSave();
+  }
+}
+
+function getCombatCloudPassword() {
+  return document.querySelector('.combat-cloud-password')?.value ||
+    sessionStorage.getItem('sye_edit_token') || '';
+}
+
+function scheduleCombatCloudSave() {
+  clearTimeout(combatCloudSaveTimer);
+  if (!combatCloudLoaded || !getCombatCloudPassword()) return;
+  setCombatCloudStatus('Есть локальные изменения...', 'saving');
+  combatCloudSaveTimer = setTimeout(() => saveCombatCloud(false), 900);
+}
+
+async function loadCombatCloud() {
+  if (combatCloudLoaded) return;
+  setCombatCloudStatus('Загружаю облачные данные...', 'saving');
+
+  try {
+    const response = await fetch('/.netlify/functions/get-combat', {
+      cache: 'no-store'
+    });
+    if (!response.ok) throw new Error('Не удалось загрузить облачные бои');
+
+    const result = await response.json();
+    const cloudTime = result.updatedAt ? new Date(result.updatedAt).getTime() : 0;
+    const localValue = localStorage.getItem(COMBAT_UPDATED_KEY);
+    const localTime = localValue ? new Date(localValue).getTime() : 0;
+
+    if (result.data?.combatState && Array.isArray(result.data.combatArchive) && cloudTime >= localTime) {
+      combatState = result.data.combatState;
+      combatArchive = result.data.combatArchive;
+      localStorage.setItem(COMBAT_STORAGE_KEY, JSON.stringify(combatState));
+      localStorage.setItem(COMBAT_ARCHIVE_KEY, JSON.stringify(combatArchive));
+      localStorage.setItem(COMBAT_UPDATED_KEY, result.updatedAt);
+      combatUndoStack = [];
+      if (combatInitialized) renderCombat();
+      setCombatCloudStatus('Загружено из облака · ' + formatCombatDate(result.updatedAt), 'saved');
+    } else if (result.data && localTime > cloudTime) {
+      setCombatCloudStatus('На этом устройстве более свежая версия', 'saving');
+    } else {
+      setCombatCloudStatus('Облачное хранилище пока пусто');
+    }
+  } catch(error) {
+    setCombatCloudStatus('Нет связи с облаком. Используются локальные данные.', 'error');
+  } finally {
+    combatCloudLoaded = true;
+    if (getCombatCloudPassword()) scheduleCombatCloudSave();
+  }
+}
+
+async function saveCombatCloud(manual = false) {
+  if (combatCloudSaving) return;
+  const password = getCombatCloudPassword();
+  if (!password) {
+    setCombatCloudStatus('Введи пароль редактора для синхронизации', 'error');
+    document.querySelector('.combat-cloud-password')?.focus();
+    return;
+  }
+
+  clearTimeout(combatCloudSaveTimer);
+  combatCloudSaving = true;
+  setCombatCloudStatus('Сохраняю в Netlify...', 'saving');
+
+  try {
+    const response = await fetch('/.netlify/functions/save-combat', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-upload-token': password
+      },
+      body: JSON.stringify({ combatState, combatArchive })
+    });
+    let result = {};
+    try { result = await response.json(); } catch(e) {}
+
+    if (!response.ok) {
+      if (response.status === 401) throw new Error('Неверный пароль');
+      throw new Error(result.error || 'Не удалось сохранить боевые данные');
+    }
+
+    sessionStorage.setItem('sye_edit_token', password);
+    localStorage.setItem(COMBAT_UPDATED_KEY, result.updatedAt);
+    setCombatCloudStatus(
+      (manual ? 'Синхронизировано' : 'Сохранено в облаке') + ' · ' + formatCombatDate(result.updatedAt),
+      'saved'
+    );
+  } catch(error) {
+    setCombatCloudStatus(error.message || 'Ошибка облачного сохранения', 'error');
+  } finally {
+    combatCloudSaving = false;
+  }
 }
 
 function initCombat() {
@@ -3257,7 +3426,7 @@ function renderCombatArchive() {
   document.getElementById('combat-archive-count').textContent = combatArchive.length;
 
   if (!combatArchive.length) {
-    container.innerHTML = '<div class="combat-empty">Завершённые бои появятся здесь. Архив хранится только в этом браузере.</div>';
+    container.innerHTML = '<div class="combat-empty">Завершённые бои появятся здесь и будут доступны на всех устройствах после облачной синхронизации.</div>';
     return;
   }
 
@@ -3411,6 +3580,11 @@ function renderCombat() {
 window.addEventListener('DOMContentLoaded', function() {
   combatState = loadCombatState();
   combatArchive = loadCombatArchive();
+  const savedToken = sessionStorage.getItem('sye_edit_token') || '';
+  document.querySelectorAll('.combat-cloud-password').forEach(input => {
+    input.value = savedToken;
+  });
+  loadCombatCloud();
 });
 </script>
 
