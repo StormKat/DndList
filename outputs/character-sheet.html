@@ -75,6 +75,35 @@ tailwind.config = {
   .eqli::before  { content:'◆'; position:absolute; left:0; color:#4a6fa8; font-size:7px; top:2px; }
   textarea { background:rgba(74,111,168,0.07); border:0.5px solid #2e3d5a; border-radius:3px; color:#dce8f0; font-family:'Manrope',Arial,sans-serif; font-size:9px; padding:6px; resize:none; outline:none; line-height:1.5; width:100%; height:58px; }
   textarea::placeholder { color:#506070; }
+  .ui-icon {
+    width: 1.15em;
+    height: 1.15em;
+    display: inline-block;
+    flex: 0 0 auto;
+    vertical-align: -0.18em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.65;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .icon-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .icon-label .ui-icon { color: #7896bd; }
+  .title-icon {
+    width: 16px;
+    height: 16px;
+    color: #7896bd;
+    filter: drop-shadow(0 0 5px rgba(106,159,216,0.22));
+  }
+  .feature-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
 
   /* ── ТУЛТИПЫ ── */
   .tip { position: relative; cursor: inherit; }
@@ -607,7 +636,22 @@ body {
   border-color: #2e3d5a;
   border-bottom-color: #141720;
 }
-.tab-btn .tab-icon { margin-right: 6px; }
+.tab-btn .tab-icon {
+  width: 15px;
+  height: 15px;
+  margin-right: 7px;
+  vertical-align: -3px;
+  color: #607895;
+  transition: color 0.2s ease, filter 0.2s ease, transform 0.2s ease;
+}
+.tab-btn:hover .tab-icon {
+  color: #91acd0;
+  transform: translateY(-1px);
+}
+.tab-btn.active .tab-icon {
+  color: #a991d6;
+  filter: drop-shadow(0 0 5px rgba(151,119,210,0.55));
+}
 
 /* ── ПАНЕЛИ ВКЛАДОК ── */
 .tab-panel { display: none; }
@@ -630,6 +674,9 @@ body {
   padding-bottom: 10px;
   margin-bottom: 16px;
   letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .inv-grid {
   display: grid;
@@ -651,6 +698,14 @@ body {
   border-bottom: 1px solid #2e3d5a;
   padding-bottom: 6px;
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.inv-section-title .ui-icon {
+  width: 14px;
+  height: 14px;
+  color: #7896bd;
 }
 .inv-item {
   display: grid;
@@ -2271,24 +2326,83 @@ b,
 </head>
 <body>
 
+<svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden">
+  <defs>
+    <symbol id="icon-portrait" viewBox="0 0 24 24">
+      <path d="M4 5.5h16v13H4z"/><circle cx="12" cy="10" r="2.4"/><path d="M7.5 16c.8-2.1 2.3-3.2 4.5-3.2s3.7 1.1 4.5 3.2"/>
+    </symbol>
+    <symbol id="icon-scroll" viewBox="0 0 24 24">
+      <path d="M7 4h11v14a2 2 0 0 1-2 2H7a3 3 0 0 1 0-6h9"/><path d="M7 14V6a2 2 0 0 0-4 0v1h4M10 8h5M10 11h5"/>
+    </symbol>
+    <symbol id="icon-rune" viewBox="0 0 24 24">
+      <path d="m12 3 1.5 5.5L19 10l-5.5 1.5L12 17l-1.5-5.5L5 10l5.5-1.5z"/><path d="m18.5 16 .7 2.3 2.3.7-2.3.7-.7 2.3-.7-2.3-2.3-.7 2.3-.7z"/>
+    </symbol>
+    <symbol id="icon-bag" viewBox="0 0 24 24">
+      <path d="M6 9h12l1.5 11h-15z"/><path d="M9 9V6.5a3 3 0 0 1 6 0V9M8 13h8M12 13v4"/>
+    </symbol>
+    <symbol id="icon-quill" viewBox="0 0 24 24">
+      <path d="M5 20c4.5-6 8.8-10.7 14-15"/><path d="M7 17c-1.8-4.7.8-10.8 12-13 1.4 8.6-3.2 13.4-9.5 12.5M5 20h6"/>
+    </symbol>
+    <symbol id="icon-swords" viewBox="0 0 24 24">
+      <path d="m5 4 6.5 6.5M4 3l3 .7-.7 3M12.5 13.5l5 5M17 21l4-4"/><path d="m19 4-6.5 6.5M20 3l-3 .7.7 3M11.5 13.5l-5 5M7 21l-4-4"/>
+    </symbol>
+    <symbol id="icon-archive" viewBox="0 0 24 24">
+      <path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H12v17H7.5A3.5 3.5 0 0 0 4 22z"/><path d="M20 5.5A3.5 3.5 0 0 0 16.5 2H12v17h4.5A3.5 3.5 0 0 1 20 22zM7 7h2M15 7h2M7 10h2M15 10h2"/>
+    </symbol>
+    <symbol id="icon-dagger" viewBox="0 0 24 24">
+      <path d="m14 3 5-1-1 5-8 8-3-3zM8.5 13.5 4 18M3 16l5 5"/>
+    </symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24">
+      <path d="M12 3 19 6v5c0 4.7-2.6 8-7 10-4.4-2-7-5.3-7-10V6z"/><path d="M12 7v9M8.5 11.5h7"/>
+    </symbol>
+    <symbol id="icon-tools" viewBox="0 0 24 24">
+      <path d="m14 6 4-4 4 4-4 4M16 8 7 17M5 15l4 4-2 2-4-4z"/><path d="m4 4 16 16M3 3l4 1-3 3z"/>
+    </symbol>
+    <symbol id="icon-coin" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.5"/><path d="M14.8 8.5c-.7-.6-1.7-1-2.8-1-1.7 0-3 .9-3 2.2 0 3.4 6 1.2 6 4.6 0 1.3-1.3 2.2-3 2.2-1.2 0-2.3-.4-3-1.1M12 6v12"/>
+    </symbol>
+    <symbol id="icon-image" viewBox="0 0 24 24">
+      <rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="9" r="1.5"/><path d="m5 18 5-5 3 3 2-2 4 4"/>
+    </symbol>
+    <symbol id="icon-run" viewBox="0 0 24 24">
+      <circle cx="14.5" cy="4.5" r="2"/><path d="m12 8 3 2 3 1M13 9l-2 4-4 2M11 13l3 3-1 5M8 16l-4 4"/>
+    </symbol>
+    <symbol id="icon-target" viewBox="0 0 24 24">
+      <circle cx="11" cy="13" r="7"/><circle cx="11" cy="13" r="3"/><path d="m13 11 8-8M16 3h5v5"/>
+    </symbol>
+    <symbol id="icon-mask" viewBox="0 0 24 24">
+      <path d="M4 6c5 1.5 11 1.5 16 0v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9z"/><path d="M7 11c1.2-1 2.4-1 3.5 0M13.5 11c1.1-1 2.3-1 3.5 0M9 16c2 1 4 1 6 0"/>
+    </symbol>
+    <symbol id="icon-magic" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/>
+    </symbol>
+    <symbol id="icon-eye" viewBox="0 0 24 24">
+      <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="2.5"/>
+    </symbol>
+    <symbol id="icon-moon" viewBox="0 0 24 24">
+      <path d="M18.5 16.5A8 8 0 0 1 9 5a8 8 0 1 0 9.5 11.5z"/>
+    </symbol>
+  </defs>
+</svg>
+
 <!-- ШАПКА САЙТА -->
 <div class="site-header">
   <div class="site-logo">D&amp;D · <span>Лист персонажа</span></div>
   <button onclick="openPortraitModal()"
-    class="bg-drow-accent hover:bg-drow-bright text-white border border-drow-bright rounded px-3 py-1.5 text-[11px] cursor-pointer transition-colors font-meta">
-    📷 Портрет персонажа
+    class="icon-label bg-drow-accent hover:bg-drow-bright text-white border border-drow-bright rounded px-3 py-1.5 text-[11px] cursor-pointer transition-colors font-meta">
+    <svg class="ui-icon"><use href="#icon-portrait"></use></svg>Портрет персонажа
   </button>
 </div>
 
 <!-- ВКЛАДКИ -->
 <div class="tabs-wrap">
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('sheet', this)"><span class="tab-icon">📜</span>Лист</button>
-    <button class="tab-btn" onclick="switchTab('spells', this)"><span class="tab-icon">✨</span>Шпаргалка</button>
-    <button class="tab-btn" onclick="switchTab('inventory', this)"><span class="tab-icon">🎒</span>Инвентарь</button>
-    <button class="tab-btn" onclick="switchTab('notes', this)"><span class="tab-icon">📝</span>Заметки</button>
-    <button class="tab-btn" onclick="switchTab('combat', this)"><span class="tab-icon">⚔️</span>Бой (Beta)</button>
-    <button class="tab-btn" onclick="switchTab('combat-archive', this)"><span class="tab-icon">📚</span>Архив боёв (Beta)</button>
+    <button class="tab-btn active" onclick="switchTab('sheet', this)"><svg class="ui-icon tab-icon"><use href="#icon-scroll"></use></svg>Лист</button>
+    <button class="tab-btn" onclick="switchTab('spells', this)"><svg class="ui-icon tab-icon"><use href="#icon-rune"></use></svg>Шпаргалка</button>
+    <button class="tab-btn" onclick="switchTab('inventory', this)"><svg class="ui-icon tab-icon"><use href="#icon-bag"></use></svg>Инвентарь</button>
+    <button class="tab-btn" onclick="switchTab('notes', this)"><svg class="ui-icon tab-icon"><use href="#icon-quill"></use></svg>Заметки</button>
+    <button class="tab-btn" onclick="switchTab('combat', this)"><svg class="ui-icon tab-icon"><use href="#icon-swords"></use></svg>Бой (Beta)</button>
+    <button class="tab-btn" onclick="switchTab('combat-archive', this)"><svg class="ui-icon tab-icon"><use href="#icon-archive"></use></svg>Архив боёв (Beta)</button>
   </div>
 </div>
 
@@ -2306,12 +2420,12 @@ b,
   <!-- ПОРТРЕТ — высокий под вертикальное фото -->
   <div class="portrait-wrap shrink-0 overflow-hidden mob-portrait" style="width:180px;min-height:190px;border-right:1px solid #2e3d5a;position:relative;">
     <div id="upload-zone" class="w-full h-full flex flex-col items-center justify-center gap-2 cursor-pointer" style="min-height:190px;background:rgba(74,111,168,0.08);" onclick="openPortraitModal()">
-      <div style="font-size:36px;opacity:0.25">🗡️</div>
+      <svg class="ui-icon" style="width:38px;height:38px;color:#617899;opacity:.48"><use href="#icon-dagger"></use></svg>
       <div style="font-size:8px;color:#506070;text-align:center;letter-spacing:1px;font-family:Manrope,Arial,sans-serif;font-weight:600">ПОРТРЕТ</div>
     </div>
     <img id="portrait-img" alt="Съебастьян" style="display:none;width:180px;height:100%;object-fit:cover;object-position:top center;position:absolute;top:0;left:0;">
     <div class="portrait-overlay">
-      <div class="portrait-upload-btn" onclick="openPortraitModal()">📷 Изменить</div>
+      <div class="portrait-upload-btn icon-label" onclick="openPortraitModal()"><svg class="ui-icon"><use href="#icon-portrait"></use></svg>Изменить</div>
     </div>
   </div>
 
@@ -2378,13 +2492,13 @@ b,
 <!-- PROFBAR -->
 <div class="flex items-center justify-between px-3 py-1.5 border-b border-drow-border bg-drow-bar text-[8.5px] text-drow-muted relative z-10 mob-profbar">
   <span class="tip">Бонус мастерства: <b class="font-meta text-[10px] text-drow-bright">+2</b>
-  <div class="tip-box"><span class="tip-title">⚔ Бонус мастерства</span>Добавляется к атакам, навыкам и спасброскам с владением.<br><br>Ур. 1–4: <b>+2</b> · Ур. 5–8: <b>+3</b> · Ур. 9–12: <b>+4</b></div>
+  <div class="tip-box"><span class="tip-title">Бонус мастерства</span>Добавляется к атакам, навыкам и спасброскам с владением.<br><br>Ур. 1–4: <b>+2</b> · Ур. 5–8: <b>+3</b> · Ур. 9–12: <b>+4</b></div>
 </span>
   <span class="tip">Пассивная Внимательность: <b class="font-meta text-[10px] text-drow-bright">14</b>
-  <div class="tip-box"><span class="tip-title">👁 Пассивная Внимательность</span>= 10 + бонус Внимательности. Мастер использует её чтобы определить, заметишь ли ты что-то без активного осмотра.<br><br><span class="tip-good">Твоя: 10 + 2 + 2 (владение) = 14</span></div>
+  <div class="tip-box"><span class="tip-title">Пассивная Внимательность</span>= 10 + бонус Внимательности. Мастер использует её чтобы определить, заметишь ли ты что-то без активного осмотра.<br><br><span class="tip-good">Твоя: 10 + 2 + 2 (владение) = 14</span></div>
 </span>
   <span class="tip">Тёмное зрение: <b class="font-meta text-[10px] text-drow-bright">120 фт</b>
-  <div class="tip-box"><span class="tip-title">🌑 Тёмное зрение</span>В тусклом свете → видишь как при ярком.<br>В темноте → видишь как в тусклом (серый).<br><br>120 фт — лучшее среди рас!<br><span class="tip-warn">Помеха атакам при прямом солнечном свете!</span></div>
+  <div class="tip-box"><span class="tip-title">Тёмное зрение</span>В тусклом свете → видишь как при ярком.<br>В темноте → видишь как в тусклом (серый).<br><br>120 фт — лучшее среди рас!<br><span class="tip-warn">Помеха атакам при прямом солнечном свете!</span></div>
 </span>
   <span>Кубик хитов: <b class="font-meta text-[10px] text-drow-bright">4d8</b></span>
 </div>
@@ -2397,32 +2511,32 @@ b,
     <div class="accordion-header font-meta text-[8px] text-drow-bright uppercase tracking-widest">Характеристики</div>
     <div class="accordion-body px-1.5 py-1.5 flex flex-col gap-1.5 mob-abs-grid">
     <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
-      <div class="text-[7px] text-drow-faint uppercase tip">Сила<div class="tip-box tip-left"><span class="tip-title">💪 Сила</span>Атлетика, ближний бой (если нет фехтовального), ношение грузов, выламывание дверей.<br><br><span class="tip-warn">У Съебастьяна Сила 10 — используй Ловкость для атак!</span></div></div>
+      <div class="text-[7px] text-drow-faint uppercase tip">Сила<div class="tip-box tip-left"><span class="tip-title">Сила</span>Атлетика, ближний бой (если нет фехтовального), ношение грузов, выламывание дверей.<br><br><span class="tip-warn">У Съебастьяна Сила 10 — используй Ловкость для атак!</span></div></div>
       <div class="stat-steel-value font-meta text-[17px] leading-none">10</div>
       <div class="stat-steel-mod text-[10px] font-bold">+0</div>
     </div>
     <div class="stat-arcane bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
-      <div class="text-[7px] text-drow-faint uppercase tip">Ловкость<div class="tip-box tip-left"><span class="tip-title">🏃 Ловкость</span>Акробатика, Скрытность, Ловкость рук, атаки фехтовальным оружием и дальнобойным, КД без доспехов, инициатива.<br><br><span class="tip-good">Главная характеристика Съебастьяна — +3 везде!</span></div></div>
+      <div class="text-[7px] text-drow-faint uppercase tip">Ловкость<div class="tip-box tip-left"><span class="tip-title">Ловкость</span>Акробатика, Скрытность, Ловкость рук, атаки фехтовальным оружием и дальнобойным, КД без доспехов, инициатива.<br><br><span class="tip-good">Главная характеристика Съебастьяна — +3 везде!</span></div></div>
       <div class="stat-arcane-value font-meta text-[17px] leading-none">18</div>
       <div class="stat-arcane-value stat-arcane-mod text-[10px] font-bold">+4</div>
     </div>
     <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
-      <div class="text-[7px] text-drow-faint uppercase tip">Телосл.<div class="tip-box tip-left"><span class="tip-title">❤ Телосложение</span>Хиты на каждом уровне, концентрация заклинаний (СС 10 или полурон), физическая выносливость.<br><br>+1 к хитам на каждом уровне.</div></div>
+      <div class="text-[7px] text-drow-faint uppercase tip">Телосл.<div class="tip-box tip-left"><span class="tip-title">Телосложение</span>Хиты на каждом уровне, концентрация заклинаний (СС 10 или полурон), физическая выносливость.<br><br>+1 к хитам на каждом уровне.</div></div>
       <div class="stat-steel-value font-meta text-[17px] leading-none">13</div>
       <div class="stat-steel-mod text-[10px] font-bold">+1</div>
     </div>
     <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
-      <div class="text-[7px] text-drow-faint uppercase tip">Интеллект<div class="tip-box tip-left"><span class="tip-title">📚 Интеллект</span>Аркана, История, Расследование, Природа, Религия. Спасброски Интеллекта.<br><br>Плут владеет спасбросками Интеллекта — <span class="tip-good">+3 со вл.</span></div></div>
+      <div class="text-[7px] text-drow-faint uppercase tip">Интеллект<div class="tip-box tip-left"><span class="tip-title">Интеллект</span>Аркана, История, Расследование, Природа, Религия. Спасброски Интеллекта.<br><br>Плут владеет спасбросками Интеллекта — <span class="tip-good">+3 со вл.</span></div></div>
       <div class="stat-steel-value font-meta text-[17px] leading-none">12</div>
       <div class="stat-steel-mod text-[10px] font-bold">+1</div>
     </div>
     <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
-      <div class="text-[7px] text-drow-faint uppercase tip">Мудрость<div class="tip-box tip-left"><span class="tip-title">🔮 Мудрость</span>Внимательность, Проницательность, Медицина, Выживание. Магия жрецов/друидов.<br><br><span class="tip-warn">Мудрость 10 — будь осторожен с заклинаниями очарования!</span></div></div>
+      <div class="text-[7px] text-drow-faint uppercase tip">Мудрость<div class="tip-box tip-left"><span class="tip-title">Мудрость</span>Внимательность, Проницательность, Медицина, Выживание. Магия жрецов/друидов.<br><br><span class="tip-warn">Мудрость 10 — будь осторожен с заклинаниями очарования!</span></div></div>
       <div class="stat-steel-value font-meta text-[17px] leading-none">10</div>
       <div class="stat-steel-mod text-[10px] font-bold">+0</div>
     </div>
     <div class="stat-arcane bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
-      <div class="text-[7px] text-drow-faint uppercase tip">Харизма<div class="tip-box tip-left"><span class="tip-title">✨ Харизма</span>Обман, Запугивание, Выступление, Убеждение. Магия дроу использует Харизму (СС 12).<br><br><span class="tip-good">Харизма +2 → Обман +4!</span></div></div>
+      <div class="text-[7px] text-drow-faint uppercase tip">Харизма<div class="tip-box tip-left"><span class="tip-title">Харизма</span>Обман, Запугивание, Выступление, Убеждение. Магия дроу использует Харизму (СС 12).<br><br><span class="tip-good">Харизма +2 → Обман +4!</span></div></div>
       <div class="stat-arcane-value font-meta text-[17px] leading-none">16</div>
       <div class="stat-arcane-value stat-arcane-mod text-[10px] font-bold">+2</div>
     </div>
@@ -2469,16 +2583,16 @@ b,
     <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-1.5">Бой</div>
     <div class="grid grid-cols-3 gap-1.5 mb-2 mob-combat-grid">
       <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver tip">15
-  <div class="tip-box"><span class="tip-title">🛡 КД 14</span>Кожаный доспех 11 + Лов +3. Атаки ниже 14 — промах.<br><span class="tip-good">Щит реакцией → КД 19 на 1 ход!</span></div>
+  <div class="tip-box"><span class="tip-title">КД 14</span>Кожаный доспех 11 + Лов +3. Атаки ниже 14 — промах.<br><span class="tip-good">Щит реакцией → КД 19 на 1 ход!</span></div>
 </div><div class="text-[7px] text-drow-faint uppercase">Класс доспехов</div></div>
       <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver tip">+4
-  <div class="tip-box"><span class="tip-title">⚡ Инициатива +4</span>d20 + 3 в начале боя. Чем выше — тем раньше ходишь.<br><span class="tip-good">Убийца выигрывает от первого хода!</span></div>
+  <div class="tip-box"><span class="tip-title">Инициатива +4</span>d20 + 3 в начале боя. Чем выше — тем раньше ходишь.<br><span class="tip-good">Убийца выигрывает от первого хода!</span></div>
 </div><div class="text-[7px] text-drow-faint uppercase">Инициатива</div></div>
       <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver">30 фт</div><div class="text-[7px] text-drow-faint uppercase">Скорость</div></div>
       <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver">27</div><div class="text-[7px] text-drow-faint uppercase">Макс хиты</div></div>
       <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver">4d8</div><div class="text-[7px] text-drow-faint uppercase">Куб хитов</div></div>
       <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver tip">+2
-  <div class="tip-box"><span class="tip-title">📖 Бонус мастерства</span>Добавляется к навыкам, атакам и спасброскам с владением.<br><br>Ур. 1–4: +2 · Ур. 5–8: +3<br><span class="tip-good">Экспертиза удваивает: +4!</span></div>
+  <div class="tip-box"><span class="tip-title">Бонус мастерства</span>Добавляется к навыкам, атакам и спасброскам с владением.<br><br>Ур. 1–4: +2 · Ур. 5–8: +3<br><span class="tip-good">Экспертиза удваивает: +4!</span></div>
 </div><div class="text-[7px] text-drow-faint uppercase">Бонус мастерства</div></div>
     </div>
     <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-1">Атаки</div>
@@ -2491,7 +2605,7 @@ b,
     <div class="mt-1.5">
       <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-0.5">Скрытная атака (1 раз в ход)</div>
       <div class="text-[9px] text-drow-text leading-relaxed tip">+<strong>2d6</strong> урона при преимуществе или союзнике в 5 фт от цели
-  <div class="tip-box"><span class="tip-title">🗡 Скрытная атака</span>Один раз в ход. Нужно:<br>• Преимущество на атаку, <b>ИЛИ</b><br>• Союзник в 5 фт от цели<br>• Без помехи на атаку<br><br>На 5 ур.: +3d6 · На 7 ур.: +4d6<br><span class="tip-good">При крите все кубики удваиваются!</span></div>
+  <div class="tip-box"><span class="tip-title">Скрытная атака</span>Один раз в ход. Нужно:<br>• Преимущество на атаку, <b>ИЛИ</b><br>• Союзник в 5 фт от цели<br>• Без помехи на атаку<br><br>На 5 ур.: +3d6 · На 7 ур.: +4d6<br><span class="tip-good">При крите все кубики удваиваются!</span></div>
 </div>
     </div>
     <div class="mt-1.5">
@@ -2590,7 +2704,7 @@ b,
 
   <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
     <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div class="font-meta text-[13px] text-drow-silver">🗡 Скрытная атака</div>
+      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-dagger"></use></svg>Скрытная атака</div>
       <span class="text-[8px] px-2 py-0.5 rounded border sbadge-ability shrink-0">1× за ход</span>
     </div>
     <div class="flex flex-wrap gap-1 mb-1.5">
@@ -2603,7 +2717,7 @@ b,
 
   <div class="scard-new border rounded-md p-2 scard-anim">
     <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div class="font-meta text-[13px] text-drow-silver">🏃 Хитрое действие</div>
+      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-run"></use></svg>Хитрое действие</div>
       <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">Бонусное действие</span>
     </div>
     <div class="text-[9.5px] text-drow-muted leading-relaxed italic">Каждый ход бонусным действием:<br>— <strong class="not-italic text-drow-text">Рывок</strong> — удвоить скорость (60 фт)<br>— <strong class="not-italic text-drow-text">Отход</strong> — без провоцированных атак<br>— <strong class="not-italic text-drow-text">Затаивание</strong> — попытка спрятаться</div>
@@ -2618,7 +2732,7 @@ b,
 
   <div class="scard-new border rounded-md p-2 scard-anim">
     <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div class="font-meta text-[13px] text-drow-silver">🎯 Ликвидация</div>
+      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-target"></use></svg>Ликвидация</div>
       <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">НОВОЕ · 3 ур.</span>
     </div>
     <div class="flex flex-wrap gap-1 mb-1.5">
@@ -2626,12 +2740,12 @@ b,
     </div>
     <div class="text-[9.5px] text-drow-muted leading-relaxed italic">— <strong class="not-italic">Преимущество</strong> на атаки по существам, что ещё <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">не совершали ход</span><br>— Попадание по <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">захваченному врасплох</span> = <strong class="not-italic">АВТОКРИТ</strong></div>
     <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Спрятался → враг удивлён → АВТОКРИТ + 2d6 удваиваются при крите!</div></div>
-    <div class="swarn rounded-r p-1.5 mt-1"><div class="text-[9px] text-drow-warntext">⚠ Автокрит — только по захваченным врасплох (до начала боя).</div></div>
+    <div class="swarn rounded-r p-1.5 mt-1"><div class="text-[9px] text-drow-warntext">Важно: автокрит — только по захваченным врасплох (до начала боя).</div></div>
   </div>
 
   <div class="scard-new border rounded-md p-2 scard-anim">
     <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div class="font-meta text-[13px] text-drow-silver">🎭 Владения убийцы</div>
+      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-mask"></use></svg>Владения убийцы</div>
       <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">НОВОЕ · 3 ур.</span>
     </div>
     <div class="flex flex-wrap gap-1 mb-1.5">
@@ -2650,7 +2764,7 @@ b,
 
   <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
     <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div><div class="font-meta text-[13px] text-drow-silver">💫 Пляшущие огоньки</div><div class="text-[9px] text-drow-muted italic">Dancing Lights</div></div>
+      <div><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-magic"></use></svg>Пляшущие огоньки</div><div class="text-[9px] text-drow-muted italic">Dancing Lights</div></div>
       <span class="text-[8px] px-2 py-0.5 rounded border sbadge-race shrink-0">Заговор · ∞</span>
     </div>
     <div class="flex flex-wrap gap-1 mb-1.5">
@@ -2659,12 +2773,12 @@ b,
     </div>
     <div class="text-[9.5px] text-drow-muted italic leading-relaxed">До <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">4 огоньков</span> в 120 фт. Тусклый свет 10 фт. Бонусным — перемещай на 60 фт.</div>
     <div class="seffect rounded-r p-1.5 mt-1.5"><div class="font-meta text-[8px] text-drow-bright uppercase mb-0.5">Тактика</div><div class="text-[9px] text-drow-muted">Приманка из фигуры. Отвлекай стражников. Освещай без раскрытия.</div></div>
-    <div class="swarn rounded-r p-1.5 mt-1"><div class="text-[9px] text-drow-warntext">⚠ Концентрация — нельзя совмещать с Огнём фей!</div></div>
+    <div class="swarn rounded-r p-1.5 mt-1"><div class="text-[9px] text-drow-warntext">Важно: концентрацию нельзя совмещать с Огнём фей.</div></div>
   </div>
 
   <div class="scard-new border rounded-md p-2 scard-anim">
     <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div><div class="font-meta text-[13px] text-drow-silver">✨ Огонь фей</div><div class="text-[9px] text-drow-muted italic">Faerie Fire</div></div>
+      <div><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-rune"></use></svg>Огонь фей</div><div class="text-[9px] text-drow-muted italic">Faerie Fire</div></div>
       <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">3 ур. · 1/день · СЕЙЧАС</span>
     </div>
     <div class="flex flex-wrap gap-1 mb-1.5">
@@ -2673,7 +2787,7 @@ b,
     </div>
     <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Существа в кубе 20 фт — спасбросок Лов СС 12. При провале — подсвечены. Все атаки по ним <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">с преимуществом</span>.</div>
     <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Преимущество для всей пати → Скрытная атака каждый ход!</div></div>
-    <div class="swarn rounded-r p-1.5 mt-1"><div class="text-[9px] text-drow-warntext">⚠ Бьёт ВСЕХ в области включая союзников!</div></div>
+    <div class="swarn rounded-r p-1.5 mt-1"><div class="text-[9px] text-drow-warntext">Важно: действует на всех в области, включая союзников.</div></div>
   </div>
 
 </div></div>
@@ -2682,12 +2796,12 @@ b,
 <div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mb-1.5">Расовые особенности · Тьма (с 5 уровня)</div>
 <div class="mob-spell-grid"><div class="grid grid-cols-2 gap-2 px-2.5 mb-2 spell-grid-inner">
   <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
-    <div class="flex items-start justify-between mb-1.5"><div class="font-meta text-[13px] text-drow-silver">👁 Тёмное зрение 120 фт</div><span class="text-[8px] px-2 py-0.5 rounded border sbadge-race shrink-0">Пассивно</span></div>
+    <div class="flex items-start justify-between mb-1.5"><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-eye"></use></svg>Тёмное зрение 120 фт</div><span class="text-[8px] px-2 py-0.5 rounded border sbadge-race shrink-0">Пассивно</span></div>
     <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Тусклый → яркий. Темнота → тусклый (серый). <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">120 фт</span> — лучшее среди рас.</div>
-    <div class="swarn rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-warntext">⚠ Помеха атакам и Внимательности при солнечном свете!</div></div>
+    <div class="swarn rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-warntext">Важно: помеха атакам и Внимательности при солнечном свете.</div></div>
   </div>
   <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
-    <div class="flex items-start justify-between mb-1.5"><div class="font-meta text-[13px] text-drow-silver">🌑 Тьма — с 5 уровня</div><span class="text-[8px] px-2 py-0.5 rounded border sbadge-later shrink-0">1/день</span></div>
+    <div class="flex items-start justify-between mb-1.5"><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-moon"></use></svg>Тьма — с 5 уровня</div><span class="text-[8px] px-2 py-0.5 rounded border sbadge-later shrink-0">1/день</span></div>
     <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Сфера 15 фт. Ничто не рассеивает. Дроу видит свою тьму нормально.</div>
     <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ КОМБО: Тьма → враги слепы → атаки с преимуществом → Скрытная атака каждый ход!</div></div>
   </div>
@@ -2954,7 +3068,7 @@ document.querySelectorAll('.scard-anim').forEach(card => {
 <div class="tab-panel" id="panel-inventory">
   <div class="inventory-panel">
     <div class="inventory-toolbar">
-      <div class="inv-title">🎒 Инвентарь — Съебастьян Сквозняк</div>
+      <div class="inv-title"><svg class="ui-icon title-icon"><use href="#icon-bag"></use></svg>Инвентарь — Съебастьян Сквозняк</div>
       <div class="inventory-sync">
         <input class="inv-add-input inventory-password" type="password" autocomplete="current-password"
           placeholder="Пароль синхронизации" oninput="setInventoryPassword(this.value)">
@@ -2964,11 +3078,11 @@ document.querySelectorAll('.scard-anim').forEach(card => {
     </div>
     <div class="inv-grid" id="inventory-grid"></div>
     <div class="inv-currency">
-      <div class="inv-money">💰 Золото
+      <div class="inv-money icon-label"><svg class="ui-icon"><use href="#icon-coin"></use></svg>Золото
         <input class="inv-money-input" id="inventory-gold" type="number" inputmode="numeric" min="0"
           oninput="setInventoryMoney('gold', this.value)">
       </div>
-      <div class="inv-money">Серебро
+      <div class="inv-money icon-label"><svg class="ui-icon"><use href="#icon-coin"></use></svg>Серебро
         <input class="inv-money-input" id="inventory-silver" type="number" inputmode="numeric" min="0"
           oninput="setInventoryMoney('silver', this.value)">
       </div>
@@ -3050,22 +3164,22 @@ function defaultInventory() {
     categories: [
       {
         id: 'weapons',
-        title: '⚔ Оружие',
+        title: 'Оружие',
         items: [item('Рапира'), item('Ручной арбалет'), item('Болты', 20), item('Кинжал', 2)]
       },
       {
         id: 'armor',
-        title: '🛡 Доспехи и защита',
+        title: 'Доспехи и защита',
         items: [item('Кожаный доспех (КД 11 + Лов)'), item('Наручи меткости (+2 к урону дальн.)')]
       },
       {
         id: 'tools',
-        title: '🔧 Инструменты',
+        title: 'Инструменты',
         items: [item('Набор взломщика'), item('Инструменты вора'), item('Набор для грима'), item('Инструменты отравителя')]
       },
       {
         id: 'gear',
-        title: '🎒 Прочее снаряжение',
+        title: 'Прочее снаряжение',
         items: [
           item('Верёвка шёлковая 50 фт'),
           item('Факел', 5),
@@ -3112,6 +3226,22 @@ function escapeInventoryHtml(value) {
     .replaceAll("'", '&#039;');
 }
 
+function inventoryIconMarkup(categoryId, extraClass = '') {
+  const icons = {
+    weapons: 'dagger',
+    armor: 'shield',
+    tools: 'tools',
+    gear: 'bag',
+    currency: 'coin'
+  };
+  const icon = icons[categoryId] || 'bag';
+  return '<svg class="ui-icon ' + extraClass + '" aria-hidden="true"><use href="#icon-' + icon + '"></use></svg>';
+}
+
+function cleanInventoryTitle(value) {
+  return String(value).replace(/^[\p{Extended_Pictographic}\uFE0F\u200D\s]+/u, '').trim();
+}
+
 function renderSheetInventory() {
   if (!inventoryState) return;
   const list = document.getElementById('sheet-inventory-list');
@@ -3133,9 +3263,11 @@ function renderSheetInventory() {
   }
 
   if (currency) {
-    currency.textContent =
-      '💰 ' + inventoryState.currency.gold + ' зм · ' +
-      inventoryState.currency.silver + ' см';
+    currency.innerHTML =
+      inventoryIconMarkup('currency') +
+      '<span>' + inventoryState.currency.gold + ' зм · ' +
+      inventoryState.currency.silver + ' см</span>';
+    currency.classList.add('icon-label');
   }
 }
 
@@ -3160,7 +3292,8 @@ function renderInventory() {
       : '<div class="inv-empty">В этой категории пока нет предметов.</div>';
 
     return '<section class="inv-section">' +
-      '<div class="inv-section-title">' + escapeInventoryHtml(category.title) + '</div>' +
+      '<div class="inv-section-title">' + inventoryIconMarkup(category.id) +
+        escapeInventoryHtml(cleanInventoryTitle(category.title)) + '</div>' +
       '<div>' + items + '</div>' +
       '<div class="inv-add-row">' +
         '<input class="inv-add-input" id="inv-add-' + category.id + '" maxlength="120" placeholder="Новый предмет" ' +
@@ -4281,7 +4414,7 @@ window.addEventListener('DOMContentLoaded', function() {
 <!-- ══ МОДАЛКА ЗАГРУЗКИ ПОРТРЕТА ══ -->
 <div class="netlify-modal" id="portraitModal">
   <div class="netlify-modal-box">
-    <div class="modal-title">🗡️ Портрет персонажа</div>
+    <div class="modal-title feature-title"><svg class="ui-icon title-icon"><use href="#icon-dagger"></use></svg>Портрет персонажа</div>
     <div class="modal-sub">
       Загрузи изображение — оно применится к листу.<br>
       <span>На Netlify портрет сохранится в постоянном хранилище Blobs.</span>
@@ -4293,7 +4426,7 @@ window.addEventListener('DOMContentLoaded', function() {
     <!-- Дропзона -->
     <div class="dropzone" id="dropzone" onclick="document.getElementById('fi-modal').click()"
          ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
-      <div class="dropzone-icon">🖼️</div>
+      <div class="dropzone-icon"><svg class="ui-icon" style="width:34px;height:34px"><use href="#icon-image"></use></svg></div>
       <div class="dropzone-text">Нажми или перетащи файл сюда</div>
       <div class="dropzone-hint">PNG, JPG, WEBP · до 4 MB</div>
     </div>
