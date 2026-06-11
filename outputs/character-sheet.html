@@ -333,7 +333,7 @@ tailwind.config = {
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-<script src="vendor/tsparticles.bundle.min.js"></script>
+<script src="vendor/three.r134.min.js"></script>
 <style>
 /* ── КАРТОЧКИ ШПАРГАЛКИ ── */
 .scard-anim {
@@ -613,7 +613,7 @@ body {
 
 .ambient-smoke {
   position: fixed;
-  inset: -18vh -16vw;
+  inset: 0;
   z-index: 3;
   overflow: hidden;
   pointer-events: none;
@@ -626,12 +626,12 @@ body {
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  opacity: 0.68;
-  filter: blur(26px) saturate(1.2) contrast(1.12) brightness(1.35);
+  opacity: 0.92;
+  filter: saturate(1.14) contrast(1.08);
   mix-blend-mode: screen;
 }
-.ambient-smoke.particles-active .smoke-wisp {
-  opacity: 0.66;
+.ambient-smoke.webgl-active .smoke-wisp {
+  opacity: 0.08;
 }
 .ambient-smoke::after {
   content: '';
@@ -706,7 +706,9 @@ body {
 }
 @media (max-width: 768px) {
   .ambient-smoke {
-    inset: -12vh -44vw;
+    inset: 0;
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.48) 12%, rgba(0,0,0,0.72) 58%, #000 92%);
+    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.48) 12%, rgba(0,0,0,0.72) 58%, #000 92%);
   }
   .smoke-wisp {
     width: 125vw;
@@ -722,7 +724,7 @@ body {
     display: none;
   }
   .ambient-smoke canvas {
-    opacity: 0.48;
+    opacity: 0.82;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -4782,92 +4784,141 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
-let ambientSmokeParticles = null;
+let ambientSmokeRenderer = null;
+let ambientSmokeFrame = null;
+let ambientSmokeResize = null;
 
-async function initAmbientSmokeParticles() {
+function initAmbientWebGLSmoke() {
   const smoke = document.querySelector('.ambient-smoke');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!smoke || reduceMotion || !window.tsParticles) return;
+  if (!smoke || reduceMotion || !window.THREE) return;
 
   try {
     const mobile = window.innerWidth <= 768;
-    ambientSmokeParticles = await window.tsParticles.load({
-      id: 'ambient-smoke',
-      options: {
-        fullScreen: { enable: false },
-        fpsLimit: mobile ? 24 : 30,
-        detectRetina: true,
-        background: { color: 'transparent' },
-        interactivity: {
-          detectsOn: 'window',
-          events: {
-            onClick: { enable: false },
-            onHover: { enable: false },
-            resize: { enable: true }
-          }
-        },
-        particles: {
-          number: {
-            value: mobile ? 9 : 18,
-            density: { enable: true, width: 1200, height: 800 }
-          },
-          color: {
-            value: ['#d4e1f2', '#9bb4d2', '#aa8dca', '#829fc2']
-          },
-          shape: {
-            type: 'image',
-            options: {
-              image: {
-                src: 'assets/smoke-puff.svg',
-                width: 256,
-                height: 256
-              }
-            }
-          },
-          opacity: {
-            value: { min: mobile ? 0.2 : 0.24, max: mobile ? 0.38 : 0.52 },
-            animation: {
-              enable: true,
-              speed: 0.16,
-              sync: false,
-              startValue: 'random',
-              destroy: 'none'
-            }
-          },
-          size: {
-            value: { min: mobile ? 95 : 135, max: mobile ? 250 : 390 },
-            animation: {
-              enable: true,
-              speed: 5,
-              sync: false,
-              startValue: 'random',
-              destroy: 'none'
-            }
-          },
-          move: {
-            enable: true,
-            speed: { min: 0.18, max: 0.55 },
-            direction: 'none',
-            random: true,
-            straight: false,
-            outModes: { default: 'out' }
-          },
-          links: { enable: false }
-        },
-        pauseOnBlur: false,
-        pauseOnOutsideViewport: false
-      }
+    const renderer = new window.THREE.WebGLRenderer({
+      alpha: true,
+      antialias: false,
+      powerPreference: 'low-power',
+      precision: 'mediump'
     });
-    smoke.classList.add('particles-active');
+    renderer.setClearColor(0x000000, 0);
+    renderer.setPixelRatio(mobile ? 0.5 : 0.65);
+    smoke.insertBefore(renderer.domElement, smoke.firstChild);
+
+    const scene = new window.THREE.Scene();
+    const camera = new window.THREE.Camera();
+    camera.position.z = 1;
+    const geometry = new window.THREE.PlaneGeometry(2, 2);
+    const uniforms = {
+      uTime: { value: 0 },
+      uResolution: { value: new window.THREE.Vector2(1, 1) },
+      uIntensity: { value: mobile ? 0.92 : 0.95 }
+    };
+    const material = new window.THREE.ShaderMaterial({
+      uniforms,
+      transparent: true,
+      depthWrite: false,
+      depthTest: false,
+      blending: window.THREE.AdditiveBlending,
+      vertexShader: `
+        void main() {
+          gl_Position = vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        precision mediump float;
+        uniform float uTime;
+        uniform float uIntensity;
+        uniform vec2 uResolution;
+
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          f = f * f * (3.0 - 2.0 * f);
+          return mix(
+            mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+            mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x),
+            f.y
+          );
+        }
+
+        float fbm(vec2 p) {
+          float value = 0.0;
+          float amplitude = 0.55;
+          mat2 rotation = mat2(0.82, -0.57, 0.57, 0.82);
+          for (int i = 0; i < 5; i++) {
+            value += amplitude * noise(p);
+            p = rotation * p * 2.03 + 8.17;
+            amplitude *= 0.5;
+          }
+          return value;
+        }
+
+        void main() {
+          vec2 uv = gl_FragCoord.xy / uResolution.xy;
+          float aspect = uResolution.x / max(uResolution.y, 1.0);
+          vec2 p = (uv - 0.5) * vec2(aspect, 1.0);
+          float time = uTime * 0.055;
+
+          float broad = fbm(p * 1.55 + vec2(time * 0.45, -time * 0.22));
+          float curls = fbm(p * 3.0 + vec2(-time * 0.28, time * 0.34) + broad);
+          float detail = fbm(p * 5.2 - vec2(time * 0.16, time * 0.2));
+          float density = smoothstep(0.36, 0.78, broad * 0.58 + curls * 0.34 + detail * 0.16);
+
+          float edge = smoothstep(0.08, 0.74, length(p * vec2(0.72, 1.0)));
+          float veil = mix(0.38, 1.0, edge);
+          vec3 blue = vec3(0.30, 0.46, 0.70);
+          vec3 violet = vec3(0.48, 0.29, 0.68);
+          vec3 color = mix(blue, violet, smoothstep(0.34, 0.78, curls));
+          float alpha = density * veil * uIntensity * 0.72;
+
+          gl_FragColor = vec4(color * alpha, alpha);
+        }
+      `
+    });
+    const mesh = new window.THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    ambientSmokeResize = () => {
+      renderer.setSize(window.innerWidth, window.innerHeight, false);
+      uniforms.uResolution.value.set(renderer.domElement.width, renderer.domElement.height);
+    };
+    ambientSmokeResize();
+    window.addEventListener('resize', ambientSmokeResize, { passive: true });
+
+    const startedAt = performance.now();
+    let lastRender = 0;
+    const frameInterval = 1000 / (mobile ? 24 : 30);
+    const renderSmoke = now => {
+      ambientSmokeFrame = requestAnimationFrame(renderSmoke);
+      if (document.hidden || now - lastRender < frameInterval) return;
+      lastRender = now;
+      uniforms.uTime.value = (now - startedAt) / 1000;
+      renderer.render(scene, camera);
+    };
+    ambientSmokeFrame = requestAnimationFrame(renderSmoke);
+    ambientSmokeRenderer = { renderer, geometry, material };
+    smoke.classList.add('webgl-active');
   } catch(error) {
-    smoke.classList.remove('particles-active');
+    smoke.classList.remove('webgl-active');
   }
 }
 
-window.addEventListener('DOMContentLoaded', initAmbientSmokeParticles);
+window.addEventListener('DOMContentLoaded', initAmbientWebGLSmoke);
 window.addEventListener('pagehide', () => {
-  ambientSmokeParticles?.destroy();
-  ambientSmokeParticles = null;
+  if (ambientSmokeFrame) cancelAnimationFrame(ambientSmokeFrame);
+  if (ambientSmokeResize) window.removeEventListener('resize', ambientSmokeResize);
+  ambientSmokeRenderer?.geometry.dispose();
+  ambientSmokeRenderer?.material.dispose();
+  ambientSmokeRenderer?.renderer.dispose();
+  ambientSmokeRenderer?.renderer.domElement.remove();
+  ambientSmokeFrame = null;
+  ambientSmokeResize = null;
+  ambientSmokeRenderer = null;
 });
 </script>
 
