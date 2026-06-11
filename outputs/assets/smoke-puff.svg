@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <filter id="soft" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="11"/>
+    </filter>
+    <radialGradient id="blue" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#d5e4f5" stop-opacity=".78"/>
+      <stop offset=".42" stop-color="#8ea8c8" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#526b8c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="violet" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#d2bee9" stop-opacity=".58"/>
+      <stop offset=".48" stop-color="#80669f" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#4a3b63" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g filter="url(#soft)">
+    <ellipse cx="82" cy="133" rx="68" ry="48" fill="url(#blue)"/>
+    <ellipse cx="145" cy="102" rx="76" ry="55" fill="url(#violet)"/>
+    <ellipse cx="174" cy="157" rx="66" ry="45" fill="url(#blue)"/>
+    <ellipse cx="119" cy="173" rx="82" ry="38" fill="url(#violet)" opacity=".72"/>
+    <ellipse cx="119" cy="82" rx="48" ry="34" fill="url(#blue)" opacity=".62"/>
+  </g>
+</svg>
