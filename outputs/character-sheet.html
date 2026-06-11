@@ -601,10 +601,119 @@ tailwind.config = {
 /* Общий фон и центрирование */
 body {
   min-height: 100vh;
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
   background:
     radial-gradient(ellipse at 15% 30%, rgba(74,111,168,0.08) 0%, transparent 50%),
     radial-gradient(ellipse at 85% 70%, rgba(138,43,226,0.06) 0%, transparent 50%),
     #0d0e14 !important;
+}
+
+.ambient-smoke {
+  position: fixed;
+  inset: -18vh -16vw;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+.ambient-smoke::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 22%, rgba(5,7,12,0.1) 64%, rgba(5,7,12,0.46) 100%),
+    linear-gradient(180deg, rgba(7,9,15,0.14), transparent 28%, transparent 72%, rgba(7,9,15,0.28));
+}
+.smoke-wisp {
+  position: absolute;
+  width: 72vw;
+  height: 58vh;
+  border-radius: 50%;
+  opacity: 0.68;
+  filter: blur(46px);
+  mix-blend-mode: screen;
+  will-change: transform;
+  transform-origin: center;
+}
+.smoke-wisp-one {
+  top: 2%;
+  left: -24%;
+  background:
+    radial-gradient(ellipse at 30% 55%, rgba(117,151,194,0.29) 0%, rgba(63,87,124,0.16) 35%, transparent 70%),
+    radial-gradient(ellipse at 70% 35%, rgba(78,119,177,0.2) 0%, transparent 64%);
+  animation: smoke-drift-one 28s ease-in-out infinite alternate;
+}
+.smoke-wisp-two {
+  top: 34%;
+  right: -28%;
+  width: 82vw;
+  height: 66vh;
+  opacity: 0.57;
+  background:
+    radial-gradient(ellipse at 56% 45%, rgba(125,84,174,0.24) 0%, rgba(69,48,105,0.14) 38%, transparent 72%),
+    radial-gradient(ellipse at 24% 62%, rgba(73,103,149,0.19) 0%, transparent 62%);
+  animation: smoke-drift-two 34s ease-in-out infinite alternate;
+}
+.smoke-wisp-three {
+  bottom: -24%;
+  left: 8%;
+  width: 94vw;
+  height: 54vh;
+  opacity: 0.45;
+  background:
+    radial-gradient(ellipse at 48% 45%, rgba(98,126,163,0.22) 0%, rgba(58,78,111,0.12) 42%, transparent 74%),
+    radial-gradient(ellipse at 75% 66%, rgba(111,70,157,0.17) 0%, transparent 58%);
+  animation: smoke-drift-three 38s ease-in-out infinite alternate;
+}
+@keyframes smoke-drift-one {
+  0% { transform: translate3d(-3%, -3%, 0) scale(0.94) rotate(-5deg); }
+  50% { transform: translate3d(17%, 8%, 0) scale(1.08) rotate(3deg); }
+  100% { transform: translate3d(31%, -1%, 0) scale(1) rotate(8deg); }
+}
+@keyframes smoke-drift-two {
+  0% { transform: translate3d(8%, -4%, 0) scale(1.04) rotate(6deg); }
+  50% { transform: translate3d(-15%, 5%, 0) scale(0.93) rotate(-2deg); }
+  100% { transform: translate3d(-28%, 11%, 0) scale(1.1) rotate(-8deg); }
+}
+@keyframes smoke-drift-three {
+  0% { transform: translate3d(-9%, 8%, 0) scale(1.06) rotate(-3deg); }
+  50% { transform: translate3d(6%, -8%, 0) scale(0.95) rotate(2deg); }
+  100% { transform: translate3d(17%, -2%, 0) scale(1.08) rotate(5deg); }
+}
+.site-header,
+.tabs-wrap,
+.site-wrap {
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 768px) {
+  .ambient-smoke {
+    inset: -12vh -44vw;
+  }
+  .smoke-wisp {
+    width: 125vw;
+    height: 48vh;
+    filter: blur(44px);
+    opacity: 0.34;
+  }
+  .smoke-wisp-two {
+    width: 138vw;
+    opacity: 0.3;
+  }
+  .smoke-wisp-three {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .smoke-wisp {
+    animation: none !important;
+    will-change: auto;
+  }
+}
+@media print {
+  .ambient-smoke { display: none; }
 }
 
 /* Контейнер */
@@ -2368,6 +2477,12 @@ b,
 
 </head>
 <body>
+
+<div class="ambient-smoke" aria-hidden="true">
+  <span class="smoke-wisp smoke-wisp-one"></span>
+  <span class="smoke-wisp smoke-wisp-two"></span>
+  <span class="smoke-wisp smoke-wisp-three"></span>
+</div>
 
 <svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden">
   <defs>
