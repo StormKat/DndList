@@ -2534,23 +2534,11 @@ b,
 <div class="grid grid-cols-2 gap-1.5 px-2 py-1.5 border-t border-drow-border relative z-10 mob-equip">
   <div>
     <div class="font-meta text-[8px] text-drow-bright uppercase tracking-wide border-b border-drow-border pb-0.5 mb-1">Снаряжение</div>
-    <ul class="text-[9px] text-drow-text leading-relaxed">
-      <li class="eqli relative pl-3">Рапира</li>
-      <li class="eqli relative pl-3">Ручной арбалет + 20 болтов</li>
-      <li class="eqli relative pl-3">Кинжал × 2</li>
-      <li class="eqli relative pl-3">Кожаный доспех (КД 11 + Лов)</li>
-      <li class="eqli relative pl-3">Набор взломщика · Инструменты вора</li>
-      <li class="eqli relative pl-3">Набор для грима · Инструменты отравителя</li>
-      <li class="eqli relative pl-3">Наручи меткости (+2 к урону дальн.)</li>
-      <li class="eqli relative pl-3">Верёвка шёлковая 50 фт</li>
-      <li class="eqli relative pl-3">Факел × 5 · Фляга · Пайки × 3</li>
-      <li class="eqli relative pl-3">Дымовые шашки × 3 (радиус 20 фт)</li>
-      <li class="eqli relative pl-3">Лопата</li>
-    </ul>
+    <ul class="text-[9px] text-drow-text leading-relaxed" id="sheet-inventory-list"></ul>
   </div>
   <div>
     <div class="font-meta text-[8px] text-drow-bright uppercase tracking-wide border-b border-drow-border pb-0.5 mb-1">Владения и валюта</div>
-    <div class="text-[9px] text-drow-text leading-relaxed">Лёгкие доспехи · Простое оружие<br>Рапиры · Длинные и короткие мечи<br>Ручные арбалеты<br>Инструменты вора · Набор взломщика<br>Языки: Общий, Эльфийский, Подземный<br><strong style="background:linear-gradient(90deg,#b8860b,#ffd700,#ffec6e,#ffd700,#b8860b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:11px;animation:goldshine 2s linear infinite;background-size:200% auto;">💰 68 зм · 23 см</strong></div>
+    <div class="text-[9px] text-drow-text leading-relaxed">Лёгкие доспехи · Простое оружие<br>Рапиры · Длинные и короткие мечи<br>Ручные арбалеты<br>Инструменты вора · Набор взломщика<br>Языки: Общий, Эльфийский, Подземный<br><strong id="sheet-inventory-currency" style="background:linear-gradient(90deg,#b8860b,#ffd700,#ffec6e,#ffd700,#b8860b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:11px;animation:goldshine 2s linear infinite;background-size:200% auto;"></strong></div>
   </div>
 </div>
 
@@ -3103,6 +3091,7 @@ function saveInventoryLocal() {
   const updatedAt = new Date().toISOString();
   localStorage.setItem(INVENTORY_STORAGE_KEY, JSON.stringify(inventoryState));
   localStorage.setItem(INVENTORY_UPDATED_KEY, updatedAt);
+  renderSheetInventory();
   scheduleInventoryCloudSave();
 }
 
@@ -3121,6 +3110,33 @@ function escapeInventoryHtml(value) {
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#039;');
+}
+
+function renderSheetInventory() {
+  if (!inventoryState) return;
+  const list = document.getElementById('sheet-inventory-list');
+  const currency = document.getElementById('sheet-inventory-currency');
+
+  if (list) {
+    const items = inventoryState.categories
+      .flatMap(category => category.items)
+      .filter(item => item.quantity > 0);
+
+    list.innerHTML = items.length
+      ? items.map(item =>
+        '<li class="eqli relative pl-3">' +
+          escapeInventoryHtml(item.name) +
+          (item.quantity !== 1 ? ' × ' + item.quantity : '') +
+        '</li>'
+      ).join('')
+      : '<li class="text-drow-faint">Снаряжение не добавлено</li>';
+  }
+
+  if (currency) {
+    currency.textContent =
+      '💰 ' + inventoryState.currency.gold + ' зм · ' +
+      inventoryState.currency.silver + ' см';
+  }
 }
 
 function renderInventory() {
@@ -3156,6 +3172,7 @@ function renderInventory() {
 
   document.getElementById('inventory-gold').value = inventoryState.currency.gold;
   document.getElementById('inventory-silver').value = inventoryState.currency.silver;
+  renderSheetInventory();
 }
 
 function findInventoryCategory(categoryId) {
@@ -3244,6 +3261,7 @@ async function loadInventoryCloud() {
       localStorage.setItem(INVENTORY_STORAGE_KEY, JSON.stringify(inventoryState));
       localStorage.setItem(INVENTORY_UPDATED_KEY, result.updatedAt);
       if (inventoryLoaded) renderInventory();
+      else renderSheetInventory();
       setInventoryStatus('Загружено из облака', 'saved');
     } else if (result.data && localTime > cloudTime) {
       setInventoryStatus('На этом устройстве более свежая версия', 'saving');
@@ -3298,6 +3316,7 @@ async function saveInventoryCloud(manual = false) {
 
 window.addEventListener('DOMContentLoaded', function() {
   inventoryState = loadInventoryLocal();
+  renderSheetInventory();
   const savedToken = sessionStorage.getItem('sye_edit_token') || '';
   const password = document.querySelector('.inventory-password');
   if (password) password.value = savedToken;
