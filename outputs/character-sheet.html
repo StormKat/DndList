@@ -77,7 +77,7 @@ tailwind.config = {
   textarea::placeholder { color:#506070; }
 
   /* ── ТУЛТИПЫ ── */
-  .tip { position: relative; cursor: help; }
+  .tip { position: relative; cursor: inherit; }
   .tip-box {
     display: none; position: absolute; z-index: 9999;
     bottom: calc(100% + 8px); left: 50%;
@@ -98,10 +98,10 @@ tailwind.config = {
   .tip-title { font-size: 10px; color: #6a9fd8; border-bottom: 1px solid #2e3d5a; padding-bottom: 4px; margin-bottom: 5px; display: block; }
   .tip-good { color: #70c090; }
   .tip-warn { color: #e09080; }
-  .tip:hover .tip-box { display: block; opacity: 1; transform: translateX(-50%) translateY(0); }
+  .tip:hover .tip-box { display: none; }
   .tip-left .tip-box { left: 0; transform: translateX(0) translateY(4px); }
   .tip-left .tip-box::after { left: 20px; }
-  .tip-left:hover .tip-box { transform: translateX(0) translateY(0); }
+  .tip-left:hover .tip-box { display: none; }
   @keyframes rainbow {
     0%   { background-position: 0% center; }
     100% { background-position: 200% center; }
@@ -2645,25 +2645,6 @@ function toggleAcc(id) {
   header.classList.toggle('open');
 }
 
-// На мобиле — тултипы по клику
-if (window.innerWidth <= 768) {
-  document.querySelectorAll('.tip').forEach(el => {
-    el.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const box = this.querySelector('.tip-box');
-      if (!box) return;
-      document.querySelectorAll('.tip-box').forEach(b => {
-        if (b !== box) b.style.display = 'none';
-      });
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
-      box.style.opacity = '1';
-      box.style.transform = 'translateX(-50%) translateY(0)';
-    });
-  });
-  document.addEventListener('click', () => {
-    document.querySelectorAll('.tip-box').forEach(b => b.style.display = 'none');
-  });
-}
 </script>
 
 
@@ -3653,7 +3634,7 @@ function renderCombatArchive() {
 function combatTagsHtml(target, conditions) {
   if (!conditions.length) return '';
   return conditions.map(condition =>
-    '<button class="combat-tag" title="Нажми, чтобы снять" onclick="removeCondition(\'' +
+    '<button class="combat-tag" onclick="removeCondition(\'' +
     escapeCombatHtml(target) + '\', \'' + escapeCombatHtml(condition) + '\')">' +
     escapeCombatHtml(condition) + ' ×</button>'
   ).join('');
