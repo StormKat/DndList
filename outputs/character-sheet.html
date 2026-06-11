@@ -653,17 +653,97 @@ body {
   margin-bottom: 10px;
 }
 .inv-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 8px;
-  padding: 5px 0;
+  padding: 7px 0;
   border-bottom: 1px solid rgba(74,111,168,0.1);
   font-size: 13px;
   color: #dce8f0;
 }
 .inv-item:last-child { border-bottom: none; }
-.inv-item::before { content: '◆'; color: #4a6fa8; font-size: 7px; flex-shrink: 0; }
+.inv-item-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.inv-item-name::before {
+  content: '◆';
+  margin-right: 8px;
+  color: #4a6fa8;
+  font-size: 7px;
+}
+.inv-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.inv-qty-btn,
+.inv-remove-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #3a4c68;
+  border-radius: 5px;
+  color: #aebdca;
+  background: rgba(74,111,168,0.08);
+  cursor: pointer;
+}
+.inv-remove-btn {
+  color: #d58b95;
+  border-color: #673c47;
+  background: rgba(120,49,62,0.11);
+}
+.inv-qty-input,
+.inv-money-input {
+  width: 54px;
+  min-height: 30px;
+  padding: 5px;
+  border: 1px solid #344663;
+  border-radius: 5px;
+  outline: none;
+  color: #dce8f0;
+  background: #10131c;
+  text-align: center;
+}
+.inv-add-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+.inv-add-input {
+  min-width: 0;
+  flex: 1;
+  min-height: 36px;
+  padding: 7px 9px;
+  border: 1px solid #344663;
+  border-radius: 5px;
+  outline: none;
+  color: #dce8f0;
+  background: #10131c;
+  font-size: 11px;
+}
+.inv-add-btn {
+  min-height: 36px;
+  padding: 7px 11px;
+  border: 1px solid #3a8060;
+  border-radius: 5px;
+  color: #8ed2ad;
+  background: rgba(42,112,64,0.13);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+}
+.inv-empty {
+  padding: 8px 0;
+  color: #607386;
+  font-size: 10px;
+}
 .inv-currency {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
   margin-top: 16px;
   padding: 12px 16px;
   background: rgba(74,111,168,0.08);
@@ -672,6 +752,41 @@ body {
   font-size: 15px;
   text-align: center;
 }
+.inv-money {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #cbbd91;
+  font-size: 12px;
+  font-weight: 700;
+}
+.inventory-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+  margin-bottom: 16px;
+}
+.inventory-toolbar .inv-title {
+  flex: 1;
+  margin-bottom: 0;
+}
+.inventory-sync {
+  min-width: 300px;
+  display: grid;
+  grid-template-columns: minmax(145px, 1fr) auto;
+  gap: 6px;
+}
+.inventory-sync-status {
+  grid-column: 1 / -1;
+  min-height: 13px;
+  color: #64798c;
+  font-size: 9px;
+  text-align: right;
+}
+.inventory-sync-status.saving { color: #b7a4ce; }
+.inventory-sync-status.saved { color: #70c090; }
+.inventory-sync-status.error { color: #e09080; }
 .inv-notes {
   margin-top: 16px;
 }
@@ -1997,6 +2112,17 @@ b,
   .inventory-panel {
     padding: 16px 14px;
   }
+  .inventory-toolbar {
+    display: block;
+  }
+  .inventory-sync {
+    min-width: 0;
+    margin-top: 12px;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .inventory-sync-status {
+    text-align: left;
+  }
   .inv-title {
     font-size: 15px;
     line-height: 1.4;
@@ -2007,6 +2133,20 @@ b,
   }
   .inv-section {
     padding: 13px 14px;
+  }
+  .inv-item {
+    grid-template-columns: 1fr;
+  }
+  .inv-item-controls {
+    justify-content: flex-end;
+  }
+  .inv-qty-btn,
+  .inv-remove-btn {
+    width: 38px;
+    height: 36px;
+  }
+  .inv-qty-input {
+    min-height: 36px;
   }
 
   .mob-spell-grid {
@@ -2825,38 +2965,25 @@ document.querySelectorAll('.scard-anim').forEach(card => {
 <!-- ── ВКЛАДКА: ИНВЕНТАРЬ ── -->
 <div class="tab-panel" id="panel-inventory">
   <div class="inventory-panel">
-    <div class="inv-title">🎒 Инвентарь — Съебастьян Сквозняк</div>
-    <div class="inv-grid">
-      <div class="inv-section">
-        <div class="inv-section-title">⚔ Оружие</div>
-        <div class="inv-item">Рапира</div>
-        <div class="inv-item">Ручной арбалет + 20 болтов</div>
-        <div class="inv-item">Кинжал × 2</div>
-      </div>
-      <div class="inv-section">
-        <div class="inv-section-title">🛡 Доспехи и защита</div>
-        <div class="inv-item">Кожаный доспех (КД 11 + Лов)</div>
-        <div class="inv-item">Наручи меткости (+2 к урону дальн.)</div>
-      </div>
-      <div class="inv-section">
-        <div class="inv-section-title">🔧 Инструменты</div>
-        <div class="inv-item">Набор взломщика</div>
-        <div class="inv-item">Инструменты вора</div>
-        <div class="inv-item">Набор для грима</div>
-        <div class="inv-item">Инструменты отравителя</div>
-      </div>
-      <div class="inv-section">
-        <div class="inv-section-title">🎒 Прочее снаряжение</div>
-        <div class="inv-item">Верёвка шёлковая 50 фт</div>
-        <div class="inv-item">Факел × 5</div>
-        <div class="inv-item">Фляга</div>
-        <div class="inv-item">Пайки × 3</div>
-        <div class="inv-item">Дымовые шашки × 3 (радиус 20 фт)</div>
-        <div class="inv-item">Лопата</div>
+    <div class="inventory-toolbar">
+      <div class="inv-title">🎒 Инвентарь — Съебастьян Сквозняк</div>
+      <div class="inventory-sync">
+        <input class="inv-add-input inventory-password" type="password" autocomplete="current-password"
+          placeholder="Пароль синхронизации" oninput="setInventoryPassword(this.value)">
+        <button class="inv-add-btn" onclick="saveInventoryCloud(true)">Синхронизировать</button>
+        <div class="inventory-sync-status">Загружаю инвентарь...</div>
       </div>
     </div>
+    <div class="inv-grid" id="inventory-grid"></div>
     <div class="inv-currency">
-      <strong style="background:linear-gradient(90deg,#b8860b,#ffd700,#ffec6e,#ffd700,#b8860b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:goldshine 2s linear infinite;background-size:200% auto;font-size:18px;">💰 68 зм · 23 см</strong>
+      <div class="inv-money">💰 Золото
+        <input class="inv-money-input" id="inventory-gold" type="number" inputmode="numeric" min="0"
+          oninput="setInventoryMoney('gold', this.value)">
+      </div>
+      <div class="inv-money">Серебро
+        <input class="inv-money-input" id="inventory-silver" type="number" inputmode="numeric" min="0"
+          oninput="setInventoryMoney('silver', this.value)">
+      </div>
     </div>
   </div>
 </div><!-- END panel-inventory -->
@@ -2904,6 +3031,7 @@ function switchTab(name, button) {
       button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     });
   }
+  if (name === 'inventory') initInventory();
   if (name === 'combat') initCombat();
   if (name === 'combat-archive') {
     if (!combatArchive.length) combatArchive = loadCombatArchive();
@@ -2911,6 +3039,270 @@ function switchTab(name, button) {
   }
   if (name === 'notes') loadNotes();
 }
+</script>
+
+<script>
+const INVENTORY_STORAGE_KEY = 'sye_inventory_v1';
+const INVENTORY_UPDATED_KEY = 'sye_inventory_updated_at_v1';
+let inventoryState = null;
+let inventoryLoaded = false;
+let inventoryCloudLoaded = false;
+let inventorySaveTimer = null;
+let inventorySaving = false;
+
+function defaultInventory() {
+  const item = (name, quantity = 1) => ({
+    id: 'item-' + Math.random().toString(36).slice(2) + Date.now(),
+    name,
+    quantity
+  });
+  return {
+    version: 1,
+    currency: { gold: 68, silver: 23 },
+    categories: [
+      {
+        id: 'weapons',
+        title: '⚔ Оружие',
+        items: [item('Рапира'), item('Ручной арбалет'), item('Болты', 20), item('Кинжал', 2)]
+      },
+      {
+        id: 'armor',
+        title: '🛡 Доспехи и защита',
+        items: [item('Кожаный доспех (КД 11 + Лов)'), item('Наручи меткости (+2 к урону дальн.)')]
+      },
+      {
+        id: 'tools',
+        title: '🔧 Инструменты',
+        items: [item('Набор взломщика'), item('Инструменты вора'), item('Набор для грима'), item('Инструменты отравителя')]
+      },
+      {
+        id: 'gear',
+        title: '🎒 Прочее снаряжение',
+        items: [
+          item('Верёвка шёлковая 50 фт'),
+          item('Факел', 5),
+          item('Фляга'),
+          item('Пайки', 3),
+          item('Дымовая шашка (радиус 20 фт)', 3),
+          item('Лопата')
+        ]
+      }
+    ]
+  };
+}
+
+function loadInventoryLocal() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(INVENTORY_STORAGE_KEY));
+    if (saved?.version === 1 && Array.isArray(saved.categories)) return saved;
+  } catch(e) {}
+  return defaultInventory();
+}
+
+function saveInventoryLocal() {
+  const updatedAt = new Date().toISOString();
+  localStorage.setItem(INVENTORY_STORAGE_KEY, JSON.stringify(inventoryState));
+  localStorage.setItem(INVENTORY_UPDATED_KEY, updatedAt);
+  scheduleInventoryCloudSave();
+}
+
+function initInventory() {
+  if (!inventoryState) inventoryState = loadInventoryLocal();
+  if (!inventoryLoaded) {
+    inventoryLoaded = true;
+    renderInventory();
+  }
+}
+
+function escapeInventoryHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
+
+function renderInventory() {
+  if (!inventoryState) return;
+  const grid = document.getElementById('inventory-grid');
+  grid.innerHTML = inventoryState.categories.map(category => {
+    const items = category.items.length
+      ? category.items.map(item =>
+        '<div class="inv-item">' +
+          '<div class="inv-item-name">' + escapeInventoryHtml(item.name) + '</div>' +
+          '<div class="inv-item-controls">' +
+            '<button class="inv-qty-btn" onclick="changeInventoryQuantity(\'' + category.id + '\', \'' + item.id + '\', -1)">−</button>' +
+            '<input class="inv-qty-input" type="number" inputmode="numeric" min="0" value="' + item.quantity +
+              '" onchange="setInventoryQuantity(\'' + category.id + '\', \'' + item.id + '\', this.value)" aria-label="Количество ' +
+              escapeInventoryHtml(item.name) + '">' +
+            '<button class="inv-qty-btn" onclick="changeInventoryQuantity(\'' + category.id + '\', \'' + item.id + '\', 1)">+</button>' +
+            '<button class="inv-remove-btn" onclick="removeInventoryItem(\'' + category.id + '\', \'' + item.id + '\')" aria-label="Удалить">×</button>' +
+          '</div>' +
+        '</div>'
+      ).join('')
+      : '<div class="inv-empty">В этой категории пока нет предметов.</div>';
+
+    return '<section class="inv-section">' +
+      '<div class="inv-section-title">' + escapeInventoryHtml(category.title) + '</div>' +
+      '<div>' + items + '</div>' +
+      '<div class="inv-add-row">' +
+        '<input class="inv-add-input" id="inv-add-' + category.id + '" maxlength="120" placeholder="Новый предмет" ' +
+          'onkeydown="if(event.key===\'Enter\') addInventoryItem(\'' + category.id + '\')">' +
+        '<button class="inv-add-btn" onclick="addInventoryItem(\'' + category.id + '\')">Добавить</button>' +
+      '</div>' +
+    '</section>';
+  }).join('');
+
+  document.getElementById('inventory-gold').value = inventoryState.currency.gold;
+  document.getElementById('inventory-silver').value = inventoryState.currency.silver;
+}
+
+function findInventoryCategory(categoryId) {
+  return inventoryState.categories.find(category => category.id === categoryId);
+}
+
+function addInventoryItem(categoryId) {
+  initInventory();
+  const category = findInventoryCategory(categoryId);
+  const input = document.getElementById('inv-add-' + categoryId);
+  const name = input.value.trim();
+  if (!category || !name) return;
+  category.items.push({
+    id: 'item-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
+    name,
+    quantity: 1
+  });
+  input.value = '';
+  saveInventoryLocal();
+  renderInventory();
+}
+
+function setInventoryQuantity(categoryId, itemId, value) {
+  const item = findInventoryCategory(categoryId)?.items.find(entry => entry.id === itemId);
+  if (!item) return;
+  item.quantity = Math.max(0, Math.min(99999, Math.floor(Number(value) || 0)));
+  saveInventoryLocal();
+  renderInventory();
+}
+
+function changeInventoryQuantity(categoryId, itemId, delta) {
+  const item = findInventoryCategory(categoryId)?.items.find(entry => entry.id === itemId);
+  if (!item) return;
+  setInventoryQuantity(categoryId, itemId, item.quantity + delta);
+}
+
+function removeInventoryItem(categoryId, itemId) {
+  const category = findInventoryCategory(categoryId);
+  if (!category) return;
+  category.items = category.items.filter(item => item.id !== itemId);
+  saveInventoryLocal();
+  renderInventory();
+}
+
+function setInventoryMoney(type, value) {
+  initInventory();
+  inventoryState.currency[type] = Math.max(0, Math.min(9999999, Math.floor(Number(value) || 0)));
+  saveInventoryLocal();
+}
+
+function setInventoryStatus(message, state = '') {
+  const status = document.querySelector('.inventory-sync-status');
+  status.textContent = message;
+  status.className = 'inventory-sync-status ' + state;
+}
+
+function setInventoryPassword(value) {
+  sessionStorage.setItem('sye_edit_token', value);
+  if (value) scheduleInventoryCloudSave();
+}
+
+function getInventoryPassword() {
+  return document.querySelector('.inventory-password')?.value ||
+    sessionStorage.getItem('sye_edit_token') || '';
+}
+
+function scheduleInventoryCloudSave() {
+  clearTimeout(inventorySaveTimer);
+  if (!inventoryCloudLoaded || !getInventoryPassword()) return;
+  setInventoryStatus('Есть локальные изменения...', 'saving');
+  inventorySaveTimer = setTimeout(() => saveInventoryCloud(false), 900);
+}
+
+async function loadInventoryCloud() {
+  setInventoryStatus('Загружаю инвентарь...', 'saving');
+  try {
+    const response = await fetch('/.netlify/functions/get-inventory', { cache: 'no-store' });
+    if (!response.ok) throw new Error('Не удалось загрузить инвентарь');
+    const result = await response.json();
+    const cloudTime = result.updatedAt ? new Date(result.updatedAt).getTime() : 0;
+    const localValue = localStorage.getItem(INVENTORY_UPDATED_KEY);
+    const localTime = localValue ? new Date(localValue).getTime() : 0;
+
+    if (result.data?.version === 1 && cloudTime >= localTime) {
+      inventoryState = result.data;
+      localStorage.setItem(INVENTORY_STORAGE_KEY, JSON.stringify(inventoryState));
+      localStorage.setItem(INVENTORY_UPDATED_KEY, result.updatedAt);
+      if (inventoryLoaded) renderInventory();
+      setInventoryStatus('Загружено из облака', 'saved');
+    } else if (result.data && localTime > cloudTime) {
+      setInventoryStatus('На этом устройстве более свежая версия', 'saving');
+    } else {
+      setInventoryStatus('Облачный инвентарь пока пуст');
+    }
+  } catch(error) {
+    setInventoryStatus('Нет связи с облаком. Используются локальные данные.', 'error');
+  } finally {
+    inventoryCloudLoaded = true;
+    if (getInventoryPassword()) scheduleInventoryCloudSave();
+  }
+}
+
+async function saveInventoryCloud(manual = false) {
+  if (inventorySaving) return;
+  initInventory();
+  const password = getInventoryPassword();
+  if (!password) {
+    setInventoryStatus('Введи пароль редактора', 'error');
+    document.querySelector('.inventory-password')?.focus();
+    return;
+  }
+
+  clearTimeout(inventorySaveTimer);
+  inventorySaving = true;
+  setInventoryStatus('Сохраняю в Netlify...', 'saving');
+  try {
+    const response = await fetch('/.netlify/functions/save-inventory', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-upload-token': password
+      },
+      body: JSON.stringify(inventoryState)
+    });
+    let result = {};
+    try { result = await response.json(); } catch(e) {}
+    if (!response.ok) {
+      if (response.status === 401) throw new Error('Неверный пароль');
+      throw new Error(result.error || 'Не удалось сохранить инвентарь');
+    }
+    sessionStorage.setItem('sye_edit_token', password);
+    localStorage.setItem(INVENTORY_UPDATED_KEY, result.updatedAt);
+    setInventoryStatus(manual ? 'Синхронизировано' : 'Сохранено в облаке', 'saved');
+  } catch(error) {
+    setInventoryStatus(error.message || 'Ошибка сохранения', 'error');
+  } finally {
+    inventorySaving = false;
+  }
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  inventoryState = loadInventoryLocal();
+  const savedToken = sessionStorage.getItem('sye_edit_token') || '';
+  const password = document.querySelector('.inventory-password');
+  if (password) password.value = savedToken;
+  loadInventoryCloud();
+});
 </script>
 
 <script>
