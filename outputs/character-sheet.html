@@ -238,6 +238,49 @@ tailwind.config = {
   .stat-arcane-mod {
     animation-delay: -1.15s;
   }
+  .stat-mod {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-width: 28px;
+    height: 18px;
+    margin: 5px auto 0;
+    padding: 0 7px;
+    border: 1px solid rgba(92,113,143,0.42);
+    border-radius: 999px;
+    background: rgba(12,17,27,0.38);
+    font-family: 'Manrope', Arial, sans-serif;
+    font-size: 9px !important;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.025em;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  .stat-mod-positive {
+    color: #b9d4f0 !important;
+    border-color: rgba(106,159,216,0.58);
+    background:
+      linear-gradient(180deg, rgba(106,159,216,0.16), rgba(74,111,168,0.08)),
+      rgba(12,17,27,0.54);
+    box-shadow:
+      inset 0 1px 0 rgba(220,232,240,0.08),
+      0 0 7px rgba(74,111,168,0.16);
+    text-shadow: 0 0 6px rgba(106,159,216,0.36);
+  }
+  .stat-arcane .stat-mod-positive {
+    color: #d9c2ff !important;
+    -webkit-text-fill-color: #d9c2ff;
+    border-color: rgba(160,111,224,0.72);
+    background:
+      linear-gradient(180deg, rgba(142,83,214,0.22), rgba(82,42,138,0.12)),
+      rgba(15,10,28,0.58);
+    box-shadow:
+      inset 0 1px 0 rgba(235,220,255,0.1),
+      0 0 9px rgba(137,70,235,0.3);
+    text-shadow: 0 0 7px rgba(190,142,255,0.55);
+    animation: none;
+  }
   .stat-steel {
     position: relative;
     overflow: hidden;
@@ -2513,32 +2556,32 @@ b,
     <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
       <div class="text-[7px] text-drow-faint uppercase tip">Сила<div class="tip-box tip-left"><span class="tip-title">Сила</span>Атлетика, ближний бой (если нет фехтовального), ношение грузов, выламывание дверей.<br><br><span class="tip-warn">У Съебастьяна Сила 10 — используй Ловкость для атак!</span></div></div>
       <div class="stat-steel-value font-meta text-[17px] leading-none">10</div>
-      <div class="stat-steel-mod text-[10px] font-bold">+0</div>
+      <div class="stat-mod stat-steel-mod">+0</div>
     </div>
     <div class="stat-arcane bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
       <div class="text-[7px] text-drow-faint uppercase tip">Ловкость<div class="tip-box tip-left"><span class="tip-title">Ловкость</span>Акробатика, Скрытность, Ловкость рук, атаки фехтовальным оружием и дальнобойным, КД без доспехов, инициатива.<br><br><span class="tip-good">Главная характеристика Съебастьяна — +3 везде!</span></div></div>
       <div class="stat-arcane-value font-meta text-[17px] leading-none">18</div>
-      <div class="stat-arcane-value stat-arcane-mod text-[10px] font-bold">+4</div>
+      <div class="stat-mod stat-mod-positive stat-arcane-mod">+4</div>
     </div>
     <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
       <div class="text-[7px] text-drow-faint uppercase tip">Телосл.<div class="tip-box tip-left"><span class="tip-title">Телосложение</span>Хиты на каждом уровне, концентрация заклинаний (СС 10 или полурон), физическая выносливость.<br><br>+1 к хитам на каждом уровне.</div></div>
       <div class="stat-steel-value font-meta text-[17px] leading-none">13</div>
-      <div class="stat-steel-mod text-[10px] font-bold">+1</div>
+      <div class="stat-mod stat-mod-positive stat-steel-mod">+1</div>
     </div>
     <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
       <div class="text-[7px] text-drow-faint uppercase tip">Интеллект<div class="tip-box tip-left"><span class="tip-title">Интеллект</span>Аркана, История, Расследование, Природа, Религия. Спасброски Интеллекта.<br><br>Плут владеет спасбросками Интеллекта — <span class="tip-good">+3 со вл.</span></div></div>
       <div class="stat-steel-value font-meta text-[17px] leading-none">12</div>
-      <div class="stat-steel-mod text-[10px] font-bold">+1</div>
+      <div class="stat-mod stat-mod-positive stat-steel-mod">+1</div>
     </div>
     <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
       <div class="text-[7px] text-drow-faint uppercase tip">Мудрость<div class="tip-box tip-left"><span class="tip-title">Мудрость</span>Внимательность, Проницательность, Медицина, Выживание. Магия жрецов/друидов.<br><br><span class="tip-warn">Мудрость 10 — будь осторожен с заклинаниями очарования!</span></div></div>
       <div class="stat-steel-value font-meta text-[17px] leading-none">10</div>
-      <div class="stat-steel-mod text-[10px] font-bold">+0</div>
+      <div class="stat-mod stat-steel-mod">+0</div>
     </div>
     <div class="stat-arcane bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
       <div class="text-[7px] text-drow-faint uppercase tip">Харизма<div class="tip-box tip-left"><span class="tip-title">Харизма</span>Обман, Запугивание, Выступление, Убеждение. Магия дроу использует Харизму (СС 12).<br><br><span class="tip-good">Харизма +2 → Обман +4!</span></div></div>
       <div class="stat-arcane-value font-meta text-[17px] leading-none">16</div>
-      <div class="stat-arcane-value stat-arcane-mod text-[10px] font-bold">+2</div>
+      <div class="stat-mod stat-mod-positive stat-arcane-mod">+2</div>
     </div>
   </div></div>
 
