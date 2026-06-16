@@ -618,16 +618,16 @@ body {
   overflow: hidden;
   pointer-events: none;
   contain: strict;
-  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.38) 8%, rgba(0,0,0,0.78) 54%, #000 90%);
-  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.38) 8%, rgba(0,0,0,0.78) 54%, #000 90%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.18) 9%, rgba(0,0,0,0.58) 54%, #000 90%);
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.18) 9%, rgba(0,0,0,0.58) 54%, #000 90%);
 }
 .ambient-smoke canvas {
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  opacity: 0.76;
-  filter: saturate(1.22) contrast(1.16) brightness(1.16);
+  opacity: 0.64;
+  filter: saturate(1.18) contrast(1.12) brightness(1.08);
   mix-blend-mode: screen;
 }
 .ambient-smoke.webgl-active .smoke-wisp {
@@ -641,6 +641,15 @@ body {
     radial-gradient(ellipse at center, transparent 22%, rgba(5,7,12,0.1) 64%, rgba(5,7,12,0.46) 100%),
     linear-gradient(180deg, rgba(7,9,15,0.14), transparent 28%, transparent 72%, rgba(7,9,15,0.28));
   opacity: 0.18;
+}
+.smoke-readable-veil {
+  position: fixed;
+  z-index: 4;
+  pointer-events: none;
+  border-radius: 10px;
+  background:
+    radial-gradient(ellipse at center, rgba(12,16,25,0.7) 0%, rgba(12,16,25,0.6) 54%, rgba(12,16,25,0.28) 82%, transparent 100%);
+  filter: blur(16px);
 }
 .smoke-wisp {
   position: absolute;
@@ -702,13 +711,13 @@ body {
 .tabs-wrap,
 .site-wrap {
   position: relative;
-  z-index: 2;
+  z-index: 5;
 }
 @media (max-width: 768px) {
   .ambient-smoke {
     inset: 0;
-    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.48) 12%, rgba(0,0,0,0.72) 58%, #000 92%);
-    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.48) 12%, rgba(0,0,0,0.72) 58%, #000 92%);
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.24) 12%, rgba(0,0,0,0.58) 58%, #000 92%);
+    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.24) 12%, rgba(0,0,0,0.58) 58%, #000 92%);
   }
   .smoke-wisp {
     width: 125vw;
@@ -724,7 +733,13 @@ body {
     display: none;
   }
   .ambient-smoke canvas {
-    opacity: 0.9;
+    opacity: 0.68;
+  }
+  .smoke-readable-veil {
+    border-radius: 8px;
+    filter: blur(10px);
+    background:
+      radial-gradient(ellipse at center, rgba(12,16,25,0.74) 0%, rgba(12,16,25,0.62) 58%, rgba(12,16,25,0.28) 86%, transparent 100%);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2509,6 +2524,7 @@ b,
   <span class="smoke-wisp smoke-wisp-two"></span>
   <span class="smoke-wisp smoke-wisp-three"></span>
 </div>
+<div class="smoke-readable-veil" aria-hidden="true"></div>
 
 <svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden">
   <defs>
@@ -3312,6 +3328,7 @@ function switchTab(name, button) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('panel-' + name).classList.add('active');
   button.classList.add('active');
+  requestAnimationFrame(updateSmokeReadableVeil);
   if (window.innerWidth <= 768) {
     requestAnimationFrame(() => {
       button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
@@ -3325,6 +3342,28 @@ function switchTab(name, button) {
   }
   if (name === 'notes') loadNotes();
 }
+
+function updateSmokeReadableVeil() {
+  const veil = document.querySelector('.smoke-readable-veil');
+  const activePanel = document.querySelector('.tab-panel.active');
+  const target = activePanel?.querySelector('.page, .inventory-panel, .notes-panel, .combat-panel, .archive-panel') || activePanel;
+  if (!veil || !target) return;
+
+  const rect = target.getBoundingClientRect();
+  const mobile = window.innerWidth <= 768;
+  const padX = mobile ? 12 : 26;
+  const padY = mobile ? 14 : 24;
+  const left = Math.max(0, rect.left - padX);
+  const top = Math.max(0, rect.top - padY);
+  veil.style.left = left + 'px';
+  veil.style.top = top + 'px';
+  veil.style.width = Math.min(window.innerWidth - left, rect.width + padX * 2) + 'px';
+  veil.style.height = Math.min(window.innerHeight - top, rect.height + padY * 2) + 'px';
+}
+
+window.addEventListener('DOMContentLoaded', updateSmokeReadableVeil);
+window.addEventListener('resize', updateSmokeReadableVeil, { passive: true });
+window.addEventListener('scroll', updateSmokeReadableVeil, { passive: true });
 </script>
 
 <script>
