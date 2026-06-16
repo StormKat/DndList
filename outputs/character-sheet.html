@@ -784,11 +784,22 @@ body {
   margin-bottom: 8px;
 }
 .site-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: 'Forum', Georgia, serif;
   font-size: 13px;
   color: #506070;
   letter-spacing: 2px;
   text-transform: uppercase;
+  min-width: 0;
+}
+.site-logo-mark {
+  display: block;
+  width: 86px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(120, 26, 42, 0.26));
 }
 .site-logo span { color: #4a6fa8; }
 
@@ -2335,6 +2346,10 @@ b,
     font-size: 11px;
     line-height: 1.25;
     letter-spacing: 1.5px;
+    gap: 8px;
+  }
+  .site-logo-mark {
+    width: 68px;
   }
   .site-header > button {
     flex: 0 0 auto;
@@ -2498,7 +2513,13 @@ b,
     align-items: flex-start;
   }
   .site-logo {
-    max-width: 125px;
+    max-width: 150px;
+  }
+  .site-logo-mark {
+    width: 58px;
+  }
+  .site-logo span {
+    max-width: 82px;
   }
   .site-header > button {
     max-width: 165px;
@@ -2587,7 +2608,10 @@ b,
 
 <!-- ШАПКА САЙТА -->
 <div class="site-header">
-  <div class="site-logo">D&amp;D · <span>Лист персонажа</span></div>
+  <div class="site-logo">
+    <img class="site-logo-mark" src="assets/dnd-5e-logo.png" alt="Dungeons &amp; Dragons">
+    <span>Лист персонажа</span>
+  </div>
   <button onclick="openPortraitModal()"
     class="icon-label bg-drow-accent hover:bg-drow-bright text-white border border-drow-bright rounded px-3 py-1.5 text-[11px] cursor-pointer transition-colors font-meta">
     <svg class="ui-icon"><use href="#icon-portrait"></use></svg>Портрет персонажа
