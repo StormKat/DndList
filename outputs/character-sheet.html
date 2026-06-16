@@ -618,16 +618,16 @@ body {
   overflow: hidden;
   pointer-events: none;
   contain: strict;
-  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.28) 8%, rgba(0,0,0,0.68) 54%, #000 90%);
-  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.28) 8%, rgba(0,0,0,0.68) 54%, #000 90%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.38) 8%, rgba(0,0,0,0.78) 54%, #000 90%);
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.38) 8%, rgba(0,0,0,0.78) 54%, #000 90%);
 }
 .ambient-smoke canvas {
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  opacity: 0.58;
-  filter: saturate(1.08) contrast(1.08) brightness(1.06);
+  opacity: 0.76;
+  filter: saturate(1.22) contrast(1.16) brightness(1.16);
   mix-blend-mode: screen;
 }
 .ambient-smoke.webgl-active .smoke-wisp {
@@ -724,7 +724,7 @@ body {
     display: none;
   }
   .ambient-smoke canvas {
-    opacity: 0.82;
+    opacity: 0.9;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -4812,7 +4812,7 @@ function initAmbientWebGLSmoke() {
     const uniforms = {
       uTime: { value: 0 },
       uResolution: { value: new window.THREE.Vector2(1, 1) },
-      uIntensity: { value: mobile ? 0.88 : 0.96 }
+      uIntensity: { value: mobile ? 1.04 : 1.14 }
     };
     const material = new window.THREE.ShaderMaterial({
       uniforms,
@@ -4862,25 +4862,27 @@ function initAmbientWebGLSmoke() {
           vec2 uv = gl_FragCoord.xy / uResolution.xy;
           float aspect = uResolution.x / max(uResolution.y, 1.0);
           vec2 p = (uv - 0.5) * vec2(aspect, 1.0);
-          float time = uTime * 0.22;
+          float time = uTime * 0.34;
 
-          float broad = fbm(p * 1.38 + vec2(time * 0.8, -time * 0.34));
+          float broad = fbm(p * 1.32 + vec2(time * 0.95, -time * 0.46));
           vec2 warped = p + vec2(
-            fbm(p * 1.8 + vec2(time * 0.42, 0.0)),
-            fbm(p * 1.65 + vec2(0.0, -time * 0.38))
-          ) * 0.38;
-          float curls = fbm(warped * 2.65 + vec2(-time * 0.58, time * 0.66) + broad);
-          float detail = fbm(warped * 5.0 - vec2(time * 0.28, time * 0.34));
-          float density = smoothstep(0.29, 0.67, broad * 0.58 + curls * 0.38 + detail * 0.2);
+            fbm(p * 1.75 + vec2(time * 0.62, 0.0)),
+            fbm(p * 1.55 + vec2(0.0, -time * 0.58))
+          ) * 0.48;
+          float curls = fbm(warped * 2.45 + vec2(-time * 0.78, time * 0.86) + broad);
+          float detail = fbm(warped * 4.65 - vec2(time * 0.42, time * 0.5));
+          float density = smoothstep(0.25, 0.6, broad * 0.56 + curls * 0.4 + detail * 0.24);
 
           float edge = smoothstep(0.02, 0.68, length(p * vec2(0.68, 1.0)));
           float veil = mix(0.62, 1.0, edge);
-          vec3 blue = vec3(0.3, 0.5, 0.76);
-          vec3 violet = vec3(0.52, 0.3, 0.72);
+          vec3 blue = vec3(0.34, 0.56, 0.84);
+          vec3 violet = vec3(0.6, 0.34, 0.82);
           vec3 color = mix(blue, violet, smoothstep(0.3, 0.72, curls));
-          color += vec3(0.12, 0.15, 0.2) * smoothstep(0.58, 0.82, detail);
-          float pulse = 0.88 + 0.12 * sin(uTime * 0.75 + p.x * 2.0);
-          float alpha = density * veil * uIntensity * pulse * 0.76;
+          float shimmer = 0.82 + 0.18 * sin(uTime * 1.35 + curls * 5.0 + p.y * 2.4);
+          color += vec3(0.16, 0.2, 0.28) * smoothstep(0.52, 0.8, detail);
+          color *= shimmer;
+          float pulse = 0.82 + 0.18 * sin(uTime * 1.15 + p.x * 2.4 + p.y);
+          float alpha = density * veil * uIntensity * pulse * 0.84;
 
           gl_FragColor = vec4(color * alpha, alpha);
         }
