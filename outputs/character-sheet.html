@@ -618,6 +618,8 @@ body {
   overflow: hidden;
   pointer-events: none;
   contain: strict;
+  transform: translateZ(0);
+  will-change: transform;
   -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.18) 9%, rgba(0,0,0,0.58) 54%, #000 90%);
   mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.18) 9%, rgba(0,0,0,0.58) 54%, #000 90%);
 }
@@ -629,6 +631,7 @@ body {
   opacity: 0.64;
   filter: saturate(1.18) contrast(1.12) brightness(1.08);
   mix-blend-mode: screen;
+  transform: translateZ(0);
 }
 .ambient-smoke.webgl-active .smoke-wisp {
   opacity: 0.08;
@@ -4850,6 +4853,7 @@ window.addEventListener('DOMContentLoaded', () => {
 let ambientSmokeRenderer = null;
 let ambientSmokeFrame = null;
 let ambientSmokeResize = null;
+let ambientSmokeScroll = null;
 
 function initAmbientWebGLSmoke() {
   const smoke = document.querySelector('.ambient-smoke');
@@ -4865,7 +4869,7 @@ function initAmbientWebGLSmoke() {
       precision: 'mediump'
     });
     renderer.setClearColor(0x000000, 0);
-    renderer.setPixelRatio(mobile ? 0.5 : 0.65);
+    renderer.setPixelRatio(1);
     smoke.insertBefore(renderer.domElement, smoke.firstChild);
 
     const scene = new window.THREE.Scene();
@@ -4913,7 +4917,7 @@ function initAmbientWebGLSmoke() {
           float value = 0.0;
           float amplitude = 0.55;
           mat2 rotation = mat2(0.82, -0.57, 0.57, 0.82);
-          for (int i = 0; i < 5; i++) {
+          for (int i = 0; i < 4; i++) {
             value += amplitude * noise(p);
             p = rotation * p * 2.03 + 8.17;
             amplitude *= 0.5;
@@ -4933,7 +4937,7 @@ function initAmbientWebGLSmoke() {
             fbm(p * 1.55 + vec2(0.0, -time * 0.58))
           ) * 0.48;
           float curls = fbm(warped * 2.45 + vec2(-time * 0.78, time * 0.86) + broad);
-          float detail = fbm(warped * 4.65 - vec2(time * 0.42, time * 0.5));
+          float detail = noise(warped * 4.25 - vec2(time * 0.42, time * 0.5));
           float density = smoothstep(0.25, 0.6, broad * 0.56 + curls * 0.4 + detail * 0.24);
 
           float edge = smoothstep(0.02, 0.68, length(p * vec2(0.68, 1.0)));
@@ -4954,8 +4958,13 @@ function initAmbientWebGLSmoke() {
     const mesh = new window.THREE.Mesh(geometry, material);
     scene.add(mesh);
 
+    const renderScale = mobile ? 0.36 : 0.44;
     ambientSmokeResize = () => {
-      renderer.setSize(window.innerWidth, window.innerHeight, false);
+      renderer.setSize(
+        Math.max(1, Math.round(window.innerWidth * renderScale)),
+        Math.max(1, Math.round(window.innerHeight * renderScale)),
+        false
+      );
       uniforms.uResolution.value.set(renderer.domElement.width, renderer.domElement.height);
     };
     ambientSmokeResize();
@@ -4963,15 +4972,27 @@ function initAmbientWebGLSmoke() {
 
     const startedAt = performance.now();
     let lastRender = 0;
-    const frameInterval = 1000 / (mobile ? 24 : 30);
+    let lastScrollRender = 0;
+    const frameInterval = 1000 / (mobile ? 14 : 18);
+    const scrollFrameInterval = 1000 / (mobile ? 10 : 12);
+    const renderSmokeAt = now => {
+      uniforms.uTime.value = (now - startedAt) / 1000;
+      renderer.render(scene, camera);
+    };
     const renderSmoke = now => {
       ambientSmokeFrame = requestAnimationFrame(renderSmoke);
       if (document.hidden || now - lastRender < frameInterval) return;
       lastRender = now;
-      uniforms.uTime.value = (now - startedAt) / 1000;
-      renderer.render(scene, camera);
+      renderSmokeAt(now);
+    };
+    ambientSmokeScroll = () => {
+      const now = performance.now();
+      if (document.hidden || now - lastScrollRender < scrollFrameInterval) return;
+      lastScrollRender = now;
+      renderSmokeAt(now);
     };
     ambientSmokeFrame = requestAnimationFrame(renderSmoke);
+    window.addEventListener('scroll', ambientSmokeScroll, { passive: true });
     ambientSmokeRenderer = { renderer, geometry, material };
     smoke.classList.add('webgl-active');
   } catch(error) {
@@ -4983,12 +5004,14 @@ window.addEventListener('DOMContentLoaded', initAmbientWebGLSmoke);
 window.addEventListener('pagehide', () => {
   if (ambientSmokeFrame) cancelAnimationFrame(ambientSmokeFrame);
   if (ambientSmokeResize) window.removeEventListener('resize', ambientSmokeResize);
+  if (ambientSmokeScroll) window.removeEventListener('scroll', ambientSmokeScroll);
   ambientSmokeRenderer?.geometry.dispose();
   ambientSmokeRenderer?.material.dispose();
   ambientSmokeRenderer?.renderer.dispose();
   ambientSmokeRenderer?.renderer.domElement.remove();
   ambientSmokeFrame = null;
   ambientSmokeResize = null;
+  ambientSmokeScroll = null;
   ambientSmokeRenderer = null;
 });
 </script>
