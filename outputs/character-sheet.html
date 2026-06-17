@@ -62,16 +62,16 @@ tailwind.config = {
   .dot.p      { background:#78909c; border-color:#b0bec5; }
   .dot.e      { background:#4a6fa8; border-color:#6a9fd8; }
   .atk-row:nth-child(even) td { background: rgba(74,111,168,0.05); }
-  .scard-new  { background: linear-gradient(145deg, rgba(92,18,24,0.32), rgba(27,13,18,0.92)) !important; border-color: #7c2029 !important; border-width: 1.5px !important; box-shadow: inset 0 0 28px rgba(125,18,28,0.2); }
-  .sgood      { background: rgba(92,18,24,0.18); border-left: 2px solid #8f2630; }
+  .scard-new  { background: rgba(74,111,168,0.07) !important; border-color: #3a2c3b !important; border-width: 1px !important; box-shadow: inset 0 0 18px rgba(92,18,24,0.08); }
+  .sgood      { background: rgba(92,18,24,0.1); border-left: 2px solid #76303a; }
   .swarn      { background: rgba(160,60,40,0.12); border-left: 2px solid #8b3020; }
   .seffect    { background: rgba(74,111,168,0.08); border-left: 2px solid #4a6fa8; }
   .slot       { width:28px; height:28px; border-radius:4px; border:1.5px solid #4a6fa8; display:flex; align-items:center; justify-content:center; font-size:11px; color:#b0bec5; background:rgba(74,111,168,0.1); }
-  .slot-new   { border-color:#8f2630 !important; background:rgba(92,18,24,0.18) !important; color:#f0a0a6 !important; }
+  .slot-new   { border-color:#76303a !important; background:rgba(92,18,24,0.1) !important; color:#d8a0a6 !important; }
   .sbadge-race   { background:rgba(40,80,40,0.2);  color:#90c090; border-color:#3a6040; }
   .sbadge-later  { background:rgba(80,50,20,0.2);  color:#c09060; border-color:#806030; }
   .sbadge-ability{ background:rgba(60,60,120,0.2); color:#9090e0; border-color:#404080; }
-  .sbadge-new    { background:rgba(92,18,24,0.38); color:#f0a0a6; border-color:#8f2630; font-weight:700; box-shadow: inset 0 0 10px rgba(255,84,92,0.08); }
+  .sbadge-new    { background:rgba(92,18,24,0.18); color:#d8a0a6; border-color:#76303a; font-weight:700; box-shadow: inset 0 0 8px rgba(255,84,92,0.04); }
   .eqli::before  { content:'◆'; position:absolute; left:0; color:#4a6fa8; font-size:7px; top:2px; }
   textarea { background:rgba(74,111,168,0.07); border:0.5px solid #2e3d5a; border-radius:3px; color:#dce8f0; font-family:'Manrope',Arial,sans-serif; font-size:9px; padding:6px; resize:none; outline:none; line-height:1.5; width:100%; height:58px; }
   textarea::placeholder { color:#506070; }
@@ -374,7 +374,7 @@ tailwind.config = {
 .scard-anim.scard-new::before {
   background: linear-gradient(135deg,
     rgba(92,18,24,0.0) 0%,
-    rgba(180,38,48,0.22) 42%,
+    rgba(180,38,48,0.1) 42%,
     rgba(92,18,24,0.0) 80%
   );
   background-size: 300% 300%;
@@ -423,26 +423,38 @@ tailwind.config = {
   gap: 7px;
 }
 .feature-title .title-icon {
+  --icon-main: #d6b0b5;
+  --icon-glow: rgba(150,40,52,0.18);
+  --icon-bg-a: rgba(42,24,32,0.86);
+  --icon-bg-b: rgba(15,18,27,0.96);
+  --icon-border: rgba(112,48,60,0.58);
   width: 24px;
   height: 24px;
   padding: 4px;
   border-radius: 6px;
-  color: #f0a0a6;
+  color: var(--icon-main);
+  fill: currentColor;
+  stroke: none;
   background:
-    radial-gradient(circle at 35% 25%, rgba(255,120,128,0.28), transparent 36%),
-    linear-gradient(145deg, rgba(88,18,27,0.92), rgba(16,17,25,0.95));
-  border: 1px solid rgba(160,44,54,0.72);
+    radial-gradient(circle at 35% 25%, var(--icon-glow), transparent 38%),
+    linear-gradient(145deg, var(--icon-bg-a), var(--icon-bg-b));
+  border: 1px solid var(--icon-border);
   box-shadow:
     inset 0 0 12px rgba(255,84,92,0.12),
     0 0 14px rgba(130,26,35,0.28);
 }
-.scard-anim:not(.scard-new) .feature-title .title-icon {
-  color: #d6b0b5;
-  background:
-    radial-gradient(circle at 35% 25%, rgba(150,40,52,0.18), transparent 36%),
-    linear-gradient(145deg, rgba(42,24,32,0.86), rgba(15,18,27,0.96));
-  border-color: rgba(112,48,60,0.58);
+.feature-title .title-icon * {
+  fill: currentColor;
+  stroke: none;
 }
+.feature-title .ability-icon--blood { color:#ff767b !important; background:radial-gradient(circle at 35% 25%, rgba(255,88,96,0.34), transparent 38%), linear-gradient(145deg, rgba(92,18,24,0.9), rgba(24,12,17,0.96)); border-color:rgba(184,56,66,0.72); }
+.feature-title .ability-icon--shadow { color:#b9a0ff !important; background:radial-gradient(circle at 35% 25%, rgba(130,88,255,0.32), transparent 38%), linear-gradient(145deg, rgba(48,32,86,0.88), rgba(14,14,26,0.96)); border-color:rgba(126,96,210,0.66); }
+.feature-title .ability-icon--mark { color:#ffbd6a !important; background:radial-gradient(circle at 35% 25%, rgba(255,166,64,0.32), transparent 38%), linear-gradient(145deg, rgba(92,52,22,0.9), rgba(22,14,12,0.96)); border-color:rgba(198,116,46,0.68); }
+.feature-title .ability-icon--venom { color:#9be782 !important; background:radial-gradient(circle at 35% 25%, rgba(112,224,128,0.28), transparent 38%), linear-gradient(145deg, rgba(32,72,44,0.86), rgba(12,20,16,0.96)); border-color:rgba(92,154,88,0.62); }
+.feature-title .ability-icon--fae { color:#fff08c !important; background:radial-gradient(circle at 35% 25%, rgba(255,228,92,0.32), transparent 38%), linear-gradient(145deg, rgba(96,74,24,0.86), rgba(22,18,12,0.96)); border-color:rgba(210,174,72,0.66); }
+.feature-title .ability-icon--fire { color:#ff8fd8 !important; background:radial-gradient(circle at 35% 25%, rgba(255,86,200,0.34), transparent 38%), linear-gradient(145deg, rgba(88,28,76,0.88), rgba(24,12,24,0.96)); border-color:rgba(204,82,170,0.66); }
+.feature-title .ability-icon--sight { color:#8fd7ff !important; background:radial-gradient(circle at 35% 25%, rgba(74,160,255,0.3), transparent 38%), linear-gradient(145deg, rgba(28,58,92,0.86), rgba(10,18,28,0.96)); border-color:rgba(84,142,196,0.64); }
+.feature-title .ability-icon--dark { color:#9ea8ff !important; background:radial-gradient(circle at 35% 25%, rgba(78,84,190,0.34), transparent 38%), linear-gradient(145deg, rgba(30,34,82,0.88), rgba(8,10,22,0.96)); border-color:rgba(82,90,176,0.66); }
 .assassin-section-title {
   color: #d47880 !important;
   border-color: rgba(143,38,48,0.86) !important;
@@ -2659,17 +2671,30 @@ b,
     <symbol id="icon-moon" viewBox="0 0 24 24">
       <path d="M18.5 16.5A8 8 0 0 1 9 5a8 8 0 1 0 9.5 11.5z"/>
     </symbol>
-    <symbol id="icon-bloodblade" viewBox="0 0 24 24">
-      <path d="m15.5 2.8 5.2.5-.5 5.2-9.6 9.6-4.7-4.7z"/><path d="m8.2 15.7-5 5M2.8 16.8l4.4 4.4M15.7 9.6l-3.2-3.2"/><path d="M18.4 13.2c1.4 1.8 2.1 3.2 2.1 4.2a2.1 2.1 0 0 1-4.2 0c0-1 .7-2.4 2.1-4.2z"/>
+    <!-- Ability icons adapted from Game-icons.net by Lorc and Delapouite, CC BY 3.0. -->
+    <symbol id="icon-gi-dripping-knife" viewBox="0 0 512 512">
+      <path d="M490.906 15c-15.93 27.59-38.93 49.68-66.125 65.906-1.656 22.7-13.066 44.383-30.655 63.844-24.774 27.41-61.863 51.865-104.78 73.906-84.056 43.17-190.69 76.712-270.75 97.656v53.875a3842.05 3842.05 0 0 1 22.624-7.25c18.695.008 39.45 7.253 46.25 50.282C80.952 445.75 64 453.105 64 477c0 12.348 12.224 21.406 24.03 21.406 12.074 0 23.532-8.464 23.532-20.187 0-23.002-16.374-32.466-23-65.283 9.795-76.6 133.782-117.104 133.782-71.75 0 11.632-12.813 21.018-12.813 31.625 0 12.752 11.694 21.75 24.032 21.75 12.068 0 24.657-10.1 24.657-23.53 0-13.43-14-20.934-14-31.75 0-71.077 114.83-78.082 132.686-16.782-13.16 56.997-42.03 75.01-42.03 116.844 0 22.04 21.583 38 44.28 38 22.2 0 45.125-17.067 45.125-40.28 0-43.735-30.165-58.033-43.06-115.19 23.29-129.734 61.263-121.692 88.31-176.03.036-.06.06-.127.095-.188C490.395 109.56 498.903 66.81 490.905 15zm-86.53 76.656c-37.166 17.086-80.115 24.428-123 21.28C221.435 153.363 107.803 206.662 18.593 225v71.97c78.706-20.824 182.013-53.747 262.219-94.94 41.78-21.456 77.22-45.23 99.437-69.81 12.273-13.58 20.51-26.965 24.125-40.564zm54.28 102.125c-7.41 43.062-29.47 51.75-29.47 81.94.002 15.146 14.987 26.28 29.47 26.28 14.81 0 28.875-10.4 28.875-24.78 0-28.982-21.217-40.46-28.874-83.44z"/>
     </symbol>
-    <symbol id="icon-assassin-mark" viewBox="0 0 24 24">
-      <path d="M12 3.2 20 7v5.2c0 4.1-2.8 7.2-8 8.8-5.2-1.6-8-4.7-8-8.8V7z"/><path d="m8.2 12.4 2.4 2.4 5.5-6.1M8 8.5c1.3-.9 2.7-.9 4 0 1.3-.9 2.7-.9 4 0"/>
+    <symbol id="icon-gi-run" viewBox="0 0 512 512">
+      <path d="M372.97 24.938c-8.67.168-17.816 3.644-26.69 10.28-12.618 9.44-24.074 25.203-30.5 44.844-6.424 19.642-6.48 39.12-1.874 54.157 4.608 15.036 13.375 25.225 24.97 29 11.593 3.772 24.724.72 37.343-8.72 12.618-9.44 24.074-25.234 30.5-44.875 6.424-19.642 6.512-39.12 1.905-54.156-4.607-15.038-13.404-25.196-25-28.97a32.051 32.051 0 0 0-8.938-1.563c-.573-.018-1.14-.01-1.718 0zm-155.69 69.78c-21.696.024-43.394 2.203-65.093 7.094-24.91 29.824-43.848 60.255-52.875 98.47l37.376 17.812c8.273-30.735 21.485-53.817 43.375-77 22.706-7.844 45.418-6.237 68.125 1.5-74.24 65.137-51.17 120.676-80.344 226.47-42.653 17.867-85.098 20.53-123.25-.002L23 415.625c59.418 27.09 125.736 29.818 190.844 0 20.368-43.443 27.214-88.603 25-132.906C295.31 354.663 323.11 398.2 338.78 498.56h57.94c-3.12-14.706-6.21-28.394-9.345-41.218-22.522-92.133-47.263-139.63-100.22-198.406 9.695-36.13 22.143-59.665 52.44-74.282 11.167 19.767 29.982 36.682 51.092 48.906l97.375 1.563.47-41.03L402 191.968c-8.05-5.556-14.925-11.73-20.75-18.314-14.886 9.08-32.024 12.563-48.156 7.313-18.422-5.997-31.143-21.962-37.063-41.282-3.482-11.37-4.742-24.05-3.686-37.25-25.017-4.884-50.047-7.746-75.063-7.72z"/>
     </symbol>
-    <symbol id="icon-poison-vial" viewBox="0 0 24 24">
-      <path d="M9 3h6M10 3v4.5l-4.1 7.1A4.2 4.2 0 0 0 9.5 21h5a4.2 4.2 0 0 0 3.6-6.4L14 7.5V3"/><path d="M7.4 15.2c2 .7 3.5.7 5.2 0 1.5-.6 2.8-.5 4 .2M10 17h.01M14 18h.01"/>
+    <symbol id="icon-gi-target-shot" viewBox="0 0 512 512">
+      <path d="M58.11 20.152a1832.461 1832.461 0 0 1 60.482 58.592c-.085.062-.168.127-.252.19a1842.578 1842.578 0 0 1 39.617 41.367l.213-.142c4.3 4.643 8.576 9.3 12.812 13.97l-.195.126a1736.308 1736.308 0 0 1 37.986 43.19l.106-.104c27.063 31.912 52.34 64.147 75.237 96.072 2.08 2.902 4.143 5.8 6.184 8.695l.723 1.026c1.75 2.486 3.48 4.97 5.2 7.45.463.67.93 1.338 1.392 2.007 1.43 2.076 2.845 4.15 4.254 6.22.68 1.003 1.37 2.007 2.048 3.008 1.403 2.076 2.786 4.148 4.166 6.22.54.808 1.09 1.62 1.627 2.43 0-.002 0 0 0 0l-.003-.003c-2.97-1.966-5.948-3.96-8.928-5.97-.582-.394-1.165-.794-1.747-1.188-2.45-1.66-4.9-3.33-7.353-5.02-.606-.417-1.213-.84-1.82-1.26-2.384-1.648-4.77-3.31-7.16-4.986l-2.05-1.442c-2.514-1.773-5.03-3.56-7.548-5.362l-1.032-.74c-2.94-2.11-5.883-4.238-8.828-6.387-28.878-21.073-57.928-44.03-86.693-68.44l.055-.057a1717.408 1717.408 0 0 1-42.99-37.795l-.062.1a1799.199 1799.199 0 0 1-13.99-12.832l.08-.117a1816.42 1816.42 0 0 1-41.418-39.697l-.096.127a1808.939 1808.939 0 0 1-55.501-57.314c14.89 23.17 30.88 46.1 47.81 68.67C24.96 203.542 33.861 300.61 97.142 363.89c57.81 57.81 143.806 70.223 213.735 37.266a734.271 734.271 0 0 1-48.74-42.906c-43.354 10.697-91.117-.853-124.934-34.67-38.908-38.91-48.344-96.285-28.325-144.162a1288.914 1288.914 0 0 0 13.793 16.33c-12.57 39.06-3.322 83.547 27.748 114.617 26.16 26.16 61.83 36.84 95.764 32.063-30.955-31.627-59.076-66.004-83.49-102.184 97.134 103.204 211.78 192 327.656 250.217C432.41 375.526 344.058 261.308 241.47 164.308c35.714 23.993 69.634 51.706 100.897 82.21 4.888-34.028-5.787-69.84-32.027-96.08-22.12-22.123-51.042-33.183-79.963-33.183a113.124 113.124 0 0 0-34.93 5.523c-5.398-4.646-10.83-9.24-16.287-13.783a132.185 132.185 0 0 1 51.217-10.31c33.743 0 67.487 12.847 93.178 38.54 33.88 33.88 45.414 81.762 34.615 125.182a739.471 739.471 0 0 1 42.904 48.555c32.952-69.93 20.536-155.932-37.27-213.74-36.82-36.82-85.077-55.232-133.333-55.232-34.703 0-69.406 9.522-99.855 28.565-23.82-17.92-48.043-34.778-72.506-50.4z"/>
     </symbol>
-    <symbol id="icon-shadow-step" viewBox="0 0 24 24">
-      <path d="M5 19c3.8-1.2 7.9-1.2 14 0M7 16c3-1 6-1 10 0"/><path d="M9.5 13.5c-.8-1.2-1-2.5-.4-3.7.7-1.6 2.2-2.5 4.4-2.8-.5 1.8-.3 3.2.8 4.4.8.9 1.9 1.4 3.2 1.6-2 1.4-4 1.8-6 1.1"/><path d="M4 6.5 8 5l-1.5 4M20 6.5 16 5l1.5 4"/>
+    <symbol id="icon-gi-poison-bottle" viewBox="0 0 512 512">
+      <path d="M181.78 33v51.53h149.407V33H181.78zm14.19 70.22c-.66 2.9-1.554 5.263-2.75 6.936-2.684 3.75-7.033 6.594-19.5 6.594-21.54 0-40.804 5.862-55.157 16.094-14.353 10.232-23.907 25.398-23.907 42.5V426.75c0 32.34 26.255 58.625 58.594 58.625h213.47c32.338 0 58.592-26.286 58.592-58.625V175.344c0-17.102-9.527-32.2-23.593-42.438-14.067-10.237-32.83-16.156-53.44-16.156-16.69 0-23.62-3.488-26.874-7.188-1.41-1.604-2.43-3.698-3.156-6.343h-19.125c1.073 6.658 3.37 13.137 8.25 18.686 8.11 9.223 21.523 13.53 40.906 13.53 16.978 0 32.056 5.008 42.44 12.564 10.38 7.556 15.905 17.1 15.905 27.344V426.75c0 22.355-17.55 39.938-39.906 39.938H153.25c-22.355 0-39.906-17.583-39.906-39.938V175.344c0-10.245 5.455-19.72 16.062-27.28 10.607-7.563 26.22-12.626 44.313-12.626 15.962 0 28.056-5.142 34.686-14.407 3.904-5.455 5.733-11.545 6.625-17.81h-19.06zm66.093 45.405c-30.545 0-50.062 12.865-63.282 32.313-12.295 18.09-18.387 42.315-19.186 66.062 25.033 12.795 39.555 27.632 43.844 44.97a46.033 46.033 0 0 1 1.312 8.905c9.01 5.134 23.22 8.44 37.813 8.438 12.935-.002 26.08-2.538 36.093-6.875a49.361 49.361 0 0 1 1.47-10c4.486-17.583 19.028-33.2 44.405-45.563-.838-22.46-6.793-46.595-19-64.938-13.2-19.84-32.745-33.312-63.467-33.312zM232.188 223.5c9.157 0 16.593 7.405 16.593 16.563 0 9.157-7.435 16.593-16.593 16.593-9.157 0-16.562-7.436-16.562-16.594 0-9.157 7.405-16.562 16.563-16.562zm55.437 0c9.158 0 16.594 7.405 16.594 16.563 0 9.157-7.438 16.593-16.595 16.593-9.158 0-16.563-7.436-16.563-16.594 0-9.157 7.405-16.562 16.563-16.562zm-28.844 33.594c6.275 13.248 11.25 26.503 13.72 39.75-9.148-3.022-18.29-3.426-27.438 0 3.34-13.25 7.352-26.504 13.72-39.75zm-37.03 63.47c-2.136 6.42-5.285 12.778-9.188 19.03 11.93 7.99 31.58 12.81 50.875 12.594 18.97-.214 36.878-5.57 46.22-12.407-3.55-5.764-6.412-11.8-8.344-18-11.947 4.416-25.424 6.375-38.75 6.376-14.447.002-28.77-2.222-40.813-7.594zm-70.656 17.06c-8.9 11.268-12.694 22.493-10.03 36.313 68.925 5.54 164.194 31.92 226.686 60.75 9.16-11.166 12.518-22.67 9.97-36.78-67.77-6.867-164.135-28.736-226.626-60.282zm216.594 0c-20.79 10.496-45.326 19.907-71.313 28.063 20.298 4.434 40.253 8.04 58.72 10.688 7.782-1.026 15.357-1.853 22.624-2.438 2.66-13.82-1.133-25.045-10.033-36.312zm-203.75 57.532a652.132 652.132 0 0 1-22.875 2.75c-2.55 14.11.81 25.615 9.968 36.78 21.375-9.86 46.575-19.447 73.25-27.998-20.87-4.912-41.385-8.868-60.343-11.532z"/>
+    </symbol>
+    <symbol id="icon-gi-fairy-wand" viewBox="0 0 512 512">
+      <path d="M250.53 22.03c-57.055 45.157-80.673 37.81-100.31.22 16.598 61.517 10.408 66.415-44.72 116.594 67.324-35.666 96.206-34.238 130.97 7.187-34.906-53.112-30.954-75.35 14.06-124zm18.407.126 11.688 114.938-99.875 58.094 97.75 21.093c-9.58 8.352-20.214 19.028-31.28 30.095l-.032.03L18.563 472.438v19.438h32.156L273.343 272.5c10.26-10.263 18.902-19.538 25.78-27.75l18.938 87.75 58.094-99.875 114.938 11.688-77.03-86.094 46.655-105.69-105.69 46.657-86.092-77.03zM26.875 55.938c33.765 27.66 35.21 42.767 30.75 87.78 18.975-53.73 27.964-67.297 64.5-82C82.972 71.094 66.21 73 26.875 55.94zm54.75 102.406c24.955 27.012 26.97 43.684 24.25 72.062 14.775-34.45 22.072-45.66 55.625-64.312-34.56 11.183-45.5 10.22-79.875-7.75zm325.594 95c9.27 51.694-4.61 73.708-32.845 106.687 43.3-37.043 57.852-44.284 96.844-38.75-38.597-11.457-47.426-20.624-64-67.936zm-55.658 72.812c-18.705 68.79-45.304 83.944-107.625 70.125 54.126 20.1 56.34 21.07 53.532 85.25 24.757-55.42 46.49-52.217 95.06-37.217-41.775-31.838-45.71-48.97-40.967-118.157zm109.344 55.97c-15.32 17.994-22.932 17.49-43.812 9.343 22.828 18.444 17.596 34.024 10.844 59.405 16.05-19.12 23.516-25.237 50.312-12.688-22.86-21.342-27.13-29.857-17.344-56.062z"/>
+    </symbol>
+    <symbol id="icon-gi-invisible-face" viewBox="0 0 512 512">
+      <path d="M251.47 19.188c-38.454 1.225-74.12 17.995-102.876 44.874h143.25L251.5 19.188h-.03zM277 20.625l106.156 118.03a9.007 9.007 0 0 1 .656.814h31.625C389.93 75.593 337.993 29.355 277 20.624zM131.594 82.063c-13.968 16.764-25.626 36.19-34.344 57.406h262.406L308.03 82.062H131.595zm290.125 75.124a9 9 0 0 1-2.314.282H92.594a9 9 0 0 1-1.844-.157 234.927 234.927 0 0 0-6.156 23.53c10.116-3.31 20.786-4.79 30.562-4.78 28.234.03 58.968 1.987 82.875 12.5 8.163 3.59 15.634 8.29 21.626 14.437h72.688c5.992-6.146 13.463-10.848 21.625-14.438 23.906-10.512 54.64-12.47 82.874-12.5 9.866-.01 20.644 1.5 30.844 4.875a236.45 236.45 0 0 0-5.97-23.75zm-303.25 36.875c-7.975.024-14.797.522-19.157 1.594-12.054 36.836-.837 77.202 8.218 112.72.656.762 11.178 4.697 19.282 4.53-7.954-23.88 13.606-98.775 35.344-115.53-13.86-2.1-30.398-3.353-43.687-3.314zm271.436.063c-21.518.234-46.257 2.96-58.812 7.28-12.053 36.837-1.15 70.11 7.906 105.626.655.765 11.052 5.23 19.156 5.064-7.954-23.882 14.262-101.213 36-117.97-1.402-.006-2.814-.015-4.25 0zm-156.375 38.78c.71 6.47.392 13.46-1.03 20.907-2.746 14.383-7.356 26.488-13.344 36.5h73.688c-5.988-10.012-10.598-22.117-13.344-36.5-1.422-7.447-1.74-14.438-1.03-20.906h-44.94zm-28.81 75.407a76.108 76.108 0 0 1-11.282 8.72c-18.483 11.666-40 14.714-59.844 14.343-16.54-.31-30.828-4.272-42.78-10.72 3.945 15.8 8.843 30.875 14.624 45.064h301.125c5.777-14.182 10.68-29.272 14.625-45.064-11.954 6.447-26.243 10.41-42.782 10.72-19.844.37-41.36-2.678-59.844-14.345a75.833 75.833 0 0 1-11.28-8.717H204.718zm-91.282 75.407c5.733 11.796 12.095 22.846 19 33.03 6.078 8.966 12.546 17.27 19.375 24.813a9 9 0 0 1 2.718-.407h202.94a9 9 0 0 1 2.717.375c6.823-7.537 13.3-15.82 19.375-24.78 6.905-10.184 13.267-21.234 19-33.03H113.438zm94.718 18.842a9 9 0 0 1 .625 0h94.44a9 9 0 1 1 0 18h-94.44a9.005 9.005 0 0 1-.624-18zM170 459.156c25.64 21.635 54.99 33.72 86 33.72 31.01 0 60.36-12.085 86-33.72H170z"/>
+    </symbol>
+    <symbol id="icon-gi-hood" viewBox="0 0 512 512">
+      <path d="M257.375 32.03C139.957 87.197 42.343 247.886 17.5 367.75c71.742 0 124.22 22.845 162.094 63.03l10.47-11.436c-28.06-28.873-64.935-52.446-113.564-75.906 26.142-65.033 66.028-163.458 116.72-169.188 19.835-2.243 41.05 9.735 64.155 43.438 72.33-120.27 141.014 38.54 180.875 125.75-47.687 25.854-84.5 49.463-112.97 78.718l9.25 10.406c37.335-39.758 89.657-64.812 162.72-64.812C467.784 249.384 377.24 90.37 257.375 32.03zm-79.72 243.314c-15.3-.083-26.405 6.436-26.405 16.656 0 12.58 16.834 26.038 37.594 30.063 20.76 4.024 37.594-2.92 37.594-15.5s-16.835-26.038-37.594-30.063c-3.893-.755-7.657-1.137-11.188-1.156zm156.345 0c-3.53.02-7.295.4-11.188 1.156-20.76 4.025-37.593 17.483-37.593 30.063 0 12.58 16.833 19.524 37.592 15.5 20.76-4.025 37.594-17.484 37.594-30.063 0-10.22-11.105-16.74-26.406-16.656z"/>
+    </symbol>
+    <symbol id="icon-gi-magic-swirl" viewBox="0 0 512 512">
+      <path d="M247.79 18.734C137.967 17.596 19.874 96.94 19.73 244.53l21.403-51.395c-9.485 72.28-7.75 147.236 38.79 202.502L38.2 377.355c39.24 69.774 126.333 90.976 200.855 92.51C124.11 429.9 67.87 342.277 63.912 246.492c-6.722-211.78 260.658-217.694 340.78-75.77-3.417-19.492-8.623-38.426-15.618-56.11 77.406 89.155 59.293 214.875-21.29 253.036-24.25 3.95-48.93 12.06-60.954 19-58.548 33.802-6.27 126.536 53.225 92.188 9.44-5.45 23.404-17.303 36.494-31.352 64.36-59.52 98.1-118.24 93.108-188.94-6.52 29.1-19.175 57.904-35.623 84.683 63.158-146.822 7.956-263.89-144.838-301.354 12.097 5.835 23.503 13.63 33.873 23.36-57.415-23.752-131.123-22.62-186.884 3.505 28.066-26.2 64.776-43.73 102.2-49.642-3.52-.205-7.054-.325-10.597-.362zm-19.74 160.202-19.843 100.566c-2.958 3.81-5.64 6.852-9.033 9.94l-25.688-49.096-22.705 11.93 31.37 60.945c4.48 11.474 10.02 20.68 15.162 28.524 28.063 42.803 64.547 35.252 95.303 9.555l87.28-48.452-12.71-22.498-66.136 36.94c-1.517-3.154-3.266-6.552-5.056-9.51l67.818-64.96-17.54-18.695-66.47 63.762c-2.356-2.318-4.238-4.527-6.765-6.54l45.084-78.085-22.733-13.127-45.864 78.297c-3.79-1.31-7.72-2.2-11.595-2.745l15.656-81.896-25.533-4.854z"/>
     </symbol>
   </defs>
 </svg>
@@ -2996,7 +3021,7 @@ b,
 
   <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
     <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-bloodblade"></use></svg>Скрытная атака</div>
+      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--blood"><use href="#icon-gi-dripping-knife"></use></svg>Скрытная атака</div>
       <span class="text-[8px] px-2 py-0.5 rounded border sbadge-ability shrink-0">1× за ход</span>
     </div>
     <div class="flex flex-wrap gap-1 mb-1.5">
@@ -3009,7 +3034,7 @@ b,
 
   <div class="scard-new border rounded-md p-2 scard-anim">
     <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-shadow-step"></use></svg>Хитрое действие</div>
+      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--shadow"><use href="#icon-gi-run"></use></svg>Хитрое действие</div>
       <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">Бонусное действие</span>
     </div>
     <div class="text-[9.5px] text-drow-muted leading-relaxed italic">Каждый ход бонусным действием:<br>— <strong class="not-italic text-drow-text">Рывок</strong> — удвоить скорость (60 фт)<br>— <strong class="not-italic text-drow-text">Отход</strong> — без провоцированных атак<br>— <strong class="not-italic text-drow-text">Затаивание</strong> — попытка спрятаться</div>
@@ -3024,7 +3049,7 @@ b,
 
   <div class="scard-new border rounded-md p-2 scard-anim">
     <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-assassin-mark"></use></svg>Ликвидация</div>
+      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--mark"><use href="#icon-gi-target-shot"></use></svg>Ликвидация</div>
       <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">3 ур.</span>
     </div>
     <div class="flex flex-wrap gap-1 mb-1.5">
@@ -3037,7 +3062,7 @@ b,
 
   <div class="scard-new border rounded-md p-2 scard-anim">
     <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-poison-vial"></use></svg>Владения убийцы</div>
+      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--venom"><use href="#icon-gi-poison-bottle"></use></svg>Владения убийцы</div>
       <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">3 ур.</span>
     </div>
     <div class="flex flex-wrap gap-1 mb-1.5">
@@ -3056,7 +3081,7 @@ b,
 
   <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
     <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-magic"></use></svg>Пляшущие огоньки</div><div class="text-[9px] text-drow-muted italic">Dancing Lights</div></div>
+      <div><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--fae"><use href="#icon-gi-fairy-wand"></use></svg>Пляшущие огоньки</div><div class="text-[9px] text-drow-muted italic">Dancing Lights</div></div>
       <span class="text-[8px] px-2 py-0.5 rounded border sbadge-race shrink-0">Заговор · ∞</span>
     </div>
     <div class="flex flex-wrap gap-1 mb-1.5">
@@ -3070,7 +3095,7 @@ b,
 
   <div class="scard-new border rounded-md p-2 scard-anim">
     <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-rune"></use></svg>Огонь фей</div><div class="text-[9px] text-drow-muted italic">Faerie Fire</div></div>
+      <div><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--fire"><use href="#icon-gi-magic-swirl"></use></svg>Огонь фей</div><div class="text-[9px] text-drow-muted italic">Faerie Fire</div></div>
       <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">1/день</span>
     </div>
     <div class="flex flex-wrap gap-1 mb-1.5">
@@ -3088,12 +3113,12 @@ b,
 <div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mb-1.5">Расовые особенности · Тьма (с 5 уровня)</div>
 <div class="mob-spell-grid"><div class="grid grid-cols-2 gap-2 px-2.5 mb-2 spell-grid-inner">
   <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
-    <div class="flex items-start justify-between mb-1.5"><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-eye"></use></svg>Тёмное зрение 120 фт</div><span class="text-[8px] px-2 py-0.5 rounded border sbadge-race shrink-0">Пассивно</span></div>
+    <div class="flex items-start justify-between mb-1.5"><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--sight"><use href="#icon-gi-invisible-face"></use></svg>Тёмное зрение 120 фт</div><span class="text-[8px] px-2 py-0.5 rounded border sbadge-race shrink-0">Пассивно</span></div>
     <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Тусклый → яркий. Темнота → тусклый (серый). <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">120 фт</span> — лучшее среди рас.</div>
     <div class="swarn rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-warntext">Важно: помеха атакам и Внимательности при солнечном свете.</div></div>
   </div>
   <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
-    <div class="flex items-start justify-between mb-1.5"><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon"><use href="#icon-moon"></use></svg>Тьма — с 5 уровня</div><span class="text-[8px] px-2 py-0.5 rounded border sbadge-later shrink-0">1/день</span></div>
+    <div class="flex items-start justify-between mb-1.5"><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--dark"><use href="#icon-gi-hood"></use></svg>Тьма — с 5 уровня</div><span class="text-[8px] px-2 py-0.5 rounded border sbadge-later shrink-0">1/день</span></div>
     <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Сфера 15 фт. Ничто не рассеивает. Дроу видит свою тьму нормально.</div>
     <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ КОМБО: Тьма → враги слепы → атаки с преимуществом → Скрытная атака каждый ход!</div></div>
   </div>
