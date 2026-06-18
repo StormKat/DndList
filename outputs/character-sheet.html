@@ -63,15 +63,15 @@ tailwind.config = {
   .dot.e      { background:#4a6fa8; border-color:#6a9fd8; }
   .atk-row:nth-child(even) td { background: rgba(74,111,168,0.05); }
   .scard-new  { background: rgba(74,111,168,0.07) !important; border-color: #2e3d5a !important; border-width: 1px !important; box-shadow: none; }
-  .sgood      { background: rgba(92,18,24,0.1); border-left: 2px solid #76303a; }
-  .swarn      { background: rgba(160,60,40,0.12); border-left: 2px solid #8b3020; }
-  .seffect    { background: rgba(74,111,168,0.08); border-left: 2px solid #4a6fa8; }
+  .sgood,
+  .swarn,
+  .seffect    { background: rgba(13,17,28,0.58); border-left: 2px solid rgba(124,32,41,0.78); }
   .slot       { width:28px; height:28px; border-radius:4px; border:1.5px solid #4a6fa8; display:flex; align-items:center; justify-content:center; font-size:11px; color:#b0bec5; background:rgba(74,111,168,0.1); }
   .slot-new   { border-color:#76303a !important; background:rgba(92,18,24,0.1) !important; color:#d8a0a6 !important; }
-  .sbadge-race   { background:rgba(40,80,40,0.2);  color:#90c090; border-color:#3a6040; }
-  .sbadge-later  { background:rgba(80,50,20,0.2);  color:#c09060; border-color:#806030; }
-  .sbadge-ability{ background:rgba(60,60,120,0.2); color:#9090e0; border-color:#404080; }
-  .sbadge-new    { background:rgba(92,18,24,0.18); color:#d8a0a6; border-color:#76303a; font-weight:700; box-shadow: inset 0 0 8px rgba(255,84,92,0.04); }
+  .sbadge-race,
+  .sbadge-later,
+  .sbadge-ability,
+  .sbadge-new    { background:rgba(13,17,28,0.72); color:#b9c9dc; border-color:#314260; font-weight:700; box-shadow:none; }
   .eqli::before  { content:'◆'; position:absolute; left:0; color:#4a6fa8; font-size:7px; top:2px; }
   textarea { background:rgba(74,111,168,0.07); border:0.5px solid #2e3d5a; border-radius:3px; color:#dce8f0; font-family:'Manrope',Arial,sans-serif; font-size:9px; padding:6px; resize:none; outline:none; line-height:1.5; width:100%; height:58px; }
   textarea::placeholder { color:#506070; }
@@ -342,14 +342,16 @@ tailwind.config = {
   transition: border-color 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
   transform-origin: center top;
   z-index: 1;
-  background-image:
-    radial-gradient(circle at 18% 8%, rgba(170, 34, 44, 0.16), transparent 34%),
-    linear-gradient(145deg, rgba(18, 20, 31, 0.94), rgba(11, 12, 18, 0.98));
+  background:
+    radial-gradient(circle at 18% 8%, rgba(124, 32, 41, 0.11), transparent 34%),
+    linear-gradient(145deg, rgba(18, 20, 31, 0.95), rgba(11, 12, 18, 0.985)) !important;
+  border-color: rgba(46, 61, 90, 0.95) !important;
+  box-shadow: inset 0 0 18px rgba(74,111,168,0.04) !important;
 }
 .scard-anim:hover {
   z-index: 2;
-  filter: brightness(1.05);
-  box-shadow: 0 0 22px rgba(124,32,41,0.32), inset 0 0 28px rgba(124,32,41,0.14);
+  filter: none;
+  box-shadow: inset 0 0 18px rgba(74,111,168,0.04) !important;
 }
 
 /* Анимированная заливка — текущий псевдоэлемент */
@@ -387,9 +389,9 @@ tailwind.config = {
   border-radius: inherit;
   pointer-events: none;
   background:
-    linear-gradient(135deg, rgba(255,255,255,0.08), transparent 28%),
-    radial-gradient(circle at 82% 12%, rgba(216,54,64,0.14), transparent 30%);
-  opacity: 0.45;
+    linear-gradient(135deg, rgba(255,255,255,0.055), transparent 28%),
+    radial-gradient(circle at 82% 12%, rgba(124,32,41,0.08), transparent 30%);
+  opacity: 0.38;
   z-index: 0;
 }
 
@@ -441,14 +443,27 @@ tailwind.config = {
   fill: currentColor;
   stroke: none;
 }
-.feature-title .ability-icon--blood { color:#ff767b !important; background:radial-gradient(circle at 35% 25%, rgba(255,88,96,0.34), transparent 38%), linear-gradient(145deg, rgba(92,18,24,0.9), rgba(24,12,17,0.96)); border-color:rgba(184,56,66,0.72); }
-.feature-title .ability-icon--shadow { color:#b9a0ff !important; background:radial-gradient(circle at 35% 25%, rgba(130,88,255,0.32), transparent 38%), linear-gradient(145deg, rgba(48,32,86,0.88), rgba(14,14,26,0.96)); border-color:rgba(126,96,210,0.66); }
-.feature-title .ability-icon--mark { color:#ffbd6a !important; background:radial-gradient(circle at 35% 25%, rgba(255,166,64,0.32), transparent 38%), linear-gradient(145deg, rgba(92,52,22,0.9), rgba(22,14,12,0.96)); border-color:rgba(198,116,46,0.68); }
-.feature-title .ability-icon--venom { color:#9be782 !important; background:radial-gradient(circle at 35% 25%, rgba(112,224,128,0.28), transparent 38%), linear-gradient(145deg, rgba(32,72,44,0.86), rgba(12,20,16,0.96)); border-color:rgba(92,154,88,0.62); }
-.feature-title .ability-icon--fae { color:#fff08c !important; background:radial-gradient(circle at 35% 25%, rgba(255,228,92,0.32), transparent 38%), linear-gradient(145deg, rgba(96,74,24,0.86), rgba(22,18,12,0.96)); border-color:rgba(210,174,72,0.66); }
-.feature-title .ability-icon--fire { color:#ff8fd8 !important; background:radial-gradient(circle at 35% 25%, rgba(255,86,200,0.34), transparent 38%), linear-gradient(145deg, rgba(88,28,76,0.88), rgba(24,12,24,0.96)); border-color:rgba(204,82,170,0.66); }
-.feature-title .ability-icon--sight { color:#8fd7ff !important; background:radial-gradient(circle at 35% 25%, rgba(74,160,255,0.3), transparent 38%), linear-gradient(145deg, rgba(28,58,92,0.86), rgba(10,18,28,0.96)); border-color:rgba(84,142,196,0.64); }
-.feature-title .ability-icon--dark { color:#9ea8ff !important; background:radial-gradient(circle at 35% 25%, rgba(78,84,190,0.34), transparent 38%), linear-gradient(145deg, rgba(30,34,82,0.88), rgba(8,10,22,0.96)); border-color:rgba(82,90,176,0.66); }
+.feature-title .ability-icon--blood,
+.feature-title .ability-icon--shadow,
+.feature-title .ability-icon--mark,
+.feature-title .ability-icon--venom,
+.feature-title .ability-icon--fae,
+.feature-title .ability-icon--fire,
+.feature-title .ability-icon--sight,
+.feature-title .ability-icon--dark {
+  background:
+    radial-gradient(circle at 35% 25%, rgba(124,32,41,0.16), transparent 38%),
+    linear-gradient(145deg, rgba(24,28,42,0.9), rgba(11,13,20,0.96));
+  border-color: rgba(49,66,96,0.9);
+}
+.feature-title .ability-icon--blood { color:#ff767b !important; }
+.feature-title .ability-icon--shadow { color:#b9a0ff !important; }
+.feature-title .ability-icon--mark { color:#ffbd6a !important; }
+.feature-title .ability-icon--venom { color:#9be782 !important; }
+.feature-title .ability-icon--fae { color:#fff08c !important; }
+.feature-title .ability-icon--fire { color:#ff8fd8 !important; }
+.feature-title .ability-icon--sight { color:#8fd7ff !important; }
+.feature-title .ability-icon--dark { color:#9ea8ff !important; }
 .assassin-section-title {
   color: #d47880 !important;
   border-color: rgba(143,38,48,0.86) !important;
