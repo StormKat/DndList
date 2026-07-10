@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1400" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#11233a"/>
+      <stop offset="0.28" stop-color="#315f7f"/>
+      <stop offset="0.48" stop-color="#d99a63"/>
+      <stop offset="0.62" stop-color="#277b91"/>
+      <stop offset="1" stop-color="#061019"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#2fa8b0"/>
+      <stop offset="0.32" stop-color="#16748b"/>
+      <stop offset="0.74" stop-color="#083b57"/>
+      <stop offset="1" stop-color="#04111c"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="39%" r="42%">
+      <stop offset="0" stop-color="#ffd28a" stop-opacity="0.9"/>
+      <stop offset="0.28" stop-color="#f39a64" stop-opacity="0.38"/>
+      <stop offset="0.62" stop-color="#5fb9c8" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#061019" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="readableCenter" cx="50%" cy="57%" r="56%">
+      <stop offset="0" stop-color="#06111c" stop-opacity="0.34"/>
+      <stop offset="0.56" stop-color="#06111c" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#02060b" stop-opacity="0.82"/>
+    </radialGradient>
+    <filter id="soften">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="paint">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.026" numOctaves="4" seed="17"/>
+      <feColorMatrix type="saturate" values="0.35"/>
+      <feBlend in="SourceGraphic" mode="soft-light"/>
+    </filter>
+  </defs>
+  <rect width="2400" height="1400" fill="url(#sky)"/>
+  <rect width="2400" height="1400" fill="url(#sunGlow)"/>
+  <g opacity="0.7" filter="url(#soften)">
+    <path d="M-100 620 C290 525 460 610 715 560 C1010 500 1220 570 1510 515 C1815 455 2050 520 2500 445 L2500 720 L-100 720 Z" fill="#16344a"/>
+    <path d="M-80 682 C210 610 430 666 690 635 C1030 594 1210 666 1540 620 C1800 584 2060 642 2480 590 L2480 735 L-80 735 Z" fill="#0c2234"/>
+  </g>
+  <rect y="610" width="2400" height="790" fill="url(#sea)"/>
+  <g opacity="0.78">
+    <path d="M0 642 C360 614 620 656 965 626 C1260 600 1540 650 1850 618 C2080 596 2250 604 2400 588 L2400 650 C2070 692 1820 650 1530 686 C1210 724 950 668 650 710 C420 742 210 694 0 724 Z" fill="#ffe3a8" opacity="0.22"/>
+    <path d="M0 736 C250 692 460 748 720 710 C1020 666 1250 736 1540 700 C1830 664 2100 714 2400 678 L2400 740 C2100 786 1840 734 1540 774 C1240 814 1030 750 730 802 C460 846 240 778 0 826 Z" fill="#c8fff2" opacity="0.18"/>
+    <path d="M0 850 C350 794 610 862 980 808 C1260 766 1480 838 1780 798 C2020 766 2220 796 2400 770 L2400 840 C2120 894 1960 850 1700 890 C1400 936 1160 858 880 914 C610 968 350 896 0 970 Z" fill="#baf9ec" opacity="0.14"/>
+    <path d="M-80 1050 C320 976 690 1064 1040 996 C1360 934 1620 1040 1940 982 C2160 942 2320 960 2480 940 L2480 1050 C2180 1118 1940 1044 1650 1112 C1350 1182 1060 1082 740 1160 C450 1230 190 1132 -80 1210 Z" fill="#f4f7d8" opacity="0.11"/>
+  </g>
+  <g opacity="0.8">
+    <path d="M0 1185 C360 1090 760 1180 1120 1118 C1480 1056 1780 1160 2400 1068 L2400 1400 L0 1400 Z" fill="#c99555"/>
+    <path d="M0 1242 C500 1168 820 1255 1240 1196 C1620 1140 1950 1216 2400 1158 L2400 1400 L0 1400 Z" fill="#7b522f" opacity="0.34"/>
+  </g>
+  <g opacity="0.24" filter="url(#soften)">
+    <ellipse cx="1220" cy="725" rx="820" ry="230" fill="#ffe5b0"/>
+    <ellipse cx="1220" cy="980" rx="1060" ry="270" fill="#051019"/>
+  </g>
+  <rect width="2400" height="1400" fill="url(#readableCenter)"/>
+  <rect width="2400" height="1400" filter="url(#paint)" opacity="0.15"/>
+</svg>
