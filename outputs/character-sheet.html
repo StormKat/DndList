@@ -752,71 +752,11 @@ body {
     #07111c !important;
 }
 
-.ambient-smoke {
-  position: fixed;
-  inset: 0;
-  z-index: 3;
-  overflow: hidden;
-  pointer-events: none;
-  contain: layout paint size;
-  transform: translateZ(0);
-  background:
-    linear-gradient(180deg, rgba(4,9,15,0.08), rgba(4,9,15,0.36)),
-    radial-gradient(ellipse at 50% 42%, rgba(255,221,155,0.1) 0%, transparent 30%),
-    radial-gradient(ellipse at 50% 82%, rgba(4,9,15,0.62) 0%, transparent 58%);
-}
-.ambient-smoke::before,
-.ambient-smoke::after {
-  content: '';
-  position: absolute;
-  pointer-events: none;
-  z-index: 1;
-}
-.ambient-smoke::before {
-  left: 0;
-  right: 0;
-  top: 36vh;
-  height: 2px;
-  background:
-    linear-gradient(90deg, transparent, rgba(223,255,255,0.6), rgba(255,214,150,0.42), transparent);
-  box-shadow:
-    0 0 22px rgba(130,224,231,0.36),
-    0 34vh 80px 28px rgba(13,82,105,0.24);
-}
-.ambient-smoke::after {
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 50% 44%, rgba(141,225,226,0.18) 0%, transparent 38%),
-    radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.62) 0%, transparent 46%),
-    radial-gradient(ellipse at center, transparent 26%, rgba(3,8,15,0.34) 78%, rgba(1,3,8,0.74) 100%),
-    linear-gradient(180deg, rgba(255,188,105,0.08), transparent 26%, transparent 62%, rgba(0,0,0,0.46));
-  opacity: 1;
-}
-.smoke-readable-veil {
-  position: fixed;
-  z-index: 4;
-  pointer-events: none;
-  border-radius: 10px;
-  background:
-    radial-gradient(ellipse at center, rgba(7,13,20,0.76) 0%, rgba(7,13,20,0.66) 54%, rgba(7,13,20,0.34) 82%, transparent 100%);
-  filter: blur(16px);
-}
 .site-header,
 .tabs-wrap,
 .site-wrap {
   position: relative;
   z-index: 5;
-}
-@media (max-width: 768px) {
-  .smoke-readable-veil {
-    border-radius: 8px;
-    filter: blur(10px);
-    background:
-      radial-gradient(ellipse at center, rgba(7,13,20,0.82) 0%, rgba(7,13,20,0.7) 58%, rgba(7,13,20,0.38) 86%, transparent 100%);
-  }
-}
-@media print {
-  .ambient-smoke { display: none; }
 }
 
 /* Контейнер */
@@ -2826,9 +2766,6 @@ b,
 </head>
 <body>
 
-<div class="ambient-smoke" id="ambient-smoke" aria-hidden="true"></div>
-<div class="smoke-readable-veil" aria-hidden="true"></div>
-
 <svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden">
   <defs>
     <symbol id="icon-portrait" viewBox="0 0 24 24">
@@ -3700,7 +3637,6 @@ function switchTab(name, button) {
   button.classList.add('active');
   void button.offsetWidth;
   button.classList.add('tab-blood-strike');
-  requestAnimationFrame(updateSmokeReadableVeil);
   if (window.innerWidth <= 768) {
     requestAnimationFrame(() => {
       button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
@@ -3715,27 +3651,6 @@ function switchTab(name, button) {
   if (name === 'notes') loadNotes();
 }
 
-function updateSmokeReadableVeil() {
-  const veil = document.querySelector('.smoke-readable-veil');
-  const activePanel = document.querySelector('.tab-panel.active');
-  const target = activePanel?.querySelector('.page, .inventory-panel, .notes-panel, .combat-panel, .archive-panel') || activePanel;
-  if (!veil || !target) return;
-
-  const rect = target.getBoundingClientRect();
-  const mobile = window.innerWidth <= 768;
-  const padX = mobile ? 12 : 26;
-  const padY = mobile ? 14 : 24;
-  const left = Math.max(0, rect.left - padX);
-  const top = Math.max(0, rect.top - padY);
-  veil.style.left = left + 'px';
-  veil.style.top = top + 'px';
-  veil.style.width = Math.min(window.innerWidth - left, rect.width + padX * 2) + 'px';
-  veil.style.height = Math.min(window.innerHeight - top, rect.height + padY * 2) + 'px';
-}
-
-window.addEventListener('DOMContentLoaded', updateSmokeReadableVeil);
-window.addEventListener('resize', updateSmokeReadableVeil, { passive: true });
-window.addEventListener('scroll', updateSmokeReadableVeil, { passive: true });
 </script>
 
 <script>
