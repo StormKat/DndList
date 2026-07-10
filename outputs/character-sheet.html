@@ -72,6 +72,39 @@ tailwind.config = {
   .sbadge-later,
   .sbadge-ability,
   .sbadge-new    { background:rgba(13,17,28,0.72); color:#b9c9dc; border-color:#314260; font-weight:700; box-shadow:none; }
+  .scard-level5 {
+    background:
+      radial-gradient(circle at 18% 10%, rgba(80,156,92,0.20), transparent 36%),
+      radial-gradient(circle at 82% 82%, rgba(93,36,112,0.16), transparent 38%),
+      linear-gradient(145deg, rgba(14,25,20,0.96), rgba(9,13,17,0.99)) !important;
+    border-color: rgba(91,162,99,0.86) !important;
+    box-shadow: inset 0 0 20px rgba(80,156,92,0.10), 0 0 18px rgba(80,156,92,0.10) !important;
+  }
+  .scard-anim.scard-level5::before {
+    background: linear-gradient(135deg,
+      rgba(80,156,92,0.0) 0%,
+      rgba(80,156,92,0.18) 36%,
+      rgba(93,36,112,0.14) 58%,
+      rgba(80,156,92,0.0) 82%
+    );
+    background-size: 300% 300%;
+    animation: card-fill 5s ease infinite;
+  }
+  .sbadge-level5 {
+    background:rgba(18,48,29,0.82) !important;
+    color:#c7f1ca !important;
+    border-color:rgba(91,162,99,0.78) !important;
+    font-weight:800;
+    box-shadow:0 0 14px rgba(80,156,92,0.12);
+  }
+  .feature-level5 {
+    margin-top: 3px;
+    padding: 4px 5px;
+    border: 1px solid rgba(91,162,99,0.62);
+    border-radius: 4px;
+    background: linear-gradient(135deg, rgba(20,55,30,0.38), rgba(13,17,28,0.48));
+    box-shadow: inset 0 0 14px rgba(80,156,92,0.08);
+  }
   .eqli::before  { content:'◆'; position:absolute; left:0; color:#4a6fa8; font-size:7px; top:2px; }
   textarea { background:rgba(74,111,168,0.07); border:0.5px solid #2e3d5a; border-radius:3px; color:#dce8f0; font-family:'Manrope',Arial,sans-serif; font-size:9px; padding:6px; resize:none; outline:none; line-height:1.5; width:100%; height:58px; }
   textarea::placeholder { color:#506070; }
@@ -379,6 +412,24 @@ tailwind.config = {
     rgba(124,32,41,0.15) 42%,
     rgba(74,111,168,0.0) 80%
   );
+  background-size: 300% 300%;
+  animation: card-fill 5s ease infinite;
+}
+.scard-anim.scard-level5 {
+  background:
+    radial-gradient(circle at 18% 10%, rgba(80,156,92,0.20), transparent 36%),
+    radial-gradient(circle at 82% 82%, rgba(93,36,112,0.16), transparent 38%),
+    linear-gradient(145deg, rgba(14,25,20,0.96), rgba(9,13,17,0.99)) !important;
+  border-color: rgba(91,162,99,0.86) !important;
+  box-shadow: inset 0 0 20px rgba(80,156,92,0.10), 0 0 18px rgba(80,156,92,0.10) !important;
+}
+.scard-anim.scard-level5::before {
+  background: linear-gradient(135deg,
+    rgba(80,156,92,0.0) 0%,
+    rgba(80,156,92,0.18) 36%,
+    rgba(93,36,112,0.14) 58%,
+    rgba(80,156,92,0.0) 82%
+  ) !important;
   background-size: 300% 300%;
   animation: card-fill 5s ease infinite;
 }
@@ -2960,7 +3011,7 @@ b,
     <div class="char-title-row">
       <div class="char-name font-meta text-[22px] tracking-[3px]">Съебастьян Сквозняк</div>
       <div class="char-subtitle text-[10px] text-drow-bright mt-0.5 tracking-wide">
-        Дроу · Плут 4 · Архетип Убийца · Нейтрально-злой
+        Дроу · Плут 5 · Архетип Убийца · Нейтрально-злой
       </div>
     </div>
     <div class="char-meta-grid grid grid-cols-3 gap-1.5 mt-1.5">
@@ -2970,11 +3021,11 @@ b,
       </div>
       <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
         <div class="text-[8px] text-drow-faint uppercase tracking-wide">Класс</div>
-        <div class="text-[11px] text-drow-text font-bold">Плут 4</div>
+        <div class="text-[11px] text-drow-text font-bold">Плут 5</div>
       </div>
       <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
         <div class="text-[8px] text-drow-faint uppercase tracking-wide">Опыт</div>
-        <div class="text-[11px] text-drow-text font-bold">2700 / 6500</div>
+        <div class="text-[11px] text-drow-text font-bold">6500 / 14000</div>
       </div>
       <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
         <div class="text-[8px] text-drow-faint uppercase tracking-wide">Предыстория</div>
@@ -2986,7 +3037,7 @@ b,
       </div>
       <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
         <div class="text-[8px] text-drow-faint uppercase tracking-wide">Уровень</div>
-        <div class="text-[11px] text-drow-text font-bold">4</div>
+        <div class="text-[11px] text-drow-text font-bold">5</div>
       </div>
     </div>
   </div>
@@ -2998,8 +3049,8 @@ b,
       <div>
         <div class="text-[7px] text-drow-muted uppercase tracking-wide mb-1 text-center">Хиты</div>
         <div class="char-vitals-circle w-[56px] h-[56px] rounded-full border-2 border-drow-accent flex flex-col items-center justify-center bg-[rgba(74,111,168,0.12)]" style="box-shadow:0 0 12px rgba(74,111,168,0.25)">
-          <div class="font-meta text-[22px] text-drow-silver leading-none">27</div>
-          <div class="text-[8px] text-drow-muted">макс: 27</div>
+          <div class="font-meta text-[22px] text-drow-silver leading-none">33</div>
+          <div class="text-[8px] text-drow-muted">макс: 33</div>
         </div>
       </div>
       <div class="char-vitals-side">
@@ -3018,16 +3069,16 @@ b,
 
 <!-- PROFBAR -->
 <div class="flex items-center justify-between px-3 py-1.5 border-b border-drow-border bg-drow-bar text-[8.5px] text-drow-muted relative z-10 mob-profbar">
-  <span class="tip">Бонус мастерства: <b class="font-meta text-[10px] text-drow-bright">+2</b>
+  <span class="tip">Бонус мастерства: <b class="font-meta text-[10px] text-drow-bright">+3</b>
   <div class="tip-box"><span class="tip-title">Бонус мастерства</span>Добавляется к атакам, навыкам и спасброскам с владением.<br><br>Ур. 1–4: <b>+2</b> · Ур. 5–8: <b>+3</b> · Ур. 9–12: <b>+4</b></div>
 </span>
-  <span class="tip">Пассивная Внимательность: <b class="font-meta text-[10px] text-drow-bright">14</b>
-  <div class="tip-box"><span class="tip-title">Пассивная Внимательность</span>= 10 + бонус Внимательности. Мастер использует её чтобы определить, заметишь ли ты что-то без активного осмотра.<br><br><span class="tip-good">Твоя: 10 + 2 + 2 (владение) = 14</span></div>
+  <span class="tip">Пассивная Внимательность: <b class="font-meta text-[10px] text-drow-bright">15</b>
+  <div class="tip-box"><span class="tip-title">Пассивная Внимательность</span>= 10 + бонус Внимательности. Мастер использует её чтобы определить, заметишь ли ты что-то без активного осмотра.<br><br><span class="tip-good">Твоя: 10 + 3 + 2 (владение) = 15</span></div>
 </span>
   <span class="tip">Тёмное зрение: <b class="font-meta text-[10px] text-drow-bright">120 фт</b>
   <div class="tip-box"><span class="tip-title">Тёмное зрение</span>В тусклом свете → видишь как при ярком.<br>В темноте → видишь как в тусклом (серый).<br><br>120 фт — лучшее среди рас!<br><span class="tip-warn">Помеха атакам при прямом солнечном свете!</span></div>
 </span>
-  <span>Кубик хитов: <b class="font-meta text-[10px] text-drow-bright">4d8</b></span>
+  <span>Кубик хитов: <b class="font-meta text-[10px] text-drow-bright">5d8</b></span>
 </div>
 
 <!-- MAIN GRID -->
@@ -3043,7 +3094,7 @@ b,
       <div class="stat-mod stat-steel-mod">+0</div>
     </div>
     <div class="stat-arcane bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
-      <div class="text-[7px] text-drow-faint uppercase tip">Ловкость<div class="tip-box tip-left"><span class="tip-title">Ловкость</span>Акробатика, Скрытность, Ловкость рук, атаки фехтовальным оружием и дальнобойным, КД без доспехов, инициатива.<br><br><span class="tip-good">Главная характеристика Съебастьяна — +3 везде!</span></div></div>
+      <div class="text-[7px] text-drow-faint uppercase tip">Ловкость<div class="tip-box tip-left"><span class="tip-title">Ловкость</span>Акробатика, Скрытность, Ловкость рук, атаки фехтовальным оружием и дальнобойным, КД без доспехов, инициатива.<br><br><span class="tip-good">Главная характеристика Съебастьяна — +4 везде!</span></div></div>
       <div class="stat-arcane-value font-meta text-[17px] leading-none">18</div>
       <div class="stat-mod stat-mod-positive stat-arcane-mod">+4</div>
     </div>
@@ -3053,7 +3104,7 @@ b,
       <div class="stat-mod stat-mod-positive stat-steel-mod">+1</div>
     </div>
     <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
-      <div class="text-[7px] text-drow-faint uppercase tip">Интеллект<div class="tip-box tip-left"><span class="tip-title">Интеллект</span>Аркана, История, Расследование, Природа, Религия. Спасброски Интеллекта.<br><br>Плут владеет спасбросками Интеллекта — <span class="tip-good">+3 со вл.</span></div></div>
+      <div class="text-[7px] text-drow-faint uppercase tip">Интеллект<div class="tip-box tip-left"><span class="tip-title">Интеллект</span>Аркана, История, Расследование, Природа, Религия. Спасброски Интеллекта.<br><br>Плут владеет спасбросками Интеллекта — <span class="tip-good">+4 со вл.</span></div></div>
       <div class="stat-steel-value font-meta text-[17px] leading-none">12</div>
       <div class="stat-mod stat-mod-positive stat-steel-mod">+1</div>
     </div>
@@ -3063,7 +3114,7 @@ b,
       <div class="stat-mod stat-steel-mod">+0</div>
     </div>
     <div class="stat-arcane bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
-      <div class="text-[7px] text-drow-faint uppercase tip">Харизма<div class="tip-box tip-left"><span class="tip-title">Харизма</span>Обман, Запугивание, Выступление, Убеждение. Магия дроу использует Харизму (СС 12).<br><br><span class="tip-good">Харизма +2 → Обман +4!</span></div></div>
+      <div class="text-[7px] text-drow-faint uppercase tip">Харизма<div class="tip-box tip-left"><span class="tip-title">Харизма</span>Обман, Запугивание, Выступление, Убеждение. Магия дроу использует Харизму (СС 13).<br><br><span class="tip-good">Харизма +2 → Обман +5!</span></div></div>
       <div class="stat-arcane-value font-meta text-[17px] leading-none">16</div>
       <div class="stat-mod stat-mod-positive stat-arcane-mod">+2</div>
     </div>
@@ -3078,7 +3129,7 @@ b,
       <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span>Сила</span></li>
       <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+6</span><span>Ловкость</span></li>
       <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+1</span><span>Телосложение</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+3</span><span>Интеллект</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+4</span><span>Интеллект</span></li>
       <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span>Мудрость</span></li>
       <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+2</span><span>Харизма</span></li>
     </ul>
@@ -3087,13 +3138,13 @@ b,
     <ul class="flex flex-col gap-px">
       <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span class="flex-1">Атлетика</span><span class="text-[8px] text-drow-faint">Сил</span></li>
       <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+6</span><span class="flex-1">Акробатика</span><span class="text-[8px] text-drow-faint">Лов</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot e"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+8</span><span class="flex-1">Ловкость рук ✦</span><span class="text-[8px] text-drow-faint">Лов</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot e"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+8</span><span class="flex-1">Скрытность ✦</span><span class="text-[8px] text-drow-faint">Лов</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot e"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+9</span><span class="flex-1">Ловкость рук ✦</span><span class="text-[8px] text-drow-faint">Лов</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot e"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+9</span><span class="flex-1">Скрытность ✦</span><span class="text-[8px] text-drow-faint">Лов</span></li>
       <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+1</span><span class="flex-1">Аркана</span><span class="text-[8px] text-drow-faint">Инт</span></li>
       <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+1</span><span class="flex-1">История</span><span class="text-[8px] text-drow-faint">Инт</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+3</span><span class="flex-1">Расследование</span><span class="text-[8px] text-drow-faint">Инт</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+4</span><span class="flex-1">Расследование</span><span class="text-[8px] text-drow-faint">Инт</span></li>
       <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+1</span><span class="flex-1">Природа</span><span class="text-[8px] text-drow-faint">Инт</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+2</span><span class="flex-1">Внимательность</span><span class="text-[8px] text-drow-faint">Муд</span></li>
+      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+3</span><span class="flex-1">Внимательность</span><span class="text-[8px] text-drow-faint">Муд</span></li>
       <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span class="flex-1">Проницательность</span><span class="text-[8px] text-drow-faint">Муд</span></li>
       <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span class="flex-1">Медицина</span><span class="text-[8px] text-drow-faint">Муд</span></li>
       <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span class="flex-1">Выживание</span><span class="text-[8px] text-drow-faint">Муд</span></li>
@@ -3110,34 +3161,34 @@ b,
     <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-1.5">Бой</div>
     <div class="grid grid-cols-3 gap-1.5 mb-2 mob-combat-grid">
       <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver tip">15
-  <div class="tip-box"><span class="tip-title">КД 14</span>Кожаный доспех 11 + Лов +3. Атаки ниже 14 — промах.<br><span class="tip-good">Щит реакцией → КД 19 на 1 ход!</span></div>
+  <div class="tip-box"><span class="tip-title">КД 15</span>Кожаный доспех 11 + Лов +4. Атаки ниже 15 — промах.</div>
 </div><div class="text-[7px] text-drow-faint uppercase">Класс доспехов</div></div>
       <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver tip">+4
-  <div class="tip-box"><span class="tip-title">Инициатива +4</span>d20 + 3 в начале боя. Чем выше — тем раньше ходишь.<br><span class="tip-good">Убийца выигрывает от первого хода!</span></div>
+  <div class="tip-box"><span class="tip-title">Инициатива +4</span>d20 + 4 в начале боя. Чем выше — тем раньше ходишь.<br><span class="tip-good">Убийца выигрывает от первого хода!</span></div>
 </div><div class="text-[7px] text-drow-faint uppercase">Инициатива</div></div>
       <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver">30 фт</div><div class="text-[7px] text-drow-faint uppercase">Скорость</div></div>
-      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver">27</div><div class="text-[7px] text-drow-faint uppercase">Макс хиты</div></div>
-      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver">4d8</div><div class="text-[7px] text-drow-faint uppercase">Куб хитов</div></div>
-      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver tip">+2
-  <div class="tip-box"><span class="tip-title">Бонус мастерства</span>Добавляется к навыкам, атакам и спасброскам с владением.<br><br>Ур. 1–4: +2 · Ур. 5–8: +3<br><span class="tip-good">Экспертиза удваивает: +4!</span></div>
+      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver">33</div><div class="text-[7px] text-drow-faint uppercase">Макс хиты</div></div>
+      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver">5d8</div><div class="text-[7px] text-drow-faint uppercase">Куб хитов</div></div>
+      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver tip">+3
+  <div class="tip-box"><span class="tip-title">Бонус мастерства</span>Добавляется к навыкам, атакам и спасброскам с владением.<br><br>Ур. 1–4: +2 · Ур. 5–8: +3<br><span class="tip-good">Экспертиза удваивает: +6!</span></div>
 </div><div class="text-[7px] text-drow-faint uppercase">Бонус мастерства</div></div>
     </div>
     <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-1">Атаки</div>
     <div class="mob-atk-wrap"><table class="w-full text-[9px] border-collapse">
       <tr><th class="bg-[rgba(74,111,168,0.13)] text-drow-bright px-1 py-1 text-left text-[7.5px] border border-drow-border">Оружие</th><th class="bg-[rgba(74,111,168,0.13)] text-drow-bright px-1 py-1 text-left text-[7.5px] border border-drow-border">Атака</th><th class="bg-[rgba(74,111,168,0.13)] text-drow-bright px-1 py-1 text-left text-[7.5px] border border-drow-border">Урон / Тип</th></tr>
-      <tr class="atk-row"><td class="px-1 py-0.5 border border-drow-border text-drow-text">Рапира</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">+6</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">1d8+4 / прокол</td></tr>
-      <tr class="atk-row"><td class="px-1 py-0.5 border border-drow-border text-drow-text">Ручной арбалет</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">+6</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">1d8+6 / прокол</td></tr>
-      <tr class="atk-row"><td class="px-1 py-0.5 border border-drow-border text-drow-text">Кинжал (брос.)</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">+6</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">1d4+6 / прокол</td></tr>
+      <tr class="atk-row"><td class="px-1 py-0.5 border border-drow-border text-drow-text">Рапира</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">+7</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">1d8+4 / прокол</td></tr>
+      <tr class="atk-row"><td class="px-1 py-0.5 border border-drow-border text-drow-text">Ручной арбалет</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">+7</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">1d8+6 / прокол</td></tr>
+      <tr class="atk-row"><td class="px-1 py-0.5 border border-drow-border text-drow-text">Кинжал (брос.)</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">+7</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">1d4+6 / прокол</td></tr>
     </table></div>
     <div class="mt-1.5">
       <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-0.5">Скрытная атака (1 раз в ход)</div>
-      <div class="text-[9px] text-drow-text leading-relaxed tip">+<strong>2d6</strong> урона при преимуществе или союзнике в 5 фт от цели
+      <div class="text-[9px] text-drow-text leading-relaxed tip">+<strong>3d6</strong> урона при преимуществе или союзнике в 5 фт от цели
   <div class="tip-box"><span class="tip-title">Скрытная атака</span>Один раз в ход. Нужно:<br>• Преимущество на атаку, <b>ИЛИ</b><br>• Союзник в 5 фт от цели<br>• Без помехи на атаку<br><br>На 5 ур.: +3d6 · На 7 ур.: +4d6<br><span class="tip-good">При крите все кубики удваиваются!</span></div>
 </div>
     </div>
     <div class="mt-1.5">
       <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-0.5">Магия дроу (Хар, СС 13)</div>
-      <div class="text-[9px] text-drow-text leading-relaxed">◆ <span class="text-drow-bright font-bold">Пляшущие огоньки</span> — заговор, по желанию<br>◆ <span class="text-drow-bright font-bold">Огонь фей</span> — 1/день ✦ РАЗБЛОКИРОВАН<br>◆ <span class="text-drow-bright font-bold">Тьма</span> — с 5 уровня, 1/день</div>
+      <div class="text-[9px] text-drow-text leading-relaxed">◆ <span class="text-drow-bright font-bold">Пляшущие огоньки</span> — заговор, по желанию<br>◆ <span class="text-drow-bright font-bold">Огонь фей</span> — 1/день ✦ РАЗБЛОКИРОВАН<br>◆ <span class="text-drow-bright font-bold">Тьма</span> — 1/день ✦ <span style="color:#bff0c4;font-weight:800">РАЗБЛОКИРОВАНА</span></div>
     </div>
   </div>
 </div>
@@ -3152,14 +3203,16 @@ b,
     <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Чувствительность к солнцу</strong> — помеха при солнечном свете</div>
     <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Владение оружием дроу</strong> — рапира, к. меч, арбалет</div>
     <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Транс</strong> — 4 часа медитации вместо 8 часов сна</div>
+    <div class="feature-level5 text-[8.5px] text-drow-text leading-snug">◆ <strong class="text-drow-silver">Тьма</strong> <span style="color:#bff0c4;font-weight:800">5 ур.</span> — 1/день ✦ РАЗБЛОКИРОВАНА</div>
   </div>
   <div class="rounded p-1.5" style="background:rgba(74,111,168,0.07);border:1px solid #2e3d5a;animation:rogue-border 3s ease-in-out infinite;transition:all 0.3s;">
     <div class="font-meta text-[8px] text-drow-bright uppercase tracking-wide border-b border-drow-border pb-0.5 mb-1">Умения плута</div>
-    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Мастерство ×2</strong> — Скрытность и Ловкость рук: +8</div>
-    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Скрытная атака</strong> — +2d6 при преимуществе / союзнике в 5 фт</div>
+    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Мастерство ×2</strong> — Скрытность и Ловкость рук: +9</div>
+    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Скрытная атака</strong> — +3d6 при преимуществе / союзнике в 5 фт</div>
     <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Хитрое действие</strong> — Рывок / Отход / Затаивание бонусным</div>
     <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Воровской жаргон</strong> — тайный язык воров</div>
     <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Спасброски:</strong> Ловкость, Интеллект</div>
+    <div class="feature-level5 text-[8.5px] text-drow-text leading-snug">◆ <strong class="text-drow-silver">Невероятное уклонение</strong> <span style="color:#bff0c4;font-weight:800">5 ур.</span> — реакцией урон от атаки ÷2</div>
   </div>
     <div class="rounded p-1.5" style="background:rgba(92,18,24,0.18);border:1px solid #8f2630;animation:assassin-border 3.5s ease-in-out infinite;">
     <div class="font-meta text-[8px] uppercase tracking-wide border-b pb-0.5 mb-1" style="color:#f0a0a6;border-color:#8f2630">
@@ -3167,7 +3220,7 @@ b,
     </div>
     <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Ликвидация</strong> — преимущество по не ходившим. Попадание по врасплох — АВТОКРИТ</div>
     <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Владения:</strong> Набор для грима · Инструменты отравителя</div>
-    <div class="text-[7px] mt-1" style="color:#f0a0a6">★ Спрятался → автокрит + 2d6 скрытная с первого удара!</div>
+    <div class="text-[7px] mt-1" style="color:#f0a0a6">★ Спрятался → автокрит + 3d6 скрытная с первого удара!</div>
   </div>
 </div>
 
@@ -3219,7 +3272,7 @@ b,
 
 <div class="text-center px-3 py-2.5 border-b-2 border-drow-border bg-drow-header relative z-10">
   <div class="font-meta text-[20px] text-drow-silver tracking-[2px]">Съебастьян Сквозняк — Шпаргалка</div>
-  <div class="text-[10px] text-drow-muted mt-0.5">Плут 4 · Убийца · Дроу · Хар-ка: Харизма (+2) · СС 13 · Бонус атаки +5</div>
+  <div class="text-[10px] text-drow-muted mt-0.5">Плут 5 · Убийца · Дроу · Хар-ка: Харизма (+2) · СС 13 · Бонус атаки +7</div>
 </div>
 
 <!-- helper macros as inline template -->
@@ -3235,10 +3288,10 @@ b,
       <span class="text-[8px] px-2 py-0.5 rounded border sbadge-ability shrink-0">1× за ход</span>
     </div>
     <div class="flex flex-wrap gap-1 mb-1.5">
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Доп. урон: <span class="text-drow-silver font-bold">+2d6</span></span>
+      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Доп. урон: <span class="text-drow-silver font-bold">+3d6</span></span>
       <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Оружие: <span class="text-drow-silver font-bold">фехт. или дальн.</span></span>
     </div>
-    <div class="text-[9.5px] text-drow-muted leading-relaxed italic">Раз в ход добавь <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">+2d6 урона</span> если есть <strong class="not-italic">преимущество</strong> или <strong class="not-italic">союзник в 5 фт от цели</strong>. Без помехи.</div>
+    <div class="text-[9.5px] text-drow-muted leading-relaxed italic">Раз в ход добавь <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">+3d6 урона</span> если есть <strong class="not-italic">преимущество</strong> или <strong class="not-italic">союзник в 5 фт от цели</strong>. Без помехи.</div>
     <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext leading-snug">✓ Союзник рядом с ЦЕЛЬЮ, не с тобой. Работает реакцией!</div></div>
   </div>
 
@@ -3249,6 +3302,19 @@ b,
     </div>
     <div class="text-[9.5px] text-drow-muted leading-relaxed italic">Каждый ход бонусным действием:<br>— <strong class="not-italic text-drow-text">Рывок</strong> — удвоить скорость (60 фт)<br>— <strong class="not-italic text-drow-text">Отход</strong> — без провоцированных атак<br>— <strong class="not-italic text-drow-text">Затаивание</strong> — попытка спрятаться</div>
     <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Затаивание → преимущество → Скрытная атака автоматически!</div></div>
+  </div>
+
+  <div class="scard-new scard-level5 border rounded-md p-2 scard-anim">
+    <div class="flex items-start justify-between mb-1.5 gap-2">
+      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--shadow"><use href="#icon-gi-crosshair-arrow"></use></svg>Невероятное уклонение</div>
+      <span class="text-[8px] px-2 py-0.5 rounded border sbadge-level5 shrink-0">5 ур. · реакция</span>
+    </div>
+    <div class="flex flex-wrap gap-1 mb-1.5">
+      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Эффект: <span class="text-drow-silver font-bold">урон ÷2</span></span>
+      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Триггер: <span class="text-drow-silver font-bold">атака попала</span></span>
+    </div>
+    <div class="text-[9.5px] text-drow-muted leading-relaxed italic">Когда нападающий, которого ты видишь, попадает по тебе атакой, можешь реакцией уменьшить урон от этой атаки вдвое.</div>
+    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Работает против атак, включая атаки заклинаниями. Не работает против спасбросков вроде Огненного шара.</div></div>
   </div>
 
 </div></div>
@@ -3266,7 +3332,7 @@ b,
       <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Тип: <span class="text-drow-silver font-bold">Пассивно</span></span>
     </div>
     <div class="text-[9.5px] text-drow-muted leading-relaxed italic">— <strong class="not-italic">Преимущество</strong> на атаки по существам, что ещё <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">не совершали ход</span><br>— Попадание по <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">захваченному врасплох</span> = <strong class="not-italic">АВТОКРИТ</strong></div>
-    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Спрятался → враг удивлён → АВТОКРИТ + 2d6 удваиваются при крите!</div></div>
+    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Спрятался → враг удивлён → АВТОКРИТ + 3d6 удваиваются при крите!</div></div>
     <div class="swarn rounded-r p-1.5 mt-1"><div class="text-[9px] text-drow-warntext">Важно: автокрит — только по захваченным врасплох (до начала боя).</div></div>
   </div>
 
@@ -3280,13 +3346,13 @@ b,
       <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Инстр. отравителя</span>
     </div>
     <div class="text-[9.5px] text-drow-muted leading-relaxed italic"><strong class="not-italic text-drow-text">Набор для грима</strong> — менять внешность, возраст, черты лица.<br><strong class="not-italic text-drow-text">Инструменты отравителя</strong> — яды: Simple Poison 1d4/ход, СС Тел 10.</div>
-    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Маскировка + Скрытность +7 = подойти вплотную незамеченным!</div></div>
+    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Маскировка + Скрытность +9 = подойти вплотную незамеченным!</div></div>
   </div>
 
 </div></div>
 
 <!-- SECTION: МАГИЯ ДРОУ -->
-<div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mb-1.5">Природная магия дроу (Хар +2, СС 12)</div>
+<div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mb-1.5">Природная магия дроу (Хар +2, СС 13)</div>
 <div class="mob-spell-grid"><div class="grid grid-cols-2 gap-2 px-2.5 mb-2 spell-grid-inner">
 
   <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
@@ -3310,9 +3376,9 @@ b,
     </div>
     <div class="flex flex-wrap gap-1 mb-1.5">
       <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">60 фт · Куб 20 фт</span>
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Спас.: <span class="text-drow-silver font-bold">Лов СС 12</span></span>
+      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Спас.: <span class="text-drow-silver font-bold">Лов СС 13</span></span>
     </div>
-    <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Существа в кубе 20 фт — спасбросок Лов СС 12. При провале — подсвечены. Все атаки по ним <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">с преимуществом</span>.</div>
+    <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Существа в кубе 20 фт — спасбросок Лов СС 13. При провале — подсвечены. Все атаки по ним <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">с преимуществом</span>.</div>
     <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Преимущество для всей пати → Скрытная атака каждый ход!</div></div>
     <div class="swarn rounded-r p-1.5 mt-1"><div class="text-[9px] text-drow-warntext">Важно: действует на всех в области, включая союзников.</div></div>
   </div>
@@ -3320,17 +3386,21 @@ b,
 </div></div>
 
 <!-- SECTION: РАСОВЫЕ -->
-<div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mb-1.5">Расовые особенности · Тьма (с 5 уровня)</div>
+<div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mb-1.5">Расовые особенности · Тьма разблокирована</div>
 <div class="mob-spell-grid"><div class="grid grid-cols-2 gap-2 px-2.5 mb-2 spell-grid-inner">
   <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
     <div class="flex items-start justify-between mb-1.5"><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--sight"><use href="#icon-gi-invisible-face"></use></svg>Тёмное зрение 120 фт</div><span class="text-[8px] px-2 py-0.5 rounded border sbadge-race shrink-0">Пассивно</span></div>
     <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Тусклый → яркий. Темнота → тусклый (серый). <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">120 фт</span> — лучшее среди рас.</div>
     <div class="swarn rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-warntext">Важно: помеха атакам и Внимательности при солнечном свете.</div></div>
   </div>
-  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
-    <div class="flex items-start justify-between mb-1.5"><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--dark"><use href="#icon-gi-hood"></use></svg>Тьма — с 5 уровня</div><span class="text-[8px] px-2 py-0.5 rounded border sbadge-later shrink-0">1/день</span></div>
-    <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Сфера 15 фт. Ничто не рассеивает. Дроу видит свою тьму нормально.</div>
-    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ КОМБО: Тьма → враги слепы → атаки с преимуществом → Скрытная атака каждый ход!</div></div>
+  <div class="scard-new scard-level5 border rounded-md p-2 scard-anim">
+    <div class="flex items-start justify-between mb-1.5"><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--dark"><use href="#icon-gi-hood"></use></svg>Тьма</div><span class="text-[8px] px-2 py-0.5 rounded border sbadge-level5 shrink-0">1/день ✦ РАЗБЛОКИРОВАНА</span></div>
+    <div class="flex flex-wrap gap-1 mb-1.5">
+      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Сфера: <span class="text-drow-silver font-bold">15 фт</span></span>
+      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Конц.: <span class="text-drow-silver font-bold">10 минут</span></span>
+    </div>
+    <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Долгожданная кнопка тёмного убийцы: сфера магической тьмы 15 фт. Дроу видит сквозь свою тьму нормально.</div>
+    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ КОМБО: Тьма → враги слепнут → атаки с преимуществом → Скрытная атака каждый ход!</div></div>
   </div>
 </div></div>
 
@@ -3339,7 +3409,7 @@ b,
 <div class="grid grid-cols-2 gap-2 px-2.5 pb-2.5">
   <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-2">
     <div class="font-meta text-[9px] text-drow-silver border-b border-drow-border pb-0.5 mb-1">Начало боя — враги удивлены</div>
-    <div class="text-[9px] text-drow-muted leading-relaxed">→ <span class="font-bold text-drow-bright">АВТОКРИТ</span> + 2d6 скрытная. Кубики удваиваются!</div>
+    <div class="text-[9px] text-drow-muted leading-relaxed">→ <span class="font-bold text-drow-bright">АВТОКРИТ</span> + 3d6 скрытная. Кубики удваиваются!</div>
   </div>
   <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-2">
     <div class="font-meta text-[9px] text-drow-silver border-b border-drow-border pb-0.5 mb-1">Первый раунд — враги не ходили</div>
@@ -3349,9 +3419,13 @@ b,
     <div class="font-meta text-[9px] text-drow-silver border-b border-drow-border pb-0.5 mb-1">Нас окружили</div>
     <div class="text-[9px] text-drow-muted leading-relaxed">→ <span class="font-bold text-drow-bright">Огонь фей</span> (1/день) → преимущество для пати 10 раундов</div>
   </div>
+  <div class="scard-level5 border rounded p-2">
+    <div class="font-meta text-[9px] text-drow-silver border-b border-drow-border pb-0.5 mb-1">Нужно забрать поле боя</div>
+    <div class="text-[9px] text-drow-muted leading-relaxed">→ <span class="font-bold text-drow-bright">Тьма</span> (1/день) → враги слепнут → <span class="font-bold text-drow-bright">Скрытная атака каждый ход</span></div>
+  </div>
   <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-2">
     <div class="font-meta text-[9px] text-drow-silver border-b border-drow-border pb-0.5 mb-1">Проникновение / разведка</div>
-    <div class="text-[9px] text-drow-muted leading-relaxed">→ <span class="font-bold text-drow-bright">Скрытность +7</span> · <span class="font-bold text-drow-bright">Грим</span> · <span class="font-bold text-drow-bright">Ловкость рук +7</span></div>
+    <div class="text-[9px] text-drow-muted leading-relaxed">→ <span class="font-bold text-drow-bright">Скрытность +9</span> · <span class="font-bold text-drow-bright">Грим</span> · <span class="font-bold text-drow-bright">Ловкость рук +9</span></div>
   </div>
 </div>
 
@@ -3413,8 +3487,8 @@ document.querySelectorAll('.scard-anim').forEach(card => {
           <div class="combat-hero">
             <div class="combat-hero-main">
               <div class="combat-hp-orb" id="combat-hp-orb">
-                <div class="combat-hp-current" id="combat-player-hp">27</div>
-                <div class="combat-hp-max">из <span id="combat-player-max-hp">27</span> ХП</div>
+                <div class="combat-hp-current" id="combat-player-hp">33</div>
+                <div class="combat-hp-max">из <span id="combat-player-max-hp">33</span> ХП</div>
                 <div class="combat-temp-hp">временные: <span id="combat-player-temp-hp">0</span></div>
               </div>
 
@@ -3579,7 +3653,7 @@ document.querySelectorAll('.scard-anim').forEach(card => {
 <div class="tab-panel" id="panel-inventory">
   <div class="inventory-panel">
     <div class="inventory-toolbar">
-      <div class="inv-title"><svg class="ui-icon title-icon"><use href="#icon-bag"></use></svg>Инвентарь — Съебастьян Сквозняк</div>
+      <div class="inv-title"><svg class="ui-icon title-icon"><use href="#icon-bag"></use></svg>Инвентарь — Съебастьян Сквозняк · Плут 5</div>
       <div class="inventory-sync">
         <input class="inv-add-input inventory-password" type="password" autocomplete="current-password"
           placeholder="Пароль синхронизации" oninput="setInventoryPassword(this.value)">
@@ -4042,8 +4116,8 @@ function defaultCombatState() {
     currentId: 'player',
     order: ['player'],
     player: {
-      hp: 27,
-      maxHp: 27,
+      hp: 33,
+      maxHp: 33,
       tempHp: 0,
       conditions: [],
       deathSuccess: 0,
