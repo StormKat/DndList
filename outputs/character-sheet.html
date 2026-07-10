@@ -501,7 +501,8 @@ tailwind.config = {
 .feature-title .ability-icon--fae,
 .feature-title .ability-icon--fire,
 .feature-title .ability-icon--sight,
-.feature-title .ability-icon--dark {
+.feature-title .ability-icon--dark,
+.feature-title .ability-icon--evasion {
   background:
     radial-gradient(circle at 35% 25%, rgba(124,32,41,0.16), transparent 38%),
     linear-gradient(145deg, rgba(24,28,42,0.9), rgba(11,13,20,0.96));
@@ -515,6 +516,7 @@ tailwind.config = {
 .feature-title .ability-icon--fire { color:#ff8fd8 !important; }
 .feature-title .ability-icon--sight { color:#8fd7ff !important; }
 .feature-title .ability-icon--dark { color:#9ea8ff !important; }
+.feature-title .ability-icon--evasion { color:#a8f2c0 !important; }
 .assassin-section-title {
   color: #d47880 !important;
   border-color: rgba(143,38,48,0.86) !important;
@@ -2957,6 +2959,13 @@ b,
     <symbol id="icon-gi-magic-swirl" viewBox="0 0 512 512">
       <path d="M247.79 18.734C137.967 17.596 19.874 96.94 19.73 244.53l21.403-51.395c-9.485 72.28-7.75 147.236 38.79 202.502L38.2 377.355c39.24 69.774 126.333 90.976 200.855 92.51C124.11 429.9 67.87 342.277 63.912 246.492c-6.722-211.78 260.658-217.694 340.78-75.77-3.417-19.492-8.623-38.426-15.618-56.11 77.406 89.155 59.293 214.875-21.29 253.036-24.25 3.95-48.93 12.06-60.954 19-58.548 33.802-6.27 126.536 53.225 92.188 9.44-5.45 23.404-17.303 36.494-31.352 64.36-59.52 98.1-118.24 93.108-188.94-6.52 29.1-19.175 57.904-35.623 84.683 63.158-146.822 7.956-263.89-144.838-301.354 12.097 5.835 23.503 13.63 33.873 23.36-57.415-23.752-131.123-22.62-186.884 3.505 28.066-26.2 64.776-43.73 102.2-49.642-3.52-.205-7.054-.325-10.597-.362zm-19.74 160.202-19.843 100.566c-2.958 3.81-5.64 6.852-9.033 9.94l-25.688-49.096-22.705 11.93 31.37 60.945c4.48 11.474 10.02 20.68 15.162 28.524 28.063 42.803 64.547 35.252 95.303 9.555l87.28-48.452-12.71-22.498-66.136 36.94c-1.517-3.154-3.266-6.552-5.056-9.51l67.818-64.96-17.54-18.695-66.47 63.762c-2.356-2.318-4.238-4.527-6.765-6.54l45.084-78.085-22.733-13.127-45.864 78.297c-3.79-1.31-7.72-2.2-11.595-2.745l15.656-81.896-25.533-4.854z"/>
     </symbol>
+    <symbol id="icon-gi-uncanny-dodge" viewBox="0 0 512 512">
+      <path d="M381 42c-61 23-112 57-151 101 28-9 59-12 91-8-59 32-105 81-138 147l54 24c31-55 75-90 132-105-15 22-24 48-26 78 39-53 84-88 136-106-20-52-53-95-98-131z"/>
+      <path d="M185 72c-51 18-88 55-110 111-21 54-24 121-8 197l83-54c-17-71-7-125 31-161 21-20 47-32 78-37-25-22-50-40-74-56z"/>
+      <path d="M151 342 54 409c33 43 78 66 135 69 75 4 144-30 207-103-82 37-151 33-207-12-14-11-26-18-38-21z"/>
+      <path d="M455 261 293 312l30 29 133-17 31 31 14-91-88-22 42 19z"/>
+      <path d="M233 219c-23 18-39 42-48 72l39 17c15-27 35-48 60-62-18-12-35-21-51-27z"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -3306,7 +3315,7 @@ b,
 
   <div class="scard-new scard-level5 border rounded-md p-2 scard-anim">
     <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--shadow"><use href="#icon-gi-crosshair-arrow"></use></svg>Невероятное уклонение</div>
+      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--evasion"><use href="#icon-gi-uncanny-dodge"></use></svg>Невероятное уклонение</div>
       <span class="text-[8px] px-2 py-0.5 rounded border sbadge-level5 shrink-0">5 ур. · реакция</span>
     </div>
     <div class="flex flex-wrap gap-1 mb-1.5">
