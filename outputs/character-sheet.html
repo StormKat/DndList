@@ -2565,6 +2565,78 @@ b,
   letter-spacing: 0.025em;
 }
 
+/* ══════════════ ПАМЯТНЫЙ РЕЖИМ ══════════════ */
+body.memorial-mode::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: rgba(2, 3, 5, 0.1);
+  -webkit-backdrop-filter: grayscale(1) saturate(0) brightness(0.9) contrast(1.06);
+  backdrop-filter: grayscale(1) saturate(0) brightness(0.9) contrast(1.06);
+}
+body.memorial-mode .site-header,
+body.memorial-mode .tabs-wrap,
+body.memorial-mode .site-wrap,
+body.memorial-mode .netlify-modal {
+  filter: grayscale(1) saturate(0) contrast(1.05);
+}
+body.memorial-mode .page {
+  box-shadow: 0 10px 44px rgba(0,0,0,0.62), 0 0 0 1px rgba(210,216,222,0.08) !important;
+}
+body.memorial-mode .char-name {
+  animation: none;
+  background: linear-gradient(105deg, #777 0%, #e2e2e2 48%, #8d8d8d 100%);
+  background-size: 100% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.mourning-memorial {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  z-index: 8;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 188px;
+  padding: 5px 12px 5px 7px;
+  border: 1px solid rgba(190,196,202,0.18);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(20,21,23,0.94), rgba(5,6,7,0.96));
+  box-shadow: 0 6px 22px rgba(0,0,0,0.46), inset 0 1px rgba(255,255,255,0.04);
+  color: #d8d8d8;
+  pointer-events: none;
+}
+.mourning-ribbon-icon {
+  width: 34px;
+  height: 42px;
+  flex: 0 0 auto;
+  overflow: visible;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,0.75));
+}
+.mourning-copy {
+  display: grid;
+  gap: 1px;
+  line-height: 1.08;
+  white-space: nowrap;
+}
+.mourning-copy strong {
+  font-family: 'Forum', Georgia, serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.mourning-copy span {
+  color: #85898d;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
 /* ══════════════ ФИНАЛЬНАЯ АДАПТИВНАЯ ПОЛИРОВКА ══════════════ */
 @media (min-width: 1100px) {
   .site-header,
@@ -2583,6 +2655,24 @@ b,
     gap: 10px;
     padding: 14px 10px 0;
     margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .mourning-memorial {
+    position: relative;
+    order: 3;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    min-width: 0;
+    justify-content: center;
+    margin-top: 1px;
+    padding: 5px 10px;
+    border-radius: 7px;
+  }
+  .mourning-ribbon-icon {
+    width: 28px;
+    height: 34px;
   }
   .site-logo {
     min-width: 0;
@@ -2781,7 +2871,7 @@ b,
 
 
 </head>
-<body>
+<body class="memorial-mode">
 
 <svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden">
   <defs>
@@ -2879,6 +2969,26 @@ b,
   <div class="site-logo">
     <img class="site-logo-mark" src="assets/dnd-5e-logo.png" alt="Dungeons &amp; Dragons">
     <span>Лист персонажа</span>
+  </div>
+  <div class="mourning-memorial" role="img" aria-label="Светлая память, Съебастьян Сквозняк">
+    <svg class="mourning-ribbon-icon" viewBox="0 0 54 70" aria-hidden="true">
+      <defs>
+        <linearGradient id="mourning-satin" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#050505"/>
+          <stop offset="0.45" stop-color="#343434"/>
+          <stop offset="0.62" stop-color="#090909"/>
+          <stop offset="1" stop-color="#1b1b1b"/>
+        </linearGradient>
+      </defs>
+      <path fill="url(#mourning-satin)" d="M27 7C17 7 10 14 10 23c0 8 5 14 12 19l5-10c-5-4-7-7-7-10 0-3 3-6 7-6s7 3 7 6c0 3-2 6-7 10l5 10c7-5 12-11 12-19C44 14 37 7 27 7Z"/>
+      <path fill="url(#mourning-satin)" d="m22 33-12 30h13l7-18-3-13Z"/>
+      <path fill="url(#mourning-satin)" d="m32 33 12 30H31l-7-18 3-13Z"/>
+      <path fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1" d="M27 8c-9 0-16 6-16 15 0 7 5 13 11 18M32 41c7-5 11-11 11-18 0-9-7-15-16-15"/>
+    </svg>
+    <span class="mourning-copy">
+      <strong>Светлая память</strong>
+      <span>Съебастьян Сквозняк</span>
+    </span>
   </div>
   <button onclick="openPortraitModal()"
     class="icon-label bg-drow-accent hover:bg-drow-bright text-white border border-drow-bright rounded px-3 py-1.5 text-[11px] cursor-pointer transition-colors font-meta">
