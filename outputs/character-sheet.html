@@ -2665,9 +2665,22 @@ b,
 .lianna-stage-buttons button span { font-size: 8px; }
 .lianna-stage-buttons button.active { border-color: #8d5dbb; background: rgba(92,49,132,.28); box-shadow: 0 0 16px rgba(113,55,169,.2); color: #c8b3d9; }
 .lianna-resource-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 9px; }
-.lianna-resource-strip div { padding: 6px; border: 1px solid rgba(84,71,105,.62); background: rgba(6,9,18,.42); text-align: center; }
+.lianna-resource-strip > div { min-width: 0; padding: 7px 5px; border: 1px solid rgba(84,71,105,.62); background: rgba(6,9,18,.42); text-align: center; transition: opacity .2s, border-color .2s; }
+.lianna-resource-strip > div.unavailable { opacity: .38; }
+.lianna-resource-strip > div.depleted { border-color: rgba(118,54,75,.72); }
 .lianna-resource-strip span { display: block; color: #695f77; font-size: 7px; text-transform: uppercase; }
 .lianna-resource-strip b { display: block; color: #c4a5dc; font-family: 'Forum', Georgia, serif; font-size: 18px; }
+.lianna-resource-pips { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 5px; min-height: 17px; margin-top: 5px; }
+.lianna-resource-pip { position: relative; width: 17px; height: 17px; flex: 0 0 auto; padding: 0; border: 1px solid #a678cc; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #e5c8ff 0 16%, #9a5dcb 34%, #4a236b 72%); box-shadow: 0 0 8px rgba(168,94,220,.45), inset 0 0 3px rgba(255,255,255,.32); cursor: pointer; transition: transform .15s, opacity .15s, box-shadow .15s; }
+.lianna-resource-pip:hover { transform: scale(1.12); }
+.lianna-resource-pip.spent { border-color: #4b4258; background: rgba(8,11,19,.72); box-shadow: inset 0 0 5px rgba(0,0,0,.6); opacity: .7; }
+.lianna-resource-pip.spent::after { content: ''; position: absolute; top: 7px; left: 2px; width: 11px; height: 1px; transform: rotate(-42deg); background: #765b7d; }
+.lianna-resource-pip.sorcery { border-color: #bd638c; background: radial-gradient(circle at 35% 30%, #ffd0e0 0 16%, #b64978 36%, #5e1d3f 72%); box-shadow: 0 0 8px rgba(193,62,119,.38), inset 0 0 3px rgba(255,255,255,.3); }
+.lianna-resource-pip.sorcery.spent { border-color: #4e3944; background: rgba(8,11,19,.72); box-shadow: inset 0 0 5px rgba(0,0,0,.6); }
+.lianna-resource-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 9px; }
+.lianna-resource-hint { color: #6f637b; font-size: 7.5px; line-height: 1.4; }
+.lianna-rest-button { flex: 0 0 auto; min-height: 30px; padding: 6px 10px; border: 1px solid #76509c; border-radius: 4px; background: rgba(94,48,135,.2); color: #bba2ce; font-size: 8px; cursor: pointer; transition: border-color .2s, background .2s; }
+.lianna-rest-button:hover { border-color: #a16fd0; background: rgba(113,54,160,.3); }
 .lianna-stage-console > p { margin: 8px 0 0; color: #8b7b9a; font-size: 8.5px; }
 .lianna-stage-card { display: none; grid-template-columns: 52px 1fr; gap: 12px; margin: 0 12px 12px; padding: 13px; border: 1px solid #4a365f; border-radius: 7px; background: linear-gradient(120deg, rgba(66,35,93,.42), rgba(12,17,29,.88)); }
 .lianna-stage-card.active { display: grid; animation: lianna-stage-in .28s ease-out; }
@@ -2690,6 +2703,9 @@ b,
   .lianna-feature-grid,
   .lianna-tactics-grid { grid-template-columns: 1fr; }
   .lianna-stage-buttons { grid-template-columns: repeat(2, 1fr); }
+  .lianna-resource-strip { grid-template-columns: repeat(2, 1fr); }
+  .lianna-resource-actions { align-items: stretch; flex-direction: column; }
+  .lianna-rest-button { width: 100%; }
   .lianna-spell-grid { grid-template-columns: 1fr; }
   .lianna-cheat-head { align-items: flex-start; padding: 12px; }
   .lianna-stage-seal { width: 60px; height: 60px; }
@@ -3264,7 +3280,14 @@ body.memorial-mode .char-name {
         <button type="button" data-lianna-stage="4" onclick="setLiannaStage(4)"><b>IV</b><span>Воплощение</span></button>
       </div>
       <div class="lianna-resource-strip">
-        <div><span>1 уровень</span><b id="lianna-slot-1">2</b></div><div><span>2 уровень</span><b id="lianna-slot-2">0</b></div><div><span>3 уровень</span><b id="lianna-slot-3">0</b></div><div><span>Очки чар.</span><b id="lianna-sorcery-points">0</b></div>
+        <div id="lianna-resource-card-1"><span>1 уровень</span><b id="lianna-slot-1">2 / 2</b><div class="lianna-resource-pips" id="lianna-slot-pips-1"></div></div>
+        <div id="lianna-resource-card-2"><span>2 уровень</span><b id="lianna-slot-2">0 / 0</b><div class="lianna-resource-pips" id="lianna-slot-pips-2"></div></div>
+        <div id="lianna-resource-card-3"><span>3 уровень</span><b id="lianna-slot-3">0 / 0</b><div class="lianna-resource-pips" id="lianna-slot-pips-3"></div></div>
+        <div id="lianna-resource-card-points"><span>Очки чар.</span><b id="lianna-sorcery-points">0 / 0</b><div class="lianna-resource-pips" id="lianna-sorcery-pips"></div></div>
+      </div>
+      <div class="lianna-resource-actions">
+        <div class="lianna-resource-hint">Нажми на заполненный круг, чтобы потратить ресурс. Повторный клик возвращает его.</div>
+        <button type="button" class="lianna-rest-button" onclick="resetLiannaResources()">Долгий отдых · восстановить всё</button>
       </div>
       <p id="lianna-stage-note">Доступны заговоры и две ячейки 1-го уровня.</p>
     </section>
@@ -3620,6 +3643,7 @@ function switchTab(name, button) {
 const CHARACTER_KEY = 'lianna';
 const EDIT_TOKEN_KEY = 'dnd_edit_token';
 const LIANNA_STAGE_KEY = 'lianna_magic_stage_v1';
+const LIANNA_RESOURCE_KEY = 'lianna_magic_resources_v1';
 const LIANNA_STAGES = {
   1: { roman: 'I', label: 'Пробуждение', slots: [2, 0, 0], points: 0, note: 'Доступны заговоры и две ячейки 1-го уровня.', sheet: '2 ячейки 1-го уровня · заговоры' },
   2: { roman: 'II', label: 'Первые шаги', slots: [3, 2, 0], points: 0, note: 'Три ячейки 1-го уровня, две 2-го и два Шага через тень в день.', sheet: '3×1 ур. · 2×2 ур. · Шаг через тень 2/день' },
@@ -3630,6 +3654,113 @@ const LIANNA_STAGES = {
 function characterApi(path) {
   const separator = path.includes('?') ? '&' : '?';
   return path + separator + 'character=' + encodeURIComponent(CHARACTER_KEY);
+}
+
+function emptyLiannaResources() {
+  return {
+    slots: {
+      1: Array(4).fill(false),
+      2: Array(3).fill(false),
+      3: Array(3).fill(false)
+    },
+    points: Array(6).fill(false)
+  };
+}
+
+function loadLiannaResources() {
+  const fallback = emptyLiannaResources();
+  try {
+    const saved = JSON.parse(localStorage.getItem(LIANNA_RESOURCE_KEY));
+    [1, 2, 3].forEach(level => {
+      if (Array.isArray(saved?.slots?.[level])) {
+        fallback.slots[level] = fallback.slots[level].map((_, index) => Boolean(saved.slots[level][index]));
+      }
+    });
+    if (Array.isArray(saved?.points)) {
+      fallback.points = fallback.points.map((_, index) => Boolean(saved.points[index]));
+    }
+  } catch(e) {}
+  return fallback;
+}
+
+let liannaResources = loadLiannaResources();
+
+function saveLiannaResources() {
+  localStorage.setItem(LIANNA_RESOURCE_KEY, JSON.stringify(liannaResources));
+}
+
+function createLiannaResourcePip(spent, label, onClick, sorcery = false) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'lianna-resource-pip' + (sorcery ? ' sorcery' : '') + (spent ? ' spent' : '');
+  button.setAttribute('aria-label', label + (spent ? ' — потрачено, нажми чтобы вернуть' : ' — доступно, нажми чтобы потратить'));
+  button.title = spent ? 'Потрачено · нажми, чтобы вернуть' : 'Доступно · нажми, чтобы потратить';
+  button.addEventListener('click', onClick);
+  return button;
+}
+
+function renderLiannaResources(stageNumber) {
+  const stage = LIANNA_STAGES[stageNumber];
+  [1, 2, 3].forEach(level => {
+    const maximum = stage.slots[level - 1];
+    const spentFlags = liannaResources.slots[level].slice(0, maximum);
+    const spentCount = spentFlags.filter(Boolean).length;
+    const remaining = maximum - spentCount;
+    const value = document.getElementById('lianna-slot-' + level);
+    const pips = document.getElementById('lianna-slot-pips-' + level);
+    const card = document.getElementById('lianna-resource-card-' + level);
+    if (value) value.textContent = remaining + ' / ' + maximum;
+    if (card) {
+      card.classList.toggle('unavailable', maximum === 0);
+      card.classList.toggle('depleted', maximum > 0 && remaining === 0);
+    }
+    if (pips) {
+      pips.replaceChildren();
+      spentFlags.forEach((spent, index) => {
+        pips.appendChild(createLiannaResourcePip(
+          spent,
+          'Ячейка ' + (index + 1) + ', ' + level + ' уровень',
+          () => toggleLiannaResource('slot', level, index)
+        ));
+      });
+    }
+  });
+
+  const pointMaximum = stage.points;
+  const spentPoints = liannaResources.points.slice(0, pointMaximum);
+  const pointRemaining = pointMaximum - spentPoints.filter(Boolean).length;
+  const pointValue = document.getElementById('lianna-sorcery-points');
+  const pointPips = document.getElementById('lianna-sorcery-pips');
+  const pointCard = document.getElementById('lianna-resource-card-points');
+  if (pointValue) pointValue.textContent = pointRemaining + ' / ' + pointMaximum;
+  if (pointCard) {
+    pointCard.classList.toggle('unavailable', pointMaximum === 0);
+    pointCard.classList.toggle('depleted', pointMaximum > 0 && pointRemaining === 0);
+  }
+  if (pointPips) {
+    pointPips.replaceChildren();
+    spentPoints.forEach((spent, index) => {
+      pointPips.appendChild(createLiannaResourcePip(
+        spent,
+        'Очко чародейства ' + (index + 1),
+        () => toggleLiannaResource('point', 0, index),
+        true
+      ));
+    });
+  }
+}
+
+function toggleLiannaResource(type, level, index) {
+  if (type === 'point') liannaResources.points[index] = !liannaResources.points[index];
+  else liannaResources.slots[level][index] = !liannaResources.slots[level][index];
+  saveLiannaResources();
+  renderLiannaResources(Number(localStorage.getItem(LIANNA_STAGE_KEY)) || 1);
+}
+
+function resetLiannaResources() {
+  liannaResources = emptyLiannaResources();
+  saveLiannaResources();
+  renderLiannaResources(Number(localStorage.getItem(LIANNA_STAGE_KEY)) || 1);
 }
 
 function setLiannaStage(value) {
@@ -3645,10 +3776,6 @@ function setLiannaStage(value) {
   const values = {
     'lianna-stage-number': stage.roman,
     'lianna-stage-label': stage.label,
-    'lianna-slot-1': stage.slots[0],
-    'lianna-slot-2': stage.slots[1],
-    'lianna-slot-3': stage.slots[2],
-    'lianna-sorcery-points': stage.points,
     'lianna-stage-note': stage.note,
     'sheet-stage-label': stage.roman + ' · ' + stage.label,
     'sheet-stage-resources': stage.sheet
@@ -3657,6 +3784,7 @@ function setLiannaStage(value) {
     const element = document.getElementById(id);
     if (element) element.textContent = text;
   });
+  renderLiannaResources(stageNumber);
 }
 
 window.addEventListener('DOMContentLoaded', function() {
