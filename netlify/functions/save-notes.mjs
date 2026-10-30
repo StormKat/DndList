@@ -1,7 +1,7 @@
 import { getStore } from "@netlify/blobs";
 
 const MAX_NOTES_SIZE = 100 * 1024;
-const NOTES_KEY = "syebastyian";
+const DEFAULT_CHARACTER_KEY = "syebastyian";
 
 export default async (request) => {
   if (request.method !== "POST") {
@@ -42,12 +42,17 @@ export default async (request) => {
 
   const updatedAt = new Date().toISOString();
   const store = getStore("character-notes");
-  await store.set(NOTES_KEY, payload.notes, {
+  await store.set(getCharacterKey(request), payload.notes, {
     metadata: { updatedAt },
   });
 
   return json({ ok: true, updatedAt });
 };
+
+function getCharacterKey(request) {
+  const value = new URL(request.url).searchParams.get("character");
+  return value && /^[a-z0-9_-]{1,40}$/i.test(value) ? value.toLowerCase() : DEFAULT_CHARACTER_KEY;
+}
 
 function json(body, status = 200, extraHeaders = {}) {
   return new Response(JSON.stringify(body), {

@@ -1,7 +1,7 @@
 import { getStore } from "@netlify/blobs";
 
 const MAX_INVENTORY_SIZE = 256 * 1024;
-const INVENTORY_KEY = "syebastyian";
+const DEFAULT_CHARACTER_KEY = "syebastyian";
 
 export default async (request) => {
   if (request.method !== "POST") {
@@ -41,12 +41,17 @@ export default async (request) => {
 
   const updatedAt = new Date().toISOString();
   const store = getStore("character-inventory");
-  await store.setJSON(INVENTORY_KEY, payload, {
+  await store.setJSON(getCharacterKey(request), payload, {
     metadata: { updatedAt },
   });
 
   return json({ ok: true, updatedAt });
 };
+
+function getCharacterKey(request) {
+  const value = new URL(request.url).searchParams.get("character");
+  return value && /^[a-z0-9_-]{1,40}$/i.test(value) ? value.toLowerCase() : DEFAULT_CHARACTER_KEY;
+}
 
 function isValidInventory(payload) {
   if (!payload || payload.version !== 1 || !Array.isArray(payload.categories)) {

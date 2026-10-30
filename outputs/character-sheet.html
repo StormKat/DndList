@@ -2565,6 +2565,136 @@ b,
   letter-spacing: 0.025em;
 }
 
+/* ══════════════ ЛИАНА · ТЕНЕВАЯ МАГИЯ ══════════════ */
+.lianna-sheet .char-meta-card {
+  padding: 4px 6px;
+  border: 1px solid #2e3d5a;
+  border-radius: 3px;
+  background: rgba(74,111,168,0.07);
+  text-align: center;
+}
+.lianna-sheet .char-meta-card > div:first-child,
+.lianna-sheet .char-vital-stat > div:first-child {
+  color: #506070;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.lianna-sheet .char-meta-card > div:last-child {
+  color: #b8c0cc;
+  font-size: 11px;
+  font-weight: 700;
+}
+.lianna-sheet .stat-steel,
+.lianna-sheet .stat-arcane {
+  padding: 6px 4px;
+  border: 1px solid #2e3d5a;
+  border-radius: 5px;
+  background: linear-gradient(160deg, rgba(35,49,75,.78), rgba(11,16,29,.88));
+  text-align: center;
+}
+.lianna-sheet .stat-arcane {
+  border-color: rgba(143,85,209,.75);
+  box-shadow: inset 0 0 18px rgba(104,46,164,.14), 0 0 12px rgba(103,50,169,.16);
+}
+.lianna-sheet .stat-steel > div:first-child,
+.lianna-sheet .stat-arcane > div:first-child {
+  color: #617087;
+  font-size: 7px;
+  text-transform: uppercase;
+}
+.lianna-sheet .stat-steel-value,
+.lianna-sheet .stat-arcane-value {
+  margin-top: 2px;
+  color: #c9ced7;
+  font-family: 'Forum', Georgia, serif;
+  font-size: 18px;
+  line-height: 1;
+}
+.lianna-sheet .stat-arcane-value { color: #cf9cff; text-shadow: 0 0 10px rgba(178,92,255,.72); }
+.lianna-sheet .stat-mod { color: #7d8a9c; font-size: 10px; font-weight: 700; }
+.lianna-sheet .stat-mod-positive { color: #a8bdd8; }
+.lianna-ac-note { margin-left: 2px; color: #8d6db9; font-size: 9px; }
+.lianna-list-title {
+  margin-bottom: 5px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #2e3d5a;
+  color: #7ba6dc;
+  font-family: 'Forum', Georgia, serif;
+  font-size: 8px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+}
+.lianna-skill-list { display: grid; gap: 2px; margin-bottom: 7px; }
+.lianna-skill-list li { display: grid; grid-template-columns: 8px 22px 1fr; align-items: center; gap: 4px; color: #aeb7c4; font-size: 9px; }
+.lianna-skill-list b { color: #7ba6dc; font-family: 'Forum', Georgia, serif; font-size: 10px; text-align: right; }
+.lianna-metric { padding: 6px 3px; border: 1px solid #2e3d5a; border-radius: 4px; background: rgba(74,111,168,.07); text-align: center; }
+.lianna-metric b { display: block; color: #c9ced7; font-family: 'Forum', Georgia, serif; font-size: 15px; }
+.lianna-metric span { display: block; color: #53647a; font-size: 6.5px; text-transform: uppercase; }
+.lianna-compact-card { display: grid; gap: 2px; margin-top: 6px; padding: 7px 8px; border-left: 2px solid #3f5c83; background: rgba(20,29,48,.68); }
+.lianna-compact-card strong { color: #a7b8ce; font-size: 9px; }
+.lianna-compact-card span { color: #6f7f93; font-size: 8px; line-height: 1.45; }
+.lianna-compact-card.shadow { border-left-color: #8756bd; box-shadow: inset 12px 0 24px rgba(104,53,158,.08); }
+.lianna-section-title { padding: 8px 12px 6px; border-top: 1px solid #2e3d5a; border-bottom: 1px solid #2e3d5a; color: #78a6dc; font-family: 'Forum', Georgia, serif; font-size: 10px; text-transform: uppercase; letter-spacing: .18em; }
+.lianna-section-title.compact { margin: -12px -12px 10px; border-top: 0; }
+.lianna-feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 10px 12px; }
+.lianna-feature-grid article,
+.lianna-tactics-grid article { padding: 10px; border: 1px solid #2e3d5a; border-radius: 5px; background: linear-gradient(155deg, rgba(25,35,57,.76), rgba(10,14,25,.84)); }
+.lianna-feature-grid h3,
+.lianna-tactics-grid h3 { margin: 0 0 4px; color: #b6c5d8; font-family: 'Forum', Georgia, serif; font-size: 11px; letter-spacing: .04em; }
+.lianna-feature-grid p,
+.lianna-tactics-grid p { margin: 0; color: #718096; font-size: 8.5px; line-height: 1.5; }
+.lianna-feature-grid .secret,
+.lianna-tactics-grid .secret { border-color: rgba(137,82,192,.68); box-shadow: inset 0 0 22px rgba(102,44,151,.1); }
+.lianna-clue-list { display: grid; gap: 7px; color: #8996a8; font-size: 9px; line-height: 1.45; }
+.lianna-clue-list li { position: relative; padding-left: 13px; }
+.lianna-clue-list li::before { content: ''; position: absolute; left: 0; top: 5px; width: 5px; height: 5px; transform: rotate(45deg); border: 1px solid #76509c; }
+.lianna-story { margin: 0; color: #7f8da0; font-size: 9px; line-height: 1.6; }
+.lianna-quote { margin-top: 10px; padding: 7px 9px; border-left: 2px solid #7549a0; color: #a48db9; font-family: 'Forum', Georgia, serif; font-size: 10px; font-style: italic; }
+
+.lianna-cheat-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 16px; border-bottom: 1px solid #2e3d5a; }
+.lianna-stage-seal { width: 72px; height: 72px; flex: 0 0 auto; display: grid; place-content: center; border: 1px solid #72509b; border-radius: 50%; background: radial-gradient(circle, rgba(104,54,154,.3), rgba(9,13,25,.86) 68%); box-shadow: 0 0 22px rgba(102,45,157,.22), inset 0 0 18px rgba(135,75,194,.13); text-align: center; }
+.lianna-stage-seal span { color: #d1a7f1; font-family: 'Forum', Georgia, serif; font-size: 24px; line-height: 1; }
+.lianna-stage-seal small { margin-top: 3px; color: #817091; font-size: 6px; text-transform: uppercase; letter-spacing: .08em; }
+.lianna-stage-console { margin: 12px; padding: 12px; border: 1px solid #3e3154; border-radius: 7px; background: linear-gradient(145deg, rgba(45,27,66,.8), rgba(10,14,25,.92)); box-shadow: inset 0 0 38px rgba(76,34,119,.14); }
+.lianna-stage-kicker { margin-bottom: 8px; color: #9a80b2; font-size: 8px; text-transform: uppercase; letter-spacing: .16em; }
+.lianna-stage-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.lianna-stage-buttons button { display: grid; grid-template-columns: 26px 1fr; align-items: center; gap: 6px; min-height: 40px; padding: 6px 8px; border: 1px solid #3a4257; border-radius: 5px; background: rgba(18,24,39,.72); color: #6e7b8f; cursor: pointer; text-align: left; transition: border-color .2s, background .2s, box-shadow .2s; }
+.lianna-stage-buttons button b { color: #8a6aa5; font-family: 'Forum', Georgia, serif; font-size: 17px; }
+.lianna-stage-buttons button span { font-size: 8px; }
+.lianna-stage-buttons button.active { border-color: #8d5dbb; background: rgba(92,49,132,.28); box-shadow: 0 0 16px rgba(113,55,169,.2); color: #c8b3d9; }
+.lianna-resource-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 9px; }
+.lianna-resource-strip div { padding: 6px; border: 1px solid rgba(84,71,105,.62); background: rgba(6,9,18,.42); text-align: center; }
+.lianna-resource-strip span { display: block; color: #695f77; font-size: 7px; text-transform: uppercase; }
+.lianna-resource-strip b { display: block; color: #c4a5dc; font-family: 'Forum', Georgia, serif; font-size: 18px; }
+.lianna-stage-console > p { margin: 8px 0 0; color: #8b7b9a; font-size: 8.5px; }
+.lianna-stage-card { display: none; grid-template-columns: 52px 1fr; gap: 12px; margin: 0 12px 12px; padding: 13px; border: 1px solid #4a365f; border-radius: 7px; background: linear-gradient(120deg, rgba(66,35,93,.42), rgba(12,17,29,.88)); }
+.lianna-stage-card.active { display: grid; animation: lianna-stage-in .28s ease-out; }
+.lianna-stage-card.apex { border-color: #9c547e; background: linear-gradient(120deg, rgba(93,35,78,.44), rgba(21,13,28,.9)); }
+.stage-roman { display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid #8a5cb0; border-radius: 50%; color: #d0a5ec; font-family: 'Forum', Georgia, serif; font-size: 21px; }
+.lianna-stage-card h3 { margin: 0 0 4px; color: #cfb7df; font-family: 'Forum', Georgia, serif; font-size: 14px; }
+.lianna-stage-card p { margin: 0; color: #8e8199; font-size: 9px; line-height: 1.55; }
+@keyframes lianna-stage-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+.lianna-spell-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 10px 12px; }
+.lianna-spell-grid section { padding: 10px; border: 1px solid #2e3d5a; border-radius: 6px; background: rgba(12,18,31,.76); }
+.lianna-spell-grid h3 { margin: 0 0 7px; color: #9e7abb; font-family: 'Forum', Georgia, serif; font-size: 12px; text-transform: uppercase; letter-spacing: .1em; }
+.lianna-spell-grid ul { display: grid; gap: 6px; }
+.lianna-spell-grid li { display: grid; gap: 1px; padding-bottom: 5px; border-bottom: 1px solid rgba(46,61,90,.58); }
+.lianna-spell-grid li:last-child { padding-bottom: 0; border-bottom: 0; }
+.lianna-spell-grid b { color: #aebbd0; font-size: 9px; }
+.lianna-spell-grid span { color: #66758a; font-size: 8px; line-height: 1.4; }
+.lianna-tactics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 10px 12px 14px; }
+
+@media (max-width: 768px) {
+  .lianna-feature-grid,
+  .lianna-tactics-grid { grid-template-columns: 1fr; }
+  .lianna-stage-buttons { grid-template-columns: repeat(2, 1fr); }
+  .lianna-spell-grid { grid-template-columns: 1fr; }
+  .lianna-cheat-head { align-items: flex-start; padding: 12px; }
+  .lianna-stage-seal { width: 60px; height: 60px; }
+}
+
 /* ══════════════ ПАМЯТНЫЙ РЕЖИМ ══════════════ */
 body.memorial-mode::after {
   content: '';
@@ -2871,7 +3001,7 @@ body.memorial-mode .char-name {
 
 
 </head>
-<body class="memorial-mode">
+<body>
 
 <svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden">
   <defs>
@@ -2970,26 +3100,6 @@ body.memorial-mode .char-name {
     <img class="site-logo-mark" src="assets/dnd-5e-logo.png" alt="Dungeons &amp; Dragons">
     <span>Лист персонажа</span>
   </div>
-  <div class="mourning-memorial" role="img" aria-label="Светлая память, Съебастьян Сквозняк">
-    <svg class="mourning-ribbon-icon" viewBox="0 0 54 70" aria-hidden="true">
-      <defs>
-        <linearGradient id="mourning-satin" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#050505"/>
-          <stop offset="0.45" stop-color="#343434"/>
-          <stop offset="0.62" stop-color="#090909"/>
-          <stop offset="1" stop-color="#1b1b1b"/>
-        </linearGradient>
-      </defs>
-      <path fill="url(#mourning-satin)" d="M27 7C17 7 10 14 10 23c0 8 5 14 12 19l5-10c-5-4-7-7-7-10 0-3 3-6 7-6s7 3 7 6c0 3-2 6-7 10l5 10c7-5 12-11 12-19C44 14 37 7 27 7Z"/>
-      <path fill="url(#mourning-satin)" d="m22 33-12 30h13l7-18-3-13Z"/>
-      <path fill="url(#mourning-satin)" d="m32 33 12 30H31l-7-18 3-13Z"/>
-      <path fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1" d="M27 8c-9 0-16 6-16 15 0 7 5 13 11 18M32 41c7-5 11-11 11-18 0-9-7-15-16-15"/>
-    </svg>
-    <span class="mourning-copy">
-      <strong>Светлая память</strong>
-      <span>Съебастьян Сквозняк</span>
-    </span>
-  </div>
   <button onclick="openPortraitModal()"
     class="icon-label bg-drow-accent hover:bg-drow-bright text-white border border-drow-bright rounded px-3 py-1.5 text-[11px] cursor-pointer transition-colors font-meta">
     <svg class="ui-icon"><use href="#icon-portrait"></use></svg>Портрет персонажа
@@ -3012,464 +3122,176 @@ body.memorial-mode .char-name {
 
 <!-- ── ВКЛАДКА: ЛИСТ ── -->
 <div class="tab-panel active" id="panel-sheet">
+  <div class="page lianna-sheet">
+    <div class="character-header flex items-stretch border-b-2 border-drow-border bg-drow-header relative z-10 mob-header">
+      <div class="portrait-wrap shrink-0 overflow-hidden mob-portrait" style="width:180px;min-height:190px;border-right:1px solid #2e3d5a;position:relative;">
+        <video id="portrait-video" class="portrait-video" muted loop playsinline preload="metadata" aria-label="Портрет Лианы" style="display:none"></video>
+        <div id="upload-zone" class="w-full h-full flex flex-col items-center justify-center gap-2 cursor-pointer" style="display:none;min-height:190px;background:radial-gradient(circle at 50% 38%,rgba(113,74,168,.22),rgba(9,12,23,.94));" onclick="openPortraitModal()">
+          <svg class="ui-icon" style="width:42px;height:42px;color:#9b7bd1;opacity:.72"><use href="#icon-moon"></use></svg>
+          <div style="font-size:8px;color:#8d83a8;text-align:center;letter-spacing:1.5px;font-family:Manrope,Arial,sans-serif;font-weight:600">ПОРТРЕТ ЛИАНЫ</div>
+        </div>
+        <img id="portrait-img" src="assets/lianna-shadow-portrait.jpg" alt="Лиана с пробудившейся теневой сущностью" style="display:block;width:180px;height:100%;object-fit:cover;object-position:50% 18%;position:absolute;top:0;left:0;">
+        <div class="portrait-overlay"><div class="portrait-upload-btn icon-label" onclick="openPortraitModal()"><svg class="ui-icon"><use href="#icon-portrait"></use></svg>Изменить</div></div>
+      </div>
 
-<!-- ══════════════ СТРАНИЦА 1 ══════════════ -->
-<div class="page">
-
-<!-- HEADER -->
-<div class="character-header flex items-stretch border-b-2 border-drow-border bg-drow-header relative z-10 mob-header">
-
-  <!-- ПОРТРЕТ — высокий под вертикальное фото -->
-  <div class="portrait-wrap shrink-0 overflow-hidden mob-portrait" style="width:180px;min-height:190px;border-right:1px solid #2e3d5a;position:relative;">
-    <video id="portrait-video" class="portrait-video" src="assets/portrait-cinematic.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Портрет персонажа"></video>
-    <div id="upload-zone" class="w-full h-full flex flex-col items-center justify-center gap-2 cursor-pointer" style="display:none;min-height:190px;background:rgba(74,111,168,0.08);" onclick="openPortraitModal()">
-      <svg class="ui-icon" style="width:38px;height:38px;color:#617899;opacity:.48"><use href="#icon-dagger"></use></svg>
-      <div style="font-size:8px;color:#506070;text-align:center;letter-spacing:1px;font-family:Manrope,Arial,sans-serif;font-weight:600">ПОРТРЕТ</div>
-    </div>
-    <img id="portrait-img" alt="Съебастьян" style="display:none;width:180px;height:100%;object-fit:cover;object-position:top center;position:absolute;top:0;left:0;">
-    <div class="portrait-overlay">
-      <div class="portrait-upload-btn icon-label" onclick="openPortraitModal()"><svg class="ui-icon"><use href="#icon-portrait"></use></svg>Изменить</div>
-    </div>
-  </div>
-
-  <div class="char-identity flex-1 px-3 py-2">
-    <div class="char-title-row">
-      <div class="char-name font-meta text-[22px] tracking-[3px]">Съебастьян Сквозняк</div>
-      <div class="char-subtitle text-[10px] text-drow-bright mt-0.5 tracking-wide">
-        Дроу · Плут 6 · Архетип Убийца · Нейтрально-злой
-      </div>
-    </div>
-    <div class="char-meta-grid grid grid-cols-3 gap-1.5 mt-1.5">
-      <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
-        <div class="text-[8px] text-drow-faint uppercase tracking-wide">Раса</div>
-        <div class="text-[11px] text-drow-text font-bold">Дроу</div>
-      </div>
-      <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
-        <div class="text-[8px] text-drow-faint uppercase tracking-wide">Класс</div>
-        <div class="text-[11px] text-drow-text font-bold">Плут 6</div>
-      </div>
-      <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
-        <div class="text-[8px] text-drow-faint uppercase tracking-wide">Опыт</div>
-        <div class="text-[11px] text-drow-text font-bold">14000 / 23000</div>
-      </div>
-      <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
-        <div class="text-[8px] text-drow-faint uppercase tracking-wide">Предыстория</div>
-        <div class="text-[11px] text-drow-text font-bold">Преступник</div>
-      </div>
-      <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
-        <div class="text-[8px] text-drow-faint uppercase tracking-wide">Скорость</div>
-        <div class="text-[11px] text-drow-text font-bold">30 фт</div>
-      </div>
-      <div class="char-meta-card bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-sm px-1.5 py-1 text-center">
-        <div class="text-[8px] text-drow-faint uppercase tracking-wide">Уровень</div>
-        <div class="text-[11px] text-drow-text font-bold">6</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- КБ И ХИТЫ -->
-  <div class="char-vitals flex flex-col items-center justify-center px-4 py-3 border-l border-drow-border min-w-[80px] mob-hpbox">
-    <div class="char-vitals-title">Боевые показатели</div>
-    <div class="char-vitals-main">
-      <div>
-        <div class="text-[7px] text-drow-muted uppercase tracking-wide mb-1 text-center">Хиты</div>
-        <div class="char-vitals-circle w-[56px] h-[56px] rounded-full border-2 border-drow-accent flex flex-col items-center justify-center bg-[rgba(74,111,168,0.12)]" style="box-shadow:0 0 12px rgba(74,111,168,0.25)">
-          <div class="font-meta text-[22px] text-drow-silver leading-none">39</div>
-          <div class="text-[8px] text-drow-muted">макс: 39</div>
+      <div class="char-identity flex-1 px-3 py-2">
+        <div class="char-title-row">
+          <div class="char-name font-meta text-[22px] tracking-[3px]">Лиана</div>
+          <div class="char-subtitle text-[10px] text-drow-bright mt-0.5 tracking-wide">Полуэльфийка · Чародейка 6 · Теневая магия</div>
+        </div>
+        <div class="char-meta-grid grid grid-cols-3 gap-1.5 mt-1.5">
+          <div class="char-meta-card"><div>Раса</div><div>Полуэльф</div></div>
+          <div class="char-meta-card"><div>Класс</div><div>Чародей 6</div></div>
+          <div class="char-meta-card"><div>Архетип</div><div>Теневая магия</div></div>
+          <div class="char-meta-card"><div>Стадия</div><div id="sheet-stage-label">I · Пробуждение</div></div>
+          <div class="char-meta-card"><div>Скорость</div><div>30 фт</div></div>
+          <div class="char-meta-card"><div>Уровень</div><div>6</div></div>
         </div>
       </div>
-      <div class="char-vitals-side">
-        <div class="char-vital-stat">
-          <div class="text-[7px] text-drow-muted uppercase">КБ</div>
-          <div class="font-meta text-[17px] text-drow-silver font-bold leading-tight">15</div>
-        </div>
-        <div class="char-vital-stat">
-          <div class="text-[7px] text-drow-muted uppercase">Иниц.</div>
-          <div class="font-meta text-[14px] text-drow-text font-bold leading-tight">+4</div>
+
+      <div class="char-vitals flex flex-col items-center justify-center px-4 py-3 border-l border-drow-border min-w-[80px] mob-hpbox">
+        <div class="char-vitals-title">Боевые показатели</div>
+        <div class="char-vitals-main">
+          <div><div class="text-[7px] text-drow-muted uppercase tracking-wide mb-1 text-center">Хиты</div><div class="char-vitals-circle w-[56px] h-[56px] rounded-full border-2 border-drow-accent flex flex-col items-center justify-center bg-[rgba(74,111,168,0.12)]"><div class="font-meta text-[22px] text-drow-silver leading-none">38</div><div class="text-[8px] text-drow-muted">макс: 38</div></div></div>
+          <div class="char-vitals-side">
+            <div class="char-vital-stat"><div>КБ</div><div class="font-meta text-[17px] text-drow-silver font-bold leading-tight">13<span class="lianna-ac-note">/16</span></div></div>
+            <div class="char-vital-stat"><div>Иниц.</div><div class="font-meta text-[14px] text-drow-text font-bold leading-tight">+3</div></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- PROFBAR -->
-<div class="flex items-center justify-between px-3 py-1.5 border-b border-drow-border bg-drow-bar text-[8.5px] text-drow-muted relative z-10 mob-profbar">
-  <span class="tip">Бонус мастерства: <b class="font-meta text-[10px] text-drow-bright">+3</b>
-  <div class="tip-box"><span class="tip-title">Бонус мастерства</span>Добавляется к атакам, навыкам и спасброскам с владением.<br><br>Ур. 1–4: <b>+2</b> · Ур. 5–8: <b>+3</b> · Ур. 9–12: <b>+4</b></div>
-</span>
-  <span class="tip">Пассивная Внимательность: <b class="font-meta text-[10px] text-drow-bright">16</b>
-  <div class="tip-box"><span class="tip-title">Пассивная Внимательность</span>= 10 + бонус Внимательности. Мастер использует её чтобы определить, заметишь ли ты что-то без активного осмотра.<br><br><span class="tip-good">Твоя: 10 + 6 (экспертиза) = 16</span></div>
-</span>
-  <span class="tip">Тёмное зрение: <b class="font-meta text-[10px] text-drow-bright">120 фт</b>
-  <div class="tip-box"><span class="tip-title">Тёмное зрение</span>В тусклом свете → видишь как при ярком.<br>В темноте → видишь как в тусклом (серый).<br><br>120 фт — лучшее среди рас!<br><span class="tip-warn">Помеха атакам при прямом солнечном свете!</span></div>
-</span>
-  <span>Кубик хитов: <b class="font-meta text-[10px] text-drow-bright">6d8</b></span>
-</div>
+    <div class="flex items-center justify-between px-3 py-1.5 border-b border-drow-border bg-drow-bar text-[8.5px] text-drow-muted relative z-10 mob-profbar">
+      <span>Бонус мастерства: <b class="font-meta text-[10px] text-drow-bright">+3</b></span>
+      <span>Пассивная Внимательность: <b class="font-meta text-[10px] text-drow-bright">14</b></span>
+      <span>Тёмное зрение: <b class="font-meta text-[10px] text-drow-bright">120 фт</b></span>
+      <span>Кубик хитов: <b class="font-meta text-[10px] text-drow-bright">6d6</b></span>
+    </div>
 
-<!-- MAIN GRID -->
-<div class="grid grid-cols-[88px_1fr_1fr] border-b border-drow-border relative z-10 mob-main">
+    <div class="grid grid-cols-[88px_1fr_1fr] border-b border-drow-border relative z-10 mob-main">
+      <div class="border-r border-drow-border mob-abilities-col">
+        <div class="accordion-header font-meta text-[8px] text-drow-bright uppercase tracking-widest">Характеристики</div>
+        <div class="accordion-body px-1.5 py-1.5 flex flex-col gap-1.5 mob-abs-grid">
+          <div class="stat-steel"><div>Сила</div><div class="stat-steel-value">8</div><div class="stat-mod">−1</div></div>
+          <div class="stat-steel"><div>Ловкость</div><div class="stat-steel-value">16</div><div class="stat-mod stat-mod-positive">+3</div></div>
+          <div class="stat-steel"><div>Телосл.</div><div class="stat-steel-value">14</div><div class="stat-mod stat-mod-positive">+2</div></div>
+          <div class="stat-steel"><div>Интеллект</div><div class="stat-steel-value">10</div><div class="stat-mod">+0</div></div>
+          <div class="stat-steel"><div>Мудрость</div><div class="stat-steel-value">12</div><div class="stat-mod stat-mod-positive">+1</div></div>
+          <div class="stat-arcane"><div>Харизма</div><div class="stat-arcane-value">16</div><div class="stat-mod stat-mod-positive stat-arcane-mod">+3</div></div>
+        </div>
+      </div>
 
-  <!-- ABILITIES -->
-  <div class="border-r border-drow-border mob-abilities-col">
-    <div class="accordion-header font-meta text-[8px] text-drow-bright uppercase tracking-widest">Характеристики</div>
-    <div class="accordion-body px-1.5 py-1.5 flex flex-col gap-1.5 mob-abs-grid">
-    <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
-      <div class="text-[7px] text-drow-faint uppercase tip">Сила<div class="tip-box tip-left"><span class="tip-title">Сила</span>Атлетика, ближний бой (если нет фехтовального), ношение грузов, выламывание дверей.<br><br><span class="tip-warn">У Съебастьяна Сила 10 — используй Ловкость для атак!</span></div></div>
-      <div class="stat-steel-value font-meta text-[17px] leading-none">10</div>
-      <div class="stat-mod stat-steel-mod">+0</div>
-    </div>
-    <div class="stat-arcane bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
-      <div class="text-[7px] text-drow-faint uppercase tip">Ловкость<div class="tip-box tip-left"><span class="tip-title">Ловкость</span>Акробатика, Скрытность, Ловкость рук, атаки фехтовальным оружием и дальнобойным, КД без доспехов, инициатива.<br><br><span class="tip-good">Главная характеристика Съебастьяна — +4 везде!</span></div></div>
-      <div class="stat-arcane-value font-meta text-[17px] leading-none">18</div>
-      <div class="stat-mod stat-mod-positive stat-arcane-mod">+4</div>
-    </div>
-    <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
-      <div class="text-[7px] text-drow-faint uppercase tip">Телосл.<div class="tip-box tip-left"><span class="tip-title">Телосложение</span>Хиты на каждом уровне, концентрация заклинаний (СС 10 или полурон), физическая выносливость.<br><br>+1 к хитам на каждом уровне.</div></div>
-      <div class="stat-steel-value font-meta text-[17px] leading-none">13</div>
-      <div class="stat-mod stat-mod-positive stat-steel-mod">+1</div>
-    </div>
-    <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
-      <div class="text-[7px] text-drow-faint uppercase tip">Интеллект<div class="tip-box tip-left"><span class="tip-title">Интеллект</span>Аркана, История, Расследование, Природа, Религия. Спасброски Интеллекта.<br><br>Плут владеет спасбросками Интеллекта — <span class="tip-good">+4 со вл.</span></div></div>
-      <div class="stat-steel-value font-meta text-[17px] leading-none">12</div>
-      <div class="stat-mod stat-mod-positive stat-steel-mod">+1</div>
-    </div>
-    <div class="stat-steel bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
-      <div class="text-[7px] text-drow-faint uppercase tip">Мудрость<div class="tip-box tip-left"><span class="tip-title">Мудрость</span>Внимательность, Проницательность, Медицина, Выживание. Магия жрецов/друидов.<br><br><span class="tip-good">Внимательность теперь с экспертизой: +6.</span></div></div>
-      <div class="stat-steel-value font-meta text-[17px] leading-none">10</div>
-      <div class="stat-mod stat-steel-mod">+0</div>
-    </div>
-    <div class="stat-arcane bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center hover:border-drow-accent transition-colors">
-      <div class="text-[7px] text-drow-faint uppercase tip">Харизма<div class="tip-box tip-left"><span class="tip-title">Харизма</span>Обман, Запугивание, Выступление, Убеждение. Магия дроу использует Харизму (СС 13).<br><br><span class="tip-good">Обман теперь с экспертизой: +8.</span></div></div>
-      <div class="stat-arcane-value font-meta text-[17px] leading-none">16</div>
-      <div class="stat-mod stat-mod-positive stat-arcane-mod">+2</div>
-    </div>
-  </div></div>
+      <div class="border-r border-drow-border mob-skills-col">
+        <div class="accordion-header font-meta text-[8px] text-drow-bright uppercase tracking-widest">Навыки и спасброски</div>
+        <div class="accordion-body px-1.5 py-1.5">
+          <div class="lianna-list-title">Спасброски</div>
+          <ul class="lianna-skill-list">
+            <li><span class="dot"></span><b>−1</b>Сила</li><li><span class="dot"></span><b>+3</b>Ловкость</li>
+            <li><span class="dot p"></span><b>+5</b>Телосложение</li><li><span class="dot"></span><b>+0</b>Интеллект</li>
+            <li><span class="dot"></span><b>+1</b>Мудрость</li><li><span class="dot p"></span><b>+6</b>Харизма</li>
+          </ul>
+          <div class="lianna-list-title">Навыки</div>
+          <ul class="lianna-skill-list">
+            <li><span class="dot"></span><b>−1</b>Атлетика</li><li><span class="dot"></span><b>+3</b>Акробатика</li>
+            <li><span class="dot"></span><b>+3</b>Ловкость рук</li><li><span class="dot p"></span><b>+6</b>Скрытность</li>
+            <li><span class="dot p"></span><b>+3</b>Аркана</li><li><span class="dot"></span><b>+0</b>История</li>
+            <li><span class="dot p"></span><b>+3</b>Расследование</li><li><span class="dot"></span><b>+0</b>Природа</li>
+            <li><span class="dot"></span><b>+0</b>Религия</li><li><span class="dot p"></span><b>+4</b>Внимательность</li>
+            <li><span class="dot p"></span><b>+4</b>Проницательность</li><li><span class="dot"></span><b>+1</b>Уход за животными</li>
+            <li><span class="dot"></span><b>+1</b>Медицина</li><li><span class="dot"></span><b>+1</b>Выживание</li>
+            <li><span class="dot p"></span><b>+6</b>Обман</li><li><span class="dot"></span><b>+3</b>Запугивание</li>
+            <li><span class="dot"></span><b>+3</b>Выступление</li><li><span class="dot"></span><b>+3</b>Убеждение</li>
+          </ul>
+          <div class="text-[7px] text-drow-faint mt-1">Закрашенная точка — владение. Остальные навыки считаются от характеристики.</div>
+        </div>
+      </div>
 
-  <!-- SKILLS -->
-  <div class="border-r border-drow-border mob-skills-col">
-    <div class="accordion-header font-meta text-[8px] text-drow-bright uppercase tracking-widest">Навыки и спасброски</div>
-    <div class="accordion-body px-1.5 py-1.5">
-    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-1">Спасброски</div>
-    <ul class="flex flex-col gap-px mb-1">
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span>Сила</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+6</span><span>Ловкость</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+1</span><span>Телосложение</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+4</span><span>Интеллект</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span>Мудрость</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+2</span><span>Харизма</span></li>
-    </ul>
-    <div class="text-center text-drow-accent text-[9px] tracking-[3px] my-0.5">✦ ✦ ✦</div>
-    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-1 mt-0.5">Навыки</div>
-    <ul class="flex flex-col gap-px">
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span class="flex-1">Атлетика</span><span class="text-[8px] text-drow-faint">Сил</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+6</span><span class="flex-1">Акробатика</span><span class="text-[8px] text-drow-faint">Лов</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot e"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+9</span><span class="flex-1">Ловкость рук ✦</span><span class="text-[8px] text-drow-faint">Лов</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot e"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+9</span><span class="flex-1">Скрытность ✦</span><span class="text-[8px] text-drow-faint">Лов</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+1</span><span class="flex-1">Аркана</span><span class="text-[8px] text-drow-faint">Инт</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+1</span><span class="flex-1">История</span><span class="text-[8px] text-drow-faint">Инт</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot p"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+4</span><span class="flex-1">Расследование</span><span class="text-[8px] text-drow-faint">Инт</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+1</span><span class="flex-1">Природа</span><span class="text-[8px] text-drow-faint">Инт</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot e"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+6</span><span class="flex-1">Внимательность ✦</span><span class="text-[8px] text-drow-faint">Муд</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span class="flex-1">Проницательность</span><span class="text-[8px] text-drow-faint">Муд</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span class="flex-1">Медицина</span><span class="text-[8px] text-drow-faint">Муд</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+0</span><span class="flex-1">Выживание</span><span class="text-[8px] text-drow-faint">Муд</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot e"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+8</span><span class="flex-1">Обман ✦</span><span class="text-[8px] text-drow-faint">Хар</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+3</span><span class="flex-1">Запугивание</span><span class="text-[8px] text-drow-faint">Хар</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+3</span><span class="flex-1">Выступление</span><span class="text-[8px] text-drow-faint">Хар</span></li>
-      <li class="flex items-center gap-1.5 text-[9px] text-drow-text"><div class="dot"></div><span class="font-meta text-[9px] text-drow-bright w-[18px] text-right">+3</span><span class="flex-1">Убеждение</span><span class="text-[8px] text-drow-faint">Хар</span></li>
-    </ul>
-    <div class="text-[6.5px] text-drow-faint mt-1">✦ Экспертиза ×2: Скрытность, Ловкость рук, Внимательность, Обман</div>
-  </div></div>
+      <div class="px-2 py-1.5">
+        <div class="lianna-list-title">Магия и бой</div>
+        <div class="grid grid-cols-3 gap-1.5 mb-2 mob-combat-grid">
+          <div class="lianna-metric"><b>14</b><span>Сл. заклинаний</span></div><div class="lianna-metric"><b>+6</b><span>Атака магией</span></div><div class="lianna-metric"><b>+3</b><span>Инициатива</span></div>
+          <div class="lianna-metric"><b>38</b><span>Макс. хиты</span></div><div class="lianna-metric"><b>13</b><span>КБ без магии</span></div><div class="lianna-metric"><b>16</b><span>Доспехи мага</span></div>
+        </div>
+        <div class="lianna-compact-card"><strong>Основной ход</strong><span>Заклинание действием; бонусное действие оставь для Шага через тень или метамагии.</span></div>
+        <div class="lianna-compact-card"><strong>Концентрация</strong><span>После урона: спасбросок Телосложения Сл. 10 или половина урона.</span></div>
+        <div class="lianna-compact-card shadow"><strong>Текущая стадия</strong><span id="sheet-stage-resources">2 ячейки 1-го уровня · заговоры</span></div>
+      </div>
+    </div>
 
-  <!-- COMBAT -->
-  <div class="px-2 py-1.5">
-    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-1.5">Бой</div>
-    <div class="grid grid-cols-3 gap-1.5 mb-2 mob-combat-grid">
-      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver tip">15
-  <div class="tip-box"><span class="tip-title">КД 15</span>Кожаный доспех 11 + Лов +4. Атаки ниже 15 — промах.</div>
-</div><div class="text-[7px] text-drow-faint uppercase">Класс доспехов</div></div>
-      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver tip">+4
-  <div class="tip-box"><span class="tip-title">Инициатива +4</span>d20 + 4 в начале боя. Чем выше — тем раньше ходишь.<br><span class="tip-good">Убийца выигрывает от первого хода!</span></div>
-</div><div class="text-[7px] text-drow-faint uppercase">Инициатива</div></div>
-      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver">30 фт</div><div class="text-[7px] text-drow-faint uppercase">Скорость</div></div>
-      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver">39</div><div class="text-[7px] text-drow-faint uppercase">Макс хиты</div></div>
-      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver">6d8</div><div class="text-[7px] text-drow-faint uppercase">Куб хитов</div></div>
-      <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1 text-center"><div class="font-meta text-[15px] text-drow-silver tip">+3
-  <div class="tip-box"><span class="tip-title">Бонус мастерства</span>Добавляется к навыкам, атакам и спасброскам с владением.<br><br>Ур. 1–4: +2 · Ур. 5–8: +3<br><span class="tip-good">На 6 ур. экспертиза выбрана для Обмана и Внимательности.</span></div>
-</div><div class="text-[7px] text-drow-faint uppercase">Бонус мастерства</div></div>
+    <div class="lianna-section-title">Классовые способности</div>
+    <div class="lianna-feature-grid">
+      <article><h3>Глаза тьмы</h3><p>Тёмное зрение 120 фт. Заклинание «Тьма» известно; за 2 очка чародейства Лиана видит сквозь созданную им тьму.</p></article>
+      <article><h3>Сила из могилы</h3><p>При падении до 0 ХП: спасбросок Харизмы Сл. 5 + полученный урон. При успехе остаётся на 1 ХП; не работает от излучения и критического удара.</p></article>
+      <article><h3>Источник магии</h3><p>В полной силе 6 очков чародейства. Гибкое колдовство превращает ячейки в очки и очки в ячейки.</p></article>
+      <article><h3>Метамагия</h3><p><b>Тонкое заклинание:</b> без слов и жестов. <b>Удвоенное:</b> вторую цель получает заклинание, которое обычно выбирает одну.</p></article>
+      <article><h3>Гончая дурного знамения</h3><p>Бонусным действием за 3 очка призывает гончую рядом с целью. Пока она рядом, цель совершает спасброски от магии Лианы с помехой.</p></article>
+      <article class="secret"><h3>Нечто ещё</h3><p>Тень молчит. Но в момент опасности стоит попробовать проверки Ловкости.</p></article>
     </div>
-    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-1">Атаки</div>
-    <div class="mob-atk-wrap"><table class="w-full text-[9px] border-collapse">
-      <tr><th class="bg-[rgba(74,111,168,0.13)] text-drow-bright px-1 py-1 text-left text-[7.5px] border border-drow-border">Оружие</th><th class="bg-[rgba(74,111,168,0.13)] text-drow-bright px-1 py-1 text-left text-[7.5px] border border-drow-border">Атака</th><th class="bg-[rgba(74,111,168,0.13)] text-drow-bright px-1 py-1 text-left text-[7.5px] border border-drow-border">Урон / Тип</th></tr>
-      <tr class="atk-row"><td class="px-1 py-0.5 border border-drow-border text-drow-text">Рапира</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">+7</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">1d8+4 / прокол</td></tr>
-      <tr class="atk-row"><td class="px-1 py-0.5 border border-drow-border text-drow-text">Ручной арбалет</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">+7</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">1d8+6 / прокол</td></tr>
-      <tr class="atk-row"><td class="px-1 py-0.5 border border-drow-border text-drow-text">Кинжал (брос.)</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">+7</td><td class="px-1 py-0.5 border border-drow-border text-drow-text">1d4+6 / прокол</td></tr>
-    </table></div>
-    <div class="mt-1.5">
-      <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-0.5">Скрытная атака (1 раз в ход)</div>
-      <div class="text-[9px] text-drow-text leading-relaxed tip">+<strong>3d6</strong> урона при преимуществе или союзнике в 5 фт от цели
-  <div class="tip-box"><span class="tip-title">Скрытная атака</span>Один раз в ход. Нужно:<br>• Преимущество на атаку, <b>ИЛИ</b><br>• Союзник в 5 фт от цели<br>• Без помехи на атаку<br><br>На 5–6 ур.: +3d6 · На 7 ур.: +4d6<br><span class="tip-good">При крите все кубики удваиваются!</span></div>
-</div>
-    </div>
-    <div class="mt-1.5">
-      <div class="font-meta text-[8px] text-drow-bright uppercase tracking-widest text-center border-b border-drow-border pb-0.5 mb-0.5">Магия дроу (Хар, СС 13)</div>
-      <div class="text-[9px] text-drow-text leading-relaxed">◆ <span class="text-drow-bright font-bold">Пляшущие огоньки</span> — заговор, по желанию<br>◆ <span class="text-drow-bright font-bold">Огонь фей</span> — 1/день ✦ РАЗБЛОКИРОВАН<br>◆ <span class="text-drow-bright font-bold">Тьма</span> — 1/день ✦ <span style="color:#bff0c4;font-weight:800">РАЗБЛОКИРОВАНА</span></div>
+
+    <div class="grid grid-cols-2 border-t border-drow-border mob-bottom-grid">
+      <section class="p-3 border-r border-drow-border">
+        <div class="lianna-section-title compact">Что знает Лиана</div>
+        <ul class="lianna-clue-list">
+          <li>Посол Гроу из Империи Смерти стоит за историей с зомби.</li>
+          <li>Его корабль в городе подготовлен к быстрому отплытию.</li>
+          <li>Гроу — могущественный маг, хотя тщательно это скрывает.</li>
+          <li>Разграбленный дом был главным пунктом приёма зомби, но не единственным.</li>
+        </ul>
+      </section>
+      <section class="p-3">
+        <div class="lianna-section-title compact">Пробуждение</div>
+        <p class="lianna-story">До этого дня Лиана не умела колдовать. Теперь внутри неё живёт чужая сущность, а магия приходит рывками после пробуждения. Она ещё не понимает предел силы и не знает, чего именно тень ждёт взамен.</p>
+        <div class="lianna-quote">«Сначала отражение шевельнулось. Потом заговорило моим голосом.»</div>
+      </section>
     </div>
   </div>
-</div>
-
-<!-- FEATURES -->
-<div class="grid grid-cols-3 gap-1.5 px-2 py-1.5 border-t border-drow-border relative z-10 mob-features">
-  <div class="rounded p-1.5" style="background:rgba(74,111,168,0.07);border:1px solid #4a6fa8;animation:drow-border 4s ease-in-out infinite;transition:all 0.3s;">
-    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-wide border-b border-drow-border pb-0.5 mb-1">Черты расы: Дроу</div>
-    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Тёмное зрение</strong> — 120 фт</div>
-    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Обострённые чувства</strong> — владение Внимательностью</div>
-    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Наследие фей</strong> — преим. против очарования, иммун. к усыплению</div>
-    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Чувствительность к солнцу</strong> — помеха при солнечном свете</div>
-    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Владение оружием дроу</strong> — рапира, к. меч, арбалет</div>
-    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Транс</strong> — 4 часа медитации вместо 8 часов сна</div>
-    <div class="feature-level5 text-[8.5px] text-drow-text leading-snug">◆ <strong class="text-drow-silver">Тьма</strong> <span style="color:#bff0c4;font-weight:800">5 ур.</span> — 1/день ✦ РАЗБЛОКИРОВАНА</div>
-  </div>
-  <div class="rounded p-1.5" style="background:rgba(74,111,168,0.07);border:1px solid #2e3d5a;animation:rogue-border 3s ease-in-out infinite;transition:all 0.3s;">
-    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-wide border-b border-drow-border pb-0.5 mb-1">Умения плута</div>
-    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Мастерство ×2</strong> — Скрытность +9, Ловкость рук +9</div>
-    <div class="feature-level6 text-[8.5px] text-drow-text leading-snug">◆ <strong class="text-drow-silver">Экспертиза</strong> <span class="sbadge-level6 text-[7px] px-1.5 py-0.5 rounded border">6 ур.</span> — Обман +8, Внимательность +6</div>
-    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Скрытная атака</strong> — +3d6 при преимуществе / союзнике в 5 фт</div>
-    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Хитрое действие</strong> — Рывок / Отход / Затаивание бонусным</div>
-    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Воровской жаргон</strong> — тайный язык воров</div>
-    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Спасброски:</strong> Ловкость, Интеллект</div>
-    <div class="feature-level5 text-[8.5px] text-drow-text leading-snug">◆ <strong class="text-drow-silver">Невероятное уклонение</strong> <span style="color:#bff0c4;font-weight:800">5 ур.</span> — реакцией урон от атаки ÷2</div>
-  </div>
-    <div class="rounded p-1.5" style="background:rgba(92,18,24,0.18);border:1px solid #8f2630;animation:assassin-border 3.5s ease-in-out infinite;">
-    <div class="font-meta text-[8px] uppercase tracking-wide border-b pb-0.5 mb-1" style="color:#f0a0a6;border-color:#8f2630">
-      Убийца — архетип
-    </div>
-    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Ликвидация</strong> — преимущество по не ходившим. Попадание по врасплох — АВТОКРИТ</div>
-    <div class="text-[8.5px] text-drow-text leading-snug mb-0.5">◆ <strong class="text-drow-silver">Владения:</strong> Набор для грима · Инструменты отравителя</div>
-    <div class="text-[7px] mt-1" style="color:#f0a0a6">★ Спрятался → автокрит + 3d6 скрытная с первого удара!</div>
-  </div>
-</div>
-
-<!-- EQUIP -->
-<div class="grid grid-cols-2 gap-1.5 px-2 py-1.5 border-t border-drow-border relative z-10 mob-equip">
-  <div>
-    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-wide border-b border-drow-border pb-0.5 mb-1">Снаряжение</div>
-    <ul class="text-[9px] text-drow-text leading-relaxed" id="sheet-inventory-list"></ul>
-  </div>
-  <div>
-    <div class="font-meta text-[8px] text-drow-bright uppercase tracking-wide border-b border-drow-border pb-0.5 mb-1">Владения и валюта</div>
-    <div class="text-[9px] text-drow-text leading-relaxed">Лёгкие доспехи · Простое оружие<br>Рапиры · Длинные и короткие мечи<br>Ручные арбалеты<br>Инструменты вора · Набор взломщика<br>Языки: Общий, Эльфийский, Подземный<br><strong id="sheet-inventory-currency" style="background:linear-gradient(90deg,#b8860b,#ffd700,#ffec6e,#ffd700,#b8860b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:11px;animation:goldshine 2s linear infinite;background-size:200% auto;"></strong></div>
-  </div>
-</div>
-
-<!-- BACKSTORY -->
-<div class="px-2.5 py-1.5 border-t border-drow-border bg-[rgba(74,111,168,0.04)] relative z-10">
-  <div class="font-meta text-[8px] text-drow-bright uppercase tracking-wide border-b border-drow-border pb-0.5 mb-1">История</div>
-  <div class="text-[9px] text-drow-muted leading-relaxed italic">Родился в Андердарке, в младшем доме дроу — достаточно знатном для амбиций, но не для их реализации. Мать — жрица Вальдиры — возлагала надежды. Отец просто надеялся выжить. В четырнадцать лет Съебастьяна отдали в академию магов. В пятнадцать он оттуда <strong class="not-italic text-drow-silver">съебастьянировал</strong> — прихватив фамильный флакон с дымовой шашкой, казну учителя и чужие сапоги на два размера больше. Долги? <strong class="not-italic text-drow-silver">Сквозняк.</strong> Стража? <strong class="not-italic text-drow-silver">Сквозняк.</strong> Свадьба с намёком? <strong class="not-italic text-drow-silver">Сквозняк.</strong> Мотивация проста: вернуться настолько богатым и опасным, чтобы мать сказала «я горжусь тобой» — и исчезнуть, пока не передумала. Где-то на этом пути он нашёл <strong class="not-italic text-drow-silver">Вальдиру</strong> — или она нашла его. Богиня теней, тайн и страха. Съебастьян не молится — он просто живёт так, как она велит: незаметно, опасно, и всегда на шаг впереди тех, кто его ищет.</div>
-</div>
-
-<!-- TRAITS -->
-<div class="grid grid-cols-4 gap-1.5 px-2 py-1.5 border-t border-drow-border relative z-10 mob-traits">
-  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1.5">
-    <div class="font-meta text-[7.5px] text-drow-faint uppercase tracking-wide mb-1">Черты личности</div>
-    <div class="text-[8.5px] text-drow-muted leading-snug italic">Всегда улыбается, когда что-то идёт не так. Особенно — когда это не так для других. Мастер массажа простаты.</div>
-  </div>
-  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1.5">
-    <div class="font-meta text-[7.5px] text-drow-faint uppercase tracking-wide mb-1">Идеал</div>
-    <div class="text-[8.5px] text-drow-muted leading-snug italic">Свобода. Никто не указывает Съебастьяну — ни боги, ни господа, ни смерть.</div>
-  </div>
-  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1.5">
-    <div class="font-meta text-[7.5px] text-drow-faint uppercase tracking-wide mb-1">Привязанность</div>
-    <div class="text-[8.5px] text-drow-muted leading-snug italic">Флакон с дымом — память о первой удачной краже. Никогда не расстаётся.</div>
-  </div>
-  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-1.5">
-    <div class="font-meta text-[7.5px] text-drow-faint uppercase tracking-wide mb-1">Слабость</div>
-    <div class="text-[8.5px] text-drow-muted leading-snug italic">Не может устоять перед красивой работой — ловушкой, замком или красавицей.</div>
-  </div>
-</div>
-
-</div><!-- END PAGE 1 -->
 </div><!-- END panel-sheet -->
 
 <!-- ── ВКЛАДКА: ШПАРГАЛКА ── -->
 <div class="tab-panel" id="panel-spells">
-<!-- ══════════════ СТРАНИЦА 2: ШПАРГАЛКА ══════════════ -->
-<div class="page">
-
-<div class="text-center px-3 py-2.5 border-b-2 border-drow-border bg-drow-header relative z-10">
-  <div class="font-meta text-[20px] text-drow-silver tracking-[2px]">Съебастьян Сквозняк — Шпаргалка</div>
-  <div class="text-[10px] text-drow-muted mt-0.5">Плут 6 · Убийца · Дроу · Хар-ка: Харизма (+2) · СС 13 · Бонус атаки +7</div>
-</div>
-
-<!-- helper macros as inline template -->
-<div class="relative z-10">
-
-<!-- SECTION: БОЕВЫЕ УМЕНИЯ -->
-<div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mt-2 mb-1.5">Боевые умения плута</div>
-<div class="mob-spell-grid"><div class="grid grid-cols-2 gap-2 px-2.5 mb-2 spell-grid-inner">
-
-  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
-    <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--blood"><use href="#icon-gi-dripping-knife"></use></svg>Скрытная атака</div>
-      <span class="text-[8px] px-2 py-0.5 rounded border sbadge-ability shrink-0">1× за ход</span>
+  <div class="page lianna-cheat">
+    <div class="lianna-cheat-head">
+      <div><div class="font-meta text-[20px] text-drow-silver tracking-[2px]">Лиана — Теневая шпаргалка</div><div class="text-[10px] text-drow-muted mt-0.5">Чародей 6 · Сл. заклинаний 14 · Атака +6 · Сл. Хватки безликого 15</div></div>
+      <div class="lianna-stage-seal"><span id="lianna-stage-number">I</span><small id="lianna-stage-label">Пробуждение</small></div>
     </div>
-    <div class="flex flex-wrap gap-1 mb-1.5">
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Доп. урон: <span class="text-drow-silver font-bold">+3d6</span></span>
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Оружие: <span class="text-drow-silver font-bold">фехт. или дальн.</span></span>
+
+    <section class="lianna-stage-console">
+      <div class="lianna-stage-kicker">Текущая стадия пробуждения</div>
+      <div class="lianna-stage-buttons" role="group" aria-label="Стадия магии Лианы">
+        <button type="button" data-lianna-stage="1" onclick="setLiannaStage(1)"><b>I</b><span>Пробуждение</span></button>
+        <button type="button" data-lianna-stage="2" onclick="setLiannaStage(2)"><b>II</b><span>Первые шаги</span></button>
+        <button type="button" data-lianna-stage="3" onclick="setLiannaStage(3)"><b>III</b><span>Хватка тени</span></button>
+        <button type="button" data-lianna-stage="4" onclick="setLiannaStage(4)"><b>IV</b><span>Воплощение</span></button>
+      </div>
+      <div class="lianna-resource-strip">
+        <div><span>1 уровень</span><b id="lianna-slot-1">2</b></div><div><span>2 уровень</span><b id="lianna-slot-2">0</b></div><div><span>3 уровень</span><b id="lianna-slot-3">0</b></div><div><span>Очки чар.</span><b id="lianna-sorcery-points">0</b></div>
+      </div>
+      <p id="lianna-stage-note">Доступны заговоры и две ячейки 1-го уровня.</p>
+    </section>
+
+    <div class="lianna-stage-card active" data-stage-card="1"><div class="stage-roman">I</div><div><h3>Чужое отражение</h3><p><b>Раз за сцену.</b> Лиана обращается к отражению или трупу и получает короткий обрывок чужой памяти: образ, ощущение или последние слова.</p></div></div>
+    <div class="lianna-stage-card" data-stage-card="2"><div class="stage-roman">II</div><div><h3>Шаг через тень</h3><p><b>Бонусное действие · 2 раза в день.</b> Телепортация на 15 фт между видимыми участками тусклого света или темноты. Ячейка не расходуется.</p></div></div>
+    <div class="lianna-stage-card" data-stage-card="3"><div class="stage-roman">III</div><div><h3>Хватка безликого</h3><p><b>Действие · раз за сцену · 30 фт.</b> Спасбросок Силы Сл. 15. Провал: 2d6 некротического урона и цель опутана тенями до конца своего следующего хода.</p></div></div>
+    <div class="lianna-stage-card apex" data-stage-card="4"><div class="stage-roman">IV</div><div><h3>Истинное воплощение</h3><p><b>Бонусное действие · раз за сессию · 3 раунда.</b> 20 временных ХП; раз за ход +2d8 некротического урона к успешной атаке или наносящему урон заклинанию; бонусная телепортация на 30 фт без провоцирования; сопротивление некротическому урону.</p></div></div>
+
+    <div class="lianna-section-title">Известные заклинания</div>
+    <div class="lianna-spell-grid">
+      <section><h3>Заговоры</h3><ul><li><b>Огненный снаряд</b><span>дальняя атака, 2d10 огня</span></li><li><b>Леденящее прикосновение</b><span>2d8 некротического, мешает лечению</span></li><li><b>Расщепление разума</b><span>спасбросок Инт, 2d6 психического, −1d4 к следующему спасброску</span></li><li><b>Малая иллюзия</b><span>звук или образ для отвлечения</span></li><li><b>Волшебная рука</b><span>манипуляции на расстоянии</span></li></ul></section>
+      <section><h3>1 уровень</h3><ul><li><b>Щит</b><span>реакция, +5 КБ до начала следующего хода</span></li><li><b>Доспехи мага</b><span>КБ 13 + Ловкость = 16 на 8 часов</span></li><li><b>Волшебная стрела</b><span>три гарантированных снаряда по 1d4+1</span></li></ul></section>
+      <section><h3>2 уровень</h3><ul><li><b>Туманный шаг</b><span>бонусная телепортация на 30 фт</span></li><li><b>Отражения</b><span>три иллюзорных двойника, без концентрации</span></li><li><b>Тьма</b><span>сфера 15 фт; за 2 очка Лиана видит сквозь неё</span></li></ul></section>
+      <section><h3>3 уровень</h3><ul><li><b>Контрзаклинание</b><span>реакцией останавливает чужую магию</span></li><li><b>Гипнотический узор</b><span>куб 30 фт, очарование и недееспособность</span></li></ul></section>
     </div>
-    <div class="text-[9.5px] text-drow-muted leading-relaxed italic">Раз в ход добавь <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">+3d6 урона</span> если есть <strong class="not-italic">преимущество</strong> или <strong class="not-italic">союзник в 5 фт от цели</strong>. Без помехи.</div>
-    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext leading-snug">✓ Союзник рядом с ЦЕЛЬЮ, не с тобой. Работает реакцией!</div></div>
+
+    <div class="lianna-section-title">Быстрые решения</div>
+    <div class="lianna-tactics-grid">
+      <article><h3>Защита</h3><p>Перед опасной сценой — «Доспехи мага». При попадании — реакция «Щит». Для спасения концентрации Лиана бросает Телосложение с бонусом +5.</p></article>
+      <article><h3>Контроль</h3><p>«Гипнотический узор» выключает группу врагов. Не атакуй очарованных без нужды: урон или действие союзника снимает эффект.</p></article>
+      <article><h3>Тьма</h3><p>За 2 очка чародейства Лиана видит сквозь собственную «Тьму». Враги внутри ослеплены, но союзникам она тоже мешает.</p></article>
+      <article><h3>Гончая</h3><p>3 очка чародейства. Выпусти её на главную цель перед заклинанием со спасброском: рядом с гончей цель бросает с помехой.</p></article>
+      <article><h3>Тонкая магия</h3><p>Убирает словесный и соматический компоненты. Полезно в плену, при переговорах и когда нельзя показать, кто колдует.</p></article>
+      <article class="secret"><h3>Проверка Ловкости</h3><p>Есть ощущение, что тело помнит то, чему Лиану никто не учил. Мастер скажет, когда тень ответит.</p></article>
+    </div>
   </div>
-
-  <div class="scard-new border rounded-md p-2 scard-anim">
-    <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--shadow"><use href="#icon-gi-run"></use></svg>Хитрое действие</div>
-      <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">Бонусное действие</span>
-    </div>
-    <div class="text-[9.5px] text-drow-muted leading-relaxed italic">Каждый ход бонусным действием:<br>— <strong class="not-italic text-drow-text">Рывок</strong> — удвоить скорость (60 фт)<br>— <strong class="not-italic text-drow-text">Отход</strong> — без провоцированных атак<br>— <strong class="not-italic text-drow-text">Затаивание</strong> — попытка спрятаться</div>
-    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Затаивание → преимущество → Скрытная атака автоматически!</div></div>
-  </div>
-
-  <div class="scard-new scard-level5 border rounded-md p-2 scard-anim">
-    <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--evasion"><use href="#icon-gi-uncanny-dodge"></use></svg>Невероятное уклонение</div>
-      <span class="text-[8px] px-2 py-0.5 rounded border sbadge-level5 shrink-0">5 ур. · реакция</span>
-    </div>
-    <div class="flex flex-wrap gap-1 mb-1.5">
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Эффект: <span class="text-drow-silver font-bold">урон ÷2</span></span>
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Триггер: <span class="text-drow-silver font-bold">атака попала</span></span>
-    </div>
-    <div class="text-[9.5px] text-drow-muted leading-relaxed italic">Когда нападающий, которого ты видишь, попадает по тебе атакой, можешь реакцией уменьшить урон от этой атаки вдвое.</div>
-    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Работает против атак, включая атаки заклинаниями. Не работает против спасбросков вроде Огненного шара.</div></div>
-  </div>
-
-  <div class="scard-new border rounded-md p-2 scard-anim">
-    <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--sight"><use href="#icon-gi-invisible-face"></use></svg>Экспертиза</div>
-      <span class="text-[8px] px-2 py-0.5 rounded border sbadge-level6 shrink-0">6 ур.</span>
-    </div>
-    <div class="flex flex-wrap gap-1 mb-1.5">
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Обман: <span class="text-drow-silver font-bold">+8</span></span>
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Внимательность: <span class="text-drow-silver font-bold">+6</span></span>
-    </div>
-    <div class="text-[9.5px] text-drow-muted leading-relaxed italic">На 6 уровне плут выбирает ещё две экспертизы. Теперь Съебастьян лучше врёт в лицо и лучше замечает засаду.</div>
-    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Пассивная Внимательность стала 16, а Обман вырос до +8.</div></div>
-  </div>
-
-</div></div>
-
-<!-- SECTION: УБИЙЦА -->
-<div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mb-1.5 assassin-section-title">Архетип Убийца — умения 3 уровня</div>
-<div class="mob-spell-grid"><div class="grid grid-cols-2 gap-2 px-2.5 mb-2 spell-grid-inner">
-
-  <div class="scard-new border rounded-md p-2 scard-anim">
-    <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--mark"><use href="#icon-gi-target-shot"></use></svg>Ликвидация</div>
-      <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">3 ур.</span>
-    </div>
-    <div class="flex flex-wrap gap-1 mb-1.5">
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Тип: <span class="text-drow-silver font-bold">Пассивно</span></span>
-    </div>
-    <div class="text-[9.5px] text-drow-muted leading-relaxed italic">— <strong class="not-italic">Преимущество</strong> на атаки по существам, что ещё <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">не совершали ход</span><br>— Попадание по <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">захваченному врасплох</span> = <strong class="not-italic">АВТОКРИТ</strong></div>
-    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Спрятался → враг удивлён → АВТОКРИТ + 3d6 удваиваются при крите!</div></div>
-    <div class="swarn rounded-r p-1.5 mt-1"><div class="text-[9px] text-drow-warntext">Важно: автокрит — только по захваченным врасплох (до начала боя).</div></div>
-  </div>
-
-  <div class="scard-new border rounded-md p-2 scard-anim">
-    <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--venom"><use href="#icon-gi-poison-bottle"></use></svg>Владения убийцы</div>
-      <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">3 ур.</span>
-    </div>
-    <div class="flex flex-wrap gap-1 mb-1.5">
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Набор для грима</span>
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Инстр. отравителя</span>
-    </div>
-    <div class="text-[9.5px] text-drow-muted leading-relaxed italic"><strong class="not-italic text-drow-text">Набор для грима</strong> — менять внешность, возраст, черты лица.<br><strong class="not-italic text-drow-text">Инструменты отравителя</strong> — яды: Simple Poison 1d4/ход, СС Тел 10.</div>
-    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Маскировка + Скрытность +9 + Обман +8 = подойти вплотную незамеченным и не спалиться разговором!</div></div>
-  </div>
-
-</div></div>
-
-<!-- SECTION: МАГИЯ ДРОУ -->
-<div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mb-1.5">Природная магия дроу (Хар +2, СС 13)</div>
-<div class="mob-spell-grid"><div class="grid grid-cols-2 gap-2 px-2.5 mb-2 spell-grid-inner">
-
-  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
-    <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--fae"><use href="#icon-gi-fairy-wand"></use></svg>Пляшущие огоньки</div><div class="text-[9px] text-drow-muted italic">Dancing Lights</div></div>
-      <span class="text-[8px] px-2 py-0.5 rounded border sbadge-race shrink-0">Заговор · ∞</span>
-    </div>
-    <div class="flex flex-wrap gap-1 mb-1.5">
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Дистанция: <span class="text-drow-silver font-bold">120 фт</span></span>
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Конц. <span class="text-drow-silver font-bold">1 мин.</span></span>
-    </div>
-    <div class="text-[9.5px] text-drow-muted italic leading-relaxed">До <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">4 огоньков</span> в 120 фт. Тусклый свет 10 фт. Бонусным — перемещай на 60 фт.</div>
-    <div class="seffect rounded-r p-1.5 mt-1.5"><div class="font-meta text-[8px] text-drow-bright uppercase mb-0.5">Тактика</div><div class="text-[9px] text-drow-muted">Приманка из фигуры. Отвлекай стражников. Освещай без раскрытия.</div></div>
-    <div class="swarn rounded-r p-1.5 mt-1"><div class="text-[9px] text-drow-warntext">Важно: концентрацию нельзя совмещать с Огнём фей.</div></div>
-  </div>
-
-  <div class="scard-new border rounded-md p-2 scard-anim">
-    <div class="flex items-start justify-between mb-1.5 gap-2">
-      <div><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--fire"><use href="#icon-gi-magic-swirl"></use></svg>Огонь фей</div><div class="text-[9px] text-drow-muted italic">Faerie Fire</div></div>
-      <span class="text-[8px] px-2 py-0.5 rounded border sbadge-new shrink-0">1/день</span>
-    </div>
-    <div class="flex flex-wrap gap-1 mb-1.5">
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">60 фт · Куб 20 фт</span>
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Спас.: <span class="text-drow-silver font-bold">Лов СС 13</span></span>
-    </div>
-    <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Существа в кубе 20 фт — спасбросок Лов СС 13. При провале — подсвечены. Все атаки по ним <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">с преимуществом</span>.</div>
-    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ Преимущество для всей пати → Скрытная атака каждый ход!</div></div>
-    <div class="swarn rounded-r p-1.5 mt-1"><div class="text-[9px] text-drow-warntext">Важно: действует на всех в области, включая союзников.</div></div>
-  </div>
-
-</div></div>
-
-<!-- SECTION: РАСОВЫЕ -->
-<div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mb-1.5">Расовые особенности · Тьма разблокирована</div>
-<div class="mob-spell-grid"><div class="grid grid-cols-2 gap-2 px-2.5 mb-2 spell-grid-inner">
-  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded-md p-2 scard-anim">
-    <div class="flex items-start justify-between mb-1.5"><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--sight"><use href="#icon-gi-invisible-face"></use></svg>Тёмное зрение 120 фт</div><span class="text-[8px] px-2 py-0.5 rounded border sbadge-race shrink-0">Пассивно</span></div>
-    <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Тусклый → яркий. Темнота → тусклый (серый). <span class="not-italic font-bold text-drow-bright underline decoration-drow-accent">120 фт</span> — лучшее среди рас.</div>
-    <div class="swarn rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-warntext">Важно: помеха атакам и Внимательности при солнечном свете.</div></div>
-  </div>
-  <div class="scard-new scard-level5 border rounded-md p-2 scard-anim">
-    <div class="flex items-start justify-between mb-1.5"><div class="feature-title font-meta text-[13px] text-drow-silver"><svg class="ui-icon title-icon ability-icon--dark"><use href="#icon-gi-hood"></use></svg>Тьма</div><span class="text-[8px] px-2 py-0.5 rounded border sbadge-level5 shrink-0">1/день ✦ РАЗБЛОКИРОВАНА</span></div>
-    <div class="flex flex-wrap gap-1 mb-1.5">
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Сфера: <span class="text-drow-silver font-bold">15 фт</span></span>
-      <span class="bg-[rgba(74,111,168,0.13)] border border-drow-border rounded px-1.5 py-0.5 text-[8.5px] text-drow-muted">Конц.: <span class="text-drow-silver font-bold">10 минут</span></span>
-    </div>
-    <div class="text-[9.5px] text-drow-muted italic leading-relaxed">Долгожданная кнопка тёмного убийцы: сфера магической тьмы 15 фт. Дроу видит сквозь свою тьму нормально.</div>
-    <div class="sgood rounded-r p-1.5 mt-1.5"><div class="text-[9px] text-drow-goodtext">✓ КОМБО: Тьма → враги слепнут → атаки с преимуществом → Скрытная атака каждый ход!</div></div>
-  </div>
-</div></div>
-
-<!-- SECTION: СВОДКА -->
-<div class="font-meta text-[9.5px] text-drow-bright uppercase tracking-[2px] border-b border-drow-border px-2.5 py-1 mb-1.5">Быстрая сводка — что делать в бою</div>
-<div class="grid grid-cols-2 gap-2 px-2.5 pb-2.5">
-  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-2">
-    <div class="font-meta text-[9px] text-drow-silver border-b border-drow-border pb-0.5 mb-1">Начало боя — враги удивлены</div>
-    <div class="text-[9px] text-drow-muted leading-relaxed">→ <span class="font-bold text-drow-bright">АВТОКРИТ</span> + 3d6 скрытная. Кубики удваиваются!</div>
-  </div>
-  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-2">
-    <div class="font-meta text-[9px] text-drow-silver border-b border-drow-border pb-0.5 mb-1">Первый раунд — враги не ходили</div>
-    <div class="text-[9px] text-drow-muted leading-relaxed">→ <span class="font-bold text-drow-bright">Ликвидация</span> даёт преимущество автоматически</div>
-  </div>
-  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-2">
-    <div class="font-meta text-[9px] text-drow-silver border-b border-drow-border pb-0.5 mb-1">Нас окружили</div>
-    <div class="text-[9px] text-drow-muted leading-relaxed">→ <span class="font-bold text-drow-bright">Огонь фей</span> (1/день) → преимущество для пати 10 раундов</div>
-  </div>
-  <div class="scard-level5 border rounded p-2">
-    <div class="font-meta text-[9px] text-drow-silver border-b border-drow-border pb-0.5 mb-1">Нужно забрать поле боя</div>
-    <div class="text-[9px] text-drow-muted leading-relaxed">→ <span class="font-bold text-drow-bright">Тьма</span> (1/день) → враги слепнут → <span class="font-bold text-drow-bright">Скрытная атака каждый ход</span></div>
-  </div>
-  <div class="bg-[rgba(74,111,168,0.07)] border border-drow-border rounded p-2">
-    <div class="font-meta text-[9px] text-drow-silver border-b border-drow-border pb-0.5 mb-1">Проникновение / разведка</div>
-    <div class="text-[9px] text-drow-muted leading-relaxed">→ <span class="font-bold text-drow-bright">Скрытность +9</span> · <span class="font-bold text-drow-bright">Ловкость рук +9</span> · <span class="font-bold text-drow-bright">Обман +8</span> · <span class="font-bold text-drow-bright">Внимательность +6</span></div>
-  </div>
-</div>
-
-</div>
-</div><!-- END PAGE 2 -->
 </div><!-- END panel-spells -->
 
 <script>
@@ -3520,22 +3342,22 @@ document.querySelectorAll('.scard-anim').forEach(card => {
       <div class="combat-stack">
         <section class="combat-box">
           <div class="combat-section-head">
-            <div class="combat-section-title">Съебастьян Сквозняк</div>
+            <div class="combat-section-title">Лиана</div>
             <span class="combat-card-state" id="combat-session-time">бой начат сейчас</span>
           </div>
           <div class="combat-hero">
             <div class="combat-hero-main">
               <div class="combat-hp-orb" id="combat-hp-orb">
-                <div class="combat-hp-current" id="combat-player-hp">39</div>
-                <div class="combat-hp-max">из <span id="combat-player-max-hp">39</span> ХП</div>
+                <div class="combat-hp-current" id="combat-player-hp">38</div>
+                <div class="combat-hp-max">из <span id="combat-player-max-hp">38</span> ХП</div>
                 <div class="combat-temp-hp">временные: <span id="combat-player-temp-hp">0</span></div>
               </div>
 
               <div class="combat-hero-info">
-                <div class="combat-hero-name">Теневой клинок</div>
+                <div class="combat-hero-name">Носительница тени</div>
                 <div class="combat-mini-stats">
-                  <div class="combat-mini-stat"><span>КБ</span><b>15</b></div>
-                  <div class="combat-mini-stat"><span>Инициатива</span><b>+4</b></div>
+                  <div class="combat-mini-stat"><span>КБ</span><b>13 / 16</b></div>
+                  <div class="combat-mini-stat"><span>Инициатива</span><b>+3</b></div>
                   <div class="combat-mini-stat"><span>Скорость</span><b>30</b></div>
                 </div>
                 <div class="combat-controls">
@@ -3552,7 +3374,7 @@ document.querySelectorAll('.scard-anim').forEach(card => {
               <button class="combat-btn small" data-turn-tool="action" onclick="toggleTurnTool('action')">Действие</button>
               <button class="combat-btn small" data-turn-tool="bonus" onclick="toggleTurnTool('bonus')">Бонусное</button>
               <button class="combat-btn small" data-turn-tool="reaction" onclick="toggleTurnTool('reaction')">Реакция</button>
-              <button class="combat-btn small magic" data-turn-tool="sneak" onclick="toggleTurnTool('sneak')">Скрытая атака</button>
+              <button class="combat-btn small magic" data-turn-tool="sneak" onclick="toggleTurnTool('sneak')">Концентрация</button>
             </div>
 
             <div class="combat-tags" id="combat-player-tags"></div>
@@ -3628,10 +3450,10 @@ document.querySelectorAll('.scard-anim').forEach(card => {
           </div>
           <div class="combat-entity-list">
             <div class="combat-card">
-              <div class="combat-card-name">Ход плута</div>
+              <div class="combat-card-name">Ход чародейки</div>
               <div class="combat-card-value" style="font-size:9px;line-height:1.6;margin-bottom:0">
                 Движение до 30 фт · одно действие · возможное бонусное действие.
-                Реакция восстанавливается в начале твоего хода. Скрытая атака применяется один раз за ход.
+                Следи за ячейками, очками чародейства и реакцией для «Щита» или «Контрзаклинания».
               </div>
             </div>
             <div class="combat-card">
@@ -3692,7 +3514,7 @@ document.querySelectorAll('.scard-anim').forEach(card => {
 <div class="tab-panel" id="panel-inventory">
   <div class="inventory-panel">
     <div class="inventory-toolbar">
-      <div class="inv-title"><svg class="ui-icon title-icon"><use href="#icon-bag"></use></svg>Инвентарь — Съебастьян Сквозняк · Плут 6</div>
+      <div class="inv-title"><svg class="ui-icon title-icon"><use href="#icon-bag"></use></svg>Инвентарь — Лиана · Чародей 6</div>
       <div class="inventory-sync">
         <input class="inv-add-input inventory-password" type="password" autocomplete="current-password"
           placeholder="Пароль синхронизации" oninput="setInventoryPassword(this.value)">
@@ -3719,8 +3541,8 @@ document.querySelectorAll('.scard-anim').forEach(card => {
   <div class="notes-panel">
     <div class="notes-heading">
       <div>
-        <div class="notes-title">Кровавое досье Съебастьяна</div>
-        <div class="notes-subtitle">Квесты, имена, долги, улики и всё, что лучше записать до рассвета</div>
+        <div class="notes-title">Теневой журнал Лианы</div>
+        <div class="notes-subtitle">Обрывки памяти, улики, заклинания и всё, что шепчет чужое отражение</div>
       </div>
       <div class="notes-sync">
         <input class="notes-password" id="notes-password" type="password"
@@ -3795,8 +3617,54 @@ function switchTab(name, button) {
 </script>
 
 <script>
-const INVENTORY_STORAGE_KEY = 'sye_inventory_v1';
-const INVENTORY_UPDATED_KEY = 'sye_inventory_updated_at_v1';
+const CHARACTER_KEY = 'lianna';
+const EDIT_TOKEN_KEY = 'dnd_edit_token';
+const LIANNA_STAGE_KEY = 'lianna_magic_stage_v1';
+const LIANNA_STAGES = {
+  1: { roman: 'I', label: 'Пробуждение', slots: [2, 0, 0], points: 0, note: 'Доступны заговоры и две ячейки 1-го уровня.', sheet: '2 ячейки 1-го уровня · заговоры' },
+  2: { roman: 'II', label: 'Первые шаги', slots: [3, 2, 0], points: 0, note: 'Три ячейки 1-го уровня, две 2-го и два Шага через тень в день.', sheet: '3×1 ур. · 2×2 ур. · Шаг через тень 2/день' },
+  3: { roman: 'III', label: 'Хватка тени', slots: [4, 3, 2], points: 4, note: 'Четыре ячейки 1-го, три 2-го, две 3-го и четыре очка чародейства.', sheet: '4/3/2 ячейки · 4 очка · Хватка безликого' },
+  4: { roman: 'IV', label: 'Воплощение', slots: [4, 3, 3], points: 6, note: 'Полный запас 4/3/3, шесть очков чародейства и Истинное воплощение.', sheet: '4/3/3 ячейки · 6 очков · Истинное воплощение' }
+};
+
+function characterApi(path) {
+  const separator = path.includes('?') ? '&' : '?';
+  return path + separator + 'character=' + encodeURIComponent(CHARACTER_KEY);
+}
+
+function setLiannaStage(value) {
+  const stageNumber = Math.min(4, Math.max(1, Number(value) || 1));
+  const stage = LIANNA_STAGES[stageNumber];
+  localStorage.setItem(LIANNA_STAGE_KEY, String(stageNumber));
+  document.querySelectorAll('[data-lianna-stage]').forEach(button => {
+    button.classList.toggle('active', Number(button.dataset.liannaStage) === stageNumber);
+  });
+  document.querySelectorAll('[data-stage-card]').forEach(card => {
+    card.classList.toggle('active', Number(card.dataset.stageCard) === stageNumber);
+  });
+  const values = {
+    'lianna-stage-number': stage.roman,
+    'lianna-stage-label': stage.label,
+    'lianna-slot-1': stage.slots[0],
+    'lianna-slot-2': stage.slots[1],
+    'lianna-slot-3': stage.slots[2],
+    'lianna-sorcery-points': stage.points,
+    'lianna-stage-note': stage.note,
+    'sheet-stage-label': stage.roman + ' · ' + stage.label,
+    'sheet-stage-resources': stage.sheet
+  };
+  Object.entries(values).forEach(([id, text]) => {
+    const element = document.getElementById(id);
+    if (element) element.textContent = text;
+  });
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  setLiannaStage(localStorage.getItem(LIANNA_STAGE_KEY) || 1);
+});
+
+const INVENTORY_STORAGE_KEY = 'lianna_inventory_v1';
+const INVENTORY_UPDATED_KEY = 'lianna_inventory_updated_at_v1';
 let inventoryState = null;
 let inventoryLoaded = false;
 let inventoryCloudLoaded = false;
@@ -3811,33 +3679,33 @@ function defaultInventory() {
   });
   return {
     version: 1,
-    currency: { gold: 68, silver: 23 },
+    currency: { gold: 15, silver: 0 },
     categories: [
       {
         id: 'weapons',
         title: 'Оружие',
-        items: [item('Рапира'), item('Ручной арбалет'), item('Болты', 20), item('Кинжал', 2)]
+        items: [item('Кинжал', 2), item('Лёгкий арбалет'), item('Болты', 20)]
       },
       {
         id: 'armor',
-        title: 'Доспехи и защита',
-        items: [item('Кожаный доспех (КД 11 + Лов)'), item('Наручи меткости (+2 к урону дальн.)')]
+        title: 'Магические принадлежности',
+        items: [item('Магическая фокусировка'), item('Мешочек компонентов')]
       },
       {
         id: 'tools',
-        title: 'Инструменты',
-        items: [item('Набор взломщика'), item('Инструменты вора'), item('Набор для грима'), item('Инструменты отравителя')]
+        title: 'Личные вещи',
+        items: [item('Тёмный дорожный плащ'), item('Зеркальце'), item('Чернильница и перо')]
       },
       {
         id: 'gear',
         title: 'Прочее снаряжение',
         items: [
-          item('Верёвка шёлковая 50 фт'),
-          item('Факел', 5),
-          item('Фляга'),
-          item('Пайки', 3),
-          item('Дымовая шашка (радиус 20 фт)', 3),
-          item('Лопата')
+          item('Верёвка 50 фт'),
+          item('Факел', 10),
+          item('Бурдюк'),
+          item('Пайки', 10),
+          item('Спальный мешок'),
+          item('Набор путешественника')
         ]
       }
     ]
@@ -4014,13 +3882,13 @@ function setInventoryStatus(message, state = '') {
 }
 
 function setInventoryPassword(value) {
-  sessionStorage.setItem('sye_edit_token', value);
+  sessionStorage.setItem(EDIT_TOKEN_KEY, value);
   if (value) scheduleInventoryCloudSave();
 }
 
 function getInventoryPassword() {
   return document.querySelector('.inventory-password')?.value ||
-    sessionStorage.getItem('sye_edit_token') || '';
+    sessionStorage.getItem(EDIT_TOKEN_KEY) || '';
 }
 
 function scheduleInventoryCloudSave() {
@@ -4033,7 +3901,7 @@ function scheduleInventoryCloudSave() {
 async function loadInventoryCloud() {
   setInventoryStatus('Загружаю инвентарь...', 'saving');
   try {
-    const response = await fetch('/.netlify/functions/get-inventory', { cache: 'no-store' });
+    const response = await fetch(characterApi('/.netlify/functions/get-inventory'), { cache: 'no-store' });
     if (!response.ok) throw new Error('Не удалось загрузить инвентарь');
     const result = await response.json();
     const cloudTime = result.updatedAt ? new Date(result.updatedAt).getTime() : 0;
@@ -4074,7 +3942,7 @@ async function saveInventoryCloud(manual = false) {
   inventorySaving = true;
   setInventoryStatus('Сохраняю в Netlify...', 'saving');
   try {
-    const response = await fetch('/.netlify/functions/save-inventory', {
+    const response = await fetch(characterApi('/.netlify/functions/save-inventory'), {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -4088,7 +3956,7 @@ async function saveInventoryCloud(manual = false) {
       if (response.status === 401) throw new Error('Неверный пароль');
       throw new Error(result.error || 'Не удалось сохранить инвентарь');
     }
-    sessionStorage.setItem('sye_edit_token', password);
+    sessionStorage.setItem(EDIT_TOKEN_KEY, password);
     localStorage.setItem(INVENTORY_UPDATED_KEY, result.updatedAt);
     setInventoryStatus(manual ? 'Синхронизировано' : 'Сохранено в облаке', 'saved');
   } catch(error) {
@@ -4101,7 +3969,7 @@ async function saveInventoryCloud(manual = false) {
 window.addEventListener('DOMContentLoaded', function() {
   inventoryState = loadInventoryLocal();
   renderSheetInventory();
-  const savedToken = sessionStorage.getItem('sye_edit_token') || '';
+  const savedToken = sessionStorage.getItem(EDIT_TOKEN_KEY) || '';
   const password = document.querySelector('.inventory-password');
   if (password) password.value = savedToken;
   loadInventoryCloud();
@@ -4109,9 +3977,9 @@ window.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
-const COMBAT_STORAGE_KEY = 'sye_combat_state_v1';
-const COMBAT_ARCHIVE_KEY = 'sye_combat_archive_v1';
-const COMBAT_UPDATED_KEY = 'sye_combat_updated_at_v1';
+const COMBAT_STORAGE_KEY = 'lianna_combat_state_v1';
+const COMBAT_ARCHIVE_KEY = 'lianna_combat_archive_v1';
+const COMBAT_UPDATED_KEY = 'lianna_combat_updated_at_v1';
 const COMBAT_CONDITIONS = [
   'Лежит', 'Схвачен', 'Опутан', 'Отравлен', 'Испуган',
   'Ослеплён', 'Оглушён', 'Без сознания', 'Невидим', 'Концентрация'
@@ -4133,8 +4001,8 @@ function defaultCombatState() {
     currentId: 'player',
     order: ['player'],
     player: {
-      hp: 39,
-      maxHp: 39,
+      hp: 38,
+      maxHp: 38,
       tempHp: 0,
       conditions: [],
       deathSuccess: 0,
@@ -4154,7 +4022,7 @@ function defaultCombatState() {
 function normalizeCombatState(state) {
   if (!state?.player) return state;
 
-  const levelSixMaxHp = 39;
+  const levelSixMaxHp = 38;
   const previousMaxHp = Number(state.player.maxHp) || levelSixMaxHp;
   if (previousMaxHp < levelSixMaxHp) {
     const hpIncrease = levelSixMaxHp - previousMaxHp;
@@ -4219,14 +4087,14 @@ function setCombatCloudPassword(value) {
     if (input.value !== value) input.value = value;
   });
   if (value) {
-    sessionStorage.setItem('sye_edit_token', value);
+    sessionStorage.setItem(EDIT_TOKEN_KEY, value);
     scheduleCombatCloudSave();
   }
 }
 
 function getCombatCloudPassword() {
   return document.querySelector('.combat-cloud-password')?.value ||
-    sessionStorage.getItem('sye_edit_token') || '';
+    sessionStorage.getItem(EDIT_TOKEN_KEY) || '';
 }
 
 function scheduleCombatCloudSave() {
@@ -4241,7 +4109,7 @@ async function loadCombatCloud() {
   setCombatCloudStatus('Загружаю облачные данные...', 'saving');
 
   try {
-    const response = await fetch('/.netlify/functions/get-combat', {
+    const response = await fetch(characterApi('/.netlify/functions/get-combat'), {
       cache: 'no-store'
     });
     if (!response.ok) throw new Error('Не удалось загрузить облачные бои');
@@ -4287,7 +4155,7 @@ async function saveCombatCloud(manual = false) {
   setCombatCloudStatus('Сохраняю в Netlify...', 'saving');
 
   try {
-    const response = await fetch('/.netlify/functions/save-combat', {
+    const response = await fetch(characterApi('/.netlify/functions/save-combat'), {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -4303,7 +4171,7 @@ async function saveCombatCloud(manual = false) {
       throw new Error(result.error || 'Не удалось сохранить боевые данные');
     }
 
-    sessionStorage.setItem('sye_edit_token', password);
+    sessionStorage.setItem(EDIT_TOKEN_KEY, password);
     localStorage.setItem(COMBAT_UPDATED_KEY, result.updatedAt);
     setCombatCloudStatus(
       (manual ? 'Синхронизировано' : 'Сохранено в облаке') + ' · ' + formatCombatDate(result.updatedAt),
@@ -4388,7 +4256,7 @@ function changePlayerHp(mode) {
         id: Date.now() + Math.random(),
         round: combatState.round,
         time: new Date().toISOString(),
-        text: 'Съебастьян получает ' + details
+        text: 'Лиана получает ' + details
       });
     });
   }
@@ -4397,7 +4265,7 @@ function changePlayerHp(mode) {
     const before = combatState.player.hp;
     const healed = Math.min(amount, combatState.player.maxHp - before);
     if (!healed) return;
-    commitCombat('Съебастьян восстанавливает ' + healed + ' ХП', () => {
+    commitCombat('Лиана восстанавливает ' + healed + ' ХП', () => {
       combatState.player.hp += healed;
       if (combatState.player.hp > 0) {
         combatState.player.deathSuccess = 0;
@@ -4409,7 +4277,7 @@ function changePlayerHp(mode) {
 
   if (mode === 'temp') {
     if (amount <= combatState.player.tempHp) return;
-    commitCombat('Съебастьян получает ' + amount + ' временных ХП', () => {
+    commitCombat('Лиана получает ' + amount + ' временных ХП', () => {
       combatState.player.tempHp = amount;
     });
   }
@@ -4421,7 +4289,7 @@ function toggleTurnTool(tool) {
     action: 'Действие',
     bonus: 'Бонусное действие',
     reaction: 'Реакция',
-    sneak: 'Скрытая атака'
+    sneak: 'Концентрация'
   };
   const nextValue = !combatState.player.tools[tool];
   commitCombat(labels[tool] + (nextValue ? ' использовано' : ' снова доступно'), () => {
@@ -4561,7 +4429,7 @@ function addCondition(target) {
     ? combatState.player.conditions
     : getCombatEntity(target)?.conditions;
   if (!conditions || conditions.includes(condition)) return;
-  const name = target === 'player' ? 'Съебастьян' : getCombatEntity(target).name;
+  const name = target === 'player' ? 'Лиана' : getCombatEntity(target).name;
   commitCombat(name + ': состояние «' + condition + '»', () => {
     conditions.push(condition);
   });
@@ -4571,7 +4439,7 @@ function removeCondition(target, condition) {
   initCombat();
   const holder = target === 'player' ? combatState.player : getCombatEntity(target);
   if (!holder) return;
-  const name = target === 'player' ? 'Съебастьян' : holder.name;
+  const name = target === 'player' ? 'Лиана' : holder.name;
   commitCombat(name + ': снято состояние «' + condition + '»', () => {
     holder.conditions = holder.conditions.filter(item => item !== condition);
   });
@@ -4595,7 +4463,7 @@ function combatInitiativeOrder() {
     player: {
       id: 'player',
       type: 'player',
-      name: 'Съебастьян'
+      name: 'Лиана'
     }
   };
   combatState.entities.forEach(entity => {
@@ -4928,7 +4796,7 @@ function renderCombat() {
 window.addEventListener('DOMContentLoaded', function() {
   combatState = loadCombatState();
   combatArchive = loadCombatArchive();
-  const savedToken = sessionStorage.getItem('sye_edit_token') || '';
+  const savedToken = sessionStorage.getItem(EDIT_TOKEN_KEY) || '';
   document.querySelectorAll('.combat-cloud-password').forEach(input => {
     input.value = savedToken;
   });
@@ -4937,7 +4805,7 @@ window.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
-const NOTES_DRAFT_KEY = 'sye_notes_draft';
+const NOTES_DRAFT_KEY = 'lianna_notes_draft';
 let notesLoaded = false;
 let notesDirty = false;
 let notesSaveTimer = null;
@@ -5134,7 +5002,7 @@ async function loadNotes() {
   setNotesStatus('Загружаю заметки...');
 
   try {
-    const response = await fetch('/.netlify/functions/get-notes', {
+    const response = await fetch(characterApi('/.netlify/functions/get-notes'), {
       cache: 'no-store'
     });
     if (!response.ok) throw new Error('Не удалось загрузить заметки');
@@ -5186,7 +5054,7 @@ async function saveNotes() {
   setNotesStatus('Сохраняю в Netlify...', 'saving');
 
   try {
-    const response = await fetch('/.netlify/functions/save-notes', {
+    const response = await fetch(characterApi('/.netlify/functions/save-notes'), {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -5205,7 +5073,7 @@ async function saveNotes() {
 
     notesDirty = false;
     localStorage.removeItem(NOTES_DRAFT_KEY);
-    sessionStorage.setItem('sye_edit_token', password);
+    sessionStorage.setItem(EDIT_TOKEN_KEY, password);
     setNotesStatus('Сохранено в облаке · ' + formatNotesDate(result.updatedAt), 'saved');
   } catch(error) {
     setNotesStatus(error.message || 'Ошибка сохранения заметок', 'error');
@@ -5242,7 +5110,7 @@ document.addEventListener('keydown', function(event) {
 });
 
 window.addEventListener('DOMContentLoaded', function() {
-  const savedToken = sessionStorage.getItem('sye_edit_token');
+  const savedToken = sessionStorage.getItem(EDIT_TOKEN_KEY);
   if (savedToken) document.getElementById('notes-password').value = savedToken;
   loadNotes();
 });
@@ -5294,7 +5162,7 @@ let selectedFile = null;
 
 function openPortraitModal() {
   document.getElementById('portraitModal').classList.add('open');
-  const savedToken = sessionStorage.getItem('sye_edit_token');
+  const savedToken = sessionStorage.getItem(EDIT_TOKEN_KEY);
   if (savedToken) document.getElementById('portrait-password').value = savedToken;
 }
 function closePortraitModal() {
@@ -5345,7 +5213,7 @@ async function applyPortrait() {
   setStatus('Загружаю портрет...', '');
 
   try {
-    const response = await fetch('/.netlify/functions/upload-portrait', {
+    const response = await fetch(characterApi('/.netlify/functions/upload-portrait'), {
       method: 'POST',
       headers: {
         'content-type': selectedFile.type,
@@ -5362,11 +5230,11 @@ async function applyPortrait() {
       throw new Error(result.error || 'Не удалось сохранить портрет');
     }
 
-    showPortrait('/.netlify/functions/get-portrait?v=' + Date.now());
-    sessionStorage.setItem('sye_edit_token', password);
+    showPortrait(characterApi('/.netlify/functions/get-portrait?v=' + Date.now()));
+    sessionStorage.setItem(EDIT_TOKEN_KEY, password);
     try {
       const reader = new FileReader();
-      reader.onload = event => localStorage.setItem('sye_portrait', event.target.result);
+      reader.onload = event => localStorage.setItem('lianna_portrait', event.target.result);
       reader.readAsDataURL(selectedFile);
     } catch(e) {}
 
@@ -5415,27 +5283,26 @@ function showPortrait(source) {
 
 function restoreLocalPortrait() {
   try {
-    const saved = localStorage.getItem('sye_portrait');
+    const saved = localStorage.getItem('lianna_portrait');
     if (saved) showPortrait(saved);
   } catch(e) {}
 }
 
 async function loadStoredPortrait() {
   try {
-    const response = await fetch('/.netlify/functions/get-portrait', {
+    const response = await fetch(characterApi('/.netlify/functions/get-portrait'), {
       method: 'HEAD',
       cache: 'no-store'
     });
     if (response.ok) {
-      showPortrait('/.netlify/functions/get-portrait?v=' + Date.now());
+      showPortrait(characterApi('/.netlify/functions/get-portrait?v=' + Date.now()));
       return;
     }
   } catch(e) {}
   restoreLocalPortrait();
 }
 
-// Видео-портрет задан как основной образ персонажа, поэтому старый сохраненный
-// портрет не подменяет его при загрузке страницы.
+window.addEventListener('DOMContentLoaded', loadStoredPortrait);
 </script>
 
 </body>
