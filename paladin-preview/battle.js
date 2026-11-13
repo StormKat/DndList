@@ -1,6 +1,14 @@
 (() => {
   const byId = id => document.getElementById(id);
   const cards = byId('battle-cards');
+  const rerollStack = byId('battle-reroll-stack');
+  const rerollCoin = byId('battle-reroll-coin');
+  let displayedRerolls = masterRerolls;
+  const rerollStatus = byId('battle-reroll-status');
+  const rerollPassword = byId('battle-reroll-password');
+  const rerollSync = byId('battle-reroll-sync');
+  let rerollRevision;
+  let rerollBusy = false;
   const result = byId('battle-result');
   const slotInputs = [byId('slots1'), byId('slots2')];
   const deathMarks = byId('battle-death-marks');
@@ -62,6 +70,30 @@
   ].join('');
 
   function syncResources() {
+    const previousRerolls = displayedRerolls;
+    displayedRerolls = masterRerolls;
+    const visibleCoins = Math.min(masterRerolls, 5);
+    rerollStack.classList.toggle('is-empty', visibleCoins === 0);
+    while (rerollStack.children.length > Math.max(1, visibleCoins)) {
+      rerollStack.lastElementChild.remove();
+    }
+    while (rerollStack.children.length < Math.max(1, visibleCoins)) {
+      rerollStack.append(rerollCoin.content.cloneNode(true));
+    }
+    if (masterRerolls > previousRerolls && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const topCoin = rerollStack.lastElementChild;
+      topCoin.getAnimations().forEach(animation => animation.cancel());
+      topCoin.animate([
+        { transform: 'translate(7px, -33px) rotate(-24deg) scale(1.12)', opacity: 0 },
+        { transform: 'translateY(2px) scale(1.06, .88)', opacity: 1, offset: .65 },
+        { transform: 'translateY(-4px)', offset: .82 },
+        { transform: 'none' }
+      ], { duration: 420, easing: 'ease-out' });
+    }
+    byId('battle-reroll-count').textContent = masterRerolls;
+    byId('battle-reroll-spend').disabled = rerollBusy || masterRerolls === 0;
+    byId('battle-reroll-grant').disabled = rerollBusy || masterRerolls === Number.MAX_SAFE_INTEGER;
+    rerollSync.disabled = rerollBusy;
     deathButtons.forEach(button => {
       button.setAttribute('aria-pressed', String(byId(button.dataset.deathMark).checked));
     });
@@ -213,6 +245,67 @@
     show('Хиты, ячейки, кость хитов и «Возложение рук» восстановлены');
   });
   document.addEventListener('sheet-resources-change', syncResources);
+  async function syncRerolls(delta = 0, upload = false) {
+    if (rerollBusy) return;
+    const password = rerollPassword.value || sessionStorage.getItem(EDIT_TOKEN_KEY);
+    if (upload && !password) {
+      rerollStatus.textContent = 'Введи пароль редактора для сохранения';
+      rerollPassword.focus();
+      return;
+    }
+    rerollBusy = true;
+    syncResources();
+    const url = characterApi('/.netlify/functions/rerolls');
+    async function readBalance() {
+      const response = await fetch(url, { cache: 'no-store' });
+      if (!response.ok) throw new Error('Не удалось загрузить перебросы');
+      const state = await response.json();
+      rerollRevision = state.revision;
+      if (state.count !== null) {
+        masterRerolls = state.count;
+        save();
+      }
+    }
+    try {
+      if (!upload || rerollRevision === undefined) await readBalance();
+      if (upload) {
+        const count = Math.min(Number.MAX_SAFE_INTEGER, Math.max(0, masterRerolls + delta));
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-upload-token': password },
+          body: JSON.stringify({ count, revision: rerollRevision })
+        });
+        if (response.status === 401) throw new Error('Неверный пароль редактора');
+        if (response.status === 409) {
+          await readBalance();
+          throw new Error('Баланс обновился на другом устройстве. Повтори действие.');
+        }
+        if (!response.ok) throw new Error('Не удалось сохранить перебросы');
+        const state = await response.json();
+        rerollRevision = state.revision;
+        masterRerolls = state.count;
+        sessionStorage.setItem(EDIT_TOKEN_KEY, password);
+        save();
+      }
+      rerollStatus.textContent = rerollRevision === null ? 'Можно перенести запас из этого браузера' : 'Синхронизировано';
+    } catch (error) {
+      rerollRevision = undefined;
+      rerollStatus.textContent = error.message;
+    } finally {
+      rerollBusy = false;
+      syncResources();
+    }
+  }
+  for (const [id, delta] of [['battle-reroll-grant', 1], ['battle-reroll-spend', -1]]) {
+    byId(id).addEventListener('click', () => {
+      if (!localPreview) {
+        syncRerolls(delta, true);
+        return;
+      }
+      masterRerolls += delta;
+      save();
+    });
+  }
   deathMarks.addEventListener('click', event => {
     const button = event.target.closest('[data-death-mark]');
     if (!button) return;
@@ -221,4 +314,11 @@
     save();
   });
   syncResources();
+  if (!localPreview) {
+    rerollSync.addEventListener('click', () => syncRerolls(0, true));
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) syncRerolls();
+    });
+    syncRerolls();
+  }
 })();

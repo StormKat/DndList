@@ -34,6 +34,40 @@
 .battle input[type=number] { appearance: textfield; }
 .battle-roll-mode { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
 .battle-roll-mode input { width: 16px; height: 16px; accent-color: #c69e76; }
+.battle .battle-inspiration {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  text-align: left;
+}
+.battle .battle-inspiration {
+  background: #493524;
+  border-color: #c4955d;
+  color: #ffe8ad;
+  box-shadow: 0 0 14px #ffcf6e33;
+  border: 1px solid #c4955d;
+  border-radius: 8px;
+}
+.battle-reroll-controls { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.battle-reroll-controls button { min-width: 38px; }
+.battle-reroll-controls output { min-width: 2ch; text-align: center; font-weight: 800; }
+.battle-reroll-cloud { flex: 1 0 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.battle .battle-reroll-cloud input { width: min(100%, 12rem); padding: 6px 8px; }
+.reroll-stack { position: relative; flex: 0 0 48px; height: 42px; }
+.reroll-coin { position: absolute; bottom: 0; left: 0; width: 44px; }
+.reroll-coin:nth-child(2) { bottom: 4px; }
+.reroll-coin:nth-child(3) { bottom: 8px; }
+.reroll-coin:nth-child(4) { bottom: 12px; }
+.reroll-coin:nth-child(5) { bottom: 16px; }
+.reroll-coin svg { display: block; width: 100%; filter: drop-shadow(0 2px 2px #170c20); }
+.reroll-coin-rim { fill: #583354; stroke: #d09b64; }
+.reroll-coin-face { fill: #d5a362; stroke: #ffe4a8; }
+.reroll-coin-inlay { fill: #51275f; stroke: #835390; }
+.reroll-coin-star { fill: #ffe4a8; }
+.reroll-stack.is-empty { opacity: .38; filter: grayscale(.6); }
 .battle .battle-death-saves { margin-bottom: 16px; }
 #battle-death-marks, #battle-death-marks > div {
   display: flex;

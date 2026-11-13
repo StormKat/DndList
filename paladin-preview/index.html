@@ -192,6 +192,30 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
     <div><span>Возложение рук</span><div id="battle-hands-pips" class="battle-hands-pips" role="group" aria-label="Очки Возложения рук"></div><small id="battle-hands"></small></div>
   </div>
   <label class="battle-roll-mode"><input id="battle-digital-rolls" type="checkbox"> Бросать кубики на сайте</label>
+  <div class="battle-inspiration" role="group" aria-label="Перебросы от мастера">
+    <div class="reroll-stack" id="battle-reroll-stack" aria-hidden="true"></div>
+    <template id="battle-reroll-coin">
+      <span class="reroll-coin">
+        <svg viewBox="0 0 44 26" aria-hidden="true">
+          <ellipse class="reroll-coin-rim" cx="22" cy="15" rx="20" ry="9"/>
+          <ellipse class="reroll-coin-face" cx="22" cy="11" rx="20" ry="9"/>
+          <ellipse class="reroll-coin-inlay" cx="22" cy="11" rx="15" ry="6"/>
+          <path class="reroll-coin-star" d="M22 5l3 4 7 2-7 2-3 4-3-4-7-2 7-2z"/>
+        </svg>
+      </span>
+    </template>
+    <span>Перебросы от мастера</span>
+    <div class="battle-reroll-controls">
+      <button type="button" id="battle-reroll-spend" aria-label="Потратить один переброс" disabled>−</button>
+      <output id="battle-reroll-count" aria-label="Доступно перебросов">0</output>
+      <button type="button" id="battle-reroll-grant" aria-label="Добавить один переброс">+</button>
+    </div>
+    <div class="battle-reroll-cloud cloud-only">
+      <input id="battle-reroll-password" type="password" autocomplete="current-password" aria-label="Пароль редактора" placeholder="Пароль редактора">
+      <button type="button" id="battle-reroll-sync">Синхронизировать</button>
+      <small id="battle-reroll-status" role="status"></small>
+    </div>
+  </div>
   <fieldset class="battle-death-saves">
     <legend>Спасброски от смерти</legend>
     <div id="battle-death-marks"></div>
@@ -432,7 +456,7 @@ const inputs = [...document.querySelectorAll("#panel-sheet input")];
 const storageKey = 'alden-vale-preview-v1';
 function save() {
   const values = Object.fromEntries(inputs.map(input => [input.id, input.type === 'checkbox' ? input.checked : input.valueAsNumber]));
-  try { localStorage.setItem(storageKey, JSON.stringify(values)); } catch {}
+  try { localStorage.setItem(storageKey, JSON.stringify({ ...values, masterRerolls })); } catch {}
   document.dispatchEvent(new Event('sheet-resources-change'));
 }
 function normalize(input) {
@@ -441,6 +465,7 @@ function normalize(input) {
 }
 let stored;
 try { stored = JSON.parse(localStorage.getItem(storageKey)); } catch {}
+let masterRerolls = Number.isSafeInteger(stored?.masterRerolls) && stored.masterRerolls >= 0 ? stored.masterRerolls : 0;
 let previousHealth;
 try { previousHealth = JSON.parse(localStorage.getItem('alden_combat_state_v1'))?.player; } catch {}
 for (const input of inputs) {
