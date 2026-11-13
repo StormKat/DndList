@@ -1,12 +1,22 @@
 [build]
   command = "node netlify/build-alden.mjs"
-  publish = "outputs"
+  publish = "outputs/alden"
   functions = "netlify/functions"
 
 [[redirects]]
-  from = "/"
-  to = "/character-sheet.html"
-  status = 200
+  from = "/character-sheet.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/alden"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/alden/*"
+  to = "/:splat"
+  status = 301
 
 [[headers]]
   for = "/.netlify/functions/get-portrait"
