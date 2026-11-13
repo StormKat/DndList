@@ -31,6 +31,15 @@
 .character-masthead .identity { gap: 12px 18px; }
 .character-masthead .identity div { border-color: #ddc09270; }
 .character-masthead dd { font-weight: 700; }
+.character-alias { margin-bottom: 16px; }
+.character-alias summary { cursor: pointer; color: #edcbed; font-weight: 700; }
+.character-alias p {
+  max-width: 52ch;
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-left: 2px solid #9774a5;
+  background: #17121de8;
+}
 
 .portrait-stand { perspective: 800px; min-width: 0; }
 .paladin .portrait-frame {
