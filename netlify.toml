@@ -1,4 +1,5 @@
 [build]
+  command = "node netlify/build-alden.mjs"
   publish = "outputs"
   functions = "netlify/functions"
 

@@ -1,0 +1,312 @@
+.paladin.paladin {
+  background: radial-gradient(ellipse at 24% 0%, #344d67, transparent 60%),
+    radial-gradient(ellipse at 90% 25%, #462b41, transparent 54%), #101c2e !important;
+  font: 14px/1.55 Manrope, system-ui, sans-serif;
+}
+
+.paladin .sheet.sheet {
+  border-radius: 14px;
+  padding: clamp(14px, 3vw, 32px);
+  background: #fcf7eb;
+}
+
+.paladin .character-masthead {
+  display: grid;
+  grid-template-columns: clamp(130px, 22vw, 212px) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(20px, 5vw, 56px);
+  padding: clamp(18px, 4vw, 40px);
+  border: 1px solid #b79a6b;
+  border-radius: 10px;
+  background: radial-gradient(ellipse at 16% 20%, #5c3c50, transparent 70%), #1b2c44;
+  color: #fff3d7;
+}
+
+.character-masthead h1 {
+  font: 700 clamp(30px, 5.5vw, 66px)/1.05 "PT Serif", Georgia, serif;
+  margin: 8px 0 24px;
+  letter-spacing: -.035em;
+}
+
+.character-masthead .identity { gap: 12px 18px; }
+.character-masthead .identity div { border-color: #ddc09270; }
+.character-masthead dd { font-weight: 700; }
+
+.portrait-stand { perspective: 800px; min-width: 0; }
+.paladin .portrait-frame {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 5px;
+  border-radius: 11px;
+  border: 1px solid #f0d098;
+  background: linear-gradient(140deg, #b88e51, #49374a 55%, #ac8151);
+  box-shadow: 0 10px 24px #0a101db0;
+  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform .24s ease-out, box-shadow .24s ease-out;
+}
+
+.portrait-frame #portrait-img {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  border-radius: 6px;
+  background: #142133;
+}
+
+.paladin .brand, .paladin .toolbar-actions, .paladin .toolbar button, .paladin .paladin-nav button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.paladin .brand { gap: 14px; font-weight: 800; }
+.paladin .brand img { width: clamp(65px, 10vw, 104px); height: auto; }
+.paladin .brand small { display: block; color: #bdbfce; font-weight: 600; }
+.paladin .toolbar button { min-height: 40px; border-radius: 7px; }
+.paladin .lucide { width: 17px; height: 17px; vertical-align: middle; flex-shrink: 0; }
+.paladin .paladin-nav button { transition: background-color .18s, color .18s; }
+.paladin .paladin-nav button:hover { background-color: #39475a; }
+.paladin .paladin-nav button[aria-pressed=true]:hover { background-color: #f2dcae; }
+.paladin .tab-panel.active { animation: panel-enter .22s ease-out both; }
+@keyframes panel-enter {
+  from { opacity: .55; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.paladin .notes-panel, .paladin .inventory-panel {
+  color: var(--ink);
+  background: #fcf7eb;
+  border: 1px solid #c9a977;
+  border-radius: 14px;
+  padding: clamp(16px, 4vw, 36px);
+  box-shadow: 0 12px 36px #090d1a40;
+}
+.paladin .notes-panel::before, .paladin .notes-panel::after, .paladin .notebook::before { display: none; }
+.paladin .notes-heading { margin-bottom: 18px; }
+.paladin .notes-title, .paladin .inv-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font: 700 clamp(22px, 4vw, 32px)/1.2 "PT Serif", Georgia, serif !important;
+  letter-spacing: 0;
+}
+.paladin .notebook { padding: 0; background: #fff9e8; border: 1px solid #cbb48b; border-radius: 10px; box-shadow: none; }
+.paladin .notes-toolbar { margin: 0; padding: 10px; background: #efe4cb; border: 0; border-bottom: 1px solid #cbb48b; border-radius: 9px 9px 0 0; }
+.paladin .notes-tool { color: #47362a; background: #fffaf0; border: 1px solid #cbb48b; min-height: 36px; }
+.paladin .notes-tool:hover, .paladin .notes-tool:focus { color: #592526; background: #f5e5cf; }
+.paladin .notes-editor {
+  margin: 0;
+  min-height: 370px;
+  padding: clamp(16px, 4vw, 30px);
+  color: var(--ink);
+  font-family: Manrope, system-ui, sans-serif;
+  background: repeating-linear-gradient(#fff9e8 0 27px, #eadcb9 27px 28px);
+  border: 0;
+  box-shadow: none;
+  line-height: 28px;
+}
+.paladin .notes-editor:focus { background-color: #fff9e8; }
+.paladin .notes-editor:empty::before, .paladin .notes-footer { color: var(--muted); }
+.paladin .inv-section, .paladin .inv-currency { background: #fffdf6; border-color: #cbb48b; }
+.paladin .inv-section-title, .paladin .inv-item, .paladin .inv-item-name, .paladin .inv-money, .paladin .inv-empty { color: var(--ink); }
+.paladin .inv-add-input, .paladin .inv-qty-input, .paladin .inv-money-input { background: #fffdf6; color: var(--ink); border-color: #cbb48b; }
+.paladin .inv-qty-btn, .paladin .inv-remove-btn, .paladin .inv-add-btn { background: #efe4cb; color: #47362a; border-color: #cbb48b; }
+
+.portrait-frame::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 6px;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), #fff0c864, transparent 64%);
+  opacity: 0;
+  transition: opacity .2s ease-out;
+}
+
+.portrait-frame.is-tilting { transition-duration: .07s; box-shadow: 0 16px 30px #0a101dd9; }
+.portrait-frame.is-tilting::after { opacity: 1; }
+
+.paladin .vitals { gap: 12px; }
+.paladin .vital { display: grid; align-content: center; justify-items: center; padding: 12px 6px; border-radius: 8px; }
+.paladin .columns { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 16px; }
+.paladin .sheet fieldset { border-radius: 8px; background: #fffdf6; }
+.paladin .ability { border-radius: 6px; padding: 10px; }
+.paladin .ability h3, .paladin .sheet legend, .paladin .sheet th { letter-spacing: .045em; }
+.paladin .check { grid-template-columns: 9px 25px minmax(0, 1fr); font-size: 12px; }
+.paladin .sheet th, .paladin .sheet td { overflow-wrap: anywhere; }
+.paladin .sheet th:nth-child(2) { white-space: nowrap; }
+
+@media (min-width: 621px) and (max-width: 790px) {
+  .paladin .abilities { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 620px) {
+  .paladin .brand > span { display: none; }
+  .paladin .character-masthead { grid-template-columns: 1fr; gap: 18px; padding: 18px; }
+  .portrait-stand { width: min(52%, 175px); justify-self: center; }
+  .character-masthead h1 { margin-bottom: 16px; }
+  .character-masthead .identity { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .paladin .columns { grid-template-columns: minmax(0, 1fr); }
+  .paladin .vitals { gap: 6px; }
+  .paladin .vital .label { font-size: 10px; letter-spacing: 0; overflow-wrap: anywhere; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paladin .portrait-frame, .portrait-frame::after { transition: none; }
+  .paladin .tab-panel.active { animation: none; }
+}
+
+.paladin.dark {
+  color-scheme: dark;
+  --ink: #f1e8dd;
+  --muted: #c4b8aa;
+  --line: var(--bronze-7, #644f43);
+  --accent: #e2b78d;
+  --paper: var(--slate-2, #18191b);
+  color: var(--ink);
+  background: #101013 !important;
+}
+.castle-scene {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  contain: strict;
+}
+.castle-art {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  /* Match the artwork's original 1672 × 941 cover geometry. */
+  width: max(100%, 177.683vh);
+  width: max(100%, 177.683dvh);
+  aspect-ratio: 1672 / 941;
+  transform: translateY(-50%);
+  background: url("castle-hall-unlit.jpg") center / 100% 100% no-repeat;
+}
+.castle-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #0d0a1320, #100c163e);
+}
+/* Tauran's CC0 flame atlas: https://opengameart.org/node/16791 (12 x 6). */
+.torch {
+  position: absolute;
+  left: 7.835%;
+  top: 18.172%;
+  width: 6.699%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  --torch-delay: 0s;
+}
+.torch-right { left: 92.883%; top: 18.704%; --torch-delay: -1.15s; }
+.torch::before {
+  content: "";
+  position: absolute;
+  inset: -59% -45% -71%;
+  background: radial-gradient(ellipse, #ffbd6699, #ff781e38 40%, transparent 70%);
+  opacity: .65;
+}
+.torch-frame { position: absolute; inset: 0; overflow: hidden; contain: strict; }
+.torch-rows { position: absolute; inset: 0; }
+.torch-sprite {
+  display: block;
+  width: 1200%;
+  height: 600%;
+  max-width: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .torch::before { animation: torch-light 1.7s ease-in-out var(--torch-delay) infinite; }
+  .torch-rows { animation: torch-rows 3s steps(6) var(--torch-delay) infinite; }
+  .torch-sprite { animation: torch-columns .5s steps(12) var(--torch-delay) infinite; }
+}
+@keyframes torch-light {
+  0%, 100% { opacity: .78; }
+  17%, 67% { opacity: .42; }
+  39%, 83% { opacity: 1; }
+}
+@keyframes torch-columns { to { transform: translateX(-100%); } }
+@keyframes torch-rows { to { transform: translateY(-600%); } }
+
+.dark .sheet.sheet, .dark .notes-panel, .dark .inventory-panel, .dark .netlify-modal-box {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.dark .inventory-panel { -webkit-backdrop-filter: none; backdrop-filter: none; }
+.dark .character-masthead {
+  background: linear-gradient(90deg, #100d19aa, #100d1966 56%, #100d1914),
+    url("shar-sanctuary.jpg") 86% center / cover no-repeat #17121f;
+  border-color: #695474;
+  color: var(--ink);
+}
+.dark .identity-hero { text-shadow: 0 2px 8px #0a060f; }
+.dark .character-masthead .identity { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.dark .character-masthead .identity div { border-color: var(--line); }
+.dark .identity dt, .dark .identity-hero .edition { color: var(--accent); }
+.dark .portrait-frame { background: linear-gradient(145deg, #d2a37a, #624439 45%, #9e7057); }
+.dark .portrait-frame.is-tilting { box-shadow: 0 15px 35px #080508, 0 0 22px #b77c4e5c; }
+.dark .paladin-nav { background: #17151a; border-color: var(--line); }
+.dark .paladin-nav button[aria-pressed=true], .dark .paladin-nav button[aria-pressed=true]:hover {
+  background: #53333a;
+  color: #fff1de;
+  border-color: #a77568;
+}
+.dark .paladin-nav button:hover { background: #302630; }
+.dark .toolbar button, .dark .hp button, .dark .notes-tool, .dark .inv-qty-btn, .dark .inv-remove-btn, .dark .inv-add-btn {
+  color: var(--ink);
+  background: #32252b;
+  border-color: var(--line);
+}
+.dark .toolbar button:hover, .dark .hp button:hover, .dark .notes-tool:hover { background: #54363f; }
+.dark .vital, .dark .sheet fieldset, .dark .inv-section, .dark .inv-currency {
+  background: var(--slate-3, #212225);
+  border-color: var(--line);
+}
+.dark .vital.health { background: #36232b; border-color: #905c60; }
+.dark .ability { background: #26242b; border-color: #53434c; }
+.dark .ability h3, .dark .modifier, .dark .notes-title, .dark .inv-title,
+.dark .inv-section-title, .dark .inv-item, .dark .inv-item-name, .dark .inv-money, .dark .inv-empty { color: var(--ink); }
+.dark .check, .dark .sheet th, .dark .sheet td { border-color: #504047; }
+.dark .inv-add-input, .dark .inv-qty-input, .dark .inv-money-input { background: #19171d; color: var(--ink); border-color: var(--line); }
+.dark .notebook { background: transparent; border: 0; container-type: inline-size; }
+.dark .notes-toolbar { background: #2d242b; border: 1px solid var(--line); border-radius: 8px; margin-bottom: 12px; }
+.dark .notes-editor, .dark .notes-editor:focus {
+  color: #392617;
+  font: 500 18px/1.34 Spectral, Georgia, serif;
+  caret-color: #623925;
+  min-height: 0;
+  height: 150cqw;
+  padding: 9% 10%;
+  overflow: auto;
+  overflow-wrap: anywhere;
+  background: url("notes-parchment-portrait.png") center / contain no-repeat #dfbd83;
+  background-clip: border-box;
+  box-shadow: none;
+  border-radius: 0;
+}
+.dark .notes-editor:empty::before { color: #6a4a30; font-style: italic; }
+.dark .notes-editor h3, .dark .notes-editor h4, .dark .notes-editor blockquote { color: #633b26; }
+.dark .notes-editor blockquote { background: #95643817; border-color: #9b6946; }
+.dark .notes-editor p, .dark .notes-editor div { margin: 0 0 .3em; }
+
+@media (max-width: 620px) {
+  .dark .character-masthead {
+    background-image: linear-gradient(0deg, #100d19ef, #100d1926 78%), url("shar-sanctuary.jpg");
+  }
+  .dark .character-masthead .identity { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media print {
+  .paladin.paladin { background: white !important; }
+  .castle-scene { display: none; }
+  .paladin .character-masthead { grid-template-columns: 95px 1fr; padding: 10px; background: white; color: #29221c; }
+  .portrait-stand { width: 100%; }
+  .paladin .portrait-frame { transform: none; box-shadow: none; }
+  .portrait-frame::after { display: none; }
+}

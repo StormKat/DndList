@@ -1,0 +1,194 @@
+.paladin .battle {
+  --battle-gold: #ecc69b;
+  --battle-border: #655047;
+}
+.battle-heading, .battle-hp, .battle-slots, .battle-actions, .battle-result {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.battle-heading { justify-content: space-between; flex-wrap: wrap; margin-bottom: 20px; }
+.battle-heading h2 { font: 700 clamp(25px, 4vw, 40px)/1.1 "PT Serif", Georgia, serif; }
+.battle-heading p { color: var(--muted); margin-top: 6px; }
+.battle-heading .battle-actions { margin-top: 0; }
+.battle-short-rest {
+  padding: 14px;
+  margin-bottom: 16px;
+  background: #29232d;
+  border: 1px solid var(--battle-border);
+  border-radius: 9px;
+}
+.battle-short-rest p { margin-bottom: 8px; }
+.battle-short-rest .battle-die { vertical-align: middle; }
+.battle-resources, .battle-cards { display: grid; gap: 12px; }
+.battle-resources { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 16px; }
+.battle-resources > div, .battle-card, .battle-result {
+  border: 1px solid var(--battle-border);
+  border-radius: 9px;
+  padding: 14px;
+  background: #242025;
+}
+.battle-resources > div { display: grid; justify-items: start; align-content: center; gap: 5px; }
+.battle-resources strong, .battle-result strong { color: var(--battle-gold); font-size: 24px; }
+.battle input { width: 4ch; border: 1px solid var(--battle-border); border-radius: 5px; background: #19161b; }
+.battle input[type=number] { appearance: textfield; }
+.battle-roll-mode { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
+.battle-roll-mode input { width: 16px; height: 16px; accent-color: #c69e76; }
+.battle .battle-death-saves { margin-bottom: 16px; }
+#battle-death-marks, #battle-death-marks > div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+#battle-death-marks { column-gap: 24px; }
+#battle-death-marks button {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  min-width: 42px;
+  min-height: 42px;
+  color: #b7a7af;
+}
+#battle-death-marks svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.45;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+#battle-death-marks [aria-pressed=true][data-death-mark^="successes"] {
+  background: #493a25;
+  color: #fff2bb;
+  box-shadow: inset 0 0 12px #ffe18f55, 0 0 12px #ffd07755;
+}
+#battle-death-marks [aria-pressed=true][data-death-mark^="failures"] {
+  background: #531c20;
+  color: #ff9568;
+  box-shadow: inset 0 0 12px #ff473d66, 0 0 12px #ff3a3655;
+}
+#battle-death-marks [aria-pressed=true] svg { fill: currentColor; filter: drop-shadow(0 0 4px currentColor); }
+.death-sparks { display: none; pointer-events: none; }
+@media (prefers-reduced-motion: no-preference) {
+  #battle-death-marks [aria-pressed=true]::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    pointer-events: none;
+    border-radius: 50%;
+    z-index: -1;
+    background: radial-gradient(circle, currentColor, transparent 70%);
+    animation: death-mark-flash .6s ease-out both;
+  }
+  #battle-death-marks [aria-pressed=true][data-death-mark^="successes"] svg {
+    animation: death-mark-radiance 1.8s ease-in-out infinite;
+  }
+  #battle-death-marks [aria-pressed=true][data-death-mark^="failures"] svg {
+    animation: death-mark-fire .72s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+  #battle-death-marks [aria-pressed=true][data-death-mark^="successes"]::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+    background: repeating-conic-gradient(from 15deg, transparent 0deg 34deg, #ffdf8d88 42deg, transparent 50deg 60deg);
+    mask-image: radial-gradient(circle, transparent 24%, black 46%, transparent 72%);
+    animation: death-mark-rays 4s linear infinite;
+  }
+  #battle-death-marks [aria-pressed=true] .death-sparks {
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+  .death-sparks i {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 6px 1px currentColor;
+    animation: death-mark-spark 1.45s ease-out infinite;
+  }
+  .death-sparks i:nth-child(1) { --spark-x: -16px; --spark-y: -22px; }
+  .death-sparks i:nth-child(2) { --spark-x: 2px; --spark-y: -31px; animation-delay: -.5s; }
+  .death-sparks i:nth-child(3) { --spark-x: 16px; --spark-y: -19px; animation-delay: -.95s; }
+  [data-death-mark^="failures"] .death-sparks { color: #ff703e; }
+}
+@keyframes death-mark-flash { from { opacity: .85; transform: scale(.55); } to { opacity: 0; transform: scale(1.9); } }
+@keyframes death-mark-radiance {
+  0%, 100% { transform: scale(.94); filter: drop-shadow(0 0 3px #f7bd5c); }
+  50% { transform: scale(1.12); filter: drop-shadow(0 0 8px #fff2bb); }
+}
+@keyframes death-mark-rays { to { transform: rotate(1turn); } }
+@keyframes death-mark-spark {
+  0% { opacity: 0; transform: scale(.5); }
+  18% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--spark-x), var(--spark-y)) scale(.2); }
+}
+@keyframes death-mark-fire {
+  0%, 100% { transform: none; }
+  35% { transform: skewX(-8deg) scale(.89, 1.27); }
+  70% { transform: skewX(7deg) scale(1.09, .94); }
+}
+.battle input::-webkit-inner-spin-button { appearance: none; }
+.battle button {
+  min-height: 38px;
+  background: #342831;
+  color: #fff1de;
+  border: 1px solid var(--battle-border);
+  border-radius: 6px;
+  transition: background-color .2s, box-shadow .2s;
+}
+.battle button:enabled:hover { background: #51363f; box-shadow: 0 0 12px #d0956240; }
+.battle button:disabled { opacity: .5; cursor: not-allowed; }
+.battle-slots button { color: #d7b7ff; }
+.battle-slots button .lucide { fill: #9264c0; }
+.battle-slots button[aria-pressed=true] .lucide { fill: none; color: #ad9bb7; }
+.battle-hands-pips { display: flex; flex-wrap: wrap; gap: 5px; }
+.battle-hands-pips button {
+  display: grid;
+  width: 36px;
+  padding: 0;
+  place-items: center;
+  color: #ffe0a6;
+}
+.battle-hands-pips svg { width: 25px; height: 25px; }
+.hand-moon { fill: #987050; }
+.hand-cross { fill: currentColor; }
+.battle-hands-pips button[aria-pressed=true] { color: #877c85; background: #201c23; }
+.battle-hands-pips button[aria-pressed=true] .hand-moon { fill: #574d58; }
+.battle-hands-pips button[aria-pressed=false] svg { filter: drop-shadow(0 0 4px #e5aa6655); }
+.battle-hands-pips button:active svg { scale: .88; }
+.battle-result { flex-wrap: wrap; min-height: 76px; margin-bottom: 16px; background: radial-gradient(ellipse at left, #47313c, #201a22 65%); }
+.battle-result .battle-die { width: 38px; height: 38px; }
+.battle-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.battle-card { --card-glow: #614036; display: flex; flex-direction: column; gap: 12px; background: radial-gradient(ellipse at top left, var(--card-glow), transparent 70%), #211d23; }
+.battle-card[data-tone^="Заклинание"] { --card-glow: #523868; }
+.battle-card[data-tone^="Бонусное"] { --card-glow: #38524b; }
+.battle-card header { display: flex; align-items: center; gap: 12px; padding: 0; border: 0; }
+.battle-card header small { color: var(--battle-gold); }
+.battle-card h3 { font: 700 21px/1.2 "PT Serif", Georgia, serif; }
+.battle-card p { color: var(--muted); }
+.battle-icon { display: grid; flex: 0 0 42px; height: 42px; place-items: center; color: #ffe1af; border: 1px solid #b28a71; border-radius: 8px; background: #19151cc0; }
+.battle-icon .lucide { width: 22px; height: 22px; }
+.battle-actions { margin-top: auto; flex-wrap: wrap; }
+.battle-actions button { display: inline-flex; align-items: center; gap: 6px; text-align: left; }
+.battle-actions button small { display: block; color: #e6c4a3; }
+.battle-die { width: 25px; height: 25px; flex-shrink: 0; fill: #5a384d; stroke: #f1cba0; stroke-width: 1.25; stroke-linejoin: round; }
+.battle-die path { fill: none; }
+@media (max-width: 640px) {
+  .battle-cards { grid-template-columns: 1fr; }
+  .battle-resources { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .battle-resources > div:first-child { grid-column: 1 / -1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .battle button { transition: none; }
+}
