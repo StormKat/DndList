@@ -346,11 +346,11 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
       <div>
         <h2 class="notes-title"><i data-lucide="notebook-pen"></i>Заметки кампании</h2>
       </div>
-      <div class="notes-sync cloud-only">
-        <input class="notes-password" id="notes-password" type="password"
-          autocomplete="current-password" placeholder="Пароль редактора">
-        <button class="notes-save-btn" id="notes-save-btn" onclick="saveNotes()">Сохранить</button>
-        <div class="notes-status" id="notes-status">Сохранение в этом браузере</div>
+      <div class="notes-sync">
+        <input class="notes-password cloud-only" id="notes-password" type="password"
+          autocomplete="current-password" aria-label="Пароль редактора" placeholder="Пароль редактора">
+        <button type="button" class="notes-save-btn" id="notes-save-btn" onclick="saveNotes()">Сохранить заметки</button>
+        <div class="notes-status" id="notes-status" role="status">Сохранение в этом браузере</div>
       </div>
     </div>
 

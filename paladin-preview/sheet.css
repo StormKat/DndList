@@ -285,6 +285,8 @@
 .dark .inv-add-input, .dark .inv-qty-input, .dark .inv-money-input { background: #19171d; color: var(--ink); border-color: var(--line); }
 .dark .notebook { background: transparent; border: 0; container-type: inline-size; }
 .dark .notes-toolbar { background: #2d242b; border: 1px solid var(--line); border-radius: 8px; margin-bottom: 12px; }
+.paladin.local-preview .notes-sync { grid-template-columns: 1fr; min-width: 0; }
+.paladin.local-preview .notes-save-btn { justify-self: start; }
 .dark .notes-editor, .dark .notes-editor:focus {
   color: #392617;
   font: 500 18px/1.34 Spectral, Georgia, serif;
