@@ -1,4 +1,4 @@
-import { copyFile, mkdir } from 'node:fs/promises';
+import { copyFile, cp, mkdir } from 'node:fs/promises';
 
 const source = new URL('../paladin-preview/', import.meta.url);
 const destination = new URL('../outputs/alden/', import.meta.url);
@@ -13,3 +13,4 @@ await mkdir(destination, { recursive: true });
 await Promise.all(assets.map(file =>
   copyFile(new URL(file, source), new URL(file, destination))
 ));
+await cp(new URL('rpg-icons/', source), new URL('rpg-icons/', destination), { recursive: true });

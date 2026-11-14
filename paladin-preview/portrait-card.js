@@ -29,8 +29,7 @@ const portraitVideo = document.getElementById('portrait-video');
 let portraitVisible = false;
 
 function canPlayPortrait() {
-  return portraitVisible && !document.hidden && !portraitMotion.matches &&
-    !portraitVideo.dataset.customPortrait;
+  return portraitVisible && !document.hidden && !portraitMotion.matches;
 }
 
 function updatePortraitVideo() {

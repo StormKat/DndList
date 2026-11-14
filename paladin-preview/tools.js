@@ -85,14 +85,14 @@ function escapeInventoryHtml(value) {
 
 function inventoryIconMarkup(categoryId, extraClass = '') {
   const icons = {
-    weapons: 'dagger',
-    armor: 'shield',
+    weapons: 'sword',
+    armor: 'armor',
     tools: 'tools',
-    gear: 'bag',
+    gear: 'backpack',
     currency: 'coin'
   };
-  const icon = icons[categoryId] || 'bag';
-  return '<svg class="ui-icon ' + extraClass + '" aria-hidden="true"><use href="#icon-' + icon + '"></use></svg>';
+  const icon = icons[categoryId] || 'backpack';
+  return '<img class="ui-icon rpg-icon ' + extraClass + '" src="rpg-icons/' + icon + '.png" alt="">';
 }
 
 function cleanInventoryTitle(value) {
@@ -125,7 +125,7 @@ function renderSheetInventory() {
 
     list.innerHTML = items.length
       ? items.map(item =>
-        '<li class="eqli relative pl-3">' +
+        '<li>' +
           escapeInventoryHtml(item.name) +
           (item.quantity !== 1 ? ' × ' + item.quantity : '') +
           inventoryItemDetails(item.name) +
@@ -658,170 +658,3 @@ window.addEventListener('DOMContentLoaded', function() {
   if (savedToken) document.getElementById('notes-password').value = savedToken;
   loadNotes();
 });
-
-
-
-let selectedFile = null;
-
-function openPortraitModal() {
-  document.getElementById('portraitModal').classList.add('open');
-  const savedToken = sessionStorage.getItem(EDIT_TOKEN_KEY);
-  if (savedToken) document.getElementById('portrait-password').value = savedToken;
-}
-function closePortraitModal() {
-  document.getElementById('portraitModal').classList.remove('open');
-  selectedFile = null;
-  document.getElementById('portrait-password').value = '';
-  document.getElementById('fi-modal').value = '';
-  document.getElementById('modal-preview').classList.remove('show');
-  document.getElementById('modal-preview').removeAttribute('src');
-  document.getElementById('dropzone').style.display = '';
-  document.getElementById('modal-apply-btn').disabled = true;
-  document.getElementById('upload-status').textContent = '';
-  document.getElementById('upload-status').className = 'upload-status';
-}
-
-function handleFileSelect(file) {
-  if (!file) return;
-  if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
-    setStatus('Разрешены только JPG, PNG и WEBP', 'error');
-    return;
-  }
-  if (file.size > 4 * 1024 * 1024) {
-    setStatus('Файл слишком большой (макс. 4 МБ)', 'error');
-    return;
-  }
-  selectedFile = file;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    const preview = document.getElementById('modal-preview');
-    preview.src = ev.target.result;
-    preview.classList.add('show');
-    document.getElementById('modal-apply-btn').disabled = false;
-    document.getElementById('dropzone').style.display = 'none';
-  };
-  reader.readAsDataURL(file);
-}
-
-async function applyPortrait() {
-  if (!selectedFile) return;
-  if (localPreview) {
-    const dataUrl = document.getElementById('modal-preview').src;
-    try {
-      localStorage.setItem('alden_portrait', dataUrl);
-      showPortrait(dataUrl);
-      closePortraitModal();
-    } catch {
-      setStatus('Не удалось сохранить портрет в браузере. Попробуй файл меньшего размера.', 'error');
-    }
-    return;
-  }
-  const password = document.getElementById('portrait-password').value;
-  if (!password) {
-    setStatus('Введи пароль для изменения портрета', 'error');
-    return;
-  }
-
-  const applyButton = document.getElementById('modal-apply-btn');
-  applyButton.disabled = true;
-  setStatus('Загружаю портрет...', '');
-
-  try {
-    const response = await fetch(characterApi('/.netlify/functions/upload-portrait'), {
-      method: 'POST',
-      headers: {
-        'content-type': selectedFile.type,
-        'x-upload-token': password
-      },
-      body: selectedFile
-    });
-
-    let result = {};
-    try { result = await response.json(); } catch(e) {}
-
-    if (!response.ok) {
-      if (response.status === 401) throw new Error('Неверный пароль');
-      throw new Error(result.error || 'Не удалось сохранить портрет');
-    }
-
-    showPortrait(characterApi('/.netlify/functions/get-portrait?v=' + Date.now()));
-    sessionStorage.setItem(EDIT_TOKEN_KEY, password);
-    try {
-      const reader = new FileReader();
-      reader.onload = event => localStorage.setItem('alden_portrait', event.target.result);
-      reader.readAsDataURL(selectedFile);
-    } catch(e) {}
-
-    setStatus('✓ Портрет сохранён и доступен на всех устройствах', 'success');
-    setTimeout(closePortraitModal, 1400);
-  } catch(error) {
-    setStatus(error.message || 'Ошибка загрузки портрета', 'error');
-    applyButton.disabled = false;
-  }
-}
-
-function setStatus(msg, cls) {
-  const el = document.getElementById('upload-status');
-  el.textContent = msg;
-  el.className = 'upload-status ' + cls;
-}
-
-// Drag & drop
-function handleDragOver(e) {
-  e.preventDefault();
-  document.getElementById('dropzone').classList.add('drag-over');
-}
-function handleDragLeave(e) {
-  document.getElementById('dropzone').classList.remove('drag-over');
-}
-function handleDrop(e) {
-  e.preventDefault();
-  document.getElementById('dropzone').classList.remove('drag-over');
-  const file = e.dataTransfer.files[0];
-  if (file && file.type.startsWith('image/')) handleFileSelect(file);
-}
-
-// Закрыть по клику вне модалки
-document.getElementById('portraitModal').addEventListener('click', function(e) {
-  if (e.target === this) closePortraitModal();
-});
-
-function showPortrait(source) {
-  const image = document.getElementById('portrait-img');
-  const video = document.getElementById('portrait-video');
-  if (video) {
-    video.dataset.customPortrait = 'true';
-    video.pause();
-    video.closest('.portrait-frame').classList.remove('is-playing');
-  }
-  image.src = source;
-  image.style.display = 'block';
-  document.getElementById('upload-zone').style.display = 'none';
-}
-
-function restoreLocalPortrait() {
-  try {
-    const saved = localStorage.getItem('alden_portrait');
-    if (saved) showPortrait(saved);
-  } catch(e) {}
-}
-
-async function loadStoredPortrait() {
-  if (localPreview) {
-    restoreLocalPortrait();
-    return;
-  }
-  try {
-    const response = await fetch(characterApi('/.netlify/functions/get-portrait'), {
-      method: 'HEAD',
-      cache: 'no-store'
-    });
-    if (response.ok) {
-      showPortrait(characterApi('/.netlify/functions/get-portrait?v=' + Date.now()));
-      return;
-    }
-  } catch(e) {}
-  restoreLocalPortrait();
-}
-
-window.addEventListener('DOMContentLoaded', loadStoredPortrait);

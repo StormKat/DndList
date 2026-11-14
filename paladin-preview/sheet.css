@@ -95,7 +95,7 @@
 .paladin .brand img { width: clamp(65px, 10vw, 104px); height: auto; }
 .paladin .brand small { display: block; color: #bdbfce; font-weight: 600; }
 .paladin .toolbar button { min-height: 40px; border-radius: 7px; }
-.paladin .lucide { width: 17px; height: 17px; vertical-align: middle; flex-shrink: 0; }
+.paladin .rpg-icon { width: 23px; height: 23px; object-fit: contain; border-radius: 4px; vertical-align: middle; flex-shrink: 0; }
 .paladin .paladin-nav button { transition: background-color .18s, color .18s; }
 .paladin .paladin-nav button:hover { background-color: #39475a; }
 .paladin .paladin-nav button[aria-pressed=true]:hover { background-color: #f2dcae; }

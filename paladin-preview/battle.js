@@ -13,12 +13,12 @@
   const slotInputs = [byId('slots1'), byId('slots2')];
   const deathMarks = byId('battle-death-marks');
   deathMarks.innerHTML = [
-    ['successes', 'Успехи', 'Успех', '<path d="M12 1l2.6 7.4L22 11l-7.4 2.6L12 21l-2.6-7.4L2 11l7.4-2.6Z"/><path d="M18 16v6m-3-3h6M5 2v5M2.5 4.5h5"/>'],
-    ['failures', 'Провалы', 'Провал', '<path d="M13 1c1 6-5 7-3 12 2-1 3-3 4-5 4 3 6 6 6 9a8 8 0 0 1-16 0c0-3 2-6 4-8 0 3 1 4 2 4"/><path d="M12 15c-1 2-3 3-3 5a3 3 0 0 0 6 0c0-2-1-3-3-5Z"/>']
+    ['successes', 'Успехи', 'Успех', 'gemGreen'],
+    ['failures', 'Провалы', 'Провал', 'gemRed']
   ].map(([id, title, label, glyph]) =>
     `<div role="group" aria-label="${title}"><span>${title}</span>` +
     [1, 2, 3].map(number =>
-      `<button type="button" data-death-mark="${id}${number}" aria-label="${label} ${number}" aria-pressed="false"><svg viewBox="0 0 24 25" aria-hidden="true">${glyph}</svg><span class="death-sparks" aria-hidden="true"><i></i><i></i><i></i></span></button>`
+      `<button type="button" data-death-mark="${id}${number}" aria-label="${label} ${number}" aria-pressed="false"><img class="rpg-icon" src="rpg-icons/${glyph}.png" alt=""><span class="death-sparks" aria-hidden="true"><i></i><i></i><i></i></span></button>`
     ).join('') + '</div>'
   ).join('');
   const deathButtons = [...deathMarks.querySelectorAll('button')];
@@ -34,27 +34,27 @@
 
   handPips.innerHTML = spentHands.map((_, index) => `
     <button type="button" data-hand-point="${index}" aria-label="Очко Возложения рук ${index + 1}">
-      <svg viewBox="0 0 28 28" aria-hidden="true">
-        <path class="hand-moon" d="M18 3a11 11 0 1 0 7 18A10 10 0 0 1 18 3Z"/>
-        <path class="hand-cross" d="M15 6h4v5h5v4h-5v7h-4v-7h-5v-4h5Z"/>
-      </svg>
+      <img class="rpg-icon" src="rpg-icons/hands.png" alt="">
     </button>`).join('');
 
   const dice = {
-    4: ['16,3 30,28 2,28', 'M16 3v17L2 28m14-8 14 8'],
-    6: ['16,2 29,9 29,24 16,31 3,24 3,9', 'M3 9l13 7 13-7M16 16v15'],
-    8: ['16,2 29,16 16,30 3,16', 'M16 2l-6 18 6 10m0-28 6 18-6 10M3 16l7 4h12l7-4'],
-    10: ['16,2 29,14 24,24 16,31 8,24 3,14', 'M16 2l-7 17 7 12m0-29 7 17-7 12M3 14l6 5h14l6-5'],
-    20: ['16,2 29,9 29,24 16,31 3,24 3,9', 'M16 2l-8 20h16L16 2M3 9l5 13-5 2m26-15-5 13 5 2M8 22l8 9 8-9']
+    4: ['16,3 30,28 2,28', '16,3 16,21 2,28', '16,21 30,28 2,28', 20, 22],
+    6: ['16,2 29,9 29,24 16,31 3,24 3,9', '16,2 29,9 16,16 3,9', '16,16 29,9 29,24 16,31', 9, 23],
+    8: ['16,2 30,16 16,30 2,16', '16,2 22,20 10,20', '10,20 22,20 30,16 16,30 2,16', 16, 25],
+    10: ['16,2 30,14 24,24 16,31 8,24 2,14', '16,2 23,18 16,23 9,18', '16,2 30,14 24,24 16,31 16,23 23,18', 16, 18],
+    20: ['16,2 29,9 29,24 16,31 3,24 3,9', '16,2 8,22 24,22', '16,2 29,9 29,24 16,31 8,22 24,22', 16, 19]
   };
   const die = sides => {
-    const [outline, facets] = dice[sides];
-    return `<svg class="battle-die" viewBox="0 0 32 32" role="img" aria-label="Кубик к${sides}"><polygon points="${outline}"/><path d="${facets}"/></svg>`;
+    const [outline, light, shade, x, y] = dice[sides];
+    return `<svg class="battle-die" viewBox="0 0 32 32" role="img" aria-label="Кубик к${sides}">
+      <polygon points="${outline}"/><polygon class="die-light" points="${light}"/><polygon class="die-shade" points="${shade}"/>
+      <text x="${x}" y="${y}" text-anchor="middle">${sides}</text>
+    </svg>`;
   };
   const rollButton = (name, label, count, sides, bonus = 0) =>
     `<button type="button" data-roll="${name}" data-count="${count}" data-sides="${sides}" data-bonus="${bonus}">${die(sides)}<span>${label}<small>${count}к${sides}${bonus ? ' + ' + bonus : ''}</small></span></button>`;
   const card = (name, icon, type, description, actions) =>
-    `<article class="battle-card" data-tone="${type}"><header><span class="battle-icon"><i data-lucide="${icon}"></i></span><div><small>${type}</small><h3>${name}</h3></div></header><p>${description}</p><div class="battle-actions">${actions}</div></article>`;
+    `<article class="battle-card" data-tone="${type}"><header><span class="battle-icon"><img class="rpg-icon" src="rpg-icons/${icon}.png" alt=""></span><div><small>${type}</small><h3>${name}</h3></div></header><p>${description}</p><div class="battle-actions">${actions}</div></article>`;
   const ravenUses = [byId('raven-uses1'), byId('raven-uses2')];
   const weapon = (name, icon, description, count, sides, extra = '') => card(name, icon, 'Оружие', description,
     rollButton(name + ' · атака', 'Атака', 1, 20, 6) +
@@ -62,14 +62,22 @@
     rollButton(name + ' · крит', 'Крит', count * 2, sides, 4) + extra);
   cards.innerHTML = [
     weapon('Двуручный меч', 'sword', 'Рубящий урон, 5 фт. Задевание при промахе наносит 4 рубящего урона.', 2, 6),
-    weapon('Копьё', 'crosshair', 'Колющий урон, 5 фт или 20/60 фт броском. Ослабление даёт цели помеху на следующую атаку до начала твоего следующего хода.', 1, 6,
+    weapon('Копьё', 'upg_spear', 'Колющий урон, 5 фт или 20/60 фт броском. Ослабление даёт цели помеху на следующую атаку до начала твоего следующего хода.', 1, 6,
       rollButton('Копьё двумя руками', 'Двумя руками', 1, 8, 4) + rollButton('Копьё двумя руками · крит', 'Крит двумя руками', 2, 8, 4)),
-    card('Благословение', 'sparkles', 'Заклинание · 1-й уровень', 'Действие · 30 фт · концентрация до 1 минуты. До трёх целей добавляют 1к4 к атакам и спасброскам. Бонусный кубик бросается при каждой такой проверке.', '<button type="button" data-cast="bless">Применить · 1 ячейка</button>' + rollButton('Благословение · бонус', 'Бонус', 1, 4)),
-    card('Щит веры', 'shield', 'Заклинание · 1-й уровень', 'Бонусное действие · 60 фт · концентрация до 10 минут. Цель получает +2 к КБ на время действия заклинания.', '<button type="button" data-cast="shield">Применить · 1 ячейка</button>'),
-    card('Благословение Королевы Воронов', 'feather', 'Бонусное действие', 'Телепортируйся на расстояние до 30 фт в свободное место, которое видишь. Два применения за продолжительный отдых.', '<button type="button" id="battle-raven">Телепортироваться</button><small id="battle-raven-count" role="status"></small>'),
-    card('Возложение рук', 'hand-heart', 'Бонусное действие', 'Касанием восстанови себе или союзнику 1 ХП за каждое потраченное очко. Чтобы снять состояние «Отравлен», потрать 5 очков. Отмечай расход крестиками вверху, а хиты меняй у цели. Кубики не нужны.', ''),
-    card('Инициатива и спасброски', 'shield', 'Проверки', 'Ловкость даёт +1 к инициативе. При 0 ХП спасбросок от смерти обычно успешен на 10+. Натуральная 1 даёт два провала, натуральная 20 восстанавливает 1 ХП. Отмечай результаты на листе.', rollButton('Инициатива', 'Инициатива', 1, 20, 1) + rollButton('Спасбросок от смерти', 'От смерти', 1, 20)),
-    card('Действия в бою', 'footprints', 'Тактика', 'Рывок даёт дополнительные 30 фт перемещения. Отход защищает от провоцированных атак до конца хода. Уклонение даёт видимым атакующим помеху и тебе преимущество на спасброски Ловкости, пока действуют условия уклонения. Провоцированная атака тратит реакцию.', '')
+    card('Благословение', 'upg_wand', 'Заклинание · 1-й уровень', 'Действие · 30 фт · концентрация до 1 минуты. До трёх целей добавляют 1к4 к атакам и спасброскам. Бонусный кубик бросается при каждой такой проверке.', '<button type="button" data-cast="bless">Применить · 1 ячейка</button>' + rollButton('Благословение · бонус', 'Бонус', 1, 4)),
+    card('Щит веры', 'upg_shield', 'Заклинание · 1-й уровень', 'Бонусное действие · 60 фт · концентрация до 10 минут. Цель получает +2 к КБ на время действия заклинания.', '<button type="button" data-cast="shield">Применить · 1 ячейка</button>'),
+    card('Благословение Королевы Воронов', 'raven-queen', 'Бонусное действие', 'Телепортируйся на расстояние до 30 фт в свободное место, которое видишь. Два применения за продолжительный отдых.', '<button type="button" id="battle-raven">Телепортироваться</button><small id="battle-raven-count" role="status"></small>'),
+    card('Возложение рук', 'heart', 'Бонусное действие', 'Касанием восстанови себе или союзнику 1 ХП за каждое потраченное очко. Чтобы снять состояние «Отравлен», потрать 5 очков. Отмечай расход крестиками вверху, а хиты меняй у цели. Кубики не нужны.', ''),
+    card('Инициатива и спасброски', 'helmet', 'Проверки', 'Ловкость даёт +1 к инициативе. При 0 ХП спасбросок от смерти обычно успешен на 10+. Натуральная 1 даёт два провала, натуральная 20 восстанавливает 1 ХП. Отмечай результаты на листе.', rollButton('Инициатива', 'Инициатива', 1, 20, 1) + rollButton('Спасбросок от смерти', 'От смерти', 1, 20)),
+    `<section class="battle-card battle-tactics" aria-labelledby="battle-tactics-title">
+      <header><span class="battle-icon"><img class="rpg-icon" src="rpg-icons/axe.png" alt=""></span><div><small>Тактика</small><h3 id="battle-tactics-title">Действия в бою</h3></div></header>
+      <dl>
+        <div><dt>Рывок <small>Действие</small></dt><dd>Получаешь дополнительное перемещение, равное твоей скорости (обычно 30 фт), до конца хода.</dd></div>
+        <div><dt>Отход <small>Действие</small></dt><dd>До конца хода твоё перемещение не провоцирует атаки.</dd></div>
+        <div><dt>Уклонение <small>Действие</small></dt><dd>До начала твоего следующего хода атаки тех, кого ты видишь, идут с помехой, а спасброски Ловкости — с преимуществом. Эффект пропадает, если ты недееспособен или твоя скорость падает до нуля.</dd></div>
+        <div><dt>Провоцированная атака <small>Реакция</small></dt><dd>Можешь потратить реакцию, чтобы атаковать видимую цель в ближнем бою, когда она покидает твою досягаемость.</dd></div>
+      </dl>
+    </section>`
   ].join('');
 
   function syncResources() {
