@@ -2,7 +2,7 @@
 <html lang="ru">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Палыч Толлстаг · Лист персонажа D&D</title>
+<title>Палыч Каратау · Лист персонажа D&D</title>
 <link rel="icon" type="image/png" sizes="64x64" href="favicon-shar.png">
 <link rel="stylesheet" href="tools.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=PT+Serif:wght@700&amp;family=Spectral:ital,wght@0,500;0,700;1,500&amp;display=swap">
@@ -108,25 +108,40 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
 <header class="character-masthead">
   <div class="portrait-stand">
     <button type="button" class="portrait-frame" onclick="openPortraitModal()" aria-label="Заменить портрет персонажа">
-      <span id="upload-zone" hidden></span><img id="portrait-img" src="portrait.jpg" alt="Палыч Толлстаг у крепостных ворот" width="667" height="1000">
+      <span id="upload-zone" hidden></span><img id="portrait-img" src="portrait-luskan-prayer.jpg" alt="Палыч Каратау склонил голову в молитве, держа двуручный меч остриём вниз на набережной Лускана" width="667" height="1000">
+      <video id="portrait-video" data-src="portrait-luskan-prayer.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
     </button>
   </div>
   <div class="identity-hero">
-  <p class="edition">Лист персонажа</p><h1>Палыч Толлстаг</h1>
-  <details class="character-alias">
-    <summary>По прозвищу «Шарик»</summary>
-    <p>В таверне я по пьяни втирал всем, какая Шар охуенная. Меня прозвали «Шариком», а самые смелые — «Шароёбом». Те, кто придумал кличку, теперь лежат в травмпункте.</p>
-  </details>
+  <p class="edition">Лист персонажа</p><h1>Палыч Каратау</h1>
   <dl class="identity">
     <div><dt>Класс</dt><dd>Паладин</dd></div><div><dt>Уровень</dt><dd>1</dd></div>
-    <div><dt>Вид</dt><dd>Человек</dd></div><div><dt>Предыстория</dt><dd>Солдат</dd></div><div><dt>Подкласс</dt><dd>С 3-го ур.</dd></div>
+    <div><dt>Вид</dt><dd>Шадар-кай</dd></div><div><dt>Предыстория</dt><dd>Солдат</dd></div><div><dt>Подкласс</dt><dd>С 3-го ур.</dd></div>
   </dl>
   </div>
 </header>
+<details class="character-story" id="character-story">
+  <summary>Предыстория</summary>
+  <div class="character-story-prose">
+    <p>В Рашемене я привык спать в сапогах. На заставе ветер заметал следы быстрее, чем сменялась стража, а по утрам заиндевевшие ремни доспеха приходилось отогревать дыханием. Я был простым солдатом — из тех, чьи имена не попадают в летописи.</p>
+    <p>Приказ отправиться в Лускан был короче зимнего дня: у тайцев в городе есть башня, и нужно сделать так, чтобы оттуда до Рашемена дотягивалось как можно меньше их рук.</p>
+    <p>Лускан пах смолой, рыбой и мокрым железом. Я выучил его по ночным обходам: где разгружают корабли без огней, где портовая стража сворачивает с набережной, у каких дверей лучше не задерживаться. Какая из этих мелочей меня выдала, не знаю. Помню только холод камней под щекой. Левым глазом я уже ничего не видел. Потом остановилось сердце.</p>
+    <p>В темноте заговорила Шар.</p>
+    <p>Она предложила вернуть мне жизнь ради мести. Цена была одна: в Лускане должна появиться её церковь, и основать её предстояло мне. Я согласился. Когда я снова вдохнул, рана над сердцем уже затянулась. С тех пор рубец тлеет фиолетовым под кольчугой. Всякий раз, когда Шар говорит со мной, боль такая, будто меня убивают заново, и прежде чем ответить, мне приходится опереться о стену.</p>
+    <p>Первый алтарь я устроил в подвале, куда в прилив сочилась морская вода. Вместо скамей стояли ящики из-под рыбы. Аколиты приходили по одному: кто потерял семью, кто — имя, кто — место, куда можно вернуться. Я выслушивал каждого и учил тому, что сам принял от Шар. Так я стал её паладином. Один подвал разросся в сеть комнат и ходов под городом. Когда нас стало столько, что мы начали спорить, кому доверить ключи, мы учредили совет.</p>
+    <p>Совет раскололся. Одна из группировок сместила меня. На следующей службе мне указали место у стены и вложили в руки свечу. Я знал, сколько ступеней ведёт в этот зал: две нижние я вытесал сам. Теперь я стоял на них простым аколитом.</p>
+    <p>Я спросил Шар, зачем она дала мне всё это, если потом заставила смотреть, как это отнимают. Рубец обжёг грудь. Это испытание, ответила она. Право вести её церковь мне придётся доказать.</p>
+    <p>Я пришёл к башне тайцев и вызвал на бой их всех. Сверху раздался хохот:</p>
+    <p>— Гляньте, Шароёб пришёл!</p>
+    <p>Сквозь смех я различил слова заклинания. Гром ударил так близко, что отдался в зубах. Когда я поднялся, под ладонью была сырая земля. Вокруг стоял лес, и сквозь туман не доносился даже шум моря.</p>
+    <p>Так я оказался в Баровии.</p>
+    <p>Отсюда нужно выбраться и набраться сил. Я ещё поднимусь к башне в Лускане. А потом спущусь в свою церковь и попрошу совет вернуть мне ключи. Попрошу один раз.</p>
+  </div>
+</details>
 <section class="vitals" aria-label="Боевые показатели">
-  <div class="vital"><strong>18</strong><span class="label">Класс брони</span><small>Кольчуга + щит</small></div>
-  <div class="vital health"><div class="hp"><button class="screen" id="down" aria-label="Убавить хит">−</button><input id="hp" type="number" min="0" max="12" value="12" aria-label="Текущие хиты"><span>/ 12</span><button class="screen" id="up" aria-label="Добавить хит">+</button></div><span class="label">Хиты</span><label>Временные <input id="temp" type="number" min="0" value="0" style="width:4em"></label></div>
-  <div class="vital"><strong>+2</strong><span class="label">Инициатива</span><small>Бдительный</small></div>
+  <div class="vital"><strong>16</strong><span class="label">Класс брони</span><small>Кольчуга</small></div>
+  <div class="vital health"><div class="hp"><button class="screen" id="down" aria-label="Убавить хит">−</button><input id="hp" type="number" min="0" max="11" value="11" aria-label="Текущие хиты"><span>/ 11</span><button class="screen" id="up" aria-label="Добавить хит">+</button></div><span class="label">Хиты</span><label>Временные <input id="temp" type="number" min="0" value="0" style="width:4em"></label></div>
+  <div class="vital"><strong>+1</strong><span class="label">Инициатива</span></div>
   <div class="vital"><strong>30</strong><span class="label">Скорость, фт</span><small>Средний размер</small></div>
   <div class="vital"><strong>13</strong><span class="label">Пассивная внимательность</span></div>
 </section>
@@ -136,35 +151,37 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
   <fieldset><legend>Владения</legend><div class="features">
     <p><strong>Доспехи</strong>Лёгкие, средние, тяжёлые и щиты</p>
     <p><strong>Оружие и инструменты</strong>Простое и воинское оружие, игральные кости</p>
-    <p><strong>Языки</strong>Общий, дворфийский, эльфийский</p>
+    <p><strong>Языки</strong>Общий, эльфийский, рашиманский, сильван</p>
   </div></fieldset>
 </div>
 <div class="stack">
   <fieldset><legend>Оружие и атаки</legend>
     <table><thead><tr><th>Оружие</th><th>Атака</th><th>Урон</th><th>Мастерство</th></tr></thead><tbody>
-    <tr><td>Длинный меч</td><td>+5</td><td>1к8 + 3, рубящий</td><td>Ослабление (Sap)</td></tr>
-    <tr><td>Метательное копьё</td><td>+5</td><td>1к6 + 3, колющий</td><td>Замедление (Slow), 30/120 фт</td></tr>
+    <tr><td>Двуручный меч</td><td>+6</td><td>2к6 + 4, рубящий</td><td>Задевание (Graze)</td></tr>
+    <tr><td>Копьё</td><td>+6</td><td>1к6 + 4, колющий</td><td>Ослабление (Sap), бросок 20/60 фт; 1к8 + 4 двумя руками в ближнем бою</td></tr>
     </tbody></table>
   </fieldset>
   <fieldset><legend>Боевые ресурсы</legend><div class="resources">
     <div class="tracker"><strong>Возложение рук</strong><label><input type="number" id="hands" min="0" max="5" value="5" style="width:3em" aria-label="Очки Возложения рук"> / 5</label></div>
     <div class="tracker" id="slots"><strong>Ячейки 1-го уровня</strong></div>
-    <div class="tracker"><label><input id="inspiration" type="checkbox" checked> Героическое вдохновение</label><label><input id="die" type="checkbox"> Кость хитов 1к10 потрачена</label></div>
+    <div class="tracker"><label><input id="inspiration" type="checkbox"> Героическое вдохновение</label><label><input id="die" type="checkbox"> Кость хитов 1к10 потрачена</label></div>
+    <div class="tracker" id="raven-uses"><strong>Благословение Королевы Воронов · потрачено</strong></div>
     <div class="tracker" id="successes"><strong>Спасброски от смерти · успехи</strong></div>
     <div class="tracker" id="failures"><strong>Провалы</strong></div>
   </div></fieldset>
   <fieldset><legend>Подготовленные заклинания</legend>
-    <p class="muted">Харизма +2 · Сл 12 · Атака заклинанием +4</p>
+    <p class="muted">Харизма +1 · Сл 11 · Атака заклинанием +3</p>
     <table><thead><tr><th>Название</th><th>Эффект</th></tr></thead><tbody>
     <tr><td>Благословение</td><td>До 3 целей добавляют 1к4 к атакам и спасброскам. Концентрация до 1 мин.</td></tr>
-    <tr><td>Лечение ран</td><td>Касание, восстановление 2к8 + 2 хитов.</td></tr>
+    <tr><td>Щит веры</td><td>Бонусное действие, 60 фт, +2 к КБ цели. Концентрация до 10 мин.</td></tr>
     </tbody></table>
   </fieldset>
   <fieldset><legend>Особенности и черты</legend><div class="features">
     <p><strong>Паладин</strong>Возложение рук бонусным действием, заклинания и мастерство двух видов оружия.</p>
-    <p><strong>Человек</strong>Героическое вдохновение после продолжительного отдыха, владение Внимательностью и дополнительная черта происхождения.</p>
-    <p><strong>Дикий атакующий · Солдат</strong>Раз за ход при попадании оружием брось кости его урона дважды и выбери результат.</p>
-    <p><strong>Бдительный · Человек</strong>Добавляй бонус мастерства к инициативе. После броска можно обменяться инициативой с согласным союзником в том же бою.</p>
+    <p><strong>Шадар-кай</strong>Эльф из Царства Теней. Тёмное зрение 60 фт, владение Внимательностью, преимущество на спасброски от очарования и сопротивление некротическому урону.</p>
+    <p><strong>Благословение Королевы Воронов</strong>Бонусным действием телепортируйся на расстояние до 30 фт в видимое свободное место. Два применения за продолжительный отдых.</p>
+    <p><strong>Транс</strong>Магия не может усыпить тебя. Продолжительный отдых занимает 4 часа медитации. После транса можешь выбрать два владения оружием или инструментами до следующего продолжительного отдыха.</p>
+    <p><strong>Неистовый атакующий · Солдат</strong>Один раз за ход при попадании оружием можешь бросить кости урона оружия дважды и выбрать один результат.</p>
   </div></fieldset>
   <fieldset><legend>Снаряжение</legend><p><strong id="sheet-inventory-currency">59 зм</strong></p><ul id="sheet-inventory-list"></ul></fieldset>
 </div>
@@ -173,7 +190,7 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
 </main>
 <section class="sheet tab-panel battle" id="panel-spells">
   <div class="battle-heading">
-    <div><h2>Заклинания и бой</h2><p>КБ 18 · Скорость 30 фт · Сл заклинаний 12</p></div>
+    <div><h2>Заклинания и бой</h2><p>КБ 16 · Скорость 30 фт · Сл заклинаний 11</p></div>
     <div class="battle-actions">
       <button type="button" id="battle-short-rest" aria-expanded="false" aria-controls="battle-short-rest-form"><i data-lucide="tent"></i> Короткий отдых</button>
       <button type="button" id="battle-rest"><i data-lucide="moon-star"></i> Продолжительный отдых</button>
@@ -187,7 +204,7 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
     </div>
   </form>
   <div class="battle-resources">
-    <div><span>Текущие хиты</span><div class="battle-hp"><button type="button" id="battle-down" aria-label="Убавить хит">−</button><input id="battle-hp" type="number" min="0" max="12" aria-label="Текущие хиты в бою"><span>/ 12</span><button type="button" id="battle-up" aria-label="Добавить хит">+</button></div><label>Временные <input id="battle-temp" type="number" min="0"></label></div>
+    <div><span>Текущие хиты</span><div class="battle-hp"><button type="button" id="battle-down" aria-label="Убавить хит">−</button><input id="battle-hp" type="number" min="0" max="11" aria-label="Текущие хиты в бою"><span>/ 11</span><button type="button" id="battle-up" aria-label="Добавить хит">+</button></div><label>Временные <input id="battle-temp" type="number" min="0"></label></div>
     <div><span>Ячейки 1-го уровня</span><div class="battle-slots"><button type="button" data-slot="1" aria-label="Ячейка 1"><i data-lucide="diamond"></i></button><button type="button" data-slot="2" aria-label="Ячейка 2"><i data-lucide="diamond"></i></button></div><small id="battle-slot-count"></small></div>
     <div><span>Возложение рук</span><div id="battle-hands-pips" class="battle-hands-pips" role="group" aria-label="Очки Возложения рук"></div><small id="battle-hands"></small></div>
   </div>
@@ -222,6 +239,18 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
   </fieldset>
   <div id="battle-result" class="battle-result" aria-live="polite" aria-atomic="true">Формы кубиков и формулы бросков указаны на карточках.</div>
   <div id="battle-cards" class="battle-cards"></div>
+  <fieldset class="battle-passives">
+    <legend>Пассивные особенности и черты</legend>
+    <dl>
+      <div><dt><i data-lucide="eye" aria-hidden="true"></i> Тёмное зрение</dt><dd>До 60 фт. В тусклом свете видишь как при ярком, в темноте — как при тусклом. Цвета в темноте различаешь только в оттенках серого.</dd></div>
+      <div><dt><i data-lucide="shield" aria-hidden="true"></i> Некротическое сопротивление</dt><dd>Получаемый некротический урон уменьшается вдвое.</dd></div>
+      <div><dt><i data-lucide="sparkles" aria-hidden="true"></i> Наследие фей</dt><dd>Преимущество на спасброски, чтобы избежать или прекратить очарование.</dd></div>
+      <div><dt><i data-lucide="scan-eye" aria-hidden="true"></i> Острые чувства</dt><dd>Владение Внимательностью: +3 к проверкам, пассивная Внимательность 13.</dd></div>
+      <div><dt><i data-lucide="moon" aria-hidden="true"></i> Транс</dt><dd>Магия не может тебя усыпить. Продолжительный отдых занимает 4 часа медитации. После транса можно выбрать два владения оружием или инструментами до следующего продолжительного отдыха.</dd></div>
+      <div><dt><i data-lucide="swords" aria-hidden="true"></i> Неистовый атакующий · Солдат</dt><dd>Один раз за ход при попадании оружием брось кости урона дважды и выбери один результат. Для двуручного меча брось два набора по 2к6, выбери один и добавь +4.</dd></div>
+      <div><dt><i data-lucide="sword" aria-hidden="true"></i> Мастерство оружия</dt><dd>Двуручный меч: 4 рубящего урона при промахе. Копьё: при попадании цель получает помеху на следующую атаку до начала твоего следующего хода.</dd></div>
+    </dl>
+  </fieldset>
 </section>
 <svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden">
   <defs>
@@ -317,7 +346,7 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
 <div class="tab-panel" id="panel-inventory">
   <div class="inventory-panel">
     <div class="inventory-toolbar">
-      <div class="inv-title"><svg class="ui-icon title-icon"><use href="#icon-bag"></use></svg>Инвентарь · Палыч Толлстаг</div>
+      <div class="inv-title"><svg class="ui-icon title-icon"><use href="#icon-bag"></use></svg>Инвентарь · Палыч Каратау</div>
       <div class="inventory-sync cloud-only">
         <input class="inv-add-input inventory-password" type="password" autocomplete="current-password"
           placeholder="Пароль синхронизации" oninput="setInventoryPassword(this.value)">
@@ -430,12 +459,12 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
 <script defer src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
 <script>
 const abilities = [
-  ['Сила',17,false,[['Атлетика',true]]],
-  ['Ловкость',10,false,[['Акробатика'],['Ловкость рук'],['Скрытность']]],
-  ['Телосложение',14,false,[]],
-  ['Интеллект',8,false,[['Магия'],['История'],['Расследование'],['Природа'],['Религия']]],
+  ['Сила',18,false,[['Атлетика',true]]],
+  ['Ловкость',12,false,[['Акробатика'],['Ловкость рук'],['Скрытность']]],
+  ['Телосложение',13,false,[]],
+  ['Интеллект',9,false,[['Магия'],['История'],['Расследование'],['Природа'],['Религия',true]]],
   ['Мудрость',12,true,[['Уход за животными'],['Проницательность',true],['Медицина'],['Внимательность',true],['Выживание']]],
-  ['Харизма',14,true,[['Обман'],['Запугивание',true],['Выступление'],['Убеждение',true]]]
+  ['Харизма',12,true,[['Обман'],['Запугивание',true],['Выступление'],['Убеждение']]]
 ];
 const signed = n => n >= 0 ? '+' + n : String(n).replace('-', '−');
 const row = (name, modifier, trained) => `<div class="check"><span class="dot ${trained ? 'trained' : ''}" aria-label="${trained ? 'Владение' : 'Без владения'}"></span><b>${signed(modifier + (trained ? 2 : 0))}</b><span>${name}</span></div>`;
@@ -443,7 +472,7 @@ document.querySelector('#abilities').innerHTML = abilities.map(([name, score, sa
   const modifier = Math.floor((score - 10) / 2);
   return `<section class="ability"><h3>${name}</h3><div class="score"><b class="modifier">${signed(modifier)}</b><small>${score}</small></div>${row('Спасбросок', modifier, save)}${skills.map(([skill, trained]) => row(skill, modifier, trained)).join('')}</section>`;
 }).join('');
-for (const [id, count, label] of [['slots',2,'Ячейка потрачена'],['successes',3,'Успех'],['failures',3,'Провал']]) {
+for (const [id, count, label] of [['slots',2,'Ячейка потрачена'],['raven-uses',2,'Применение Благословения потрачено'],['successes',3,'Успех'],['failures',3,'Провал']]) {
   for (let i = 1; i <= count; i++) {
     const box = document.createElement('input');
     box.type = 'checkbox';

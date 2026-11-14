@@ -204,6 +204,20 @@
 .battle-result { flex-wrap: wrap; min-height: 76px; margin-bottom: 16px; background: radial-gradient(ellipse at left, #47313c, #201a22 65%); }
 .battle-result .battle-die { width: 38px; height: 38px; }
 .battle-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.battle-passives { margin-top: 16px; }
+.battle-passives dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.battle-passives dl > div { min-width: 0; padding: 10px; border-bottom: 1px solid var(--battle-border); }
+.battle-passives dt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--battle-gold);
+}
+.battle-passives dd { margin: 5px 0 0; color: var(--muted); }
 .battle-card { --card-glow: #614036; display: flex; flex-direction: column; gap: 12px; background: radial-gradient(ellipse at top left, var(--card-glow), transparent 70%), #211d23; }
 .battle-card[data-tone^="Заклинание"] { --card-glow: #523868; }
 .battle-card[data-tone^="Бонусное"] { --card-glow: #38524b; }
@@ -219,7 +233,7 @@
 .battle-die { width: 25px; height: 25px; flex-shrink: 0; fill: #5a384d; stroke: #f1cba0; stroke-width: 1.25; stroke-linejoin: round; }
 .battle-die path { fill: none; }
 @media (max-width: 640px) {
-  .battle-cards { grid-template-columns: 1fr; }
+  .battle-cards, .battle-passives dl { grid-template-columns: 1fr; }
   .battle-resources { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .battle-resources > div:first-child { grid-column: 1 / -1; }
 }

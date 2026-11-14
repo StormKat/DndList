@@ -24,3 +24,32 @@ portraitStand.addEventListener('pointermove', event => {
 portraitStand.addEventListener('pointerleave', resetPortraitTilt);
 portraitStand.addEventListener('pointercancel', resetPortraitTilt);
 portraitMotion.addEventListener('change', resetPortraitTilt);
+
+const portraitVideo = document.getElementById('portrait-video');
+let portraitVisible = false;
+
+function canPlayPortrait() {
+  return portraitVisible && !document.hidden && !portraitMotion.matches &&
+    !portraitVideo.dataset.customPortrait;
+}
+
+function updatePortraitVideo() {
+  if (!canPlayPortrait()) {
+    portraitVideo.pause();
+    if (portraitMotion.matches) portraitCard.classList.remove('is-playing');
+    return;
+  }
+  if (!portraitVideo.hasAttribute('src')) portraitVideo.src = portraitVideo.dataset.src;
+  portraitVideo.play().catch(() => {});
+}
+
+portraitVideo.addEventListener('playing', () => {
+  if (canPlayPortrait()) portraitCard.classList.add('is-playing');
+});
+portraitVideo.addEventListener('error', () => portraitCard.classList.remove('is-playing'));
+portraitMotion.addEventListener('change', updatePortraitVideo);
+document.addEventListener('visibilitychange', updatePortraitVideo);
+new IntersectionObserver(([entry]) => {
+  portraitVisible = entry.isIntersecting;
+  updatePortraitVideo();
+}).observe(portraitStand);

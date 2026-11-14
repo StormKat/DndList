@@ -29,22 +29,22 @@ function defaultInventory() {
       {
         id: 'weapons',
         title: 'Оружие',
-        items: [item('Длинный меч'), item('Метательное копьё', 6)]
+        items: [item('Двуручный меч'), item('Копьё')]
       },
       {
         id: 'armor',
         title: 'Доспехи',
-        items: [item('Кольчуга'), item('Щит')]
+        items: [item('Кольчуга')]
       },
       {
         id: 'tools',
         title: 'Принадлежности',
-        items: [item('Священный символ')]
+        items: []
       },
       {
         id: 'gear',
         title: 'Прочее снаряжение',
-        items: [item('Набор священника')]
+        items: [item('Набор священника'), item('Ездовой конь')]
       }
     ]
   };
@@ -99,6 +99,20 @@ function cleanInventoryTitle(value) {
   return String(value).replace(/^[\p{Extended_Pictographic}\uFE0F\u200D\s]+/u, '').trim();
 }
 
+function inventoryItemDetails(name) {
+  switch (name.trim().toLowerCase()) {
+    case 'набор священника':
+      return '<details class="inventory-branch"><summary>Содержимое одного набора</summary><ul>' +
+        ['Рюкзак', 'Одеяло', 'Святая вода', 'Лампа', 'Рационы на 7 дней', 'Одеяние', 'Трутница']
+          .map(entry => '<li>' + entry + '</li>').join('') +
+        '</ul></details>';
+    case 'кольчуга':
+      return '<p class="inventory-item-note">Тяжёлый доспех · КБ 16 · 75 зм<br>Сила 13 · Помеха на Скрытность</p>';
+    default:
+      return '';
+  }
+}
+
 function renderSheetInventory() {
   if (!inventoryState) return;
   const list = document.getElementById('sheet-inventory-list');
@@ -114,6 +128,7 @@ function renderSheetInventory() {
         '<li class="eqli relative pl-3">' +
           escapeInventoryHtml(item.name) +
           (item.quantity !== 1 ? ' × ' + item.quantity : '') +
+          inventoryItemDetails(item.name) +
         '</li>'
       ).join('')
       : '<li class="text-drow-faint">Снаряжение не добавлено</li>';
@@ -135,7 +150,8 @@ function renderInventory() {
     const items = category.items.length
       ? category.items.map(item =>
         '<div class="inv-item">' +
-          '<div class="inv-item-name">' + escapeInventoryHtml(item.name) + '</div>' +
+          '<div><div class="inv-item-name">' + escapeInventoryHtml(item.name) + '</div>' +
+            inventoryItemDetails(item.name) + '</div>' +
           '<div class="inv-item-controls">' +
             '<button class="inv-qty-btn" onclick="changeInventoryQuantity(\'' + category.id + '\', \'' + item.id + '\', -1)">−</button>' +
             '<input class="inv-qty-input" type="number" inputmode="numeric" min="0" value="' + item.quantity +
@@ -773,7 +789,11 @@ document.getElementById('portraitModal').addEventListener('click', function(e) {
 function showPortrait(source) {
   const image = document.getElementById('portrait-img');
   const video = document.getElementById('portrait-video');
-  if (video) video.style.display = 'none';
+  if (video) {
+    video.dataset.customPortrait = 'true';
+    video.pause();
+    video.closest('.portrait-frame').classList.remove('is-playing');
+  }
   image.src = source;
   image.style.display = 'block';
   document.getElementById('upload-zone').style.display = 'none';

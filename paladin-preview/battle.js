@@ -55,21 +55,27 @@
     `<button type="button" data-roll="${name}" data-count="${count}" data-sides="${sides}" data-bonus="${bonus}">${die(sides)}<span>${label}<small>${count}к${sides}${bonus ? ' + ' + bonus : ''}</small></span></button>`;
   const card = (name, icon, type, description, actions) =>
     `<article class="battle-card" data-tone="${type}"><header><span class="battle-icon"><i data-lucide="${icon}"></i></span><div><small>${type}</small><h3>${name}</h3></div></header><p>${description}</p><div class="battle-actions">${actions}</div></article>`;
-  const weapon = (name, icon, description, sides) => card(name, icon, 'Оружие', description,
-    rollButton(name + ' · атака', 'Атака', 1, 20, 5) +
-    rollButton(name + ' · урон', 'Урон', 1, sides, 3) +
-    rollButton(name + ' · крит', 'Крит', 2, sides, 3));
+  const ravenUses = [byId('raven-uses1'), byId('raven-uses2')];
+  const weapon = (name, icon, description, count, sides, extra = '') => card(name, icon, 'Оружие', description,
+    rollButton(name + ' · атака', 'Атака', 1, 20, 6) +
+    rollButton(name + ' · урон', 'Урон', count, sides, 4) +
+    rollButton(name + ' · крит', 'Крит', count * 2, sides, 4) + extra);
   cards.innerHTML = [
-    weapon('Длинный меч', 'sword', 'Действие · 5 фт · рубящий урон. Ослабление: при попадании цель получает помеху на следующую атаку до начала твоего следующего хода. Урон указан для меча в одной руке.', 8),
-    weapon('Метательное копьё', 'crosshair', 'Действие · 5 фт вблизи или 30/120 фт броском · колющий урон. При нанесении урона снижает скорость цели на 10 фт до начала твоего следующего хода.', 6),
+    weapon('Двуручный меч', 'sword', 'Рубящий урон, 5 фт. Задевание при промахе наносит 4 рубящего урона.', 2, 6),
+    weapon('Копьё', 'crosshair', 'Колющий урон, 5 фт или 20/60 фт броском. Ослабление даёт цели помеху на следующую атаку до начала твоего следующего хода.', 1, 6,
+      rollButton('Копьё двумя руками', 'Двумя руками', 1, 8, 4) + rollButton('Копьё двумя руками · крит', 'Крит двумя руками', 2, 8, 4)),
     card('Благословение', 'sparkles', 'Заклинание · 1-й уровень', 'Действие · 30 фт · концентрация до 1 минуты. До трёх целей добавляют 1к4 к атакам и спасброскам. Бонусный кубик бросается при каждой такой проверке.', '<button type="button" data-cast="bless">Применить · 1 ячейка</button>' + rollButton('Благословение · бонус', 'Бонус', 1, 4)),
-    card('Лечение ран', 'heart-pulse', 'Заклинание · 1-й уровень', 'Действие · касание. Восстанавливает 2к8 + 2 хитов выбранной цели.', `<button type="button" data-cast="cure">${die(8)}<span>Применить · 1 ячейка<small>2к8 + 2</small></span></button>`),
+    card('Щит веры', 'shield', 'Заклинание · 1-й уровень', 'Бонусное действие · 60 фт · концентрация до 10 минут. Цель получает +2 к КБ на время действия заклинания.', '<button type="button" data-cast="shield">Применить · 1 ячейка</button>'),
+    card('Благословение Королевы Воронов', 'feather', 'Бонусное действие', 'Телепортируйся на расстояние до 30 фт в свободное место, которое видишь. Два применения за продолжительный отдых.', '<button type="button" id="battle-raven">Телепортироваться</button><small id="battle-raven-count" role="status"></small>'),
     card('Возложение рук', 'hand-heart', 'Бонусное действие', 'Касанием восстанови себе или союзнику 1 ХП за каждое потраченное очко. Чтобы снять состояние «Отравлен», потрать 5 очков. Отмечай расход крестиками вверху, а хиты меняй у цели. Кубики не нужны.', ''),
-    card('Инициатива и спасброски', 'shield', 'Проверки', 'Бдительность даёт +2 к инициативе. При 0 ХП спасбросок от смерти обычно успешен на 10+. Натуральная 1 даёт два провала, натуральная 20 восстанавливает 1 ХП. Отмечай результаты на листе.', rollButton('Инициатива', 'Инициатива', 1, 20, 2) + rollButton('Спасбросок от смерти', 'От смерти', 1, 20)),
+    card('Инициатива и спасброски', 'shield', 'Проверки', 'Ловкость даёт +1 к инициативе. При 0 ХП спасбросок от смерти обычно успешен на 10+. Натуральная 1 даёт два провала, натуральная 20 восстанавливает 1 ХП. Отмечай результаты на листе.', rollButton('Инициатива', 'Инициатива', 1, 20, 1) + rollButton('Спасбросок от смерти', 'От смерти', 1, 20)),
     card('Действия в бою', 'footprints', 'Тактика', 'Рывок даёт дополнительные 30 фт перемещения. Отход защищает от провоцированных атак до конца хода. Уклонение даёт видимым атакующим помеху и тебе преимущество на спасброски Ловкости, пока действуют условия уклонения. Провоцированная атака тратит реакцию.', '')
   ].join('');
 
   function syncResources() {
+    const ravenAvailable = ravenUses.filter(input => !input.checked).length;
+    byId('battle-raven-count').textContent = ravenAvailable + ' из 2 доступно';
+    byId('battle-raven').disabled = ravenAvailable === 0;
     const previousRerolls = displayedRerolls;
     displayedRerolls = masterRerolls;
     const visibleCoins = Math.min(masterRerolls, 5);
@@ -122,7 +128,7 @@
     cards.querySelectorAll('[data-cast]').forEach(button => { button.disabled = !available; });
     byId('battle-short-rest-help').innerHTML = hitDie.checked
       ? 'Кость хитов уже потрачена. Она восстановится после продолжительного отдыха.'
-      : die(10) + ' Брось <strong>1к10</strong> и введи выпавшее число. Лист добавит <strong>+2</strong> за Телосложение.';
+      : die(10) + ' Брось <strong>1к10</strong> и введи выпавшее число. Лист добавит <strong>+1</strong> за Телосложение.';
     shortRestRoll.disabled = hitDie.checked;
     shortRest.querySelector('button[type="submit"]').disabled = hitDie.checked;
   }
@@ -210,8 +216,14 @@
       if (!slot) return;
       slot.checked = true;
       save();
-      if (cast === 'cure') roll('Лечение ран', 2, 8, 2, true);
-      else show('Благословение применено · ячейка потрачена');
+      show((cast === 'shield' ? 'Щит веры: +2 к КБ цели' : 'Благословение применено') + ' · ячейка потрачена');
+    }
+    if (button.id === 'battle-raven') {
+      const use = ravenUses.find(input => !input.checked);
+      if (!use) return;
+      use.checked = true;
+      save();
+      show('Благословение Королевы Воронов · телепортация до 30 фт');
     }
   });
   shortRestToggle.addEventListener('click', () => {
@@ -222,7 +234,7 @@
   shortRest.addEventListener('submit', event => {
     event.preventDefault();
     if (hitDie.checked || !shortRestRoll.checkValidity()) return;
-    const restored = Math.min(shortRestRoll.valueAsNumber + 2, Number(health.max) - health.valueAsNumber);
+    const restored = Math.min(shortRestRoll.valueAsNumber + 1, Number(health.max) - health.valueAsNumber);
     if (restored <= 0) {
       show('Хиты уже полные. Кость хитов доступна.');
       return;
@@ -239,10 +251,10 @@
     byId('temp').value = 0;
     hands.value = hands.max;
     byId('die').checked = false;
-    byId('inspiration').checked = true;
+    ravenUses.forEach(input => { input.checked = false; });
     document.querySelectorAll('#slots input, #successes input, #failures input').forEach(input => { input.checked = false; });
     save();
-    show('Хиты, ячейки, кость хитов и «Возложение рук» восстановлены');
+    show('Хиты, ячейки, кость хитов, «Возложение рук» и телепортации восстановлены');
   });
   document.addEventListener('sheet-resources-change', syncResources);
   async function syncRerolls(delta = 0, upload = false) {

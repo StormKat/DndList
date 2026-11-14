@@ -31,15 +31,25 @@
 .character-masthead .identity { gap: 12px 18px; }
 .character-masthead .identity div { border-color: #ddc09270; }
 .character-masthead dd { font-weight: 700; }
-.character-alias { margin-bottom: 16px; }
-.character-alias summary { cursor: pointer; color: #edcbed; font-weight: 700; }
-.character-alias p {
-  max-width: 52ch;
-  margin-top: 8px;
-  padding: 8px 12px;
-  border-left: 2px solid #9774a5;
-  background: #17121de8;
+.character-story {
+  margin-block: 16px;
+  border: 1px solid #695474;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #302339, #1b1720 75%);
 }
+.character-story summary {
+  cursor: pointer;
+  padding: 12px 18px;
+  color: #edcbed;
+  font-weight: 800;
+}
+.character-story[open] summary { border-bottom: 1px solid #695474; }
+.character-story-prose {
+  padding: clamp(16px, 3vw, 30px);
+  color: #efe4db;
+  font: 500 clamp(16px, 2vw, 20px)/1.55 Spectral, Georgia, serif;
+}
+.character-story-prose p + p { margin-top: .85em; }
 
 .portrait-stand { perspective: 800px; min-width: 0; }
 .paladin .portrait-frame {
@@ -63,6 +73,18 @@
   border-radius: 6px;
   background: #142133;
 }
+.portrait-frame #portrait-video {
+  position: absolute;
+  inset: 5px;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  object-fit: contain;
+  border-radius: 6px;
+  background: #142133;
+  opacity: 0;
+  pointer-events: none;
+}
+.portrait-frame.is-playing #portrait-video { opacity: 1; }
 
 .paladin .brand, .paladin .toolbar-actions, .paladin .toolbar button, .paladin .paladin-nav button {
   display: flex;
@@ -320,4 +342,26 @@
   .portrait-stand { width: 100%; }
   .paladin .portrait-frame { transform: none; box-shadow: none; }
   .portrait-frame::after { display: none; }
+}
+.inventory-branch,
+.inventory-item-note {
+  margin: .25rem 0 .2rem .8rem;
+  font-size: .85em;
+  line-height: 1.45;
+}
+.inventory-branch summary { cursor: pointer; }
+.inventory-branch ul {
+  list-style: none;
+  margin: .2rem 0 0 .3rem;
+  padding: 0 0 0 .85rem;
+  border-inline-start: 1px solid currentColor;
+}
+.inventory-branch li { position: relative; padding: .1rem 0; }
+.inventory-branch li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: -.85rem;
+  width: .55rem;
+  top: .8em;
+  border-block-start: 1px solid currentColor;
 }
