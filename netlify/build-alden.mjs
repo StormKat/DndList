@@ -6,7 +6,7 @@ const assets = [
   'index.html', 'tools.js', 'tools.css', 'sheet.css', 'battle.js', 'battle.css',
   'portrait-card.js', 'portrait-luskan-prayer.jpg', 'portrait-luskan-prayer.mp4', 'dnd-logo.png', 'castle-hall-unlit.jpg',
   'torch-flame-soft.png', 'notes-parchment-portrait.png', 'shar-sanctuary.jpg',
-  'favicon-shar.png'
+  'favicon-shar.png', 'faerun-map.jpg', 'map.css', 'map.js'
 ];
 
 await mkdir(destination, { recursive: true });

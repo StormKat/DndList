@@ -1,0 +1,58 @@
+.faerun {
+  position: relative;
+  width: min(1080px, calc(100% - 28px));
+  height: clamp(340px, 72dvh, 800px);
+  margin: 0 auto 22px;
+  overflow: hidden;
+  border: 1px solid #745b58;
+  border-radius: 14px;
+  background: #172126;
+  color: #fff2e3;
+}
+.faerun-view { position: absolute; inset: 0; overflow: hidden; touch-action: none; cursor: grab; }
+.faerun-view:active { cursor: grabbing; }
+.faerun-world { position: absolute; width: 4096px; height: 3072px; transform-origin: top left; }
+.faerun-world img { display: block; width: 100%; height: 100%; user-select: none; pointer-events: none; }
+.faerun button, .faerun input {
+  font: inherit; color: inherit; border: 1px solid #806777; background: #27212c;
+}
+.faerun-search { position: absolute; top: 12px; left: 12px; width: min(290px, calc(100% - 24px)); }
+.faerun-search input { width: 100%; padding: 10px 14px; border-radius: 22px; box-shadow: 0 3px 12px #0008; }
+.faerun-results:not(:empty) { margin-top: 5px; padding: 5px; background: #27212c; border-radius: 12px; box-shadow: 0 3px 12px #0008; }
+.faerun-results { max-height: min(40dvh, 260px); overflow-y: auto; overscroll-behavior: contain; }
+.faerun-results button { display: block; width: 100%; text-align: left; padding: 7px 10px; border: 0; border-radius: 6px; }
+.faerun-results p { margin: 6px 10px; }
+.faerun-controls { position: absolute; right: 12px; bottom: 29px; display: grid; gap: 4px; }
+.faerun-controls button { width: 42px; height: 42px; border-radius: 9px; font-size: 23px; }
+.faerun button:hover { background: #49344d; }
+.faerun-credit { position: absolute; bottom: 0; right: 0; padding: 2px 6px; background: #211b26eb; font-size: 11px; }
+.faerun-brand {
+  position: absolute; left: 12px; bottom: 24px; pointer-events: none;
+  color: #fff3dfd9; text-shadow: 0 1px 3px #17101c, 0 0 12px #17101c;
+}
+.faerun-brand strong { display: block; font-size: clamp(16px, 3vw, 26px); line-height: 1.15; }
+.faerun-wordmark > span { opacity: .88; }
+.faerun-wordmark > span:is(:nth-child(1), :nth-child(4), :nth-child(7)) { color: #4285f4; }
+.faerun-wordmark > span:is(:nth-child(2), :nth-child(6), :nth-child(9)) { color: #ea4335; }
+.faerun-wordmark > span:nth-child(3) { color: #fbbc05; }
+.faerun-wordmark > span:is(:nth-child(5), :nth-child(8)) { color: #34a853; }
+.faerun-brand small { display: block; margin-top: 3px; font-size: 10px; }
+.faerun .faerun-pin {
+  position: absolute; width: 28px; height: 32px; padding: 0; border: 0; background: transparent;
+  transform: translate(-50%, -100%) scale(var(--pin-scale, 1));
+  transform-origin: bottom center;
+}
+.faerun-pin::before {
+  content: ""; position: absolute; inset: 4px 3px 6px; border: 2px solid #ffe1a9;
+  background: #643a80; border-radius: 50% 50% 50% 0; rotate: -45deg;
+  box-shadow: 0 2px 5px #231323;
+}
+.faerun-pin[aria-pressed=true] { z-index: 1; }
+.faerun .faerun-pin[hidden] { display: none; }
+.faerun-pin[aria-pressed=true]::before { background: #cc8645; }
+.faerun-pin span {
+  position: absolute; left: 50%; bottom: 31px; transform: translateX(-50%);
+  white-space: nowrap; padding: 3px 6px; border-radius: 4px; background: #27212c;
+  font-size: 12px; display: none;
+}
+.faerun-pin:is(:hover, :focus-visible, [aria-pressed=true]) span { display: block; }

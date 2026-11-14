@@ -82,6 +82,7 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
 @media print{body.paladin{background:white!important}.paladin-nav,.paladin .tab-panel:not(#panel-sheet),.paladin .netlify-modal{display:none!important}.paladin #panel-sheet{display:block}.paladin .sheet header{background:white;color:var(--ink)}.identity-hero .edition,.identity dt{color:var(--accent)}}
 </style>
 <link rel="stylesheet" href="sheet.css">
+<link rel="stylesheet" href="map.css">
 <link rel="stylesheet" href="battle.css">
 <body class="paladin dark">
 <div class="castle-scene" aria-hidden="true">
@@ -102,6 +103,7 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
   <button type="button" data-panel="spells" aria-pressed="false"><img class="rpg-icon" src="rpg-icons/upg_sword.png" alt="">Заклинания и бой</button>
   <button type="button" data-panel="inventory" aria-pressed="false"><img class="rpg-icon" src="rpg-icons/backpack.png" alt="">Инвентарь</button>
   <button type="button" data-panel="notes" aria-pressed="false"><img class="rpg-icon" src="rpg-icons/tome.png" alt="">Заметки</button>
+  <button type="button" data-panel="map" aria-pressed="false"><img class="rpg-icon" src="rpg-icons/map.png" alt="">Карта Фаэруна</button>
 </nav>
 <main class="sheet tab-panel active" id="panel-sheet">
 <header class="character-masthead">
@@ -319,6 +321,27 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
     </div>
   </div>
 </div><!-- END panel-notes -->
+<section class="tab-panel faerun" id="panel-map" aria-label="Карта Фаэруна">
+  <div class="faerun-view" tabindex="0" aria-label="Карта: стрелки перемещают, плюс и минус меняют масштаб">
+    <div class="faerun-world">
+      <img data-src="faerun-map.jpg" alt="Карта Фаэруна, 1372 ЛД" width="4096" height="3072" draggable="false">
+    </div>
+  </div>
+  <div class="faerun-search">
+    <input type="search" aria-label="Найти место на карте" placeholder="Найти место на карте">
+    <div class="faerun-results"></div>
+  </div>
+  <div class="faerun-controls">
+    <button type="button" data-map-action="in" aria-label="Приблизить">+</button>
+    <button type="button" data-map-action="out" aria-label="Отдалить">−</button>
+    <button type="button" data-map-action="reset" aria-label="Показать всю карту">⌂</button>
+  </div>
+  <div class="faerun-brand" lang="en">
+    <strong><span class="faerun-wordmark"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span><span>d</span><span>o</span><span>r</span></span> Maps</strong>
+    <small>Rerouting. Another portal.</small>
+  </div>
+  <span class="faerun-credit">Фаэрун · 1372 ЛД · David Bishop</span>
+</section>
 
   </div>
 </div>
@@ -401,5 +424,6 @@ document.querySelector('.paladin-nav').addEventListener('click', event => {
 });
 </script>
 <script src="battle.js"></script>
+<script src="map.js"></script>
 </body>
 </html>
