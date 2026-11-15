@@ -24,12 +24,13 @@
   const deathButtons = [...deathMarks.querySelectorAll('button')];
   const hands = byId('hands');
   const health = byId('hp');
-  const hitDie = byId('die');
+  const hitDice = [byId('die'), byId('die2')];
+  const freeSmite = byId('smite-free-spent');
   const shortRest = byId('battle-short-rest-form');
   const shortRestToggle = byId('battle-short-rest');
   const shortRestRoll = byId('battle-short-rest-roll');
   const handPips = byId('battle-hands-pips');
-  const spentHands = Array.from({ length: 5 }, (_, index) => index >= hands.valueAsNumber);
+  const spentHands = Array.from({ length: Number(hands.max) }, (_, index) => index >= hands.valueAsNumber);
   let animation;
 
   handPips.innerHTML = spentHands.map((_, index) => `
@@ -66,6 +67,10 @@
       rollButton('Копьё двумя руками', 'Двумя руками', 1, 8, 4) + rollButton('Копьё двумя руками · крит', 'Крит двумя руками', 2, 8, 4)),
     card('Благословение', 'upg_wand', 'Заклинание · 1-й уровень', 'Действие · 30 фт · концентрация до 1 минуты. До трёх целей добавляют 1к4 к атакам и спасброскам. Бонусный кубик бросается при каждой такой проверке.', '<button type="button" data-cast="bless">Применить · 1 ячейка</button>' + rollButton('Благословение · бонус', 'Бонус', 1, 4)),
     card('Щит веры', 'upg_shield', 'Заклинание · 1-й уровень', 'Бонусное действие · 60 фт · концентрация до 10 минут. Цель получает +2 к КБ на время действия заклинания.', '<button type="button" data-cast="shield">Применить · 1 ячейка</button>'),
+    card('Лечение ран', 'heart', 'Заклинание · 1-й уровень', 'Действие · касание. Цель восстанавливает 2к8 + 1 ХП (+1 от Харизмы). Если лечишь себя, добавь результат к своим хитам.', '<button type="button" data-cast="cure">Применить · 1 ячейка</button>' + rollButton('Лечение ран', 'Лечение', 2, 8, 1)),
+    card('Божественная кара', 'upg_sword', 'Заклинание · 1-й уровень', 'Бонусное действие сразу после попадания оружием ближнего боя или безоружным ударом. Дополнительно 2к8 урона излучением, или 3к8 по исчадию либо нежити. Одно бесплатное применение за продолжительный отдых.',
+      '<button type="button" id="battle-free-smite">Применить без ячейки</button><button type="button" data-cast="smite">Применить · 1 ячейка</button>' +
+      rollButton('Божественная кара', 'Урон', 2, 8) + rollButton('Божественная кара · исчадие или нежить', 'Исчадие / нежить', 3, 8)),
     card('Благословение Королевы Воронов', 'raven-queen', 'Бонусное действие', 'Телепортируйся на расстояние до 30 фт в свободное место, которое видишь. Два применения за продолжительный отдых.', '<button type="button" id="battle-raven">Телепортироваться</button><small id="battle-raven-count" role="status"></small>'),
     card('Возложение рук', 'heart', 'Бонусное действие', 'Касанием восстанови себе или союзнику 1 ХП за каждое потраченное очко. Чтобы снять состояние «Отравлен», потрать 5 очков. Отмечай расход крестиками вверху, а хиты меняй у цели. Кубики не нужны.', ''),
     card('Инициатива и спасброски', 'helmet', 'Проверки', 'Ловкость даёт +1 к инициативе. При 0 ХП спасбросок от смерти обычно успешен на 10+. Натуральная 1 даёт два провала, натуральная 20 восстанавливает 1 ХП. Отмечай результаты на листе.', rollButton('Инициатива', 'Инициатива', 1, 20, 1) + rollButton('Спасбросок от смерти', 'От смерти', 1, 20)),
@@ -125,7 +130,7 @@
       button.setAttribute('aria-pressed', String(spentHands[index]));
       button.title = spentHands[index] ? 'Вернуть очко' : 'Потратить очко';
     });
-    byId('battle-hands').textContent = remaining + ' из 5 доступно';
+    byId('battle-hands').textContent = remaining + ' из ' + hands.max + ' доступно';
     slotInputs.forEach((input, index) => {
       const button = document.querySelector(`[data-slot="${index + 1}"]`);
       button.setAttribute('aria-pressed', String(input.checked));
@@ -134,11 +139,14 @@
     const available = slotInputs.filter(input => !input.checked).length;
     byId('battle-slot-count').textContent = available + ' из 2 доступно';
     cards.querySelectorAll('[data-cast]').forEach(button => { button.disabled = !available; });
-    byId('battle-short-rest-help').innerHTML = hitDie.checked
-      ? 'Кость хитов уже потрачена. Она восстановится после продолжительного отдыха.'
-      : die(10) + ' Брось <strong>1к10</strong> и введи выпавшее число. Лист добавит <strong>+1</strong> за Телосложение.';
-    shortRestRoll.disabled = hitDie.checked;
-    shortRest.querySelector('button[type="submit"]').disabled = hitDie.checked;
+    byId('battle-free-smite').disabled = freeSmite.checked;
+    byId('battle-free-smite').textContent = freeSmite.checked ? 'Бесплатное применение потрачено' : 'Применить без ячейки';
+    const diceLeft = hitDice.filter(input => !input.checked).length;
+    byId('battle-short-rest-help').innerHTML = diceLeft
+      ? die(10) + ' Доступно костей хитов: ' + diceLeft + ' из 2. Брось <strong>1к10</strong>, лист добавит <strong>+1</strong>. Можно повторить, пока есть кости.'
+      : 'Все кости хитов потрачены. Они восстановятся после продолжительного отдыха.';
+    shortRestRoll.disabled = !diceLeft;
+    shortRest.querySelector('button[type="submit"]').disabled = !diceLeft;
   }
 
   function show(text, total = null, sides = null, canHeal = false) {
@@ -224,7 +232,12 @@
       if (!slot) return;
       slot.checked = true;
       save();
-      show((cast === 'shield' ? 'Щит веры: +2 к КБ цели' : 'Благословение применено') + ' · ячейка потрачена');
+      show(({ shield: 'Щит веры: +2 к КБ цели', bless: 'Благословение применено', smite: 'Божественная кара', cure: 'Лечение ран: 2к8 + 1 ХП цели' })[cast] + ' · ячейка потрачена');
+    }
+    if (button.id === 'battle-free-smite') {
+      freeSmite.checked = true;
+      save();
+      show('Божественная кара · ячейка не потрачена');
     }
     if (button.id === 'battle-raven') {
       const use = ravenUses.find(input => !input.checked);
@@ -241,7 +254,8 @@
   });
   shortRest.addEventListener('submit', event => {
     event.preventDefault();
-    if (hitDie.checked || !shortRestRoll.checkValidity()) return;
+    const hitDie = hitDice.find(input => !input.checked);
+    if (!hitDie || !shortRestRoll.checkValidity()) return;
     const restored = Math.min(shortRestRoll.valueAsNumber + 1, Number(health.max) - health.valueAsNumber);
     if (restored <= 0) {
       show('Хиты уже полные. Кость хитов доступна.');
@@ -258,11 +272,12 @@
     health.value = health.max;
     byId('temp').value = 0;
     hands.value = hands.max;
-    byId('die').checked = false;
+    hitDice.forEach(input => { input.checked = false; });
+    freeSmite.checked = false;
     ravenUses.forEach(input => { input.checked = false; });
     document.querySelectorAll('#slots input, #successes input, #failures input').forEach(input => { input.checked = false; });
     save();
-    show('Хиты, ячейки, кость хитов, «Возложение рук» и телепортации восстановлены');
+    show('Хиты, кости хитов, ячейки и классовые ресурсы восстановлены');
   });
   document.addEventListener('sheet-resources-change', syncResources);
   async function syncRerolls(delta = 0, upload = false) {

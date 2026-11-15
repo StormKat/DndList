@@ -121,7 +121,7 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
   <div class="identity-hero">
   <p class="edition">Лист персонажа</p><h1>Палыч Каратау</h1>
   <dl class="identity">
-    <div><dt>Класс</dt><dd>Паладин</dd></div><div><dt>Уровень</dt><dd>1</dd></div>
+    <div><dt>Класс</dt><dd>Паладин</dd></div><div><dt>Уровень</dt><dd>2</dd></div>
     <div><dt>Вид</dt><dd>Шадар-кай</dd></div><div><dt>Предыстория</dt><dd>Солдат</dd></div><div><dt>Подкласс</dt><dd>С 3-го ур.</dd></div>
   </dl>
   </div>
@@ -145,8 +145,8 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
   </div>
 </details>
 <section class="vitals" aria-label="Боевые показатели">
-  <div class="vital"><strong>16</strong><span class="label">Класс брони</span><small>Кольчуга</small></div>
-  <div class="vital health"><div class="hp"><button class="screen" id="down" aria-label="Убавить хит">−</button><input id="hp" type="number" min="0" max="11" value="11" aria-label="Текущие хиты"><span>/ 11</span><button class="screen" id="up" aria-label="Добавить хит">+</button></div><span class="label">Хиты</span><label>Временные <input id="temp" type="number" min="0" value="0" style="width:4em"></label></div>
+  <div class="vital"><strong>17</strong><span class="label">Класс брони</span><small>Кольчуга + Оборона</small></div>
+  <div class="vital health"><div class="hp"><button class="screen" id="down" aria-label="Убавить хит">−</button><input id="hp" type="number" min="0" max="16" value="16" aria-label="Текущие хиты"><span>/ 16</span><button class="screen" id="up" aria-label="Добавить хит">+</button></div><span class="label">Хиты</span><label>Временные <input id="temp" type="number" min="0" value="0" style="width:4em"></label></div>
   <div class="vital"><strong>+1</strong><span class="label">Инициатива</span></div>
   <div class="vital"><strong>30</strong><span class="label">Скорость, фт</span><small>Средний размер</small></div>
   <div class="vital"><strong>13</strong><span class="label">Пассивная внимательность</span></div>
@@ -172,10 +172,13 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
     <table><thead><tr><th>Название</th><th>Эффект</th></tr></thead><tbody>
     <tr><td>Благословение</td><td>До 3 целей добавляют 1к4 к атакам и спасброскам. Концентрация до 1 мин.</td></tr>
     <tr><td>Щит веры</td><td>Бонусное действие, 60 фт, +2 к КБ цели. Концентрация до 10 мин.</td></tr>
+    <tr><td>Лечение ран</td><td>Действие, касание. Восстанавливает 2к8 + 1 ХП цели.</td></tr>
+    <tr><td>Божественная кара</td><td>Всегда подготовлена сверх трёх заклинаний. Одно применение без ячейки за продолжительный отдых.</td></tr>
     </tbody></table>
   </fieldset>
   <fieldset><legend>Особенности и черты</legend><div class="features">
     <p><strong>Паладин</strong>Возложение рук бонусным действием, заклинания и мастерство двух видов оружия.</p>
+    <p><strong>Боевой стиль</strong>Оборона: +1 к КБ, пока носишь доспех.</p>
     <p><strong>Шадар-кай</strong>Эльф из Царства Теней. Тёмное зрение 60 фт, владение Внимательностью, преимущество на спасброски от очарования и сопротивление некротическому урону.</p>
     <p><strong>Благословение Королевы Воронов</strong>Бонусным действием телепортируйся на расстояние до 30 фт в видимое свободное место. Два применения за продолжительный отдых.</p>
     <p><strong>Транс</strong>Магия не может усыпить тебя. Продолжительный отдых занимает 4 часа медитации. После транса можешь выбрать два владения оружием или инструментами до следующего продолжительного отдыха.</p>
@@ -188,7 +191,7 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
 </main>
 <section class="sheet tab-panel battle" id="panel-spells">
   <div class="battle-heading">
-    <div><h2>Заклинания и бой</h2><p>КБ 16 · Скорость 30 фт · Сл заклинаний 11 · Атака заклинанием +3</p></div>
+    <div><h2>Заклинания и бой</h2><p>КБ 17 · Скорость 30 фт · Сл заклинаний 11 · Атака заклинанием +3</p></div>
     <div class="battle-actions">
       <button type="button" id="battle-short-rest" aria-expanded="false" aria-controls="battle-short-rest-form"><span class="rest-icon rest-campfire" aria-hidden="true"><i></i><b></b></span> Короткий отдых</button>
       <button type="button" id="battle-rest"><span class="rest-icon rest-lounge" aria-hidden="true"><img src="rpg-icons/sofa.png" alt=""><i class="rest-hookah"></i><b class="rest-smoke"></b></span> Продолжительный отдых</button>
@@ -202,20 +205,22 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
     </div>
   </form>
   <div class="battle-resources">
-    <div><span>Текущие хиты</span><div class="battle-hp"><button type="button" id="battle-down" aria-label="Убавить хит">−</button><input id="battle-hp" type="number" min="0" max="11" aria-label="Текущие хиты в бою"><span>/ 11</span><button type="button" id="battle-up" aria-label="Добавить хит">+</button></div><label>Временные <input id="battle-temp" type="number" min="0"></label></div>
+    <div><span>Текущие хиты</span><div class="battle-hp"><button type="button" id="battle-down" aria-label="Убавить хит">−</button><input id="battle-hp" type="number" min="0" max="16" aria-label="Текущие хиты в бою"><span>/ 16</span><button type="button" id="battle-up" aria-label="Добавить хит">+</button></div><label>Временные <input id="battle-temp" type="number" min="0"></label></div>
     <div><span>Ячейки 1-го уровня</span><div class="battle-slots"><button type="button" data-slot="1" aria-label="Ячейка 1"><span class="slot-sigil" aria-hidden="true"></span></button><button type="button" data-slot="2" aria-label="Ячейка 2"><span class="slot-sigil" aria-hidden="true"></span></button></div><small id="battle-slot-count"></small></div>
     <div><span>Возложение рук</span><div id="battle-hands-pips" class="battle-hands-pips" role="group" aria-label="Очки Возложения рук"></div><small id="battle-hands"></small></div>
   </div>
   <div id="battle-resource-state" hidden>
-    <input type="number" id="hands" min="0" max="5" value="5">
+    <input type="number" id="hands" min="0" max="10" value="10">
     <div id="slots"></div>
     <div id="raven-uses"></div>
     <div id="successes"></div>
     <div id="failures"></div>
+    <input type="checkbox" id="smite-free-spent">
   </div>
   <div class="battle-actions">
     <label class="battle-roll-mode"><input id="inspiration" type="checkbox"> Героическое вдохновение</label>
-    <label class="battle-roll-mode"><input id="die" type="checkbox"> Кость хитов 1к10 потрачена</label>
+    <label class="battle-roll-mode"><input id="die" type="checkbox"> Потрачена кость хитов 1</label>
+    <label class="battle-roll-mode"><input id="die2" type="checkbox"> Потрачена кость хитов 2</label>
     <label class="battle-roll-mode"><input id="battle-digital-rolls" type="checkbox"> Бросать кубики на сайте</label>
   </div>
   <div class="battle-inspiration" role="group" aria-label="Перебросы от мастера">
@@ -379,11 +384,11 @@ for (const [id, count, label] of [['slots',2,'Ячейка потрачена'],
     document.getElementById(id).append(box);
   }
 }
-const inputs = [...document.querySelectorAll("#panel-sheet input, #battle-resource-state input, #inspiration, #die")];
+const inputs = [...document.querySelectorAll("#panel-sheet input, #battle-resource-state input, #inspiration, #die, #die2")];
 const storageKey = 'alden-vale-preview-v1';
 function save() {
   const values = Object.fromEntries(inputs.map(input => [input.id, input.type === 'checkbox' ? input.checked : input.valueAsNumber]));
-  try { localStorage.setItem(storageKey, JSON.stringify({ ...values, masterRerolls })); } catch {}
+  try { localStorage.setItem(storageKey, JSON.stringify({ ...values, masterRerolls, level: 2 })); } catch {}
   document.dispatchEvent(new Event('sheet-resources-change'));
 }
 function normalize(input) {
@@ -401,7 +406,11 @@ for (const input of inputs) {
     successes1: previousHealth?.deathSuccess >= 1, successes2: previousHealth?.deathSuccess >= 2, successes3: previousHealth?.deathSuccess >= 3,
     failures1: previousHealth?.deathFailure >= 1, failures2: previousHealth?.deathFailure >= 2, failures3: previousHealth?.deathFailure >= 3
   }[input.id];
-  const value = stored?.[input.id] ?? previousValue;
+  let value = stored?.[input.id] ?? previousValue;
+  if (stored?.level !== 2 && Number.isFinite(value)) {
+    if (input.id === 'hp') value = value > 0 ? value + 5 : 0;
+    if (input.id === 'hands') value += 5;
+  }
   if (input.type === 'checkbox' && typeof value === 'boolean') input.checked = value;
   if (input.type === 'number' && Number.isFinite(value)) {
     input.value = value;
