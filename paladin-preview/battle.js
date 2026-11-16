@@ -10,7 +10,7 @@
   let rerollRevision;
   let rerollBusy = false;
   const result = byId('battle-result');
-  const slotInputs = [byId('slots1'), byId('slots2')];
+  const slotInputs = [...document.querySelectorAll('#slots input')];
   const deathMarks = byId('battle-death-marks');
   deathMarks.innerHTML = [
     ['successes', 'Успехи', 'Успех', 'gemGreen'],
@@ -24,7 +24,9 @@
   const deathButtons = [...deathMarks.querySelectorAll('button')];
   const hands = byId('hands');
   const health = byId('hp');
-  const hitDice = [byId('die'), byId('die2')];
+  const hitDice = [byId('die'), byId('die2'), byId('die3')];
+  const channel = byId('channel');
+  const channelRecover = byId('battle-channel-recover');
   const freeSmite = byId('smite-free-spent');
   const shortRest = byId('battle-short-rest-form');
   const shortRestToggle = byId('battle-short-rest');
@@ -68,11 +70,16 @@
     card('Благословение', 'upg_wand', 'Заклинание · 1-й уровень', 'Действие · 30 фт · концентрация до 1 минуты. До трёх целей добавляют 1к4 к атакам и спасброскам. Бонусный кубик бросается при каждой такой проверке.', '<button type="button" data-cast="bless">Применить · 1 ячейка</button>' + rollButton('Благословение · бонус', 'Бонус', 1, 4)),
     card('Щит веры', 'upg_shield', 'Заклинание · 1-й уровень', 'Бонусное действие · 60 фт · концентрация до 10 минут. Цель получает +2 к КБ на время действия заклинания.', '<button type="button" data-cast="shield">Применить · 1 ячейка</button>'),
     card('Лечение ран', 'heart', 'Заклинание · 1-й уровень', 'Действие · касание. Цель восстанавливает 2к8 + 1 ХП (+1 от Харизмы). Если лечишь себя, добавь результат к своим хитам.', '<button type="button" data-cast="cure">Применить · 1 ячейка</button>' + rollButton('Лечение ран', 'Лечение', 2, 8, 1)),
+    card('Божественное благоволение', 'upg_wand', 'Заклинание · 1-й уровень', 'Бонусное действие · на себя · 1 минута без концентрации. Каждое попадание оружием наносит +1к4 урона излучением. Если эффект уже действует, можешь добавить и Божественную кару после попадания в ближнем бою. В ход сотворения Благоволения бонусное действие уже занято.', '<button type="button" data-cast="favor">Применить · 1 ячейка</button>' + rollButton('Божественное благоволение', 'Урон излучением', 1, 4)),
+    card('Порча', 'wand', 'Заклинание клятвы · 1-й уровень', 'Действие · 30 фт · концентрация до 1 минуты. До трёх видимых целей совершают спасбросок Харизмы (Сл 11). При провале цель вычитает 1к4 из каждого броска атаки и спасброска до конца заклинания.', '<button type="button" data-cast="bane">Применить · 1 ячейка</button>' + rollButton('Порча · штраф', 'Штраф', 1, 4)),
+    card('Метка охотника', 'darkvision', 'Заклинание клятвы · 1-й уровень', 'Бонусное действие · 90 фт · концентрация до 1 часа. По видимой отмеченной цели каждое попадание атакой наносит дополнительно 1к6 силового урона. По ней проще искать следы: преимущество на Восприятие и Выживание для поиска цели. Когда цель падает до 0 ХП, на последующем ходу можешь перенести метку бонусным действием.', '<button type="button" data-cast="mark">Применить · 1 ячейка</button>' + rollButton('Метка охотника', 'Урон метки', 1, 6)),
     card('Божественная кара', 'upg_sword', 'Заклинание · 1-й уровень', 'Бонусное действие сразу после попадания оружием ближнего боя или безоружным ударом. Дополнительно 2к8 урона излучением, или 3к8 по исчадию либо нежити. Одно бесплатное применение за продолжительный отдых.',
       '<button type="button" id="battle-free-smite">Применить без ячейки</button><button type="button" data-cast="smite">Применить · 1 ячейка</button>' +
       rollButton('Божественная кара', 'Урон', 2, 8) + rollButton('Божественная кара · исчадие или нежить', 'Исчадие / нежить', 3, 8)),
     card('Благословение Королевы Воронов', 'raven-queen', 'Бонусное действие', 'Телепортируйся на расстояние до 30 фт в свободное место, которое видишь. Два применения за продолжительный отдых.', '<button type="button" id="battle-raven">Телепортироваться</button><small id="battle-raven-count" role="status"></small>'),
     card('Возложение рук', 'heart', 'Бонусное действие', 'Касанием восстанови себе или союзнику 1 ХП за каждое потраченное очко. Чтобы снять состояние «Отравлен», потрать 5 очков. Отмечай расход крестиками вверху, а хиты меняй у цели. Кубики не нужны.', ''),
+    card('Божественный канал: Божественное чувство', 'darkvision', 'Бонусное действие', 'На 10 минут (или пока не станешь недееспособен) узнаёшь тип и местоположение небожителей, исчадий и нежити в пределах 60 фт. Обнаруживаешь также освящённые и осквернённые места и предметы. Короткий отдых возвращает одно применение, продолжительный — оба.', '<button type="button" id="battle-channel-use">Применить</button><small id="battle-channel-count" role="status"></small>'),
+    card('Обет вражды', 'upg_sword', 'Клятва мести · Божественный канал', 'При действии «Атака» выбери видимую цель в пределах 30 фт. Получаешь преимущество на атаки по ней на 1 минуту или пока не применишь обет заново. Если цель падает до 0 ХП, можешь перенести обет на другую цель в пределах 30 фт без действия и без нового расхода.', '<button type="button" id="battle-vow-use">Дать обет · 1 применение канала</button><small id="battle-vow-count" role="status"></small>'),
     card('Инициатива и спасброски', 'helmet', 'Проверки', 'Ловкость даёт +1 к инициативе. При 0 ХП спасбросок от смерти обычно успешен на 10+. Натуральная 1 даёт два провала, натуральная 20 восстанавливает 1 ХП. Отмечай результаты на листе.', rollButton('Инициатива', 'Инициатива', 1, 20, 1) + rollButton('Спасбросок от смерти', 'От смерти', 1, 20)),
     `<section class="battle-card battle-tactics" aria-labelledby="battle-tactics-title">
       <header><span class="battle-icon"><img class="rpg-icon" src="rpg-icons/axe.png" alt=""></span><div><small>Тактика</small><h3 id="battle-tactics-title">Действия в бою</h3></div></header>
@@ -137,13 +144,18 @@
       button.title = input.checked ? 'Восстановить ячейку' : 'Отметить ячейку потраченной';
     });
     const available = slotInputs.filter(input => !input.checked).length;
-    byId('battle-slot-count').textContent = available + ' из 2 доступно';
+    byId('battle-slot-count').textContent = available + ' из ' + slotInputs.length + ' доступно';
+    byId('battle-channel-count').textContent = channel.value + ' из ' + channel.max + ' доступно';
+    byId('battle-channel-use').disabled = channel.valueAsNumber === 0;
+    byId('battle-vow-use').disabled = channel.valueAsNumber === 0;
+    byId('battle-vow-count').textContent = byId('battle-channel-count').textContent;
+    channelRecover.disabled = channel.value === channel.max;
     cards.querySelectorAll('[data-cast]').forEach(button => { button.disabled = !available; });
     byId('battle-free-smite').disabled = freeSmite.checked;
     byId('battle-free-smite').textContent = freeSmite.checked ? 'Бесплатное применение потрачено' : 'Применить без ячейки';
     const diceLeft = hitDice.filter(input => !input.checked).length;
     byId('battle-short-rest-help').innerHTML = diceLeft
-      ? die(10) + ' Доступно костей хитов: ' + diceLeft + ' из 2. Брось <strong>1к10</strong>, лист добавит <strong>+1</strong>. Можно повторить, пока есть кости.'
+      ? die(10) + ' Доступно костей хитов: ' + diceLeft + ' из ' + hitDice.length + '. Брось <strong>1к10</strong>, лист добавит <strong>+1</strong>. Можно повторить, пока есть кости.'
       : 'Все кости хитов потрачены. Они восстановятся после продолжительного отдыха.';
     shortRestRoll.disabled = !diceLeft;
     shortRest.querySelector('button[type="submit"]').disabled = !diceLeft;
@@ -232,7 +244,7 @@
       if (!slot) return;
       slot.checked = true;
       save();
-      show(({ shield: 'Щит веры: +2 к КБ цели', bless: 'Благословение применено', smite: 'Божественная кара', cure: 'Лечение ран: 2к8 + 1 ХП цели' })[cast] + ' · ячейка потрачена');
+      show(({ shield: 'Щит веры: +2 к КБ цели', bless: 'Благословение применено', smite: 'Божественная кара', cure: 'Лечение ран: 2к8 + 1 ХП цели', favor: 'Божественное благоволение: +1к4 излучением при попадании оружием', bane: 'Порча: спасбросок Харизмы Сл 11', mark: 'Метка охотника: +1к6 при попадании' })[cast] + ' · ячейка потрачена');
     }
     if (button.id === 'battle-free-smite') {
       freeSmite.checked = true;
@@ -246,6 +258,19 @@
       save();
       show('Благословение Королевы Воронов · телепортация до 30 фт');
     }
+    if (button.id === 'battle-channel-use' || button.id === 'battle-vow-use') {
+      channel.value = channel.valueAsNumber - 1;
+      save();
+      show((button.id === 'battle-vow-use' ? 'Обет вражды' : 'Божественное чувство') + ' · применение канала потрачено');
+    }
+  });
+  channelRecover.addEventListener('click', () => {
+    if (!confirm('Завершить короткий отдых и восстановить одно применение канала?')) return;
+    channel.value = Math.min(Number(channel.max), channel.valueAsNumber + 1);
+    shortRest.hidden = true;
+    shortRestToggle.setAttribute('aria-expanded', 'false');
+    save();
+    show('Короткий отдых · восстановлено одно применение канала');
   });
   shortRestToggle.addEventListener('click', () => {
     shortRest.hidden = !shortRest.hidden;
@@ -272,6 +297,7 @@
     health.value = health.max;
     byId('temp').value = 0;
     hands.value = hands.max;
+    channel.value = channel.max;
     hitDice.forEach(input => { input.checked = false; });
     freeSmite.checked = false;
     ravenUses.forEach(input => { input.checked = false; });

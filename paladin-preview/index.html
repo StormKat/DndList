@@ -121,8 +121,8 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
   <div class="identity-hero">
   <p class="edition">Лист персонажа</p><h1>Палыч Каратау</h1>
   <dl class="identity">
-    <div><dt>Класс</dt><dd>Паладин</dd></div><div><dt>Уровень</dt><dd>2</dd></div>
-    <div><dt>Вид</dt><dd>Шадар-кай</dd></div><div><dt>Предыстория</dt><dd>Солдат</dd></div><div><dt>Подкласс</dt><dd>С 3-го ур.</dd></div>
+    <div><dt>Класс</dt><dd>Паладин</dd></div><div><dt>Уровень</dt><dd>3</dd></div>
+    <div><dt>Вид</dt><dd>Шадар-кай</dd></div><div><dt>Предыстория</dt><dd>Солдат</dd></div><div><dt>Подкласс</dt><dd>Клятва мести</dd></div>
   </dl>
   </div>
 </header>
@@ -146,7 +146,7 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
 </details>
 <section class="vitals" aria-label="Боевые показатели">
   <div class="vital"><strong>17</strong><span class="label">Класс брони</span><small>Кольчуга + Оборона</small></div>
-  <div class="vital health"><div class="hp"><button class="screen" id="down" aria-label="Убавить хит">−</button><input id="hp" type="number" min="0" max="16" value="16" aria-label="Текущие хиты"><span>/ 16</span><button class="screen" id="up" aria-label="Добавить хит">+</button></div><span class="label">Хиты</span><label>Временные <input id="temp" type="number" min="0" value="0" style="width:4em"></label></div>
+  <div class="vital health"><div class="hp"><button class="screen" id="down" aria-label="Убавить хит">−</button><input id="hp" type="number" min="0" max="27" value="27" aria-label="Текущие хиты"><span>/ 27</span><button class="screen" id="up" aria-label="Добавить хит">+</button></div><span class="label">Хиты</span><label>Временные <input id="temp" type="number" min="0" value="0" style="width:4em"></label></div>
   <div class="vital"><strong>+1</strong><span class="label">Инициатива</span></div>
   <div class="vital"><strong>30</strong><span class="label">Скорость, фт</span><small>Средний размер</small></div>
   <div class="vital"><strong>13</strong><span class="label">Пассивная внимательность</span></div>
@@ -173,11 +173,15 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
     <tr><td>Благословение</td><td>До 3 целей добавляют 1к4 к атакам и спасброскам. Концентрация до 1 мин.</td></tr>
     <tr><td>Щит веры</td><td>Бонусное действие, 60 фт, +2 к КБ цели. Концентрация до 10 мин.</td></tr>
     <tr><td>Лечение ран</td><td>Действие, касание. Восстанавливает 2к8 + 1 ХП цели.</td></tr>
-    <tr><td>Божественная кара</td><td>Всегда подготовлена сверх трёх заклинаний. Одно применение без ячейки за продолжительный отдых.</td></tr>
+    <tr><td>Божественное благоволение</td><td>Бонусное действие, на себя. На 1 мин. попадания оружием наносят +1к4 урона излучением. Без концентрации.</td></tr>
+    <tr><td>Порча</td><td>Всегда подготовлена по клятве. До трёх целей при провале спасброска Харизмы вычитают 1к4 из атак и спасбросков. Концентрация до 1 мин.</td></tr>
+    <tr><td>Метка охотника</td><td>Всегда подготовлена по клятве. +1к6 силового урона при попадании по отмеченной цели. Концентрация до 1 часа.</td></tr>
+    <tr><td>Божественная кара</td><td>Всегда подготовлена сверх четырёх заклинаний. Одно применение без ячейки за продолжительный отдых.</td></tr>
     </tbody></table>
   </fieldset>
   <fieldset><legend>Особенности и черты</legend><div class="features">
     <p><strong>Паладин</strong>Возложение рук бонусным действием, заклинания и мастерство двух видов оружия.</p>
+    <p><strong>Клятва мести</strong>Обет вражды даёт преимущество на атаки по выбранной цели и расходует одно применение Божественного канала.</p>
     <p><strong>Боевой стиль</strong>Оборона: +1 к КБ, пока носишь доспех.</p>
     <p><strong>Шадар-кай</strong>Эльф из Царства Теней. Тёмное зрение 60 фт, владение Внимательностью, преимущество на спасброски от очарования и сопротивление некротическому урону.</p>
     <p><strong>Благословение Королевы Воронов</strong>Бонусным действием телепортируйся на расстояние до 30 фт в видимое свободное место. Два применения за продолжительный отдых.</p>
@@ -202,15 +206,17 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
     <div class="battle-actions">
       <label>Что выпало на к10 <input id="battle-short-rest-roll" type="number" min="1" max="10" required inputmode="numeric"></label>
       <button type="submit">Восстановить ХП</button>
+      <button type="button" id="battle-channel-recover">Восстановить 1 применение канала</button>
     </div>
   </form>
   <div class="battle-resources">
-    <div><span>Текущие хиты</span><div class="battle-hp"><button type="button" id="battle-down" aria-label="Убавить хит">−</button><input id="battle-hp" type="number" min="0" max="16" aria-label="Текущие хиты в бою"><span>/ 16</span><button type="button" id="battle-up" aria-label="Добавить хит">+</button></div><label>Временные <input id="battle-temp" type="number" min="0"></label></div>
-    <div><span>Ячейки 1-го уровня</span><div class="battle-slots"><button type="button" data-slot="1" aria-label="Ячейка 1"><span class="slot-sigil" aria-hidden="true"></span></button><button type="button" data-slot="2" aria-label="Ячейка 2"><span class="slot-sigil" aria-hidden="true"></span></button></div><small id="battle-slot-count"></small></div>
+    <div><span>Текущие хиты</span><div class="battle-hp"><button type="button" id="battle-down" aria-label="Убавить хит">−</button><input id="battle-hp" type="number" min="0" max="27" aria-label="Текущие хиты в бою"><span>/ 27</span><button type="button" id="battle-up" aria-label="Добавить хит">+</button></div><label>Временные <input id="battle-temp" type="number" min="0"></label></div>
+    <div><span>Ячейки 1-го уровня</span><div class="battle-slots"><button type="button" data-slot="1" aria-label="Ячейка 1"><span class="slot-sigil" aria-hidden="true"></span></button><button type="button" data-slot="2" aria-label="Ячейка 2"><span class="slot-sigil" aria-hidden="true"></span></button><button type="button" data-slot="3" aria-label="Ячейка 3"><span class="slot-sigil" aria-hidden="true"></span></button></div><small id="battle-slot-count"></small></div>
     <div><span>Возложение рук</span><div id="battle-hands-pips" class="battle-hands-pips" role="group" aria-label="Очки Возложения рук"></div><small id="battle-hands"></small></div>
   </div>
   <div id="battle-resource-state" hidden>
-    <input type="number" id="hands" min="0" max="10" value="10">
+    <input type="number" id="hands" min="0" max="15" value="15">
+    <input type="number" id="channel" min="0" max="2" value="2">
     <div id="slots"></div>
     <div id="raven-uses"></div>
     <div id="successes"></div>
@@ -221,6 +227,7 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
     <label class="battle-roll-mode"><input id="inspiration" type="checkbox"> Героическое вдохновение</label>
     <label class="battle-roll-mode"><input id="die" type="checkbox"> Потрачена кость хитов 1</label>
     <label class="battle-roll-mode"><input id="die2" type="checkbox"> Потрачена кость хитов 2</label>
+    <label class="battle-roll-mode"><input id="die3" type="checkbox"> Потрачена кость хитов 3</label>
     <label class="battle-roll-mode"><input id="battle-digital-rolls" type="checkbox"> Бросать кубики на сайте</label>
   </div>
   <div class="battle-inspiration" role="group" aria-label="Перебросы от мастера">
@@ -375,7 +382,7 @@ document.querySelector('#abilities').innerHTML = abilities.map(([name, score, sa
   const modifier = Math.floor((score - 10) / 2);
   return `<section class="ability"><h3>${name}</h3><div class="score"><b class="modifier">${signed(modifier)}</b><small>${score}</small></div>${row('Спасбросок', modifier, save)}${skills.map(([skill, trained]) => row(skill, modifier, trained)).join('')}</section>`;
 }).join('');
-for (const [id, count, label] of [['slots',2,'Ячейка потрачена'],['raven-uses',2,'Применение Благословения потрачено'],['successes',3,'Успех'],['failures',3,'Провал']]) {
+for (const [id, count, label] of [['slots',3,'Ячейка потрачена'],['raven-uses',2,'Применение Благословения потрачено'],['successes',3,'Успех'],['failures',3,'Провал']]) {
   for (let i = 1; i <= count; i++) {
     const box = document.createElement('input');
     box.type = 'checkbox';
@@ -384,11 +391,11 @@ for (const [id, count, label] of [['slots',2,'Ячейка потрачена'],
     document.getElementById(id).append(box);
   }
 }
-const inputs = [...document.querySelectorAll("#panel-sheet input, #battle-resource-state input, #inspiration, #die, #die2")];
+const inputs = [...document.querySelectorAll("#panel-sheet input, #battle-resource-state input, #inspiration, #die, #die2, #die3")];
 const storageKey = 'alden-vale-preview-v1';
 function save() {
   const values = Object.fromEntries(inputs.map(input => [input.id, input.type === 'checkbox' ? input.checked : input.valueAsNumber]));
-  try { localStorage.setItem(storageKey, JSON.stringify({ ...values, masterRerolls, level: 2 })); } catch {}
+  try { localStorage.setItem(storageKey, JSON.stringify({ ...values, masterRerolls, level: 3 })); } catch {}
   document.dispatchEvent(new Event('sheet-resources-change'));
 }
 function normalize(input) {
@@ -407,9 +414,9 @@ for (const input of inputs) {
     failures1: previousHealth?.deathFailure >= 1, failures2: previousHealth?.deathFailure >= 2, failures3: previousHealth?.deathFailure >= 3
   }[input.id];
   let value = stored?.[input.id] ?? previousValue;
-  if (stored?.level !== 2 && Number.isFinite(value)) {
-    if (input.id === 'hp') value = value > 0 ? value + 5 : 0;
-    if (input.id === 'hands') value += 5;
+  if (stored?.level !== 3 && Number.isFinite(value)) {
+    if (input.id === 'hp') value = value > 0 ? value + (stored?.level === 2 ? 11 : 16) : 0;
+    if (input.id === 'hands') value += stored?.level === 2 ? 5 : 10;
   }
   if (input.type === 'checkbox' && typeof value === 'boolean') input.checked = value;
   if (input.type === 'number' && Number.isFinite(value)) {
