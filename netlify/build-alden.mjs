@@ -6,7 +6,7 @@ const assets = [
   'index.html', 'tools.js', 'tools.css', 'sheet.css', 'battle.js', 'battle.css',
   'portrait-card.js', 'portrait-luskan-prayer.jpg', 'portrait-luskan-prayer.mp4', 'dnd-logo.png', 'castle-hall-unlit.jpg',
   'torch-flame-soft.png', 'notes-parchment-portrait.png', 'shar-sanctuary.jpg',
-  'favicon-shar.png', 'faerun-map.jpg', 'map.css', 'map.js',
+  'favicon-shar.png', 'faerun-map.jpg', 'barovia-map.jpg', 'map.css', 'map.js',
   'palych-favicon.png', 'palych-app-180.png', 'palych-app-192.png', 'palych-app-512.png',
   'palych.webmanifest'
 ];

@@ -1,3 +1,8 @@
+.barovia-map-icon { filter: drop-shadow(0 0 3px #ac60ed); }
+.paladin-nav [data-panel="barovia"]:is(:hover, [aria-pressed=true]) .barovia-map-icon {
+  filter: drop-shadow(0 0 4px #ca83ff);
+}
+
 .faerun {
   position: relative;
   width: min(1080px, calc(100% - 28px));
@@ -11,7 +16,7 @@
 }
 .faerun-view { position: absolute; inset: 0; overflow: hidden; touch-action: none; cursor: grab; }
 .faerun-view:active { cursor: grabbing; }
-.faerun-world { position: absolute; width: 4096px; height: 3072px; transform-origin: top left; }
+.faerun-world { position: absolute; transform-origin: top left; }
 .faerun-world img { display: block; width: 100%; height: 100%; user-select: none; pointer-events: none; }
 .faerun button, .faerun input {
   font: inherit; color: inherit; border: 1px solid #806777; background: #27212c;

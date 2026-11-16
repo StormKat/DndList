@@ -109,6 +109,7 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
   <button type="button" data-panel="inventory" aria-pressed="false"><img class="rpg-icon" src="rpg-icons/backpack.png" alt="">Инвентарь</button>
   <button type="button" data-panel="notes" aria-pressed="false"><img class="rpg-icon" src="rpg-icons/tome.png" alt="">Заметки</button>
   <button type="button" data-panel="map" aria-pressed="false"><img class="rpg-icon" src="rpg-icons/map.png" alt="">Карта Фаэруна</button>
+  <button type="button" data-panel="barovia" aria-pressed="false"><img class="rpg-icon barovia-map-icon" src="rpg-icons/barovia-map.svg" alt="">Карта Баровии</button>
 </nav>
 <main class="sheet tab-panel active" id="panel-sheet">
 <header class="character-masthead">
@@ -358,6 +359,22 @@ body.paladin{background:radial-gradient(ellipse at top,#405a77 0%,#202f45 48%,#1
     <small>Rerouting. Another portal.</small>
   </div>
   <span class="faerun-credit">Фаэрун · 1372 ЛД · David Bishop</span>
+</section>
+<section class="tab-panel faerun" id="panel-barovia" aria-label="Карта Баровии">
+  <div class="faerun-view" tabindex="0" aria-label="Карта: стрелки перемещают, плюс и минус меняют масштаб">
+    <div class="faerun-world">
+      <img data-src="barovia-map.jpg" alt="Карта долины Баровии без подписей" width="4096" height="2626" draggable="false">
+    </div>
+  </div>
+  <div class="faerun-controls">
+    <button type="button" data-map-action="in" aria-label="Приблизить">+</button>
+    <button type="button" data-map-action="out" aria-label="Отдалить">−</button>
+    <button type="button" data-map-action="reset" aria-label="Показать всю карту">⌂</button>
+  </div>
+  <div class="faerun-brand" lang="en">
+    <strong><span class="faerun-wordmark"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span><span>d</span><span>o</span><span>r</span></span> Maps</strong>
+    <small>Rerouting. The mists insist.</small>
+  </div>
 </section>
 
   </div>

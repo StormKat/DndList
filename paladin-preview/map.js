@@ -1,14 +1,16 @@
 (() => {
-  const panel = document.getElementById('panel-map');
+function initMap(panel, places = []) {
   const view = panel.querySelector('.faerun-view');
   const world = view.firstElementChild;
   const image = world.querySelector('img');
   const search = panel.querySelector('input');
   const results = panel.querySelector('.faerun-results');
-  const width = image.width;
-  const height = image.height;
+  const width = Number(image.getAttribute('width'));
+  const height = Number(image.getAttribute('height'));
+  world.style.width = `${width}px`;
+  world.style.height = `${height}px`;
   // Coordinates on the 1824 × 1368 reference preview, not geodetic positions.
-  const places = [
+  if (panel.id === 'panel-map') places = [
     ['Лускан', 'Luskan', 199, 128, 1],
     ['Рашемен', 'Rashemen', 1615, 126, 1],
     ['Тэй', 'Thay Тай', 1619, 351, 1],
@@ -185,9 +187,9 @@
       results.append(button);
     });
   }
-  search.addEventListener('focus', showResults);
-  search.addEventListener('input', showResults);
-  search.addEventListener('keydown', event => {
+  search?.addEventListener('focus', showResults);
+  search?.addEventListener('input', showResults);
+  search?.addEventListener('keydown', event => {
     if (event.key === 'Escape') results.replaceChildren();
     if (event.key === 'Enter' && matches().length) {
       choose(matches()[0].index);
@@ -195,9 +197,10 @@
     }
   });
   panel.addEventListener('click', event => {
-    if (!event.target.closest('.faerun-search')) results.replaceChildren();
+    if (!event.target.closest('.faerun-search')) results?.replaceChildren();
     const action = event.target.dataset.mapAction;
-    if (action === 'reset') { search.value = ''; reset(); }
+    if (!scale) return;
+    if (action === 'reset') { if (search) search.value = ''; reset(); }
     if (action === 'in' || action === 'out') zoom(scale * (action === 'in' ? 1.35 : 1 / 1.35));
   });
   function point(event) {
@@ -236,4 +239,7 @@
     else return;
     event.preventDefault();
   });
+}
+
+document.querySelectorAll('.tab-panel.faerun').forEach(panel => initMap(panel));
 })();
